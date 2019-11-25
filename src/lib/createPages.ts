@@ -7,15 +7,44 @@ const pages = [
     { id: 3, content: '확실히 어렵네요' }
 ]
 
-export const createPages = ({actions}: CreatePagesArgs) => {
+export const createPages = async ({ actions, graphql }: CreatePagesArgs) => {
     console.log('I will create a page!')
     console.log('Typescript!')
-    const {createPage} = actions
-    pages.forEach(page => {
+    const { createPage } = actions
+
+    const { data, errors } = await graphql(`
+      {
+        allMarkdownRemark {
+          edges {
+            node {
+              html
+              frontmatter {
+                title
+              }
+            }
+          }
+        }
+      }
+    `)
+
+    if (errors) throw errors
+
+    data.allMarkdownRemark.edges.forEach(({ node }: any) => {
         createPage({
-            path: page.id.toString(),
-            context: page,
+            path: node.frontmatter.title,
+            context: {
+                html: node.html,
+                title: node.frontmatter.title
+            },
             component: path.resolve(__dirname, '../templates/PostTemplate.tsx')
         })
     })
+
+    // pages.forEach(page => {
+    //     createPage({
+    //         path: page.id.toString(),
+    //         context: page,
+    //         component: path.resolve(__dirname, '../templates/PostTemplate.tsx')
+    //     })
+    // })
 }
