@@ -6,6 +6,7 @@ import { ITemplateProps } from '../interface'
 type iPostTemplateProps = ITemplateProps<{
     html: string
     title: string
+    date: string
 }>
 
 const PostTemplate: React.FC<iPostTemplateProps> = React.memo(props => {
