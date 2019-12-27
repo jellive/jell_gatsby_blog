@@ -8,7 +8,7 @@ const pages = [
     { id: 3, content: '확실히 어렵네요' }
 ]
 
-export const createPages = async ({ actions, graphql }: CreatePagesArgs) => {
+export async function createPages ({ actions, graphql }: CreatePagesArgs) {
     console.log('I will create a page!')
     console.log('Typescript!')
     const { createPage } = actions

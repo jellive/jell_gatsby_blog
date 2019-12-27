@@ -696,6 +696,8 @@ export type FileFieldsEnum =
   'internal___type' |
   'childMarkdownRemark___id' |
   'childMarkdownRemark___frontmatter___title' |
+  'childMarkdownRemark___frontmatter___date' |
+  'childMarkdownRemark___frontmatter___path' |
   'childMarkdownRemark___excerpt' |
   'childMarkdownRemark___rawMarkdownBody' |
   'childMarkdownRemark___fileAbsolutePath' |
@@ -1437,6 +1439,8 @@ export type MarkdownRemarkEdge = {
 export type MarkdownRemarkFieldsEnum = 
   'id' |
   'frontmatter___title' |
+  'frontmatter___date' |
+  'frontmatter___path' |
   'excerpt' |
   'rawMarkdownBody' |
   'fileAbsolutePath' |
@@ -1557,10 +1561,22 @@ export type MarkdownRemarkFilterInput = {
 
 export type MarkdownRemarkFrontmatter = {
   title?: Maybe<Scalars['String']>,
+  date?: Maybe<Scalars['Date']>,
+  path?: Maybe<Scalars['String']>,
+};
+
+
+export type MarkdownRemarkFrontmatterDateArgs = {
+  formatString?: Maybe<Scalars['String']>,
+  fromNow?: Maybe<Scalars['Boolean']>,
+  difference?: Maybe<Scalars['String']>,
+  locale?: Maybe<Scalars['String']>
 };
 
 export type MarkdownRemarkFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>,
+  date?: Maybe<DateQueryOperatorInput>,
+  path?: Maybe<StringQueryOperatorInput>,
 };
 
 export type MarkdownRemarkGroupConnection = {
@@ -2610,6 +2626,11 @@ export type StringQueryOperatorInput = {
   regex?: Maybe<Scalars['String']>,
   glob?: Maybe<Scalars['String']>,
 };
+
+export type LatestPostListQueryQueryVariables = {};
+
+
+export type LatestPostListQueryQuery = { allMarkdownRemark: { edges: Array<{ node: (Pick<MarkdownRemark, 'excerpt' | 'id'> & { frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title' | 'path' | 'date'>> }) }> } };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
