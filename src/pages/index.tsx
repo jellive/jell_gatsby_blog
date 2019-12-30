@@ -1,9 +1,9 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
+import Img from 'gatsby-image'
 import {Link} from 'gatsby-theme-material-ui'
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
 import { Typography } from '@material-ui/core'
@@ -12,23 +12,6 @@ import { Typography } from '@material-ui/core'
 import { Query } from "../graphql-types"
 
 const IndexPage: React.FC = () => {
-  // const data = useStaticQuery<Query>(graphql`
-  // query LatestPostListQuery {
-  //     allMarkdownRemark(sort: { order: DESC, fields: frontmatter___date }) {
-  //         edges {
-  //             node {
-  //                 excerpt(truncate: true, pruneLength: 200)
-  //                 frontmatter {
-  //                     title
-  //                     path
-  //                     date(formatString: "YYYY-MM-DD HH:mm:ss")
-  //                 }
-  //                 id
-  //             }
-  //         }
-  //     }
-  // }
-  // `)
   const data = useStaticQuery<Query>(graphql`
   query LatestPostListQuery {
     allMarkdownRemark (
@@ -44,12 +27,12 @@ const IndexPage: React.FC = () => {
             category
             featuredImage {
               publicURL
-              #childImageSharp{
-              #    sizes(maxWidth: 630, maxHeight: 360) {
-              #        srcSet
-              #        ...GatsbyImageSharpSizes
-              #    }
-              #}
+              childImageSharp{
+                  fluid(maxWidth: 630, maxHeight: 360) {
+                      srcSet
+                      ...GatsbyImageSharpFluid
+                  }
+              }
             }
           }
           excerpt(pruneLength: 250)
@@ -96,6 +79,11 @@ const IndexPage: React.FC = () => {
               <Link to={node.fields.slug}>{node.frontmatter.title}</Link>
             </h2>
             <h3>{node.frontmatter.date}</h3>
+            {
+              node.frontmatter.featuredImage && node.frontmatter.featuredImage.src
+              // && <img style={{ margin: 'auto' }} src={edge.node.frontmatter.featuredImage.publicURL} />
+              && <Img sizes={node.frontmatter.featuredImage.childImageSharp.sizes} />
+            }
             <Typography>{node.excerpt}</Typography>
             <hr />
           </li>
