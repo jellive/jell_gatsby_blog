@@ -15,9 +15,11 @@ type iPostTemplateProps = ITemplateProps<{
 const PostTemplate: React.FC<iPostTemplateProps> = React.memo(props => {
     const { title, date, html } = props.pageContext;
     let disqusConfig = {
-      url: `${siteMetadata.siteUrl+location.pathname}`,
-      identifier: "jell-1",
+    //   url: `${siteMetadata.siteUrl+location.pathname}`,
+      id: "disqus_thread",
+      identifier: title,
       title: title,
+      shortname: 'jell-1'
     }
     return (
         <Layout>
