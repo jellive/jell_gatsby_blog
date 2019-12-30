@@ -1428,6 +1428,7 @@ export type MarkdownRemarkHeadingsArgs = {
 
 
 export type MarkdownRemarkTableOfContentsArgs = {
+  absolute?: Maybe<Scalars['Boolean']>,
   pathToSlugField?: Maybe<Scalars['String']>,
   maxDepth?: Maybe<Scalars['Int']>,
   heading?: Maybe<Scalars['String']>
@@ -2333,6 +2334,12 @@ export type SitePageFieldsEnum =
   'pluginCreator___resolve' |
   'pluginCreator___name' |
   'pluginCreator___version' |
+  'pluginCreator___pluginOptions___plugins' |
+  'pluginCreator___pluginOptions___plugins___resolve' |
+  'pluginCreator___pluginOptions___plugins___id' |
+  'pluginCreator___pluginOptions___plugins___name' |
+  'pluginCreator___pluginOptions___plugins___version' |
+  'pluginCreator___pluginOptions___plugins___pluginFilepath' |
   'pluginCreator___pluginOptions___name' |
   'pluginCreator___pluginOptions___path' |
   'pluginCreator___pluginOptions___short_name' |
@@ -2342,6 +2349,7 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___display' |
   'pluginCreator___pluginOptions___icon' |
   'pluginCreator___pluginOptions___dest' |
+  'pluginCreator___pluginOptions___classPrefix' |
   'pluginCreator___pluginOptions___pathCheck' |
   'pluginCreator___nodeAPIs' |
   'pluginCreator___browserAPIs' |
@@ -2529,6 +2537,13 @@ export type SitePluginFieldsEnum =
   'resolve' |
   'name' |
   'version' |
+  'pluginOptions___plugins' |
+  'pluginOptions___plugins___resolve' |
+  'pluginOptions___plugins___id' |
+  'pluginOptions___plugins___name' |
+  'pluginOptions___plugins___version' |
+  'pluginOptions___plugins___pluginOptions___classPrefix' |
+  'pluginOptions___plugins___pluginFilepath' |
   'pluginOptions___name' |
   'pluginOptions___path' |
   'pluginOptions___short_name' |
@@ -2538,6 +2553,7 @@ export type SitePluginFieldsEnum =
   'pluginOptions___display' |
   'pluginOptions___icon' |
   'pluginOptions___dest' |
+  'pluginOptions___classPrefix' |
   'pluginOptions___pathCheck' |
   'nodeAPIs' |
   'browserAPIs' |
@@ -2654,6 +2670,7 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 };
 
 export type SitePluginPluginOptions = {
+  plugins?: Maybe<Array<Maybe<SitePluginPluginOptionsPlugins>>>,
   name?: Maybe<Scalars['String']>,
   path?: Maybe<Scalars['String']>,
   short_name?: Maybe<Scalars['String']>,
@@ -2663,10 +2680,12 @@ export type SitePluginPluginOptions = {
   display?: Maybe<Scalars['String']>,
   icon?: Maybe<Scalars['String']>,
   dest?: Maybe<Scalars['String']>,
+  classPrefix?: Maybe<Scalars['String']>,
   pathCheck?: Maybe<Scalars['Boolean']>,
 };
 
 export type SitePluginPluginOptionsFilterInput = {
+  plugins?: Maybe<SitePluginPluginOptionsPluginsFilterListInput>,
   name?: Maybe<StringQueryOperatorInput>,
   path?: Maybe<StringQueryOperatorInput>,
   short_name?: Maybe<StringQueryOperatorInput>,
@@ -2676,7 +2695,38 @@ export type SitePluginPluginOptionsFilterInput = {
   display?: Maybe<StringQueryOperatorInput>,
   icon?: Maybe<StringQueryOperatorInput>,
   dest?: Maybe<StringQueryOperatorInput>,
+  classPrefix?: Maybe<StringQueryOperatorInput>,
   pathCheck?: Maybe<BooleanQueryOperatorInput>,
+};
+
+export type SitePluginPluginOptionsPlugins = {
+  resolve?: Maybe<Scalars['String']>,
+  id?: Maybe<Scalars['String']>,
+  name?: Maybe<Scalars['String']>,
+  version?: Maybe<Scalars['String']>,
+  pluginOptions?: Maybe<SitePluginPluginOptionsPluginsPluginOptions>,
+  pluginFilepath?: Maybe<Scalars['String']>,
+};
+
+export type SitePluginPluginOptionsPluginsFilterInput = {
+  resolve?: Maybe<StringQueryOperatorInput>,
+  id?: Maybe<StringQueryOperatorInput>,
+  name?: Maybe<StringQueryOperatorInput>,
+  version?: Maybe<StringQueryOperatorInput>,
+  pluginOptions?: Maybe<SitePluginPluginOptionsPluginsPluginOptionsFilterInput>,
+  pluginFilepath?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePluginPluginOptionsPluginsFilterListInput = {
+  elemMatch?: Maybe<SitePluginPluginOptionsPluginsFilterInput>,
+};
+
+export type SitePluginPluginOptionsPluginsPluginOptions = {
+  classPrefix?: Maybe<Scalars['String']>,
+};
+
+export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
+  classPrefix?: Maybe<StringQueryOperatorInput>,
 };
 
 export type SitePluginSortInput = {
