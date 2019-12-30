@@ -6,8 +6,63 @@
 
 // You can delete this file if you're not using it
 
+const path = require(`path`);
 require('ts-node').register();
 
-const { createPages } = require('./src/lib/createPages');
+const { createFilePath } = require(`gatsby-source-filesystem`)
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === `MarkdownRemark`) {
+    const slug = createFilePath({ node, getNode, basePath: `pages` })
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    })
+  }
+}
 
-exports.createPages = createPages;
+// const { createPages } = require('./src/lib/createPages');
+
+// exports.createPages = createPages;
+
+
+exports.createPages = ({ graphql, actions }) => {
+    const { createPage } = actions
+    return new Promise((resolve, reject) => {
+      graphql(`
+        {
+            allMarkdownRemark {
+                edges {
+                    node {
+                        html
+                        frontmatter {
+                            title
+                        }
+                        fields {
+                            slug
+                        }
+                    }
+                }
+            }
+        }
+      `
+  ).then(result => {
+        // console.log(JSON.stringify(result, null, 4))
+  
+        result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+          createPage({
+            path: node.fields.slug,
+            component: path.resolve('./src/templates/PostTemplate.tsx'),
+            context: {
+                ...node,
+                // Data passed to context is available in page queries as GraphQL variables.
+                slug: node.fields.slug,
+            },
+          })
+        })
+        resolve()
+      })
+    })
+  };
+  

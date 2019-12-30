@@ -1,29 +1,69 @@
 import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
+import {Link} from 'gatsby-theme-material-ui'
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
+import { Typography } from '@material-ui/core'
+
 // import { LatestPostListQuery } from '../graphql'
 import { Query } from "../graphql-types"
 
 const IndexPage: React.FC = () => {
+  // const data = useStaticQuery<Query>(graphql`
+  // query LatestPostListQuery {
+  //     allMarkdownRemark(sort: { order: DESC, fields: frontmatter___date }) {
+  //         edges {
+  //             node {
+  //                 excerpt(truncate: true, pruneLength: 200)
+  //                 frontmatter {
+  //                     title
+  //                     path
+  //                     date(formatString: "YYYY-MM-DD HH:mm:ss")
+  //                 }
+  //                 id
+  //             }
+  //         }
+  //     }
+  // }
+  // `)
   const data = useStaticQuery<Query>(graphql`
   query LatestPostListQuery {
-      allMarkdownRemark(sort: { order: DESC, fields: frontmatter___date }) {
-          edges {
-              node {
-                  excerpt(truncate: true, pruneLength: 200)
-                  frontmatter {
-                      title
-                      path
-                      date(formatString: "YYYY-MM-DD HH:mm:ss")
-                  }
-                  id
-              }
+    allMarkdownRemark (
+      sort: {fields: [frontmatter___date], order: DESC}
+    ) {
+      edges {
+        node {
+          frontmatter {
+            # Assumes you're using title in your frontmatter.
+            title
+            date(formatString: "MMMM DD, YYYY")
+            tags
+            category
+            featuredImage {
+              publicURL
+              #childImageSharp{
+              #    sizes(maxWidth: 630, maxHeight: 360) {
+              #        srcSet
+              #        ...GatsbyImageSharpSizes
+              #    }
+              #}
+            }
           }
+          excerpt(pruneLength: 250)
+          fields {
+            slug
+          }
+        }
       }
+    }
+    site {
+      siteMetadata {
+        title
+      }
+    }
   }
   `)
 
@@ -52,10 +92,11 @@ const IndexPage: React.FC = () => {
         {data.allMarkdownRemark.edges.map(({ node }) => (
           <li key={node.id}>
             <h2>
-              <Link to={node.frontmatter.title}>{node.frontmatter.title}</Link>
+              {/* <Link to={node.frontmatter.title}>{node.frontmatter.title}</Link> */}
+              <Link to={node.fields.slug}>{node.frontmatter.title}</Link>
             </h2>
             <h3>{node.frontmatter.date}</h3>
-            <p>{node.excerpt}</p>
+            <Typography>{node.excerpt}</Typography>
             <hr />
           </li>
         ))}

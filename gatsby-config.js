@@ -1,5 +1,6 @@
 module.exports = {
   siteMetadata: {
+    siteUrl: 'https://blog.jell.kr',
     title: `Jell의 세상 사는 이야기`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@jellive7`,
@@ -90,8 +91,24 @@ module.exports = {
           pathToStylesProvider: `src/styles-provider-props`,
           injectFirst: true,
         },
+        webFontsConfig: {
+          fonts: {
+            google: [
+              {
+                family: `Montserrat`,
+                variants: [`300`, `400`, `500`],
+              },
+            ],
+          },
+        },
       },
     },
     `gatsby-plugin-styled-components`,
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `jell-1`
+      }
+    },
   ],
 };
