@@ -689,40 +689,7 @@ export type FileFieldsEnum =
   'childMarkdownRemark___frontmatter___category' |
   'childMarkdownRemark___frontmatter___date' |
   'childMarkdownRemark___frontmatter___tags' |
-  'childMarkdownRemark___frontmatter___featuredImage___birthtime' |
-  'childMarkdownRemark___frontmatter___featuredImage___birthtimeMs' |
-  'childMarkdownRemark___frontmatter___featuredImage___sourceInstanceName' |
-  'childMarkdownRemark___frontmatter___featuredImage___absolutePath' |
-  'childMarkdownRemark___frontmatter___featuredImage___relativePath' |
-  'childMarkdownRemark___frontmatter___featuredImage___extension' |
-  'childMarkdownRemark___frontmatter___featuredImage___size' |
-  'childMarkdownRemark___frontmatter___featuredImage___prettySize' |
-  'childMarkdownRemark___frontmatter___featuredImage___modifiedTime' |
-  'childMarkdownRemark___frontmatter___featuredImage___accessTime' |
-  'childMarkdownRemark___frontmatter___featuredImage___changeTime' |
-  'childMarkdownRemark___frontmatter___featuredImage___birthTime' |
-  'childMarkdownRemark___frontmatter___featuredImage___root' |
-  'childMarkdownRemark___frontmatter___featuredImage___dir' |
-  'childMarkdownRemark___frontmatter___featuredImage___base' |
-  'childMarkdownRemark___frontmatter___featuredImage___ext' |
-  'childMarkdownRemark___frontmatter___featuredImage___name' |
-  'childMarkdownRemark___frontmatter___featuredImage___relativeDirectory' |
-  'childMarkdownRemark___frontmatter___featuredImage___dev' |
-  'childMarkdownRemark___frontmatter___featuredImage___mode' |
-  'childMarkdownRemark___frontmatter___featuredImage___nlink' |
-  'childMarkdownRemark___frontmatter___featuredImage___uid' |
-  'childMarkdownRemark___frontmatter___featuredImage___gid' |
-  'childMarkdownRemark___frontmatter___featuredImage___rdev' |
-  'childMarkdownRemark___frontmatter___featuredImage___ino' |
-  'childMarkdownRemark___frontmatter___featuredImage___atimeMs' |
-  'childMarkdownRemark___frontmatter___featuredImage___mtimeMs' |
-  'childMarkdownRemark___frontmatter___featuredImage___ctimeMs' |
-  'childMarkdownRemark___frontmatter___featuredImage___atime' |
-  'childMarkdownRemark___frontmatter___featuredImage___mtime' |
-  'childMarkdownRemark___frontmatter___featuredImage___ctime' |
-  'childMarkdownRemark___frontmatter___featuredImage___publicURL' |
-  'childMarkdownRemark___frontmatter___featuredImage___id' |
-  'childMarkdownRemark___frontmatter___featuredImage___children' |
+  'childMarkdownRemark___frontmatter___featuredImage' |
   'childMarkdownRemark___frontmatter___path' |
   'childMarkdownRemark___excerpt' |
   'childMarkdownRemark___rawMarkdownBody' |
@@ -1467,65 +1434,7 @@ export type MarkdownRemarkFieldsEnum =
   'frontmatter___category' |
   'frontmatter___date' |
   'frontmatter___tags' |
-  'frontmatter___featuredImage___birthtime' |
-  'frontmatter___featuredImage___birthtimeMs' |
-  'frontmatter___featuredImage___sourceInstanceName' |
-  'frontmatter___featuredImage___absolutePath' |
-  'frontmatter___featuredImage___relativePath' |
-  'frontmatter___featuredImage___extension' |
-  'frontmatter___featuredImage___size' |
-  'frontmatter___featuredImage___prettySize' |
-  'frontmatter___featuredImage___modifiedTime' |
-  'frontmatter___featuredImage___accessTime' |
-  'frontmatter___featuredImage___changeTime' |
-  'frontmatter___featuredImage___birthTime' |
-  'frontmatter___featuredImage___root' |
-  'frontmatter___featuredImage___dir' |
-  'frontmatter___featuredImage___base' |
-  'frontmatter___featuredImage___ext' |
-  'frontmatter___featuredImage___name' |
-  'frontmatter___featuredImage___relativeDirectory' |
-  'frontmatter___featuredImage___dev' |
-  'frontmatter___featuredImage___mode' |
-  'frontmatter___featuredImage___nlink' |
-  'frontmatter___featuredImage___uid' |
-  'frontmatter___featuredImage___gid' |
-  'frontmatter___featuredImage___rdev' |
-  'frontmatter___featuredImage___ino' |
-  'frontmatter___featuredImage___atimeMs' |
-  'frontmatter___featuredImage___mtimeMs' |
-  'frontmatter___featuredImage___ctimeMs' |
-  'frontmatter___featuredImage___atime' |
-  'frontmatter___featuredImage___mtime' |
-  'frontmatter___featuredImage___ctime' |
-  'frontmatter___featuredImage___publicURL' |
-  'frontmatter___featuredImage___childImageSharp___id' |
-  'frontmatter___featuredImage___childImageSharp___children' |
-  'frontmatter___featuredImage___id' |
-  'frontmatter___featuredImage___parent___id' |
-  'frontmatter___featuredImage___parent___children' |
-  'frontmatter___featuredImage___children' |
-  'frontmatter___featuredImage___children___id' |
-  'frontmatter___featuredImage___children___children' |
-  'frontmatter___featuredImage___internal___content' |
-  'frontmatter___featuredImage___internal___contentDigest' |
-  'frontmatter___featuredImage___internal___description' |
-  'frontmatter___featuredImage___internal___fieldOwners' |
-  'frontmatter___featuredImage___internal___ignoreType' |
-  'frontmatter___featuredImage___internal___mediaType' |
-  'frontmatter___featuredImage___internal___owner' |
-  'frontmatter___featuredImage___internal___type' |
-  'frontmatter___featuredImage___childMarkdownRemark___id' |
-  'frontmatter___featuredImage___childMarkdownRemark___excerpt' |
-  'frontmatter___featuredImage___childMarkdownRemark___rawMarkdownBody' |
-  'frontmatter___featuredImage___childMarkdownRemark___fileAbsolutePath' |
-  'frontmatter___featuredImage___childMarkdownRemark___html' |
-  'frontmatter___featuredImage___childMarkdownRemark___htmlAst' |
-  'frontmatter___featuredImage___childMarkdownRemark___excerptAst' |
-  'frontmatter___featuredImage___childMarkdownRemark___headings' |
-  'frontmatter___featuredImage___childMarkdownRemark___timeToRead' |
-  'frontmatter___featuredImage___childMarkdownRemark___tableOfContents' |
-  'frontmatter___featuredImage___childMarkdownRemark___children' |
+  'frontmatter___featuredImage' |
   'frontmatter___path' |
   'excerpt' |
   'rawMarkdownBody' |
@@ -1650,7 +1559,7 @@ export type MarkdownRemarkFrontmatter = {
   category?: Maybe<Scalars['String']>,
   date?: Maybe<Scalars['Date']>,
   tags?: Maybe<Array<Maybe<Scalars['String']>>>,
-  featuredImage?: Maybe<File>,
+  featuredImage?: Maybe<Scalars['String']>,
   path?: Maybe<Scalars['String']>,
 };
 
@@ -1667,7 +1576,7 @@ export type MarkdownRemarkFrontmatterFilterInput = {
   category?: Maybe<StringQueryOperatorInput>,
   date?: Maybe<DateQueryOperatorInput>,
   tags?: Maybe<StringQueryOperatorInput>,
-  featuredImage?: Maybe<FileFilterInput>,
+  featuredImage?: Maybe<StringQueryOperatorInput>,
   path?: Maybe<StringQueryOperatorInput>,
 };
 
@@ -2352,6 +2261,8 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___dest' |
   'pluginCreator___pluginOptions___maxWidth' |
   'pluginCreator___pluginOptions___classPrefix' |
+  'pluginCreator___pluginOptions___stylesProvider___pathToStylesProvider' |
+  'pluginCreator___pluginOptions___stylesProvider___injectFirst' |
   'pluginCreator___pluginOptions___pathCheck' |
   'pluginCreator___nodeAPIs' |
   'pluginCreator___browserAPIs' |
@@ -2559,6 +2470,8 @@ export type SitePluginFieldsEnum =
   'pluginOptions___dest' |
   'pluginOptions___maxWidth' |
   'pluginOptions___classPrefix' |
+  'pluginOptions___stylesProvider___pathToStylesProvider' |
+  'pluginOptions___stylesProvider___injectFirst' |
   'pluginOptions___pathCheck' |
   'nodeAPIs' |
   'browserAPIs' |
@@ -2687,6 +2600,7 @@ export type SitePluginPluginOptions = {
   dest?: Maybe<Scalars['String']>,
   maxWidth?: Maybe<Scalars['Int']>,
   classPrefix?: Maybe<Scalars['String']>,
+  stylesProvider?: Maybe<SitePluginPluginOptionsStylesProvider>,
   pathCheck?: Maybe<Scalars['Boolean']>,
 };
 
@@ -2703,6 +2617,7 @@ export type SitePluginPluginOptionsFilterInput = {
   dest?: Maybe<StringQueryOperatorInput>,
   maxWidth?: Maybe<IntQueryOperatorInput>,
   classPrefix?: Maybe<StringQueryOperatorInput>,
+  stylesProvider?: Maybe<SitePluginPluginOptionsStylesProviderFilterInput>,
   pathCheck?: Maybe<BooleanQueryOperatorInput>,
 };
 
@@ -2738,6 +2653,16 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
 export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   maxWidth?: Maybe<IntQueryOperatorInput>,
   classPrefix?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePluginPluginOptionsStylesProvider = {
+  pathToStylesProvider?: Maybe<Scalars['String']>,
+  injectFirst?: Maybe<Scalars['Boolean']>,
+};
+
+export type SitePluginPluginOptionsStylesProviderFilterInput = {
+  pathToStylesProvider?: Maybe<StringQueryOperatorInput>,
+  injectFirst?: Maybe<BooleanQueryOperatorInput>,
 };
 
 export type SitePluginSortInput = {

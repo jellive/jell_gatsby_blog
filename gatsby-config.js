@@ -83,5 +83,15 @@ module.exports = {
       // To learn more, visit: https://gatsby.dev/offline
       // `gatsby-plugin-offline`,
     },
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        stylesProvider: {
+          pathToStylesProvider: `src/styles-provider-props`,
+          injectFirst: true,
+        },
+      },
+    },
+    `gatsby-plugin-styled-components`,
   ],
 };
