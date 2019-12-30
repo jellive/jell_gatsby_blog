@@ -686,9 +686,8 @@ export type FileFieldsEnum =
   'internal___type' |
   'childMarkdownRemark___id' |
   'childMarkdownRemark___frontmatter___title' |
-  'childMarkdownRemark___frontmatter___date' |
-  'childMarkdownRemark___frontmatter___path' |
   'childMarkdownRemark___frontmatter___category' |
+  'childMarkdownRemark___frontmatter___date' |
   'childMarkdownRemark___frontmatter___tags' |
   'childMarkdownRemark___frontmatter___featuredImage___birthtime' |
   'childMarkdownRemark___frontmatter___featuredImage___birthtimeMs' |
@@ -724,6 +723,7 @@ export type FileFieldsEnum =
   'childMarkdownRemark___frontmatter___featuredImage___publicURL' |
   'childMarkdownRemark___frontmatter___featuredImage___id' |
   'childMarkdownRemark___frontmatter___featuredImage___children' |
+  'childMarkdownRemark___frontmatter___path' |
   'childMarkdownRemark___excerpt' |
   'childMarkdownRemark___rawMarkdownBody' |
   'childMarkdownRemark___fileAbsolutePath' |
@@ -1463,9 +1463,8 @@ export type MarkdownRemarkEdge = {
 export type MarkdownRemarkFieldsEnum = 
   'id' |
   'frontmatter___title' |
-  'frontmatter___date' |
-  'frontmatter___path' |
   'frontmatter___category' |
+  'frontmatter___date' |
   'frontmatter___tags' |
   'frontmatter___featuredImage___birthtime' |
   'frontmatter___featuredImage___birthtimeMs' |
@@ -1526,6 +1525,7 @@ export type MarkdownRemarkFieldsEnum =
   'frontmatter___featuredImage___childMarkdownRemark___timeToRead' |
   'frontmatter___featuredImage___childMarkdownRemark___tableOfContents' |
   'frontmatter___featuredImage___childMarkdownRemark___children' |
+  'frontmatter___path' |
   'excerpt' |
   'rawMarkdownBody' |
   'fileAbsolutePath' |
@@ -1646,11 +1646,11 @@ export type MarkdownRemarkFilterInput = {
 
 export type MarkdownRemarkFrontmatter = {
   title?: Maybe<Scalars['String']>,
-  date?: Maybe<Scalars['Date']>,
-  path?: Maybe<Scalars['String']>,
   category?: Maybe<Scalars['String']>,
+  date?: Maybe<Scalars['Date']>,
   tags?: Maybe<Array<Maybe<Scalars['String']>>>,
   featuredImage?: Maybe<File>,
+  path?: Maybe<Scalars['String']>,
 };
 
 
@@ -1663,11 +1663,11 @@ export type MarkdownRemarkFrontmatterDateArgs = {
 
 export type MarkdownRemarkFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>,
-  date?: Maybe<DateQueryOperatorInput>,
-  path?: Maybe<StringQueryOperatorInput>,
   category?: Maybe<StringQueryOperatorInput>,
+  date?: Maybe<DateQueryOperatorInput>,
   tags?: Maybe<StringQueryOperatorInput>,
   featuredImage?: Maybe<FileFilterInput>,
+  path?: Maybe<StringQueryOperatorInput>,
 };
 
 export type MarkdownRemarkGroupConnection = {
