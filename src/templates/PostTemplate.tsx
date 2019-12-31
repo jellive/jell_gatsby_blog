@@ -3,32 +3,37 @@ import Layout from '../components/layout'
 import { ITemplateProps } from '../interface'
 import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
 import { siteMetadata } from '../../gatsby-config'
+import { Card, CardContent, Chip } from '@material-ui/core';
+import './PostTemplates.css'
 
 
 type iPostTemplateProps = ITemplateProps<{
     html: string
-    title: string
-    date: string
+    frontmatter: Object
     slug: Object
 }>
 
 const PostTemplate: React.FC<iPostTemplateProps> = React.memo(props => {
-    const { title, date, html } = props.pageContext;
+    const { frontmatter, html } = props.pageContext;
     let disqusConfig = {
     //   url: `${siteMetadata.siteUrl+location.pathname}`,
       id: "disqus_thread",
-      identifier: title,
-      title: title,
+      identifier: frontmatter.title,
+      title: frontmatter.title,
       shortname: 'jell-1'
     }
     return (
         <Layout>
-            <h2>{title}</h2>
-            <h4>{date}</h4>
-            <hr />
-            <div dangerouslySetInnerHTML={{ __html: html }} />
-            <CommentCount config={disqusConfig} placeholder={'...'} />
-            <Disqus config={disqusConfig} />
+            <Card>
+            <CardContent>
+                <h2>{frontmatter.title}</h2>
+                <h4>{frontmatter.date}</h4>
+                <hr />
+                <div dangerouslySetInnerHTML={{ __html: html }} />
+                <CommentCount config={disqusConfig} placeholder={'...'} />
+                <Disqus config={disqusConfig} />
+            </CardContent>
+            </Card>
         </Layout>
     )
 })

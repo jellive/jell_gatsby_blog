@@ -696,10 +696,10 @@ export type FileFieldsEnum =
   'internal___type' |
   'childMarkdownRemark___id' |
   'childMarkdownRemark___frontmatter___title' |
-  'childMarkdownRemark___frontmatter___date' |
-  'childMarkdownRemark___frontmatter___path' |
   'childMarkdownRemark___frontmatter___category' |
+  'childMarkdownRemark___frontmatter___date' |
   'childMarkdownRemark___frontmatter___tags' |
+  'childMarkdownRemark___frontmatter___path' |
   'childMarkdownRemark___frontmatter___featuredImage___birthtime' |
   'childMarkdownRemark___frontmatter___featuredImage___birthtimeMs' |
   'childMarkdownRemark___frontmatter___featuredImage___sourceInstanceName' |
@@ -1484,10 +1484,10 @@ export type MarkdownRemarkFields = {
 export type MarkdownRemarkFieldsEnum = 
   'id' |
   'frontmatter___title' |
-  'frontmatter___date' |
-  'frontmatter___path' |
   'frontmatter___category' |
+  'frontmatter___date' |
   'frontmatter___tags' |
+  'frontmatter___path' |
   'frontmatter___featuredImage___birthtime' |
   'frontmatter___featuredImage___birthtimeMs' |
   'frontmatter___featuredImage___sourceInstanceName' |
@@ -1675,10 +1675,10 @@ export type MarkdownRemarkFilterInput = {
 
 export type MarkdownRemarkFrontmatter = {
   title?: Maybe<Scalars['String']>,
-  date?: Maybe<Scalars['Date']>,
-  path?: Maybe<Scalars['String']>,
   category?: Maybe<Scalars['String']>,
+  date?: Maybe<Scalars['Date']>,
   tags?: Maybe<Array<Maybe<Scalars['String']>>>,
+  path?: Maybe<Scalars['String']>,
   featuredImage?: Maybe<File>,
 };
 
@@ -1692,10 +1692,10 @@ export type MarkdownRemarkFrontmatterDateArgs = {
 
 export type MarkdownRemarkFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>,
-  date?: Maybe<DateQueryOperatorInput>,
-  path?: Maybe<StringQueryOperatorInput>,
   category?: Maybe<StringQueryOperatorInput>,
+  date?: Maybe<DateQueryOperatorInput>,
   tags?: Maybe<StringQueryOperatorInput>,
+  path?: Maybe<StringQueryOperatorInput>,
   featuredImage?: Maybe<FileFilterInput>,
 };
 
@@ -2241,10 +2241,12 @@ export type SitePageContextFilterInput = {
 
 export type SitePageContextFrontmatter = {
   title?: Maybe<Scalars['String']>,
+  date?: Maybe<Scalars['String']>,
 };
 
 export type SitePageContextFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>,
+  date?: Maybe<StringQueryOperatorInput>,
 };
 
 export type SitePageEdge = {
@@ -2347,6 +2349,7 @@ export type SitePageFieldsEnum =
   'isCreatedByStatefulCreatePages' |
   'context___html' |
   'context___frontmatter___title' |
+  'context___frontmatter___date' |
   'context___fields___slug' |
   'context___slug' |
   'pluginCreator___id' |
