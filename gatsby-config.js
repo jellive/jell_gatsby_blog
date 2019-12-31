@@ -78,7 +78,24 @@ module.exports = {
             // bash highlighter.
             aliases: {},
           },
-        }]
+        },
+        {
+          resolve: `gatsby-transformer-remark`,
+          options: {
+            plugins: [
+              {
+                resolve: `gatsby-remark-table-of-contents`,
+                options: {
+                  exclude: "Table of Contents",
+                  tight: false,
+                  fromHeading: 1,
+                  toHeading: 6
+                },
+              }
+            ],
+          },
+        },
+      ]
       }
       // this (optional) plugin enables Progressive Web App + Offline functionality
       // To learn more, visit: https://gatsby.dev/offline

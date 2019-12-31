@@ -6764,6 +6764,14 @@ gatsby-remark-prismjs@^3.3.28:
     parse-numeric-range "^0.0.2"
     unist-util-visit "^1.4.1"
 
+gatsby-remark-table-of-contents@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-table-of-contents/-/gatsby-remark-table-of-contents-0.0.8.tgz#3ee7260ef1245020dbf8e42d70938d760f3a6c06"
+  integrity sha512-b8XS++wsTk5W23Sqfy+ky/EYu5Aw47qXzGrYVTop/HXCJwURz5fsq8A9YMyqigSokO5/COZpKtl0GPEXjRIS8Q==
+  dependencies:
+    js-yaml "^3.13.1"
+    mdast-util-toc "^4.2.0"
+
 gatsby-source-filesystem@^2.1.36:
   version "2.1.36"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.36.tgz#3e2fda1d7e7a31cfc0e67814ef7f4fb94d6e4e8c"
@@ -9471,6 +9479,17 @@ mdast-util-to-string@^1.0.5, mdast-util-to-string@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/mdast-util-to-string/-/mdast-util-to-string-1.0.7.tgz#62d8e9c6b2113070d8b497c7dc35bf12796f06ee"
   integrity sha512-P+gdtssCoHOX+eJUrrC30Sixqao86ZPlVjR5NEAoy0U79Pfxb1Y0Gntei0+GrnQD4T04X9xA8tcugp90cSmNow==
+
+mdast-util-toc@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/mdast-util-toc/-/mdast-util-toc-4.2.0.tgz#9085c4313359c981e4c1d22efe02f8ce01072da4"
+  integrity sha512-BEbxg3GtAsvswmV9bMAV/WJA7v0CsG5tYk90xnTlIeCnnBKD6Cof3KEg/K3xQ1O2FRyJKMWkgKZB2mpnOjA0tg==
+  dependencies:
+    extend "^3.0.2"
+    github-slugger "^1.2.1"
+    mdast-util-to-string "^1.0.5"
+    unist-util-is "^3.0.0"
+    unist-util-visit "^1.1.0"
 
 mdast-util-toc@^5.0:
   version "5.0.0"
