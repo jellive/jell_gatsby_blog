@@ -2420,6 +2420,7 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___fonts___google' |
   'pluginCreator___pluginOptions___modules' |
   'pluginCreator___pluginOptions___shortname' |
+  'pluginCreator___pluginOptions___logo' |
   'pluginCreator___pluginOptions___pathCheck' |
   'pluginCreator___nodeAPIs' |
   'pluginCreator___browserAPIs' |
@@ -2643,6 +2644,7 @@ export type SitePluginFieldsEnum =
   'pluginOptions___fonts___google___variants' |
   'pluginOptions___modules' |
   'pluginOptions___shortname' |
+  'pluginOptions___logo' |
   'pluginOptions___pathCheck' |
   'nodeAPIs' |
   'browserAPIs' |
@@ -2779,6 +2781,7 @@ export type SitePluginPluginOptions = {
   fonts?: Maybe<SitePluginPluginOptionsFonts>,
   modules?: Maybe<Array<Maybe<Scalars['String']>>>,
   shortname?: Maybe<Scalars['String']>,
+  logo?: Maybe<Scalars['String']>,
   pathCheck?: Maybe<Scalars['Boolean']>,
 };
 
@@ -2803,6 +2806,7 @@ export type SitePluginPluginOptionsFilterInput = {
   fonts?: Maybe<SitePluginPluginOptionsFontsFilterInput>,
   modules?: Maybe<StringQueryOperatorInput>,
   shortname?: Maybe<StringQueryOperatorInput>,
+  logo?: Maybe<StringQueryOperatorInput>,
   pathCheck?: Maybe<BooleanQueryOperatorInput>,
 };
 

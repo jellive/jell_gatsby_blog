@@ -128,5 +128,11 @@ module.exports = {
         shortname: `jell-1`
       }
     },
+    {
+      resolve: `gatsby-plugin-favicon`,
+      options: {
+        logo: "./src/images/favicon.png",
+      }
+    }
   ],
 };
