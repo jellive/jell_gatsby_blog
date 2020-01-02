@@ -1,13 +1,15 @@
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
+import AppBar from '@material-ui/core/AppBar'
 
 const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
+  <AppBar
+    // style={{
+    //   background: `rebeccapurple`,
+    //   marginBottom: `1.45rem`,
+    // }}
+    color='default'
   >
     <div
       style={{
@@ -20,7 +22,7 @@ const Header = ({ siteTitle }) => (
         <Link
           to="/"
           style={{
-            color: `white`,
+            color: `gray`,
             textDecoration: `none`,
           }}
         >
@@ -28,7 +30,7 @@ const Header = ({ siteTitle }) => (
         </Link>
       </h1>
     </div>
-  </header>
+  </AppBar>
 );
 
 Header.propTypes = {

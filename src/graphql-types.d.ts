@@ -699,6 +699,7 @@ export type FileFieldsEnum =
   'childMarkdownRemark___frontmatter___category' |
   'childMarkdownRemark___frontmatter___date' |
   'childMarkdownRemark___frontmatter___tags' |
+  'childMarkdownRemark___frontmatter___path' |
   'childMarkdownRemark___frontmatter___featuredImage___birthtime' |
   'childMarkdownRemark___frontmatter___featuredImage___birthtimeMs' |
   'childMarkdownRemark___frontmatter___featuredImage___sourceInstanceName' |
@@ -735,7 +736,6 @@ export type FileFieldsEnum =
   'childMarkdownRemark___frontmatter___featuredImage___publicURL' |
   'childMarkdownRemark___frontmatter___featuredImage___id' |
   'childMarkdownRemark___frontmatter___featuredImage___children' |
-  'childMarkdownRemark___frontmatter___path' |
   'childMarkdownRemark___excerpt' |
   'childMarkdownRemark___rawMarkdownBody' |
   'childMarkdownRemark___fileAbsolutePath' |
@@ -1487,6 +1487,7 @@ export type MarkdownRemarkFieldsEnum =
   'frontmatter___category' |
   'frontmatter___date' |
   'frontmatter___tags' |
+  'frontmatter___path' |
   'frontmatter___featuredImage___birthtime' |
   'frontmatter___featuredImage___birthtimeMs' |
   'frontmatter___featuredImage___sourceInstanceName' |
@@ -1548,7 +1549,6 @@ export type MarkdownRemarkFieldsEnum =
   'frontmatter___featuredImage___childMarkdownRemark___timeToRead' |
   'frontmatter___featuredImage___childMarkdownRemark___tableOfContents' |
   'frontmatter___featuredImage___childMarkdownRemark___children' |
-  'frontmatter___path' |
   'excerpt' |
   'rawMarkdownBody' |
   'fileAbsolutePath' |
@@ -1678,8 +1678,8 @@ export type MarkdownRemarkFrontmatter = {
   category?: Maybe<Scalars['String']>,
   date?: Maybe<Scalars['Date']>,
   tags?: Maybe<Array<Maybe<Scalars['String']>>>,
-  featuredImage?: Maybe<File>,
   path?: Maybe<Scalars['String']>,
+  featuredImage?: Maybe<File>,
 };
 
 
@@ -1695,8 +1695,8 @@ export type MarkdownRemarkFrontmatterFilterInput = {
   category?: Maybe<StringQueryOperatorInput>,
   date?: Maybe<DateQueryOperatorInput>,
   tags?: Maybe<StringQueryOperatorInput>,
-  featuredImage?: Maybe<FileFilterInput>,
   path?: Maybe<StringQueryOperatorInput>,
+  featuredImage?: Maybe<FileFilterInput>,
 };
 
 export type MarkdownRemarkGroupConnection = {
@@ -2416,6 +2416,9 @@ export type SitePageFieldsEnum =
   'pluginCreator___pluginOptions___tight' |
   'pluginCreator___pluginOptions___fromHeading' |
   'pluginCreator___pluginOptions___toHeading' |
+  'pluginCreator___pluginOptions___stylesProvider___injectFirst' |
+  'pluginCreator___pluginOptions___fonts___google' |
+  'pluginCreator___pluginOptions___modules' |
   'pluginCreator___pluginOptions___shortname' |
   'pluginCreator___pluginOptions___pathCheck' |
   'pluginCreator___nodeAPIs' |
@@ -2634,6 +2637,11 @@ export type SitePluginFieldsEnum =
   'pluginOptions___tight' |
   'pluginOptions___fromHeading' |
   'pluginOptions___toHeading' |
+  'pluginOptions___stylesProvider___injectFirst' |
+  'pluginOptions___fonts___google' |
+  'pluginOptions___fonts___google___family' |
+  'pluginOptions___fonts___google___variants' |
+  'pluginOptions___modules' |
   'pluginOptions___shortname' |
   'pluginOptions___pathCheck' |
   'nodeAPIs' |
@@ -2767,6 +2775,9 @@ export type SitePluginPluginOptions = {
   tight?: Maybe<Scalars['Boolean']>,
   fromHeading?: Maybe<Scalars['Int']>,
   toHeading?: Maybe<Scalars['Int']>,
+  stylesProvider?: Maybe<SitePluginPluginOptionsStylesProvider>,
+  fonts?: Maybe<SitePluginPluginOptionsFonts>,
+  modules?: Maybe<Array<Maybe<Scalars['String']>>>,
   shortname?: Maybe<Scalars['String']>,
   pathCheck?: Maybe<Scalars['Boolean']>,
 };
@@ -2788,8 +2799,33 @@ export type SitePluginPluginOptionsFilterInput = {
   tight?: Maybe<BooleanQueryOperatorInput>,
   fromHeading?: Maybe<IntQueryOperatorInput>,
   toHeading?: Maybe<IntQueryOperatorInput>,
+  stylesProvider?: Maybe<SitePluginPluginOptionsStylesProviderFilterInput>,
+  fonts?: Maybe<SitePluginPluginOptionsFontsFilterInput>,
+  modules?: Maybe<StringQueryOperatorInput>,
   shortname?: Maybe<StringQueryOperatorInput>,
   pathCheck?: Maybe<BooleanQueryOperatorInput>,
+};
+
+export type SitePluginPluginOptionsFonts = {
+  google?: Maybe<Array<Maybe<SitePluginPluginOptionsFontsGoogle>>>,
+};
+
+export type SitePluginPluginOptionsFontsFilterInput = {
+  google?: Maybe<SitePluginPluginOptionsFontsGoogleFilterListInput>,
+};
+
+export type SitePluginPluginOptionsFontsGoogle = {
+  family?: Maybe<Scalars['String']>,
+  variants?: Maybe<Array<Maybe<Scalars['String']>>>,
+};
+
+export type SitePluginPluginOptionsFontsGoogleFilterInput = {
+  family?: Maybe<StringQueryOperatorInput>,
+  variants?: Maybe<StringQueryOperatorInput>,
+};
+
+export type SitePluginPluginOptionsFontsGoogleFilterListInput = {
+  elemMatch?: Maybe<SitePluginPluginOptionsFontsGoogleFilterInput>,
 };
 
 export type SitePluginPluginOptionsPlugins = {
@@ -2872,6 +2908,14 @@ export type SitePluginPluginOptionsPluginsPluginOptionsPluginsPluginOptionsFilte
   tight?: Maybe<BooleanQueryOperatorInput>,
   fromHeading?: Maybe<IntQueryOperatorInput>,
   toHeading?: Maybe<IntQueryOperatorInput>,
+};
+
+export type SitePluginPluginOptionsStylesProvider = {
+  injectFirst?: Maybe<Scalars['Boolean']>,
+};
+
+export type SitePluginPluginOptionsStylesProviderFilterInput = {
+  injectFirst?: Maybe<BooleanQueryOperatorInput>,
 };
 
 export type SitePluginSortInput = {

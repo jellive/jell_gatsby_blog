@@ -12,6 +12,9 @@ import { useStaticQuery, graphql } from 'gatsby';
 import Header from './header';
 import './layout.css';
 
+import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+import Slide from '@material-ui/core/Slide';
+
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -23,6 +26,7 @@ const Layout = ({ children }) => {
     }
   `);
 
+  const trigger = useScrollTrigger()
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
@@ -34,10 +38,14 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
-        <main>{children}</main>
+        <main>
+          {/* <Slide in={!trigger}> */}
+            {children}
+          {/* </Slide> */}
+        </main>
         <footer>
           © {new Date().getFullYear()}, Copyright by
-          {` `}
+            {` `}
           <a href="https://blog.jell.kr">Jell</a>
         </footer>
       </div>
