@@ -32,7 +32,7 @@ const PostTemplate: React.FC<iPostTemplateProps> = React.memo(props => {
                 <Typography>
                 <div dangerouslySetInnerHTML={{ __html: html }} />
                 </Typography>
-                <CommentCount config={disqusConfig} placeholder={'...'} />
+                {/* <CommentCount config={disqusConfig} placeholder={'...'} /> */}
                 <Disqus config={disqusConfig} />
             </CardContent>
             </Card>
