@@ -1,0 +1,240 @@
+@import '../utils/variables.scss';
+
+.blog-post-container {
+  margin-bottom: 2rem;
+  & > div,
+  .ad {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .blog-post {
+    padding: 1rem;
+
+    a {
+      text-decoration-line: underline;
+    }
+
+    .blog-post-title {
+      font-size: 1.8rem;
+      margin: 0;
+      font-family: 'Noto Serif KR';
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    .blog-post-info {
+      margin-top: 1rem;
+      color: rgba(0, 0, 0, 0.64);
+      display: flex;
+      font-family: 'Nanum Gothic';
+      font-size: 0.84rem;
+      align-items: center;
+      justify-content: space-between;
+
+      & > span:nth-child(2) {
+        margin: 0 0.5rem;
+      }
+
+      .blog-post-tag-list {
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        flex-grow: 1;
+
+        .blog-post-tag {
+          list-style: none;
+          margin: 0;
+          margin-right: 0.3rem;
+
+          a {
+            color: rgba(0, 0, 0, 0.64);
+            text-decoration: none;
+            transition: 0.3s;
+
+            &:hover {
+              color: rgba(0, 0, 0, 0.84);
+            }
+          }
+        }
+      }
+
+      .blog-post-inside-toc {
+        align-self: flex-end;
+        display: none;
+
+        @media screen and (max-width: $break-toc) {
+          display: inline-block;
+        }
+
+        .toc-button {
+          cursor: pointer;
+          color: #6a737d;
+          opacity: 0.5;
+
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+    .series-list {
+      margin: 0;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-family: 'Nanum Gothic';
+      font-size: 0.9rem;
+
+      .series-item {
+        list-style: none;
+        margin: 0;
+        opacity: 0.4;
+        transition: all 0.2s;
+
+        &:hover {
+          opacity: 0.9;
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        &.current-series {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    .inside-toc-wrap {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .blog-post-content {
+      margin-top: 3rem;
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: 'Noto Serif KR';
+      }
+      h1 {
+        margin-top: 4rem;
+      }
+      h2 {
+        margin-top: 3rem;
+      }
+      h3 {
+        margin-top: 2rem;
+      }
+
+      li {
+        margin-bottom: 0.25rem;
+
+        ul {
+          margin-top: 0.25rem;
+        }
+      }
+      code {
+        font-family: 'Nanum Gothic Coding';
+      }
+    }
+  }
+
+  .social-share {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    ul {
+      margin: 0;
+      display: flex;
+
+      li.social-share-item {
+        margin: 0;
+        list-style: none;
+        margin: 0 0.25rem;
+
+        & > div {
+          cursor: pointer;
+
+          circle {
+            fill: #6a737d;
+            transition: 0.3s;
+          }
+        }
+        &:hover {
+          &.email {
+            & > div circle {
+              fill: #7f7f7f;
+            }
+          }
+          &.facebook {
+            & > div circle {
+              fill: #3b5998;
+            }
+          }
+          &.twitter {
+            & > div circle {
+              fill: #00aced;
+            }
+          }
+          &.linkedin {
+            & > div circle {
+              fill: #007fb1;
+            }
+          }
+          &.reddit {
+            & > div circle {
+              fill: #5f99cf;
+            }
+          }
+          &.pocket {
+            & > div circle {
+              fill: #ef3f56;
+            }
+          }
+        }
+      }
+    }
+  }
+  .ad {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .ad-dev,
+  .comments-dev {
+    border: 1px dotted gray;
+    min-height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-family: 'Nanum Gothic';
+
+    & > :nth-child(1) {
+      opacity: 0.8;
+    }
+
+    & > :nth-child(2) {
+      font-size: 0.9rem;
+      opacity: 0.5;
+    }
+
+    &.comments-dev {
+      min-height: 20rem;
+    }
+  }
+
+  .comments {
+    padding: 1rem;
+  }
+}

@@ -1,11 +1,4 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+import wrapWithProvider from './wrap-with-provider.tsx';
+export const wrapRootElement = wrapWithProvider;
 
-// You can delete this file if you're not using it
-
-require("prismjs/themes/prism-solarizedlight.css")
-
-require("prismjs/plugins/line-numbers/prism-line-numbers.css")
+require('prism-themes/themes/prism-ghcolors.css');
