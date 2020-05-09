@@ -48,6 +48,7 @@ const Layout = (props: LayoutPropsType) => {
         <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
         <link href={`https://fonts.googleapis.com/css?family=${googleFont}`} rel="stylesheet" />
         <style>{FaDom.css()}</style>
+        <script data-ad-client="ca-pub-5518615618879832" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       </Helmet>
 
       <Header siteTitle={data.site.siteMetadata.title} />
