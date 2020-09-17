@@ -1,19 +1,18 @@
-import React from 'react';
-import { useState } from 'react';
-import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
+import { graphql } from 'gatsby';
+import React, { useState } from 'react';
 
 import Layout from '../components/Layout';
-import SEO from '../components/seo';
-import { graphql } from 'gatsby';
 import PostList from '../components/PostList';
+import SEO from '../components/seo';
 import './styles/search.scss';
 
-export interface SearchProps {
+export interface ISearchProps {
   data: any;
 }
 
-const Search = (props: SearchProps) => {
+const Search = (props: ISearchProps) => {
   const posts = props.data.allMarkdownRemark.edges;
   const [value, setValue] = useState('');
   const [isTitleOnly, setIsTitleOnly] = useState(true);
@@ -45,7 +44,7 @@ const Search = (props: SearchProps) => {
               value={value}
               placeholder="Search"
               autoComplete="off"
-              autoFocus
+              autoFocus={true}
               onChange={(e: React.FormEvent<HTMLInputElement>) => {
                 setValue(e.currentTarget.value);
               }}
