@@ -2,7 +2,7 @@
 category: "Dev"
 date: "2020-10-03T15:30:00Z"
 title: "Cocoapods 1.9.4에 버그가 있습니다(Cocoapods 다운그레이드 방법)"
-tags: ["개발", "Javascript"]
+tags: ["개발", "iOS", "Cocoapods", "XCode"]
 ---
 집에서 iOS를 공부하기 위해 습관적으로 cocoapods를 업데이트하고 빌드를 하려고 보니
 ![증상 스크린샷](images/screenshot1.png)
