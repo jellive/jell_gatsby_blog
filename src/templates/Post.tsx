@@ -1,11 +1,11 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import Helmet from 'react-helmet';
-import { graphql, Link } from 'gatsby';
-import { DiscussionEmbed } from 'disqus-react';
-import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
-import { faListUl } from '@fortawesome/free-solid-svg-icons';
-import AdSense from 'react-adsense';
+import React from 'react'
+import { useEffect, useState } from 'react'
+import Helmet from 'react-helmet'
+import { graphql, Link } from 'gatsby'
+import { DiscussionEmbed } from 'disqus-react'
+import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
+import { faListUl } from '@fortawesome/free-solid-svg-icons'
+import AdSense from 'react-adsense'
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -18,81 +18,81 @@ import {
   LinkedinIcon,
   RedditIcon,
   PocketIcon,
-  EmailIcon,
-} from 'react-share';
+  EmailIcon
+} from 'react-share'
 
-import Layout from '../components/Layout';
-import Toc from '../components/Toc';
-import SEO from '../components/seo';
-import './post.scss';
-import 'katex/dist/katex.min.css';
-const config = require('../../config');
+import Layout from '../components/Layout'
+import Toc from '../components/Toc'
+import SEO from '../components/seo'
+import './post.scss'
+import 'katex/dist/katex.min.css'
+const config = require('../../config')
 
 export interface postProps {
-  data: any;
-  pageContext: any;
+  data: any
+  pageContext: any
 }
 
 const Post = (props: postProps) => {
-  const { data, pageContext } = props;
-  const { markdownRemark } = data; // data.markdownRemark holds your post data
-  const { frontmatter, html, tableOfContents, fields, excerpt } = markdownRemark;
-  const { title, date, tags, keywords } = frontmatter;
-  const { slug } = fields;
-  const { series } = pageContext;
-  const [yList, setYList] = useState();
-  const [isInsideToc, setIsInsideToc] = useState(false);
+  const { data, pageContext } = props
+  const { markdownRemark } = data // data.markdownRemark holds your post data
+  const { frontmatter, html, tableOfContents, fields, excerpt } = markdownRemark
+  const { title, date, tags, keywords } = frontmatter
+  const { slug } = fields
+  const { series } = pageContext
+  const [yList, setYList] = useState()
+  const [isInsideToc, setIsInsideToc] = useState(false)
 
-  const isTableOfContents = config.enablePostOfContents && tableOfContents !== '';
-  const isDevelopment = process.env.NODE_ENV === 'development';
-  const isDisqus = config.disqusShortname;
-  const isSocialShare = config.enableSocialShare;
+  const isTableOfContents = config.enablePostOfContents && tableOfContents !== ''
+  const isDevelopment = process.env.NODE_ENV === 'development'
+  const isDisqus = config.disqusShortname
+  const isSocialShare = config.enableSocialShare
 
   useEffect(() => {
-    const hs = Array.from(document.querySelectorAll('h2, h3')) as Array<HTMLHeadingElement>;
+    const hs = Array.from(document.querySelectorAll('h2, h3')) as Array<HTMLHeadingElement>
 
     const foo = hs.map(h => {
-      return h.offsetTop;
-    });
+      return h.offsetTop
+    })
 
-    setYList(foo);
+    setYList(foo)
 
-    return () => {};
-  }, []);
+    return () => {}
+  }, [])
 
   useEffect(() => {
     const setYPos = () => {
       if (yList) {
         const index =
           yList.filter((v: number) => {
-            return v < window.pageYOffset;
-          }).length - 1;
+            return v < window.pageYOffset
+          }).length - 1
 
-        const aList = document.querySelectorAll('.toc.outside li a') as NodeListOf<HTMLAnchorElement>;
+        const aList = document.querySelectorAll('.toc.outside li a') as NodeListOf<HTMLAnchorElement>
 
         for (const i in Array.from(aList)) {
           if (parseInt(i, 10) === index) {
-            aList[i].style.opacity = '1';
+            aList[i].style.opacity = '1'
           } else {
-            aList[i].style.opacity = '0.4';
+            aList[i].style.opacity = '0.4'
           }
         }
       }
-    };
+    }
 
-    if (isTableOfContents) document.addEventListener('scroll', setYPos);
+    if (isTableOfContents) document.addEventListener('scroll', setYPos)
     return () => {
-      if (isTableOfContents) document.removeEventListener('scroll', setYPos);
-    };
-  }, [yList]);
+      if (isTableOfContents) document.removeEventListener('scroll', setYPos)
+    }
+  }, [yList])
 
   const mapTags = tags.map((tag: string) => {
     return (
       <li key={tag} className="blog-post-tag">
         <Link to={`/tag/${tag}`}>{`#${tag}`}</Link>
       </li>
-    );
-  });
+    )
+  })
 
   const mapSeries = series.map((s: any) => {
     return (
@@ -101,8 +101,8 @@ const Post = (props: postProps) => {
           <span>{s.title}</span>
         </Link>
       </li>
-    );
-  });
+    )
+  })
 
   //disqus
   const disqusConfig = {
@@ -110,19 +110,19 @@ const Post = (props: postProps) => {
     config: {
       url: `${config.siteUrl + slug}`,
       identifier: slug,
-      title,
-    },
-  };
+      title
+    }
+  }
 
   const metaKeywords = (keywordList: Array<string>, tagList: Array<string>) => {
-    const resultKeywords = new Set();
+    const resultKeywords = new Set()
 
     for (const v of [...keywordList, ...tagList]) {
-      resultKeywords.add(v);
+      resultKeywords.add(v)
     }
 
-    return Array.from(resultKeywords);
-  };
+    return Array.from(resultKeywords)
+  }
 
   return (
     <>
@@ -154,8 +154,8 @@ const Post = (props: postProps) => {
                     role="button"
                     onClick={() => {
                       setIsInsideToc((prev: boolean) => {
-                        return !prev;
-                      });
+                        return !prev
+                      })
                     }}
                   >
                     <Fa icon={faListUl} />
@@ -249,8 +249,8 @@ const Post = (props: postProps) => {
         {!isTableOfContents ? null : <Toc isOutside={true} toc={tableOfContents} />}
       </Layout>
     </>
-  );
-};
+  )
+}
 
 export const pageQuery = graphql`
   query($slug: String) {
@@ -269,6 +269,6 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
 
-export default Post;
+export default Post

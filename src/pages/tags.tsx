@@ -1,41 +1,41 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { graphql } from 'gatsby';
+import * as React from 'react'
+import { useEffect, useState } from 'react'
+import { graphql } from 'gatsby'
 
-import Layout from '../components/Layout';
-import SEO from '../components/seo';
-import './styles/tags.scss';
-import PostList from '../components/PostList';
+import Layout from '../components/Layout'
+import SEO from '../components/seo'
+import './styles/tags.scss'
+import PostList from '../components/PostList'
 
 export interface TagsPageProps {
-  data: any;
+  data: any
 }
 
 const Tags = (props: TagsPageProps) => {
-  const { group } = props.data.allMarkdownRemark;
-  const [largeCount, setLargeCount] = useState(0);
-  const [targetTag, setTargetTag] = useState('undefined');
+  const { group } = props.data.allMarkdownRemark
+  const [largeCount, setLargeCount] = useState(0)
+  const [targetTag, setTargetTag] = useState('undefined')
 
   interface groupItem {
-    fieldValue: string;
-    totalCount: number;
+    fieldValue: string
+    totalCount: number
   }
 
   group.sort((a: groupItem, b: groupItem) => {
-    const x = a.fieldValue.toLocaleLowerCase();
-    const y = b.fieldValue.toLocaleLowerCase();
+    const x = a.fieldValue.toLocaleLowerCase()
+    const y = b.fieldValue.toLocaleLowerCase()
 
-    if (x < y) return -1;
-    if (y < x) return 1;
-    return 0;
-  });
+    if (x < y) return -1
+    if (y < x) return 1
+    return 0
+  })
 
   const tagList = group.map((g: groupItem) => {
     const getFontSize = () => {
-      let fontSize = Math.round(50 / (largeCount / g.totalCount)).toString();
-      if (fontSize.length <= 1) fontSize = `0${fontSize}`;
-      return `1.${fontSize}rem`;
-    };
+      let fontSize = Math.round(50 / (largeCount / g.totalCount)).toString()
+      if (fontSize.length <= 1) fontSize = `0${fontSize}`
+      return `1.${fontSize}rem`
+    }
 
     return (
       <li key={g.fieldValue}>
@@ -44,47 +44,47 @@ const Tags = (props: TagsPageProps) => {
           style={{
             fontSize: g.fieldValue !== 'undefined' ? getFontSize() : '1rem',
             opacity: g.fieldValue === targetTag ? '0.9' : '0.5',
-            fontWeight: g.fieldValue === targetTag ? 'bold' : 'normal',
+            fontWeight: g.fieldValue === targetTag ? 'bold' : 'normal'
           }}
           onClick={() => {
-            setTargetTag(g.fieldValue);
+            setTargetTag(g.fieldValue)
           }}
         >
           <a href={`#${g.fieldValue}`}>{g.fieldValue}</a>
         </span>
       </li>
-    );
-  });
+    )
+  })
 
   tagList.sort((a: React.ReactElement) => {
-    if (a.key === 'undefined') return -1;
-    return 0;
-  });
+    if (a.key === 'undefined') return -1
+    return 0
+  })
 
   const getPostList = () => {
     if (group.filter((g: groupItem) => g.fieldValue === targetTag).length) {
-      return group.filter((g: groupItem) => g.fieldValue === targetTag)[0].edges;
+      return group.filter((g: groupItem) => g.fieldValue === targetTag)[0].edges
     }
     if (group.filter((g: groupItem) => g.fieldValue === 'undefined').length) {
-      return group.filter((g: groupItem) => g.fieldValue === 'undefined')[0].edges;
+      return group.filter((g: groupItem) => g.fieldValue === 'undefined')[0].edges
     }
-    return [];
-  };
+    return []
+  }
 
   useEffect(() => {
-    let large = 0;
+    let large = 0
     for (const g of group) {
-      if (g.fieldValue !== 'undefined' && g.totalCount > large) large = g.totalCount;
+      if (g.fieldValue !== 'undefined' && g.totalCount > large) large = g.totalCount
     }
-    setLargeCount(large);
+    setLargeCount(large)
 
-    return () => {};
-  }, [group]);
+    return () => {}
+  }, [group])
 
   useEffect(() => {
-    if (location.hash) setTargetTag(location.hash.split('#')[1]);
-    return () => {};
-  }, []);
+    if (location.hash) setTargetTag(location.hash.split('#')[1])
+    return () => {}
+  }, [])
 
   return (
     <Layout>
@@ -97,8 +97,8 @@ const Tags = (props: TagsPageProps) => {
         <PostList posts={getPostList()} />
       </div>
     </Layout>
-  );
-};
+  )
+}
 
 export const pageQuery = graphql`
   query {
@@ -122,6 +122,6 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
 
-export default Tags;
+export default Tags

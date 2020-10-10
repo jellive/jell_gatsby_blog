@@ -1,7 +1,7 @@
-import * as React from 'react';
-import Link from 'gatsby-link';
-import Img from 'gatsby-image';
-import { Card, CardContent, Chip } from '@material-ui/core';
+import * as React from 'react'
+import Link from 'gatsby-link'
+import Img from 'gatsby-image'
+import { Card, CardContent, Chip } from '@material-ui/core'
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema
@@ -9,39 +9,39 @@ interface IndexPageProps {
   data: {
     site: {
       siteMetadata: {
-        title: string;
-      };
-    };
+        title: string
+      }
+    }
 
     allMarkdownRemark: {
       edges: {
         node: {
-          excerpt: string;
+          excerpt: string
           frontmatter: {
-            title: string;
-            date(formatString: 'MMMM DD, YYYY'): string;
-            path: string;
-            tags: string[];
-            category: string;
+            title: string
+            date(formatString: 'MMMM DD, YYYY'): string
+            path: string
+            tags: string[]
+            category: string
             featuredImage: {
-              publicURL: string;
+              publicURL: string
               childImageSharp: {
-                sizes: any;
-              };
-            };
-          };
+                sizes: any
+              }
+            }
+          }
           fields: {
-            slug: string;
-          };
-        };
-      }[];
-    };
-  };
+            slug: string
+          }
+        }
+      }[]
+    }
+  }
 }
 
 export default class extends React.Component<IndexPageProps, {}> {
   constructor(props: IndexPageProps, context: any) {
-    super(props, context);
+    super(props, context)
   }
   public render() {
     return (
@@ -85,7 +85,7 @@ export default class extends React.Component<IndexPageProps, {}> {
           </CardContent>
         </Card>
       </>
-    );
+    )
   }
 }
 
@@ -126,4 +126,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

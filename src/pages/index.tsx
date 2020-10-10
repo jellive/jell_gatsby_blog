@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { graphql } from 'gatsby';
+import * as React from 'react'
+import { graphql } from 'gatsby'
 
-import Layout from '../components/Layout';
-import SEO from '../components/seo';
-import Bio from '../components/Bio';
-import './styles/index.scss';
-import PostList from '../components/PostList';
+import Layout from '../components/Layout'
+import SEO from '../components/seo'
+import Bio from '../components/Bio'
+import './styles/index.scss'
+import PostList from '../components/PostList'
 
 export interface IndexPageProps {
-  path: String;
-  location: Object;
-  data: any; //
+  path: String
+  location: Object
+  data: any //
 }
 
 const IndexPage = (props: IndexPageProps) => {
-  const posts = props.data.allMarkdownRemark.edges;
+  const posts = props.data.allMarkdownRemark.edges
   return (
     <Layout>
       <SEO title="Home" />
@@ -25,8 +25,8 @@ const IndexPage = (props: IndexPageProps) => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
 export const pageQuery = graphql`
   query {
@@ -46,6 +46,6 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
 
-export default IndexPage;
+export default IndexPage

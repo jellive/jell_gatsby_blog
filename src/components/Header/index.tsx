@@ -1,90 +1,90 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { Link } from 'gatsby';
-import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
-import { faTags, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { connect } from 'react-redux';
-import MobileDetect from 'mobile-detect';
+import * as React from 'react'
+import { useEffect, useState } from 'react'
+import { Link } from 'gatsby'
+import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
+import { faTags, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux'
+import MobileDetect from 'mobile-detect'
 
-import './header.scss';
-const config = require('../../../config');
+import './header.scss'
+const config = require('../../../config')
 
 export interface headerPropsType {
-  siteTitle: String;
-  path: any;
-  setPath: any;
-  size: string;
+  siteTitle: String
+  path: any
+  setPath: any
+  size: string
 }
 
 const Header = (props: headerPropsType) => {
-  const { siteTitle, path, setPath, size } = props;
-  const [, setYPos] = useState(0);
-  const [isHide, setIsHide] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const { siteTitle, path, setPath, size } = props
+  const [, setYPos] = useState(0)
+  const [isHide, setIsHide] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const bio: HTMLDivElement | null = document.querySelector('.bio');
+    const bio: HTMLDivElement | null = document.querySelector('.bio')
     if (bio) {
       if (isHide === true) {
-        bio.style.opacity = '0';
-        bio.style.pointerEvents = 'none';
+        bio.style.opacity = '0'
+        bio.style.pointerEvents = 'none'
       } else {
-        bio.style.opacity = '1';
-        bio.style.pointerEvents = 'all';
+        bio.style.opacity = '1'
+        bio.style.pointerEvents = 'all'
       }
     }
-  }, [isHide]);
+  }, [isHide])
 
   useEffect(() => {
-    const md = new MobileDetect(window.navigator.userAgent);
+    const md = new MobileDetect(window.navigator.userAgent)
     if (md.mobile()) {
-      setIsMobile(true);
+      setIsMobile(true)
     }
 
-    const profile: HTMLImageElement | null = document.querySelector('.header-profile-image-wrap>img');
+    const profile: HTMLImageElement | null = document.querySelector('.header-profile-image-wrap>img')
 
-    const prevPath = path;
-    const currPath = location.pathname;
+    const prevPath = path
+    const currPath = location.pathname
 
     if (profile) {
       if (currPath === prevPath) {
-        setPath(location.pathname, currPath !== '/' ? '25px' : '50px');
+        setPath(location.pathname, currPath !== '/' ? '25px' : '50px')
       }
 
       if (prevPath !== '/' && currPath === '/') {
-        setPath(location.pathname, '50px');
+        setPath(location.pathname, '50px')
       }
 
       if (prevPath === '/' && currPath !== '/') {
-        setPath(location.pathname, '25px');
+        setPath(location.pathname, '25px')
       }
 
       if (prevPath !== '/' && currPath !== '/') {
-        setPath(location.pathname);
+        setPath(location.pathname)
       }
     } else {
-      setPath(location.pathname);
+      setPath(location.pathname)
     }
 
     const setVisible = () => {
       setYPos(prevYPos => {
-        const currentYPos = window.pageYOffset;
+        const currentYPos = window.pageYOffset
 
-        setIsHide(prevYPos < currentYPos);
+        setIsHide(prevYPos < currentYPos)
 
-        return currentYPos;
-      });
-    };
-    document.addEventListener('scroll', setVisible);
-    return () => document.removeEventListener('scroll', setVisible);
-  }, []);
+        return currentYPos
+      })
+    }
+    document.addEventListener('scroll', setVisible)
+    return () => document.removeEventListener('scroll', setVisible)
+  }, [])
 
   const tagSpanVisibleToggle = (isVisible: boolean) => {
-    const tag: HTMLSpanElement | null = document.querySelector('.tag-wrap>span');
+    const tag: HTMLSpanElement | null = document.querySelector('.tag-wrap>span')
 
-    if (tag && isVisible) tag.style.opacity = '1';
-    if (tag && !isVisible) tag.style.opacity = '0';
-  };
+    if (tag && isVisible) tag.style.opacity = '1'
+    if (tag && !isVisible) tag.style.opacity = '0'
+  }
 
   return (
     <header id="Header" className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''}`}>
@@ -118,10 +118,10 @@ const Header = (props: headerPropsType) => {
                 <Fa
                   icon={faTags}
                   onMouseEnter={() => {
-                    tagSpanVisibleToggle(true);
+                    tagSpanVisibleToggle(true)
                   }}
                   onMouseLeave={() => {
-                    tagSpanVisibleToggle(false);
+                    tagSpanVisibleToggle(false)
                   }}
                 />
               </Link>
@@ -138,17 +138,17 @@ const Header = (props: headerPropsType) => {
         </ul>
       </nav>
     </header>
-  );
-};
+  )
+}
 
 const mapStateToProps = ({ path, size }: { path: string; size: string }) => {
-  return { path, size };
-};
+  return { path, size }
+}
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    setPath: (path: string, size: string) => dispatch({ type: `SET_PATH`, path, size }),
-  };
-};
+    setPath: (path: string, size: string) => dispatch({ type: `SET_PATH`, path, size })
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

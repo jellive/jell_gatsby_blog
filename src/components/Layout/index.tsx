@@ -1,24 +1,24 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import Helmet from 'react-helmet';
-import { config as FaConfig, dom as FaDom } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
-import { faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons';
+import * as React from 'react'
+import { useState, useEffect } from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import Helmet from 'react-helmet'
+import { config as FaConfig, dom as FaDom } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
+import { faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons'
 
-import Header from '../Header';
-import './layout.scss';
-import { googleFont } from '../../utils/typography';
+import Header from '../Header'
+import './layout.scss'
+import { googleFont } from '../../utils/typography'
 
-FaConfig.autoAddCss = false;
+FaConfig.autoAddCss = false
 
 export interface LayoutPropsType {
-  children: Object;
+  children: Object
 }
 
 const Layout = (props: LayoutPropsType) => {
-  const { children } = props;
-  const [isTop, setIsTop] = useState(true);
+  const { children } = props
+  const [isTop, setIsTop] = useState(true)
 
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -28,19 +28,19 @@ const Layout = (props: LayoutPropsType) => {
         }
       }
     }
-  `);
+  `)
 
   useEffect(() => {
     const setTop = () => {
       if (window.pageYOffset < window.innerHeight / 2) {
-        setIsTop(true);
+        setIsTop(true)
       } else {
-        setIsTop(false);
+        setIsTop(false)
       }
-    };
-    document.addEventListener('scroll', setTop);
-    return () => document.removeEventListener('scroll', setTop);
-  }, []);
+    }
+    document.addEventListener('scroll', setTop)
+    return () => document.removeEventListener('scroll', setTop)
+  }, [])
 
   return (
     <>
@@ -69,16 +69,16 @@ const Layout = (props: LayoutPropsType) => {
         id="top"
         style={{
           opacity: isTop ? '0' : '1',
-          pointerEvents: isTop ? 'none' : 'all',
+          pointerEvents: isTop ? 'none' : 'all'
         }}
         onClick={() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: 'smooth' })
         }}
       >
         <Fa icon={faAngleDoubleUp} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

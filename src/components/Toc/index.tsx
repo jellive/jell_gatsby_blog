@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import './toc.scss';
+import './toc.scss'
 
 export interface TocProps {
-  toc: string;
-  isOutside: boolean;
+  toc: string
+  isOutside: boolean
 }
 const Toc = (props: TocProps) => {
-  const { toc, isOutside } = props;
+  const { toc, isOutside } = props
 
-  return <div className={`toc ${isOutside ? 'outside' : 'inside'}`} dangerouslySetInnerHTML={{ __html: toc }}></div>;
-};
+  return <div className={`toc ${isOutside ? 'outside' : 'inside'}`} dangerouslySetInnerHTML={{ __html: toc }}></div>
+}
 
-export default Toc;
+export default Toc

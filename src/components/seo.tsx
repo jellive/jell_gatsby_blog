@@ -1,17 +1,17 @@
-import * as React from 'react';
-import Helmet from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
+import * as React from 'react'
+import Helmet from 'react-helmet'
+import { useStaticQuery, graphql } from 'gatsby'
 
 export interface SEOpropsType {
-  description: any;
-  lang: any;
-  meta: any;
-  title: any;
-  keywords: any;
+  description: any
+  lang: any
+  meta: any
+  title: any
+  keywords: any
 }
 
 function SEO(props: SEOpropsType) {
-  const { description, lang, meta, title, keywords } = props;
+  const { description, lang, meta, title, keywords } = props
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -24,64 +24,64 @@ function SEO(props: SEOpropsType) {
         }
       }
     `
-  );
+  )
 
-  const metaDescription = description || site.siteMetadata.description;
+  const metaDescription = description || site.siteMetadata.description
 
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang
       }}
       title={title}
       titleTemplate={title === 'Home' ? site.siteMetadata.title : `%s | ${site.siteMetadata.title}`}
       meta={[
         {
           name: `description`,
-          content: metaDescription,
+          content: metaDescription
         },
         {
           property: `og:title`,
-          content: title,
+          content: title
         },
         {
           property: `og:description`,
-          content: metaDescription,
+          content: metaDescription
         },
         {
           property: `og:type`,
-          content: `website`,
+          content: `website`
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary`
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: site.siteMetadata.author
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: title
         },
         {
           name: `twitter:description`,
-          content: metaDescription,
+          content: metaDescription
         },
         {
           name: `keywords`,
-          content: keywords,
-        },
+          content: keywords
+        }
       ].concat(meta)}
     />
-  );
+  )
 }
 
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
-  keywords: ``,
-};
+  keywords: ``
+}
 
-export default SEO;
+export default SEO

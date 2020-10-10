@@ -1,34 +1,34 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome';
-import { graphql } from 'gatsby';
-import React, { useState } from 'react';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
+import { graphql } from 'gatsby'
+import React, { useState } from 'react'
 
-import Layout from '../components/Layout';
-import PostList from '../components/PostList';
-import SEO from '../components/seo';
-import './styles/search.scss';
+import Layout from '../components/Layout'
+import PostList from '../components/PostList'
+import SEO from '../components/seo'
+import './styles/search.scss'
 
 export interface ISearchProps {
-  data: any;
+  data: any
 }
 
 const Search = (props: ISearchProps) => {
-  const posts = props.data.allMarkdownRemark.edges;
-  const [value, setValue] = useState('');
-  const [isTitleOnly, setIsTitleOnly] = useState(true);
+  const posts = props.data.allMarkdownRemark.edges
+  const [value, setValue] = useState('')
+  const [isTitleOnly, setIsTitleOnly] = useState(true)
 
   const filteredPosts = posts.filter((post: any) => {
-    const { node } = post;
-    const { frontmatter, rawMarkdownBody } = node;
-    const { title } = frontmatter;
-    const lowerValue = value.toLocaleLowerCase();
+    const { node } = post
+    const { frontmatter, rawMarkdownBody } = node
+    const { title } = frontmatter
+    const lowerValue = value.toLocaleLowerCase()
 
     if (!isTitleOnly && rawMarkdownBody.toLocaleLowerCase().indexOf(lowerValue) > -1) {
-      return true;
+      return true
     }
 
-    return title.toLocaleLowerCase().indexOf(lowerValue) > -1;
-  });
+    return title.toLocaleLowerCase().indexOf(lowerValue) > -1
+  })
 
   return (
     <Layout>
@@ -46,14 +46,14 @@ const Search = (props: ISearchProps) => {
               autoComplete="off"
               autoFocus={true}
               onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                setValue(e.currentTarget.value);
+                setValue(e.currentTarget.value)
               }}
             />
             <div className="search-toggle">
               <span
                 style={{ opacity: isTitleOnly ? 0.8 : 0.15 }}
                 onClick={() => {
-                  setIsTitleOnly(true);
+                  setIsTitleOnly(true)
                 }}
               >
                 in Title
@@ -61,7 +61,7 @@ const Search = (props: ISearchProps) => {
               <span
                 style={{ opacity: !isTitleOnly ? 0.8 : 0.15 }}
                 onClick={() => {
-                  setIsTitleOnly(false);
+                  setIsTitleOnly(false)
                 }}
               >
                 in Title+Content
@@ -74,8 +74,8 @@ const Search = (props: ISearchProps) => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
 export const pageQuery = graphql`
   query {
@@ -96,6 +96,6 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
 
-export default Search;
+export default Search
