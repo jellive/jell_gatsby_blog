@@ -4,6 +4,9 @@
   "description": "Gatsby Blog, 'Borderless' Theme By Junhobaik",
   "version": "3.0.0",
   "author": "Jell",
+  "engines": {
+    "node": ">=14.17.0"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
