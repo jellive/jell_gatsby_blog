@@ -18,26 +18,14 @@ Undefined symbols for architecture arm64:
 ld: symbol(s) not found for architecture arm64
 ```
 
-라는 에러와 함께 빌드가 실패했습니다.  
-그래서 팟을 해제시켜보고 소스를 다시 받아보고 빌드 클린을 해도 증상은 똑같더라구요.  
-해결은 의외로 간단했습니다.  
-단순히 설치되어있는 cocoapods 1.9.3에 버그가 있어 프로젝트 생성이 이상하게 된다는 건데요.
+여기서 Pods 프로젝트의 'RxRealm.framework'의 정보를 보시면
+![RxRealm 이전 스크린샷](images/screenshot2.png)
+이렇게 세 가지의 framework가 포함되어 있음을 알 수 있습니다.
 
-우선 Podfile에 설정되어 있는 RealmSwift를 5.4.3버전으로 내립니다.
+문제는 여기서 제일 중요한 'Realm'의 참조가 빠져있다는 건데요.
+Realm.framework를 추가해 줍니다.
+![Realm 선택 스크린샷](images/screenshot3.png)
+![RxRealm 이후 스크린샷](images/screenshot4.png)
 
-```
-    pod 'RealmSwift', '~> 5.4.3'
-```
+이후 클린 및 빌드를 진행하시면 성공하는 걸 볼 수 있습니다. 
 
-그리고 설치된 cocoapods를 1.8.3으로 내립니다.
-
-```shell
-sudo gem uninstall cocoapods
-sudo gem install cocoapods -v 1.8.3
-pod deintegrate // 설치된 pods의 링크를 해제합니다.
-pod cache clean --all // 설치된 pods의 캐시를 모두 날려, 재설치시 캐시를 무시하게 만듭니다.
-pod install // clean 한 상태로 다시 설치합니다.
-```
-
-해당 커맨드 입력 후 정상적으로 되더군요.  
-하루빨리 버그가 고쳐진 새 cocoapods가 나오길 바랍니다.
