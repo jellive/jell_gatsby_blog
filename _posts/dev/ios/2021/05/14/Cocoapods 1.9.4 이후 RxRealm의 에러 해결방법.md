@@ -1,11 +1,14 @@
 ---
 category: 'Dev'
-date: '2020-10-03T15:30:00Z'
-title: 'Cocoapods 1.9.4에 버그가 있습니다(Cocoapods 다운그레이드 방법)'
+date: '2021-05-14T16:00:00Z'
+title: 'Cocoapods 1.9.4 이후 RxRealm의 에러 해결방법'
 tags: ['개발', 'iOS', 'Cocoapods', 'XCode']
 ---
 
-집에서 iOS를 공부하기 위해 습관적으로 cocoapods를 업데이트하고 빌드를 하려고 보니
+[이전 글](/dev/ios/2020/10/03/Cocoapods%201.9.4%EC%97%90%20%ED%98%84%EC%9E%AC%20%EB%B2%84%EA%B7%B8%EA%B0%80%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4/)에서 나타났던 에러의 해결방법입니다.  
+
+
+기존 에러는 다음과 같습니다.  
 ![증상 스크린샷](images/screenshot1.png)
 
 ```
@@ -38,7 +41,3 @@ pod install // clean 한 상태로 다시 설치합니다.
 
 해당 커맨드 입력 후 정상적으로 되더군요.  
 하루빨리 버그가 고쳐진 새 cocoapods가 나오길 바랍니다.
-
------------
-(2021. 05. 14 추가)
-해결방법이 나와서 추가합니다. [해결방법](/dev/ios/2021/05/14/Cocoapods%201.9.4%20이후%20RxRealm의%20에러%20해결방법/)
