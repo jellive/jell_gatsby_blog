@@ -12,3 +12,4 @@ date: 1991-03-24
 해당 게시물 파일은 지워도되나, `./_drafts` 폴더는 절대 지우지 마세요.
 
 자세한 가이드는 [Documents](<https://github.com/junhobaik/junhobaik.github.io/wiki/Document-(Borderless)>)를 확인해주세요.
+
