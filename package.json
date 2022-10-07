@@ -52,7 +52,7 @@
     "react-share": "^4.4.0",
     "react-typography": "^0.16.20",
     "redux": "^4.1.0",
-    "sharp": "^0.28.0",
+    "sharp": "^0.30.5",
     "typography": "^0.16.21",
     "webpack": "^5.24.2"
   },
