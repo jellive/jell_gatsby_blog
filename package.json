@@ -37,6 +37,7 @@
     "gatsby-source-filesystem": "^3.5.0",
     "gatsby-transformer-remark": "^4.2.0",
     "gatsby-transformer-sharp": "^3.5.0",
+    "graphql": "^15.4.0",
     "katex": "^0.13.10",
     "mobile-detect": "^1.4.5",
     "node-sass": "^6.0.0",
@@ -51,7 +52,9 @@
     "react-share": "^4.4.0",
     "react-typography": "^0.16.20",
     "redux": "^4.1.0",
-    "typography": "^0.16.21"
+    "sharp": "^0.28.0",
+    "typography": "^0.16.21",
+    "webpack": "^5.24.2"
   },
   "devDependencies": {
     "@types/react": "^17.0.5",
