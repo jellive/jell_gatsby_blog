@@ -15,3 +15,5 @@ tags: ["공지"]
 또한 빌드는 node 16으로 하시는 걸 권장드립니다.  
 NVM으로 사용 설정하시고, docker등을 사용한다면 NODE_VERSION을 16 마지막인 16.18.0으로 고정시키는 걸 권장드립니다.  
 그럼, 또 뵙겠습니다 :)
+
+추가로, gatsby-transformer-sharp를 사용했다면 node_modules/sharp 디렉토리를 삭제하고 진행하시면 됩니다 :)  
