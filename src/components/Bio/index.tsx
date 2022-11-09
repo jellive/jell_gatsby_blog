@@ -4,6 +4,7 @@ import { faUserCircle, faAt, faMapMarkerAlt, faLink, faAddressCard, faRss } from
 import { faFacebook, faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import './bio.scss'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 const config = require('../../../config')
 
 const Bio = () => {
@@ -16,7 +17,7 @@ const Bio = () => {
       {!name ? null : (
         <div className="bio-item name">
           <div className="icon-wrap">
-            <Fa icon={faUserCircle} />
+            <Fa icon={faUserCircle as IconProp} />
           </div>
           <span>{name}</span>
         </div>
@@ -25,7 +26,7 @@ const Bio = () => {
       {!company ? null : (
         <div className="bio-item company">
           <div className="icon-wrap">
-            <Fa icon={faAddressCard} />
+            <Fa icon={faAddressCard as IconProp} />
           </div>
           <span>{company}</span>
         </div>
@@ -34,7 +35,7 @@ const Bio = () => {
       {!location ? null : (
         <div className="bio-item location">
           <div className="icon-wrap">
-            <Fa icon={faMapMarkerAlt} />
+            <Fa icon={faMapMarkerAlt as IconProp} />
           </div>
           <span>{location}</span>
         </div>
@@ -43,7 +44,7 @@ const Bio = () => {
       {!email ? null : (
         <div className="bio-item email">
           <div className="icon-wrap">
-            <Fa icon={faAt} />
+            <Fa icon={faAt as IconProp} />
           </div>
           <a href={`mailto:${email}`}>{email}</a>
         </div>
@@ -52,7 +53,7 @@ const Bio = () => {
       {!website ? null : (
         <div className="bio-item website">
           <div className="icon-wrap">
-            <Fa icon={faLink} />
+            <Fa icon={faLink as IconProp} />
           </div>
 
           <a href={website} target="_blank" rel="noopener noreferrer">
@@ -63,28 +64,28 @@ const Bio = () => {
 
       <div className="social">
         <a href={`${config.siteUrl}/rss`} target="_blank" rel="noopener noreferrer">
-          <Fa icon={faRss} className="rss" />
+          <Fa icon={faRss as IconProp} className="rss" />
         </a>
 
         {!linkedin ? null : (
           <a href="http://" target="_blank" rel="noopener noreferrer">
-            <Fa icon={faLinkedin} className="linkedin" />
+            <Fa icon={faLinkedin as IconProp} className="linkedin" />
           </a>
         )}
 
         {!facebook ? null : (
           <a href={facebook} target="_blank" rel="noopener noreferrer">
-            <Fa icon={faFacebook} className="facebook" />
+            <Fa icon={faFacebook as IconProp} className="facebook" />
           </a>
         )}
         {!instagram ? null : (
           <a href={instagram} target="_blank" rel="noopener noreferrer">
-            <Fa icon={faInstagram} className="instagram" />
+            <Fa icon={faInstagram as IconProp} className="instagram" />
           </a>
         )}
         {!github ? null : (
           <a href={github} target="_blank" rel="noopener noreferrer">
-            <Fa icon={faGithub} className="github" />
+            <Fa icon={faGithub as IconProp} className="github" />
           </a>
         )}
       </div>

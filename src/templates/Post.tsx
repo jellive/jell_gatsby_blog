@@ -26,6 +26,7 @@ import Toc from '../components/Toc'
 import SEO from '../components/seo'
 import './post.scss'
 import 'katex/dist/katex.min.css'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 const config = require('../../config')
 
 export interface postProps {
@@ -158,7 +159,7 @@ const Post = (props: postProps) => {
                       })
                     }}
                   >
-                    <Fa icon={faListUl} />
+                    <Fa icon={faListUl as IconProp} />
                   </div>
                 </div>
               )}

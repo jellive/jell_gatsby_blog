@@ -1,7 +1,8 @@
 import * as React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby';
+// import Link from 'gatsby-link'
 import { GatsbyImage } from "gatsby-plugin-image";
-import { Card, CardContent, Chip } from '@material-ui/core'
+import { Card, CardContent, Chip } from '@mui/material'
 
 // Please note that you can use https://github.com/dotansimha/graphql-code-generator
 // to generate all types from graphQL schema

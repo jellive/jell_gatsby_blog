@@ -1,3 +1,4 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
 import { graphql } from 'gatsby'
@@ -36,7 +37,7 @@ const Search = (props: ISearchProps) => {
       <div id="Search">
         <div className="search-inner-wrap">
           <div className="input-wrap">
-            <Fa icon={faSearch} />
+            <Fa icon={faSearch as IconProp} />
             <input
               type="text"
               name="search"

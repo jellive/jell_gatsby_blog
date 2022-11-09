@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
-import { config as FaConfig, dom as FaDom } from '@fortawesome/fontawesome-svg-core'
+import { config as FaConfig, dom as FaDom, IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
 import { faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons'
 
@@ -75,7 +75,7 @@ const Layout = (props: LayoutPropsType) => {
           window.scrollTo({ top: 0, behavior: 'smooth' })
         }}
       >
-        <Fa icon={faAngleDoubleUp} />
+        <Fa icon={faAngleDoubleUp as IconProp} />
       </div>
     </>
   )

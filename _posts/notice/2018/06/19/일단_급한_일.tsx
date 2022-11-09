@@ -1,5 +1,6 @@
 import * as React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby';
+// import Link from 'gatsby-link'
 
 export const data = {
   title: '일단 급한 일',

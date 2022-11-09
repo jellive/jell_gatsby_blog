@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import MobileDetect from 'mobile-detect'
 
 import './header.scss'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 const config = require('../../../config')
 
 export interface headerPropsType {
@@ -116,7 +117,7 @@ const Header = (props: headerPropsType) => {
               <span>TAG</span>
               <Link to="/tags">
                 <Fa
-                  icon={faTags}
+                  icon={faTags as IconProp}
                   onMouseEnter={() => {
                     tagSpanVisibleToggle(true)
                   }}
@@ -131,7 +132,7 @@ const Header = (props: headerPropsType) => {
           <li>
             <div className="search-wrap">
               <Link to="/search" className="search">
-                <Fa icon={faSearch} />
+                <Fa icon={faSearch as IconProp} />
               </Link>
             </div>
           </li>
