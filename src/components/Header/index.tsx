@@ -67,7 +67,7 @@ const Header = (props: headerPropsType) => {
     }
 
     const setVisible = () => {
-      setYPos(prevYPos => {
+      setYPos((prevYPos) => {
         const currentYPos = window.pageYOffset
 
         setIsHide(prevYPos < currentYPos)
@@ -86,8 +86,17 @@ const Header = (props: headerPropsType) => {
     if (tag && !isVisible) tag.style.opacity = '0'
   }
 
+  const isDevelopment = process.env.NODE_ENV === 'development'
+
   return (
     <header id="Header" className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''}`}>
+      {!isDevelopment && (
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5518615618879832"
+          crossorigin="anonymous"
+        ></script>
+      )}
       <div className="header-title">
         <Link to="/">
           <div className="header-profile-image-wrap">
