@@ -51,7 +51,7 @@ const Post = (props: postProps) => {
   useEffect(() => {
     const hs = Array.from(document.querySelectorAll('h2, h3')) as Array<HTMLHeadingElement>
 
-    const foo = hs.map(h => {
+    const foo = hs.map((h) => {
       return h.offsetTop
     })
 
@@ -229,8 +229,8 @@ const Post = (props: postProps) => {
             <>
               <aside className="ad">
                 <AdSense.Google
-                  client={config.googleAdsenseClient || 'ca-pub-5001380215831339'}
-                  slot={config.googleAdsenseSlot || '5214956675'}
+                  client={config.googleAdsenseClient || 'ca-pub-5518615618879832'}
+                  slot={config.googleAdsenseSlot || '6839238861'}
                   style={{ display: 'block' }}
                   format="auto"
                   responsive="true"
@@ -253,7 +253,7 @@ const Post = (props: postProps) => {
 }
 
 export const pageQuery = graphql`
-  query($slug: String) {
+  query ($slug: String) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       excerpt
