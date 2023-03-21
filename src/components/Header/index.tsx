@@ -90,6 +90,7 @@ const Header = (props: headerPropsType) => {
 
   return (
     <header id="Header" className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''}`}>
+      {/* Google adsense auto */}
       {!isDevelopment && (
         <script
           async
@@ -97,6 +98,8 @@ const Header = (props: headerPropsType) => {
           crossorigin="anonymous"
         ></script>
       )}
+      {/* Google adsense auto end*/}
+
       <div className="header-title">
         <Link to="/">
           <div className="header-profile-image-wrap">
