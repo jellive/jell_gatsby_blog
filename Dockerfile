@@ -16,7 +16,7 @@ COPY . .
 # 앱 빌드
 RUN yarn build
 
-EXPOSE 80
+# EXPOSE 80
 # Nginx를 사용하여 앱 제공
-# FROM nginx:latest
-# COPY --from=0 /app/public /usr/share/nginx/html
+FROM nginx:latest
+COPY --from=0 /app/public /usr/share/nginx/html
