@@ -27,8 +27,7 @@ struct ViewController_preview: PreviewProvider {
     struct Container: UIViewControllerRepresentable {
 
         func makeUIViewController(context: Context) -> UIViewController {
-            let layout = UICollectionViewLayout()
-            let vc = ViewController(collectionViewLayout: layout)
+            let vc = ViewController()
             return UINavigationController(rootViewController: vc)
         }
 
