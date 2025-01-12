@@ -1,101 +1,73 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { graphql } from 'gatsby'
-import React, { useState } from 'react'
-
+import { useState, useEffect } from 'react'
+import { GetStaticProps } from 'next'
+import { getAllPosts } from '../lib/posts'
 import Layout from '../components/Layout'
-import PostList from '../components/PostList'
-import SEO from '../components/seo'
-import './styles/search.scss'
+import Link from 'next/link'
+import { Post } from '../lib/posts'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import '@/styles/search.scss'
 
-export interface ISearchProps {
-  data: any
+interface SearchPageProps {
+  posts: Post[]
 }
 
-const Search = (props: ISearchProps) => {
-  const posts = props.data.allMarkdownRemark.edges
-  const [value, setValue] = useState('')
-  const [isTitleOnly, setIsTitleOnly] = useState(true)
+export default function SearchPage({ posts }: SearchPageProps) {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [searchResults, setSearchResults] = useState<Post[]>([])
+  const [searchInContent, setSearchInContent] = useState(false)
 
-  const filteredPosts = posts.filter((post: any) => {
-    const { node } = post
-    const { frontmatter, rawMarkdownBody } = node
-    const { title } = frontmatter
-    const lowerValue = value.toLocaleLowerCase()
+  useEffect(() => {
+    const results = posts.filter((post) => {
+      const searchContent = searchInContent
+        ? `${post.frontmatter.title} ${post.frontmatter.tags?.join(' ')} ${post.excerpt}`
+        : post.frontmatter.title
+      return searchContent.toLowerCase().includes(searchTerm.toLowerCase())
+    })
 
-    if (!isTitleOnly && rawMarkdownBody.toLocaleLowerCase().indexOf(lowerValue) > -1) {
-      return true
-    }
-
-    return title.toLocaleLowerCase().indexOf(lowerValue) > -1
-  })
+    setSearchResults(results)
+  }, [searchTerm, searchInContent, posts])
 
   return (
     <Layout>
-      <SEO title="Search" />
-      <div id="Search">
-        <div className="search-inner-wrap">
-          <div className="input-wrap">
-            <Fa icon={faSearch} />
-            <input
-              type="text"
-              name="search"
-              id="searchInput"
-              value={value}
-              placeholder="Search"
-              autoComplete="off"
-              autoFocus={true}
-              onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                setValue(e.currentTarget.value)
-              }}
-            />
-            <div className="search-toggle">
-              <span
-                style={{ opacity: isTitleOnly ? 0.8 : 0.15 }}
-                onClick={() => {
-                  setIsTitleOnly(true)
-                }}
-              >
-                in Title
-              </span>
-              <span
-                style={{ opacity: !isTitleOnly ? 0.8 : 0.15 }}
-                onClick={() => {
-                  setIsTitleOnly(false)
-                }}
-              >
-                in Title+Content
-              </span>
-            </div>
+      <div className="search-wrap">
+        <div className="input-wrap">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+          <input
+            type="text"
+            name="search"
+            id="searchInput"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            autoComplete="off"
+          />
+          <div className="search-toggle" onClick={() => setSearchInContent(!searchInContent)}>
+            <span style={{ opacity: searchInContent ? 0.15 : 0.8 }}>in Title</span>
+            <span style={{ opacity: searchInContent ? 0.8 : 0.15 }}>in Title+Content</span>
           </div>
+        </div>
 
-          {value !== '' && !filteredPosts.length ? <span className="no-result">No search results</span> : null}
-          <PostList posts={value === '' ? posts : filteredPosts} />
+        <div className="search-results">
+          {searchResults.map((post) => (
+            <div key={post.fields.slug} className="post-item">
+              <Link href={`/${post.fields.slug}`}>
+                <h2>{post.frontmatter.title}</h2>
+              </Link>
+              {post.excerpt && <p>{post.excerpt}</p>}
+            </div>
+          ))}
         </div>
       </div>
     </Layout>
   )
 }
 
-export const pageQuery = graphql`
-  query {
-    allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
-      edges {
-        node {
-          rawMarkdownBody
-          excerpt(format: PLAIN)
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMM DD, YYYY")
-            title
-            tags
-          }
-        }
-      }
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = await getAllPosts()
+  return {
+    props: {
+      posts
     }
   }
-`
-
-export default Search
+}

@@ -9,3 +9,35 @@ yarn-error.log
 # Build directory
 .DS_Store
 public/
+
+# Next.js
+.next/
+out/
+
+# Dependencies
+node_modules/
+
+# Build
+build/
+dist/
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

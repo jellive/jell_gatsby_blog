@@ -1,35 +1,35 @@
-@import '../../utils/variables.scss';
+@use '../../utils/variables' as vars;
 
 html,
 body {
   overscroll-behavior-y: none;
-  color: $font-color-0;
+  color: vars.$font-color-0;
 }
 
 a {
-  color: $font-color-0;
+  color: vars.$font-color-0;
   text-decoration: none;
 
   &:active {
-    color: $font-color-0;
+    color: vars.$font-color-0;
   }
 }
 
 #content {
   display: flex;
   flex-direction: column;
-  padding-top: $header-height;
-  min-height: 100vh;
+  margin-top: 3rem;
 
-  @media screen and (max-width: $break-m) {
-    padding-top: $header-height-m;
+  @media screen and (max-width: vars.$break-m) {
+    padding-top: vars.$header-height-m;
   }
-  @media screen and (max-width: $break-s) {
-    padding-top: $header-height-s;
+  @media screen and (max-width: vars.$break-s) {
+    padding-top: vars.$header-height-s;
   }
 
   main {
     flex-grow: 1;
+    padding: 0 1rem;
   }
 
   footer {
@@ -58,7 +58,7 @@ a {
   transition: 0.5s;
   cursor: pointer;
 
-  @media screen and (max-width: $break-s) {
+  @media screen and (max-width: vars.$break-s) {
     margin-right: 1rem;
     margin-bottom: 1rem;
   }
@@ -73,4 +73,88 @@ a {
       opacity: 1;
     }
   }
+}
+
+.root-page #content {
+  margin-top: 8rem;
+
+  .bio,
+  .post-list {
+    margin-top: 0;
+  }
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-top: 2rem;
+
+  .comment {
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .bio-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    .icon-wrap {
+      width: 1rem;
+      margin-right: 0.5rem;
+      display: flex;
+      align-items: center;
+
+      svg {
+        width: 1em;
+        height: 1em;
+        color: rgba(0, 0, 0, 0.54);
+      }
+    }
+
+    a {
+      color: rgba(0, 0, 0, 0.74);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .social {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    svg {
+      width: 1.2em;
+      height: 1.2em;
+      font-size: 1rem;
+      color: rgba(0, 0, 0, 0.54);
+      transition: color 0.2s;
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.84);
+      }
+
+      &.rss:hover {
+        color: #f26522;
+      }
+
+      &.linkedin:hover {
+        color: #0077b5;
+      }
+
+      &.github:hover {
+        color: #333;
+      }
+    }
+  }
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

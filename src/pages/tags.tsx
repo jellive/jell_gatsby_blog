@@ -1,127 +1,88 @@
-import * as React from 'react'
-import { useEffect, useState } from 'react'
-import { graphql } from 'gatsby'
-
+import { useState } from 'react'
+import { GetStaticProps } from 'next'
+import { getAllPosts } from '../lib/posts'
 import Layout from '../components/Layout'
-import SEO from '../components/seo'
-import './styles/tags.scss'
-import PostList from '../components/PostList'
+import Link from 'next/link'
+import { Post } from '../lib/posts'
+import '@/styles/tags.scss'
 
-export interface TagsPageProps {
-  data: any
+interface TagsPageProps {
+  tags: {
+    [key: string]: Post[]
+  }
 }
 
-const Tags = (props: TagsPageProps) => {
-  const { group } = props.data.allMarkdownRemark
-  const [largeCount, setLargeCount] = useState(0)
-  const [targetTag, setTargetTag] = useState('undefined')
+export default function TagsPage({ tags }: TagsPageProps) {
+  const [selectedTag, setSelectedTag] = useState<string | null>(null)
 
-  interface groupItem {
-    fieldValue: string
-    totalCount: number
+  // 태그의 사용 빈도에 따라 폰트 크기 계산
+  const getTagSize = (count: number) => {
+    const baseSize = 1
+    const maxSize = 1.5
+    const scale = 0.1
+    return Math.min(baseSize + count * scale, maxSize)
   }
 
-  group.sort((a: groupItem, b: groupItem) => {
-    const x = a.fieldValue.toLocaleLowerCase()
-    const y = b.fieldValue.toLocaleLowerCase()
-
-    if (x < y) return -1
-    if (y < x) return 1
-    return 0
-  })
-
-  const tagList = group.map((g: groupItem) => {
-    const getFontSize = () => {
-      let fontSize = Math.round(50 / (largeCount / g.totalCount)).toString()
-      if (fontSize.length <= 1) fontSize = `0${fontSize}`
-      return `1.${fontSize}rem`
-    }
-
-    return (
-      <li key={g.fieldValue}>
-        <span
-          className="tag-text"
-          style={{
-            fontSize: g.fieldValue !== 'undefined' ? getFontSize() : '1rem',
-            opacity: g.fieldValue === targetTag ? '0.9' : '0.5',
-            fontWeight: g.fieldValue === targetTag ? 'bold' : 'normal'
-          }}
-          onClick={() => {
-            setTargetTag(g.fieldValue)
-          }}
-        >
-          <a href={`#${g.fieldValue}`}>{g.fieldValue}</a>
-        </span>
-      </li>
-    )
-  })
-
-  tagList.sort((a: React.ReactElement) => {
-    if (a.key === 'undefined') return -1
-    return 0
-  })
-
-  const getPostList = () => {
-    if (group.filter((g: groupItem) => g.fieldValue === targetTag).length) {
-      return group.filter((g: groupItem) => g.fieldValue === targetTag)[0].edges
-    }
-    if (group.filter((g: groupItem) => g.fieldValue === 'undefined').length) {
-      return group.filter((g: groupItem) => g.fieldValue === 'undefined')[0].edges
-    }
-    return []
-  }
-
-  useEffect(() => {
-    let large = 0
-    for (const g of group) {
-      if (g.fieldValue !== 'undefined' && g.totalCount > large) large = g.totalCount
-    }
-    setLargeCount(large)
-
-    return () => {}
-  }, [group])
-
-  useEffect(() => {
-    if (location.hash) setTargetTag(location.hash.split('#')[1])
-    return () => {}
-  }, [])
+  const sortedTags = Object.entries(tags).sort(([a], [b]) => a.localeCompare(b))
 
   return (
     <Layout>
-      <SEO title="Tags" />
-      <div id="tags">
-        <div className="tag-list-wrap">
-          <ul>{tagList}</ul>
-        </div>
+      <div className="tags-wrap">
+        <ul>
+          {sortedTags.map(([tag, posts]) => (
+            <li key={tag}>
+              <span
+                className="tag-text"
+                style={{
+                  fontSize: `${getTagSize(posts.length)}rem`,
+                  opacity: selectedTag === tag ? 0.9 : 0.5,
+                  fontWeight: selectedTag === tag ? 'bold' : 'normal'
+                }}
+              >
+                <a href={`#${tag}`} onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}>
+                  {tag}
+                </a>
+              </span>
+            </li>
+          ))}
+        </ul>
 
-        <PostList posts={getPostList()} />
+        {selectedTag && (
+          <div className="selected-tag-posts">
+            <h2>{selectedTag}</h2>
+            <ul>
+              {tags[selectedTag].map((post) => (
+                <li key={post.fields.slug}>
+                  <Link href={`/${post.fields.slug}`}>{post.frontmatter.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </Layout>
   )
 }
 
-export const pageQuery = graphql`
-  query {
-      allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
-      group(field: {frontmatter: {tags: SELECT}}) {
-        fieldValue
-        totalCount
-        edges {
-          node {
-            excerpt(format: PLAIN)
-            fields {
-              slug
-            }
-            frontmatter {
-              date(formatString: "MMM DD, YYYY")
-              title
-              tags
-            }
-          }
-        }
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = await getAllPosts()
+  const tags: { [key: string]: Post[] } = {}
+
+  posts.forEach((post) => {
+    post.frontmatter.tags?.forEach((tag) => {
+      if (!tags[tag]) {
+        tags[tag] = []
       }
+      tags[tag].push(post)
+    })
+  })
+
+  // 태그별로 정렬
+  const sortedTags = Object.fromEntries(Object.entries(tags).sort(([a], [b]) => a.localeCompare(b)))
+
+  return {
+    props: {
+      tags: sortedTags
     }
   }
-`
-
-export default Tags
+}
