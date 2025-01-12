@@ -1247,6 +1247,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@netlify/plugin-nextjs@npm:^5.9.3":
+  version: 5.9.3
+  resolution: "@netlify/plugin-nextjs@npm:5.9.3"
+  checksum: 10c0/11d63a758ac906b27f32501f5e187c7c6b34230de54078abd60170bdf3e44aa33c351e1406e39120ffdf4ad4997de0b6039e16f1fb0e6b91e5f19539eca8e7db
+  languageName: node
+  linkType: hard
+
 "@next/env@npm:15.1.4":
   version: 15.1.4
   resolution: "@next/env@npm:15.1.4"
@@ -2421,6 +2428,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^6.5.1"
     "@fortawesome/react-fontawesome": "npm:^0.2.0"
     "@mui/material": "npm:^6.3.1"
+    "@netlify/plugin-nextjs": "npm:^5.9.3"
     "@types/fs-extra": "npm:^11.0.4"
     "@types/glob": "npm:^8.1.0"
     "@types/react": "npm:^18.2.64"
