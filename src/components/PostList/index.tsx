@@ -1,79 +1,54 @@
-import { useQuery } from '@apollo/client'
-import { GET_POSTS } from '@/lib/queries'
-import Link from 'next/link'
-import '@/styles/postlist.scss'
+import React from 'react'
+import { Link } from 'gatsby'
 
-interface PostNode {
-  id: string
-  fields: {
-    slug: string
-  }
-  frontmatter: {
-    title: string
-    date: string
-    tags?: string[]
-  }
-  excerpt?: string
+import './postList.scss'
+
+export interface PostListProps {
+  posts: any
 }
 
-interface PostListProps {
-  posts: Array<{
-    node: PostNode
-  }>
-}
+const PostList = (props: PostListProps) => {
+  const { posts } = props
 
-export default function PostList({ posts }: PostListProps) {
-  const { loading, error, data } = useQuery(GET_POSTS, {
-    fetchPolicy: 'cache-and-network',
-    nextFetchPolicy: 'cache-first'
+  const mapPost = posts.map((post: any) => {
+    const { node } = post
+    const { excerpt, fields, frontmatter } = node
+    const { slug } = fields
+    const { date, title, tags } = frontmatter
+
+    const mapTag = tags.map((tag: String) => {
+      if (tag === 'undefined') return
+
+      return (
+        <li key={`${slug}-${tag}`} className="tag">
+          <span>
+            <Link to={`/tags#${tag}`}>{`#${tag}`}</Link>
+          </span>
+        </li>
+      )
+    })
+
+    return (
+      <li key={slug} className="post">
+        <article>
+          <h2 className="title">
+            <Link to={slug}>{title}</Link>
+          </h2>
+          <div className="info">
+            <span className="date">{date}</span>
+            {tags.length && tags[0] !== 'undefined' ? <span className="info-dot">·</span> : null}
+            <ul className="tag-list">{mapTag}</ul>
+          </div>
+          <span className="excerpt">{excerpt}</span>
+        </article>
+      </li>
+    )
   })
-
-  if (loading) return <div>Loading posts...</div>
-  if (error) {
-    console.error('PostList query error:', error)
-    return <div>Error loading posts: {error.message}</div>
-  }
-
-  const allPosts = posts.length > 0 ? posts : data?.allMarkdownRemark?.edges || []
-  console.log('Fetched posts:', allPosts)
-
   return (
     <div className="post-list">
-      <ul>
-        {allPosts.map(({ node }: { node: PostNode }) => (
-          <li key={node.id} className="post">
-            <article>
-              <h2 className="title">
-                <Link href={node.fields.slug}>{node.frontmatter.title}</Link>
-              </h2>
-              <div className="info">
-                <span className="date">
-                  {new Date(node.frontmatter.date).toLocaleDateString('ko-KR', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </span>
-                {node.frontmatter.tags && node.frontmatter.tags.length > 0 && (
-                  <>
-                    <span className="info-dot">·</span>
-                    <ul className="tag-list">
-                      {node.frontmatter.tags.map((tag: string) => (
-                        <li key={`${node.fields.slug}-${tag}`} className="tag">
-                          <span>
-                            <Link href={`/tags#${tag}`}>{`#${tag}`}</Link>
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                )}
-              </div>
-              {node.excerpt && <div className="excerpt">{node.excerpt}</div>}
-            </article>
-          </li>
-        ))}
-      </ul>
+      <ul>{mapPost}</ul>
     </div>
   )
 }
+
+export default PostList

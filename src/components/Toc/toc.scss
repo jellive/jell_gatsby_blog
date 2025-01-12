@@ -1,4 +1,4 @@
-@import '.variables.scss';
+@import '../../utils/variables.scss';
 
 .toc {
   font-family: 'Nanum Gothic';
@@ -17,43 +17,47 @@
   ul {
     margin-top: 0;
     margin-left: 0.5rem;
-    padding: 0;
-
     li {
       list-style: none;
-      margin: 0.5rem 0;
+      margin: 0;
+    }
+  }
+  p {
+    margin: 0;
+  }
 
-      a {
-        color: rgba(0, 0, 0, 0.7);
-        text-decoration: none;
-        opacity: 0.4;
-        transition: 0.2s;
-        max-width: calc(220px - 1.5rem);
-        display: block;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
+  a {
+    opacity: 0.4;
+    transition: 0.2s;
+    max-width: calc(220px - 1.5rem);
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
-        &:hover {
-          opacity: 1 !important;
-          color: rgba(0, 0, 0, 0.9);
-        }
-      }
+    &:hover {
+      opacity: 1 !important;
+    }
+
+    img {
+      display: none !important;
     }
   }
 }
 
 .toc.outside {
-  display: none;
   position: fixed;
-  top: 120px;
-  right: 2rem;
-  width: 240px;
-  max-height: calc(100vh - 180px);
-  overflow-y: auto;
+  top: 0;
+  right: 0;
+  margin-top: $header-height;
+  opacity: 0.4;
 
-  @media screen and (min-width: 1200px) {
-    display: block;
+  @media screen and (max-width: $break-toc) {
+    display: none;
+  }
+
+  &:hover {
+    opacity: 0.9;
   }
 }
 
