@@ -1,0 +1,51 @@
+@use 'variables' as vars;
+
+.tags-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+  }
+
+  .tag-group {
+    padding: 3rem 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: rgba(0, 0, 0, 0.84);
+
+      @media screen and (max-width: vars.$break-m) {
+        font-size: 1.1rem;
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin: 0.25rem 0;
+
+        a {
+          color: rgba(0, 0, 0, 0.74);
+          text-decoration: none;
+          font-size: 0.95rem;
+          line-height: 1.6;
+
+          &:hover {
+            color: rgba(0, 0, 0, 0.84);
+          }
+        }
+      }
+    }
+  }
+}

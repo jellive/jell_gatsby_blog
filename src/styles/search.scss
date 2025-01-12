@@ -1,0 +1,81 @@
+@use 'variables' as vars;
+
+.search-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+
+    &:focus {
+      outline: none;
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .search-results {
+    h2 {
+      margin-bottom: 2rem;
+      color: rgba(0, 0, 0, 0.54);
+      font-size: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding: 3rem 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+        &:first-child {
+          padding-top: 0;
+          border-top: 0;
+        }
+
+        h3 {
+          font-size: 1.3rem;
+          margin-bottom: 0.25rem;
+
+          @media screen and (max-width: vars.$break-m) {
+            font-size: 1.1rem;
+          }
+        }
+
+        p {
+          color: rgba(0, 0, 0, 0.74);
+          font-size: 0.95rem;
+          line-height: 1.6;
+          margin-top: 1rem;
+        }
+
+        .tags {
+          display: flex;
+          color: rgba(0, 0, 0, 0.54);
+          font-size: 0.9rem;
+          margin-top: 0.25rem;
+
+          a {
+            margin-right: 0.5rem;
+            color: rgba(0, 0, 0, 0.54);
+            text-decoration: none;
+
+            &:hover {
+              color: rgba(0, 0, 0, 0.74);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,6 +5,8 @@ import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
 import { faTags, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import MobileDetect from 'mobile-detect'
+import Image from 'next/image'
+import profileImage from '@/assets/images/profile.jpeg'
 
 import './header.scss'
 const config = require('../../../config')
@@ -102,15 +104,13 @@ const Header = ({ siteTitle, path, setPath, size }: headerPropsType) => {
       <div className="header-title">
         <Link href="/">
           <div className="header-profile-image-wrap">
-            <img
-              src={
-                config.profileImageFileName
-                  ? require(`../../images/${config.profileImageFileName}`)
-                  : 'https://source.unsplash.com/random/100x100'
-              }
-              alt="title profile picture"
-              width={size || '25px'}
-              height={size || '25px'}
+            <Image
+              src={profileImage}
+              alt="Profile"
+              width={path === '/' ? 50 : 25}
+              height={path === '/' ? 50 : 25}
+              className="rounded-full"
+              priority
             />
           </div>
         </Link>
