@@ -26,6 +26,7 @@
     "graphql": "^16.8.1",
     "graphql-compose": "^9.0.10",
     "graphql-tag": "^2.12.6",
+    "graphql-yoga": "^5.10.9",
     "gray-matter": "^4.0.3",
     "katex": "^0.13.24",
     "markdown-to-jsx": "^7.7.3",
