@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { DiscussionEmbed } from 'disqus-react'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { faListUl, faLayerGroup, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faListUl, faLayerGroup } from '@fortawesome/free-solid-svg-icons'
 import AdSense from 'react-adsense'
 import {
   FacebookShareButton,
@@ -48,56 +48,68 @@ interface PostProps {
 const Post = ({ post, series = [] }: PostProps) => {
   const [isInsideToc, setIsInsideToc] = useState(false)
   const isTableOfContents = config.enablePostOfContents && post.tableOfContents !== ''
+  const isDevelopment = process.env.NODE_ENV === 'development'
+  const isDisqus = !!config.disqusShortname
+  const isSocialShare = config.enableSocialShare
+
+  const metaKeywords = (keywords: string[], tags: string[]) => {
+    const result = new Set([...(keywords || []), ...(tags || [])])
+    return Array.from(result)
+  }
+
+  const disqusConfig = {
+    shortname: config.disqusShortname,
+    config: {
+      url: config.siteUrl + post.slug,
+      identifier: post.slug,
+      title: post.title
+    }
+  }
+
+  const mapTags = post.tags.map((tag: string) => (
+    <li key={tag} className="blog-post-tag">
+      <Link href={`/tags#${tag}`}>{`#${tag}`}</Link>
+    </li>
+  ))
+
+  const mapSeries = series.map((s, i) => {
+    return (
+      <li key={i} className={`series-item ${post.slug === s.slug ? 'current-series' : ''}`}>
+        <Link href={s.slug}>
+          {s.num}. {s.title}
+        </Link>
+      </li>
+    )
+  })
 
   const headings = React.useMemo(() => {
-    if (typeof window === 'undefined') {
-      console.log('Server-side rendering, skipping headings')
-      return []
-    }
+    if (typeof window === 'undefined') return []
 
     const content = document.querySelector('.blog-post-content')
-    if (!content) {
-      console.log('Blog post content not found')
-      return []
-    }
+    if (!content) return []
 
     const headingElements = Array.from(content.querySelectorAll('h1, h2, h3'))
-    console.log('Found headings:', headingElements.length)
-
     return headingElements.map((heading) => {
       const id = heading.id || heading.textContent?.toLowerCase().replace(/\s+/g, '-') || ''
       const title = heading.textContent || ''
       const level = parseInt(heading.tagName[1])
-
-      console.log('Heading:', { id, title, level })
       return { id, title, level }
     })
   }, [post.html])
 
   useEffect(() => {
-    console.log('isTableOfContents:', isTableOfContents)
-    console.log('headings length:', headings.length)
-
     const content = document.querySelector('.blog-post-content')
-    if (!content) {
-      console.log('Content not found in useEffect')
-      return
-    }
+    if (!content) return
 
     const elements = Array.from(content.querySelectorAll('h1, h2, h3'))
-    console.log('Found elements in useEffect:', elements.length)
-
     elements.forEach((heading) => {
       if (!heading.id) {
-        const newId = heading.textContent?.toLowerCase().replace(/\s+/g, '-') || ''
-        heading.id = newId
-        console.log('Added ID to heading:', newId)
+        heading.id = heading.textContent?.toLowerCase().replace(/\s+/g, '-') || ''
       }
     })
-  }, [post.html, isTableOfContents, headings.length])
+  }, [post.html])
 
   const TocWithLog = React.useMemo(() => {
-    console.log('Rendering TOC with headings:', headings)
     return <Toc headings={headings} />
   }, [headings])
 

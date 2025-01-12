@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { GetStaticProps } from 'next'
 import { initializeApollo } from '../lib/apollo'
-import { GET_POSTS } from '../lib/queries'
+// import { GET_POSTS } from '../lib/queries'
 
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
@@ -14,7 +14,10 @@ interface IndexPageProps {
   initialApolloState: any
 }
 
-export default function IndexPage({ posts, initialApolloState }: IndexPageProps) {
+export default function IndexPage({
+  posts
+}: // initialApolloState
+IndexPageProps) {
   return (
     <Layout>
       <SEO title="Home" />

@@ -2,9 +2,6 @@ import fs from 'fs-extra'
 import { glob } from 'glob'
 import matter from 'gray-matter'
 import path from 'path'
-import { remark } from 'remark'
-import html from 'remark-html'
-import remarkGfm from 'remark-gfm'
 
 export interface Post {
   excerpt: string
@@ -15,8 +12,8 @@ export interface Post {
     date: string
     title: string
     tags: string[]
-    featuredImage?: string
-    category?: string
+    featuredImage: string | null
+    category: string | null
   }
   rawMarkdownBody: string
 }
@@ -62,6 +59,19 @@ async function markdownToHtml(markdown: string, postPath: string) {
   return processedContent
 }
 
+// 타입 가드 함수 추가
+function isValidPost(post: any): post is Post {
+  return (
+    post !== null &&
+    typeof post.excerpt === 'string' &&
+    typeof post.fields?.slug === 'string' &&
+    typeof post.frontmatter?.date === 'string' &&
+    typeof post.frontmatter?.title === 'string' &&
+    Array.isArray(post.frontmatter?.tags) &&
+    typeof post.rawMarkdownBody === 'string'
+  )
+}
+
 export async function getAllPosts(): Promise<Post[]> {
   const postsDirectory = path.join(process.cwd(), '_posts')
   //   console.log('Posts directory:', postsDirectory)
@@ -71,10 +81,6 @@ export async function getAllPosts(): Promise<Post[]> {
     if (!exists) {
       throw new Error('_posts directory not found')
     }
-
-    // 디렉토리 내용 확인
-    const dirContents = await fs.readdir(postsDirectory)
-    //     console.log('Directory contents:', dirContents)
   } catch (error) {
     console.error('Error accessing _posts directory:', error)
     return []
@@ -133,8 +139,8 @@ export async function getAllPosts(): Promise<Post[]> {
     })
   )
 
-  // 에러가 있는 포스트 제거
-  const validPosts = posts.filter((post): post is Post => post !== null)
+  // 타입 가드 함수 사용
+  const validPosts = posts.filter(isValidPost)
   //   console.log('Total valid posts:', validPosts.length)
 
   return validPosts.sort((a, b) => {

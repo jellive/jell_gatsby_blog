@@ -1,8 +1,1 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/[...slug]": "pages/[...slug].js",
-  "/": "pages/index.js",
-  "/api/graphql": "pages/api/graphql.js"
-}
+{"/_error":"pages/_error.js","/_app":"pages/_app.js","/404":"pages/404.html","/api/graphql":"pages/api/graphql.js","/":"pages/index.js","/tags":"pages/tags.js","/[...slug]":"pages/[...slug].js","/search":"pages/search.js","/_document":"pages/_document.js"}

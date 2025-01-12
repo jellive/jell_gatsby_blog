@@ -1,10 +1,26 @@
 import { useQuery } from '@apollo/client'
 import { GET_POSTS } from '@/lib/queries'
 import Link from 'next/link'
-import Markdown from 'markdown-to-jsx'
 import './postlist.scss'
 
-export default function PostList() {
+interface PostListProps {
+  posts: Array<{
+    node: {
+      id: string
+      fields: {
+        slug: string
+      }
+      frontmatter: {
+        title: string
+        date: string
+        tags?: string[]
+      }
+      excerpt?: string
+    }
+  }>
+}
+
+export default function PostList({ posts }: PostListProps) {
   const { loading, error, data } = useQuery(GET_POSTS, {
     fetchPolicy: 'cache-and-network',
     nextFetchPolicy: 'cache-first'
@@ -16,12 +32,12 @@ export default function PostList() {
     return <div>Error loading posts: {error.message}</div>
   }
 
-  const posts = data?.allMarkdownRemark?.edges || []
+  const allPosts = posts || data?.allMarkdownRemark?.edges || []
 
   return (
     <div className="post-list">
       <ul>
-        {posts.map(({ node }: any) => {
+        {allPosts.map(({ node }) => {
           return (
             <li key={node.id} className="post">
               <article>
@@ -36,7 +52,7 @@ export default function PostList() {
                       day: 'numeric'
                     })}
                   </span>
-                  {node.frontmatter.tags?.length > 0 && (
+                  {node.frontmatter.tags && node.frontmatter.tags?.length > 0 && (
                     <>
                       <span className="info-dot">·</span>
                       <ul className="tag-list">

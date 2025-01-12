@@ -13,7 +13,7 @@ const config = require('../../../config')
 
 const Header = () => {
   const router = useRouter()
-  const [isHide, setIsHide] = useState(false)
+  const [isHide] = useState(false)
   const { size, setPath } = useHeaderStore()
   const [mounted, setMounted] = useState(false)
 
