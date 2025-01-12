@@ -16,7 +16,7 @@ function createApolloClient() {
               read(existing) {
                 return existing
               },
-              merge(existing, incoming) {
+              merge(incoming) {
                 return {
                   ...incoming,
                   edges: incoming.edges,

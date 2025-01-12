@@ -8,8 +8,6 @@ import '@/styles/markdown.scss'
 import Markdown from 'markdown-to-jsx'
 import Toc from '@/components/Toc'
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
-import path from 'path'
 
 interface PostPageProps {
   post: {
