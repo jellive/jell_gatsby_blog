@@ -7,7 +7,7 @@ import Image from 'next/image'
 import profileImage from '@/assets/images/profile.jpeg'
 import { useRouter } from 'next/router'
 import { useHeaderStore } from '@/store'
-import './header.scss'
+import '@/styles/header.scss'
 
 const config = require('../../../config')
 

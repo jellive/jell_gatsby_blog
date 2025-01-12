@@ -1,23 +1,33 @@
 import * as React from 'react'
 import { GetStaticProps } from 'next'
 import { initializeApollo } from '../lib/apollo'
-// import { GET_POSTS } from '../lib/queries'
+import { GET_POSTS } from '@/lib/queries'
 
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
 import Bio from '../components/Bio'
-import './styles/index.scss'
+import '@/styles/pages/index.scss'
 import PostList from '../components/PostList'
 
 interface IndexPageProps {
-  posts: any[]
-  initialApolloState: any
+  posts: Array<{
+    node: {
+      id: string
+      excerpt: string
+      fields: {
+        slug: string
+      }
+      frontmatter: {
+        title: string
+        date: string
+        tags: string[]
+        category: string
+      }
+    }
+  }>
 }
 
-export default function IndexPage({
-  posts
-}: // initialApolloState
-IndexPageProps) {
+export default function IndexPage({ posts }: IndexPageProps) {
   return (
     <Layout>
       <SEO title="Home" />
@@ -34,43 +44,55 @@ IndexPageProps) {
 export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo()
 
-  const data = {
-    allMarkdownRemark: {
-      edges: [
-        {
-          node: {
-            excerpt: 'This is a sample excerpt...',
-            fields: {
-              slug: '/sample-post-1'
-            },
-            frontmatter: {
-              date: 'Mar 15, 2024',
-              title: 'Sample Post 1',
-              tags: ['react', 'nextjs']
-            }
-          }
-        },
-        {
-          node: {
-            excerpt: 'Another sample excerpt...',
-            fields: {
-              slug: '/sample-post-2'
-            },
-            frontmatter: {
-              date: 'Mar 10, 2024',
-              title: 'Sample Post 2',
-              tags: ['javascript', 'typescript']
-            }
-          }
-        }
-      ]
-    }
-  }
+  try {
+    const { data } = await apolloClient.query({
+      query: GET_POSTS
+    })
 
-  return {
-    props: {
-      posts: data.allMarkdownRemark.edges,
-      initialApolloState: apolloClient.cache.extract()
+    console.log('GraphQL Response:', JSON.stringify(data, null, 2))
+
+    if (!data?.allMarkdownRemark?.edges) {
+      console.error('No posts found in GraphQL response')
+      return {
+        props: {
+          posts: [],
+          initialApolloState: apolloClient.cache.extract()
+        }
+      }
+    }
+
+    const posts = data.allMarkdownRemark.edges.map((edge: any) => ({
+      node: {
+        id: edge.node.id,
+        excerpt: edge.node.excerpt || '',
+        fields: {
+          slug: edge.node.fields.slug
+        },
+        frontmatter: {
+          title: edge.node.frontmatter.title,
+          date: edge.node.frontmatter.date,
+          tags: edge.node.frontmatter.tags || [],
+          category: edge.node.frontmatter.category
+        }
+      }
+    }))
+
+    console.log('Processed posts:', JSON.stringify(posts, null, 2))
+
+    return {
+      props: {
+        posts,
+        initialApolloState: apolloClient.cache.extract()
+      },
+      revalidate: 1
+    }
+  } catch (error) {
+    console.error('Error fetching posts:', error)
+    return {
+      props: {
+        posts: [],
+        initialApolloState: apolloClient.cache.extract()
+      }
     }
   }
 }

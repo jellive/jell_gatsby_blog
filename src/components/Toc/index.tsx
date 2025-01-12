@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './toc.scss'
+import '@/styles/toc.scss'
 
 interface TocProps {
   headings: {

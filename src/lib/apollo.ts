@@ -14,13 +14,13 @@ function createApolloClient() {
           fields: {
             allMarkdownRemark: {
               read(existing) {
-                return existing
+                return existing || { edges: [] }
               },
-              merge(incoming) {
+              merge(existing, incoming) {
                 return {
-                  ...incoming,
-                  edges: incoming.edges,
-                  group: incoming.group
+                  ...existing,
+                  edges: incoming?.edges || [],
+                  group: incoming?.group || []
                 }
               }
             }

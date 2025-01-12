@@ -3,7 +3,7 @@ import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
 import { faUserCircle, faAt, faMapMarkerAlt, faLink, faAddressCard, faRss } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faInstagram, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
 
-import './bio.scss'
+import '@/styles/bio.scss'
 const config = require('../../../config')
 
 const Bio = () => {

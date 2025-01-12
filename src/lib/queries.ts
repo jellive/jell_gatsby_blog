@@ -6,36 +6,21 @@ export const GET_POSTS = gql`
       edges {
         node {
           id
-          excerpt(length: 200)
+          excerpt
           fields {
             slug
           }
           frontmatter {
-            date
             title
-            category
+            date
             tags
-            featuredImage
+            category
           }
-          rawMarkdownBody
         }
       }
       group {
         fieldValue
         totalCount
-        edges {
-          node {
-            id
-            fields {
-              slug
-            }
-            frontmatter {
-              title
-              date
-              tags
-            }
-          }
-        }
       }
     }
   }
@@ -43,15 +28,15 @@ export const GET_POSTS = gql`
 
 export const GET_POSTS_WITH_CONTENT = gql`
   query GetPostsWithContent {
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMarkdownRemark {
       edges {
         node {
-          excerpt(format: PLAIN)
+          excerpt
           fields {
             slug
           }
           frontmatter {
-            date(formatString: "MMM DD, YYYY")
+            date
             title
             tags
             featuredImage
@@ -66,17 +51,17 @@ export const GET_POSTS_WITH_CONTENT = gql`
 export const GET_TAGS = gql`
   query GetTags {
     allMarkdownRemark {
-      group(field: { frontmatter: { tags: SELECT } }) {
+      group {
         fieldValue
         totalCount
         edges {
           node {
-            excerpt(format: PLAIN)
+            excerpt
             fields {
               slug
             }
             frontmatter {
-              date(formatString: "MMM DD, YYYY")
+              date
               title
               tags
               featuredImage
