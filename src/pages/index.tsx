@@ -1,5 +1,7 @@
 import * as React from 'react'
-import { graphql } from 'gatsby'
+import { GetStaticProps } from 'next'
+import { initializeApollo } from '../lib/apollo'
+import { GET_POSTS } from '../lib/queries'
 
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
@@ -7,14 +9,12 @@ import Bio from '../components/Bio'
 import './styles/index.scss'
 import PostList from '../components/PostList'
 
-export interface IndexPageProps {
-  path: String
-  location: Object
-  data: any //
+interface IndexPageProps {
+  posts: any[]
+  initialApolloState: any
 }
 
-const IndexPage = (props: IndexPageProps) => {
-  const posts = props.data.allMarkdownRemark.edges
+export default function IndexPage({ posts, initialApolloState }: IndexPageProps) {
   return (
     <Layout>
       <SEO title="Home" />
@@ -28,24 +28,46 @@ const IndexPage = (props: IndexPageProps) => {
   )
 }
 
-export const pageQuery = graphql`
-  query {
-    allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
-      edges {
-        node {
-          excerpt(format: PLAIN)
-          fields {
-            slug
+export const getStaticProps: GetStaticProps = async () => {
+  const apolloClient = initializeApollo()
+
+  const data = {
+    allMarkdownRemark: {
+      edges: [
+        {
+          node: {
+            excerpt: 'This is a sample excerpt...',
+            fields: {
+              slug: '/sample-post-1'
+            },
+            frontmatter: {
+              date: 'Mar 15, 2024',
+              title: 'Sample Post 1',
+              tags: ['react', 'nextjs']
+            }
           }
-          frontmatter {
-            date(formatString: "MMM DD, YYYY")
-            title
-            tags
+        },
+        {
+          node: {
+            excerpt: 'Another sample excerpt...',
+            fields: {
+              slug: '/sample-post-2'
+            },
+            frontmatter: {
+              date: 'Mar 10, 2024',
+              title: 'Sample Post 2',
+              tags: ['javascript', 'typescript']
+            }
           }
         }
-      }
+      ]
     }
   }
-`
 
-export default IndexPage
+  return {
+    props: {
+      posts: data.allMarkdownRemark.edges,
+      initialApolloState: apolloClient.cache.extract()
+    }
+  }
+}

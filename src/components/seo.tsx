@@ -1,87 +1,45 @@
-import * as React from 'react'
-import Helmet from 'react-helmet'
-import { useStaticQuery, graphql } from 'gatsby'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-export interface SEOpropsType {
-  description: any
-  lang: any
-  meta: any
-  title: any
-  keywords: any
+interface SEOProps {
+  title: string
+  description?: string
+  image?: string
+  keywords?: string[]
 }
 
-function SEO(props: SEOpropsType) {
-  const { description, lang, meta, title, keywords } = props
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  )
+export default function SEO({ title, description, image, keywords }: SEOProps) {
+  const router = useRouter()
+  const config = require('../../config')
 
-  const metaDescription = description || site.siteMetadata.description
+  const siteMetadata = {
+    title: config.title,
+    description: config.description,
+    author: config.author
+  }
+
+  const metaDescription = description || siteMetadata.description
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang
-      }}
-      title={title}
-      titleTemplate={title === 'Home' ? site.siteMetadata.title : `%s | ${site.siteMetadata.title}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription
-        },
-        {
-          property: `og:title`,
-          content: title
-        },
-        {
-          property: `og:description`,
-          content: metaDescription
-        },
-        {
-          property: `og:type`,
-          content: `website`
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author
-        },
-        {
-          name: `twitter:title`,
-          content: title
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription
-        },
-        {
-          name: `keywords`,
-          content: keywords
-        }
-      ].concat(meta)}
-    />
+    <Head>
+      <title>{`${title} | ${siteMetadata.title}`}</title>
+      <meta name="description" content={metaDescription} />
+
+      {/* Open Graph */}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:url" content={`${process.env.NEXT_PUBLIC_SITE_URL}${router.asPath}`} />
+      {image && <meta property="og:image" content={image} />}
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content={siteMetadata.author} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={metaDescription} />
+      {image && <meta name="twitter:image" content={image} />}
+
+      {/* Keywords */}
+      {keywords && keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+    </Head>
   )
 }
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-  keywords: ``
-}
-
-export default SEO

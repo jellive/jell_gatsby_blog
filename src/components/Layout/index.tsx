@@ -1,81 +1,22 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
-import Helmet from 'react-helmet'
-import { config as FaConfig, dom as FaDom } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { faAngleDoubleUp } from '@fortawesome/free-solid-svg-icons'
+import { useLayoutStore } from '../../store'
 
 import Header from '../Header'
 import './layout.scss'
-import { googleFont } from '../../utils/typography'
 
-FaConfig.autoAddCss = false
-
-export interface LayoutPropsType {
-  children: Object
+interface LayoutPropsType {
+  children: React.ReactNode
 }
 
-const Layout = (props: LayoutPropsType) => {
-  const { children } = props
-  const [isTop, setIsTop] = useState(true)
-
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
-  useEffect(() => {
-    const setTop = () => {
-      if (window.pageYOffset < window.innerHeight / 2) {
-        setIsTop(true)
-      } else {
-        setIsTop(false)
-      }
-    }
-    document.addEventListener('scroll', setTop)
-    return () => document.removeEventListener('scroll', setTop)
-  }, [])
+const Layout = ({ children }: LayoutPropsType) => {
+  const siteTitle = require('../../../config').title
+  const { path, size, setPath } = useLayoutStore()
 
   return (
     <>
-      <Helmet>
-        <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
-        <link href={`https://fonts.googleapis.com/css?family=${googleFont}`} rel="stylesheet" />
-        <style>{FaDom.css()}</style>
-        <script
-          data-ad-client="ca-pub-5518615618879832"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        ></script>
-      </Helmet>
-
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle={siteTitle} path={path} setPath={setPath} size={size} />
       <div id="content">
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()} Jell, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-
-      <div
-        id="top"
-        style={{
-          opacity: isTop ? '0' : '1',
-          pointerEvents: isTop ? 'none' : 'all'
-        }}
-        onClick={() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-        }}
-      >
-        <Fa icon={faAngleDoubleUp} />
       </div>
     </>
   )

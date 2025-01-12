@@ -1,4 +1,4 @@
-@import '../../utils/variables.scss';
+@use '../../utils/variables' as vars;
 
 #Header {
   display: flex;
@@ -9,23 +9,23 @@
   align-items: flex-end;
   justify-content: space-between;
   padding: 0 2rem 1rem 2rem;
-  height: $header-height;
-  max-height: $header-height;
+  height: vars.$header-height;
+  max-height: vars.$header-height;
   transition: top 0.3s;
   transition-delay: 0.2s;
   background-color: transparent;
   user-select: none;
 
-  @media screen and (max-width: $break-l) {
+  @media screen and (max-width: vars.$break-l) {
     background-color: #fff;
     padding: 0 1.5rem 1rem 1.5rem;
   }
-  @media screen and (max-width: $break-m) {
+  @media screen and (max-width: vars.$break-m) {
     padding: 0 1rem 0.5rem 1rem;
-    height: $header-height-m;
+    height: vars.$header-height-m;
   }
-  @media screen and (max-width: $break-s) {
-    height: $header-height-s;
+  @media screen and (max-width: vars.$break-s) {
+    height: vars.$header-height-s;
     padding: 0 1rem 0.25rem 1rem;
   }
 
@@ -38,14 +38,14 @@
     top: 0;
   }
   &.hide {
-    top: -$header-height;
+    top: -#{vars.$header-height};
   }
 
   .header-title {
     display: flex;
     align-items: flex-end;
 
-    @media screen and (max-width: $break-s) {
+    @media screen and (max-width: vars.$break-s) {
       align-items: center;
     }
 
@@ -57,7 +57,7 @@
       border-radius: 100%;
       margin-right: 0.25rem;
 
-      @media screen and (max-width: $break-s) {
+      @media screen and (max-width: vars.$break-s) {
         padding: 1px;
       }
 
@@ -68,12 +68,12 @@
         transition: all 0.5s;
         transition-timing-function: ease-in-out;
 
-        @media screen and (max-width: $break-l) {
+        @media screen and (max-width: vars.$break-l) {
           width: 25px !important;
           height: 25px !important;
         }
 
-        @media screen and (max-width: $break-s) {
+        @media screen and (max-width: vars.$break-s) {
           width: 15px !important;
           height: 15px !important;
         }
@@ -106,7 +106,7 @@
         opacity: 1;
       }
 
-      @media screen and (max-width: $break-s) {
+      @media screen and (max-width: vars.$break-s) {
         font-size: 1.1rem;
       }
     }
@@ -133,7 +133,7 @@
           opacity: 0.8;
         }
 
-        @media screen and (max-width: $break-s) {
+        @media screen and (max-width: vars.$break-s) {
           font-size: 1rem;
         }
       }

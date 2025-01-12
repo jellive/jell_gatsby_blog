@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { Link } from 'gatsby'
+import Link from 'next/link'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
 import { faTags, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
@@ -10,14 +10,13 @@ import './header.scss'
 const config = require('../../../config')
 
 export interface headerPropsType {
-  siteTitle: String
-  path: any
-  setPath: any
+  siteTitle: string
+  path: string
+  setPath: (path: string, size?: string) => void
   size: string
 }
 
-const Header = (props: headerPropsType) => {
-  const { siteTitle, path, setPath, size } = props
+const Header = ({ siteTitle, path, setPath, size }: headerPropsType) => {
   const [, setYPos] = useState(0)
   const [isHide, setIsHide] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -95,13 +94,13 @@ const Header = (props: headerPropsType) => {
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5518615618879832"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         ></script>
       )}
       {/* Google adsense auto end*/}
 
       <div className="header-title">
-        <Link to="/">
+        <Link href="/">
           <div className="header-profile-image-wrap">
             <img
               src={
@@ -116,7 +115,7 @@ const Header = (props: headerPropsType) => {
           </div>
         </Link>
 
-        <Link to="/">
+        <Link href="/">
           <h1 className="header-title-text">{siteTitle}</h1>
         </Link>
       </div>
@@ -126,7 +125,7 @@ const Header = (props: headerPropsType) => {
           <li>
             <div className="tag-wrap">
               <span>TAG</span>
-              <Link to="/tags">
+              <Link href="/tags">
                 <Fa
                   icon={faTags}
                   onMouseEnter={() => {
@@ -142,7 +141,7 @@ const Header = (props: headerPropsType) => {
 
           <li>
             <div className="search-wrap">
-              <Link to="/search" className="search">
+              <Link href="/search" className="search">
                 <Fa icon={faSearch} />
               </Link>
             </div>
@@ -163,4 +162,4 @@ const mapDispatchToProps = (dispatch: any) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default Header

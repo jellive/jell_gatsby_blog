@@ -1,21 +1,22 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { graphql } from 'gatsby'
-import React, { useState } from 'react'
+import React from 'react'
+import { GetStaticProps } from 'next'
 
 import Layout from '../components/Layout'
 import PostList from '../components/PostList'
 import SEO from '../components/seo'
+import { useSearchStore } from '../store'
 import './styles/search.scss'
+import { initializeApollo } from '../lib/apollo'
+import { GET_POSTS_WITH_CONTENT } from '../lib/queries'
 
-export interface ISearchProps {
-  data: any
+interface SearchProps {
+  posts: any[]
 }
 
-const Search = (props: ISearchProps) => {
-  const posts = props.data.allMarkdownRemark.edges
-  const [value, setValue] = useState('')
-  const [isTitleOnly, setIsTitleOnly] = useState(true)
+export default function Search({ posts }: SearchProps) {
+  const { value, isTitleOnly, setValue, setIsTitleOnly } = useSearchStore()
 
   const filteredPosts = posts.filter((post: any) => {
     const { node } = post
@@ -45,25 +46,13 @@ const Search = (props: ISearchProps) => {
               placeholder="Search"
               autoComplete="off"
               autoFocus={true}
-              onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                setValue(e.currentTarget.value)
-              }}
+              onChange={(e) => setValue(e.target.value)}
             />
             <div className="search-toggle">
-              <span
-                style={{ opacity: isTitleOnly ? 0.8 : 0.15 }}
-                onClick={() => {
-                  setIsTitleOnly(true)
-                }}
-              >
+              <span style={{ opacity: isTitleOnly ? 0.8 : 0.15 }} onClick={() => setIsTitleOnly(true)}>
                 in Title
               </span>
-              <span
-                style={{ opacity: !isTitleOnly ? 0.8 : 0.15 }}
-                onClick={() => {
-                  setIsTitleOnly(false)
-                }}
-              >
+              <span style={{ opacity: !isTitleOnly ? 0.8 : 0.15 }} onClick={() => setIsTitleOnly(false)}>
                 in Title+Content
               </span>
             </div>
@@ -77,25 +66,48 @@ const Search = (props: ISearchProps) => {
   )
 }
 
-export const pageQuery = graphql`
-  query {
-    allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
-      edges {
-        node {
-          rawMarkdownBody
-          excerpt(format: PLAIN)
-          fields {
-            slug
+export const getStaticProps: GetStaticProps = async () => {
+  const apolloClient = initializeApollo()
+
+  const data = {
+    allMarkdownRemark: {
+      edges: [
+        {
+          node: {
+            excerpt: 'This is a sample excerpt...',
+            fields: {
+              slug: '/sample-post-1'
+            },
+            frontmatter: {
+              date: 'Mar 15, 2024',
+              title: 'Sample Post 1',
+              tags: ['react', 'nextjs']
+            },
+            rawMarkdownBody: 'This is the full content of sample post 1...'
           }
-          frontmatter {
-            date(formatString: "MMM DD, YYYY")
-            title
-            tags
+        },
+        {
+          node: {
+            excerpt: 'Another sample excerpt...',
+            fields: {
+              slug: '/sample-post-2'
+            },
+            frontmatter: {
+              date: 'Mar 10, 2024',
+              title: 'Sample Post 2',
+              tags: ['javascript', 'typescript']
+            },
+            rawMarkdownBody: 'This is the full content of sample post 2...'
           }
         }
-      }
+      ]
     }
   }
-`
 
-export default Search
+  return {
+    props: {
+      posts: data.allMarkdownRemark.edges,
+      initialApolloState: apolloClient.cache.extract()
+    }
+  }
+}

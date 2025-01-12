@@ -1,4 +1,4 @@
-@import '../../utils/variables.scss';
+@use '../../utils/variables' as vars;
 
 .post-list {
   max-width: 640px;
@@ -20,7 +20,7 @@
 
     padding: 3rem 1rem;
 
-    @media screen and (max-width: $break-m) {
+    @media screen and (max-width: vars.$break-m) {
       padding: 2rem 1rem;
     }
 
@@ -31,10 +31,10 @@
 
     & > * > * {
       margin-bottom: 0.25rem;
-      @media screen and (max-width: $break-m) {
+      @media screen and (max-width: vars.$break-m) {
         margin-bottom: 0.2rem;
       }
-      @media screen and (max-width: $break-s) {
+      @media screen and (max-width: vars.$break-s) {
         margin-bottom: 0.1rem;
       }
     }
@@ -42,7 +42,7 @@
     .title {
       font-size: 1.3rem;
 
-      @media screen and (max-width: $break-m) {
+      @media screen and (max-width: vars.$break-m) {
         font-size: 1.1rem;
       }
     }
@@ -80,13 +80,60 @@
       overflow: hidden;
       color: rgba(0, 0, 0, 0.74);
       max-width: calc(640px - 2rem);
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       font-size: 0.95rem;
+      line-height: 1.6;
+      margin-top: 1rem;
 
-      @media screen and (max-width: $break-m) {
-        font-size: 0.82rem;
+      p {
+        margin: 0;
       }
+
+      img,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        display: none;
+      }
+
+      code {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 0.85em;
+      }
+    }
+  }
+}
+
+.post-item {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+
+  h2 {
+    margin: 0 0 0.5rem;
+    color: #333;
+  }
+
+  .post-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-tags {
+    margin-top: 0.5rem;
+
+    .tag {
+      display: inline-block;
+      margin-right: 0.5rem;
+      color: #0070f3;
+      font-size: 0.9rem;
     }
   }
 }
