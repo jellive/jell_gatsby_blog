@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { getAllPosts } from '../lib/posts'
 import Layout from '../components/Layout'
 import AdSense from 'react-adsense'
+import { DiscussionEmbed } from 'disqus-react'
 import config from '../../config'
 import '@/styles/markdown.scss'
 import Markdown from 'markdown-to-jsx'
@@ -11,12 +12,26 @@ interface PostPageProps {
     frontmatter: {
       title: string
     }
+    fields: {
+      slug: string
+    }
     rawMarkdownBody: string
   }
 }
 
 export default function PostPage({ post }: PostPageProps) {
   if (!post) return null
+
+  const disqusConfig = {
+    shortname: config.disqusShortname,
+    config: {
+      url: `${config.siteUrl}/${post.fields.slug}`,
+      identifier: post.fields.slug,
+      title: post.frontmatter.title
+    }
+  }
+
+  const isDevelopment = process.env.NODE_ENV === 'development'
 
   return (
     <Layout>
@@ -34,7 +49,6 @@ export default function PostPage({ post }: PostPageProps) {
                           ''
                         )}`
                       : src
-                    console.log('Rendering image:', { alt, originalSrc: src, finalSrc: imageSrc })
                     return <img alt={alt} src={imageSrc} style={{ maxWidth: '100%' }} className="markdown-image" />
                   }
                 }
@@ -45,14 +59,32 @@ export default function PostPage({ post }: PostPageProps) {
           </Markdown>
         </div>
         {config.googleAdsenseClient && config.googleAdsenseSlot && (
-          <div className="adsense-container">
-            <AdSense.Google
-              client={config.googleAdsenseClient}
-              slot={config.googleAdsenseSlot}
-              style={{ display: 'block' }}
-              format="auto"
-              responsive="true"
-            />
+          <div className="adsense-container" style={{ minHeight: '100px' }}>
+            {!isDevelopment ? (
+              <AdSense.Google
+                client={config.googleAdsenseClient}
+                slot={config.googleAdsenseSlot}
+                style={{ display: 'block' }}
+                format="auto"
+                responsive="true"
+              />
+            ) : (
+              <div
+                style={{
+                  background: '#f0f0f0',
+                  padding: '1rem',
+                  textAlign: 'center',
+                  color: '#666'
+                }}
+              >
+                AdSense (Development Mode)
+              </div>
+            )}
+          </div>
+        )}
+        {config.disqusShortname && (
+          <div className="comments">
+            <DiscussionEmbed {...disqusConfig} />
           </div>
         )}
       </article>
