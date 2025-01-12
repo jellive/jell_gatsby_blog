@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import Head from 'next/head'
-import Link from 'next/link'
+import React from 'react'
+import { useEffect, useState } from 'react'
+import Helmet from 'react-helmet'
+import { graphql, Link } from 'gatsby'
 import { DiscussionEmbed } from 'disqus-react'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { faListUl, faLayerGroup } from '@fortawesome/free-solid-svg-icons'
+import { faListUl, faLayerGroup, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import AdSense from 'react-adsense'
 import {
   FacebookShareButton,
@@ -27,109 +28,130 @@ import './post.scss'
 import 'katex/dist/katex.min.css'
 const config = require('../../config')
 
-interface PostProps {
-  post: {
-    title: string
-    date: string
-    tags: string[]
-    keywords: string[]
-    html: string
-    tableOfContents: string
-    excerpt: string
-    slug: string
-  }
-  series?: {
-    title: string
-    slug: string
-    num: number
-  }[]
+export interface postProps {
+  data: any
+  pageContext: any
 }
 
-const Post = ({ post, series = [] }: PostProps) => {
+const Post = (props: postProps) => {
+  const { data, pageContext } = props
+  const { markdownRemark } = data // data.markdownRemark holds your post data
+  const { frontmatter, html, tableOfContents, fields, excerpt } = markdownRemark
+  const { title, date, tags, keywords } = frontmatter
+  const { slug } = fields
+  const { series } = pageContext
+  const [yList, setYList] = useState()
   const [isInsideToc, setIsInsideToc] = useState(false)
-  const isTableOfContents = config.enablePostOfContents && post.tableOfContents !== ''
+
+  const isTableOfContents = config.enablePostOfContents && tableOfContents !== ''
   const isDevelopment = process.env.NODE_ENV === 'development'
-  const isDisqus = !!config.disqusShortname
+  const isDisqus = config.disqusShortname
   const isSocialShare = config.enableSocialShare
 
-  const metaKeywords = (keywords: string[], tags: string[]) => {
-    const result = new Set([...(keywords || []), ...(tags || [])])
-    return Array.from(result)
-  }
+  useEffect(() => {
+    const hs = Array.from(document.querySelectorAll('h2, h3')) as Array<HTMLHeadingElement>
 
-  const disqusConfig = {
-    shortname: config.disqusShortname,
-    config: {
-      url: config.siteUrl + post.slug,
-      identifier: post.slug,
-      title: post.title
+    const foo = hs.map((h) => {
+      return h.offsetTop
+    })
+
+    setYList(foo)
+
+    return () => {}
+  }, [])
+
+  useEffect(() => {
+    const setYPos = () => {
+      if (yList) {
+        const index =
+          yList.filter((v: number) => {
+            return v < window.pageYOffset
+          }).length - 1
+
+        const aList = document.querySelectorAll('.toc.outside li a') as NodeListOf<HTMLAnchorElement>
+
+        for (const i in Array.from(aList)) {
+          if (parseInt(i, 10) === index) {
+            aList[i].style.opacity = '1'
+          } else {
+            aList[i].style.opacity = '0.4'
+          }
+        }
+      }
     }
-  }
 
-  const mapTags = post.tags.map((tag: string) => (
-    <li key={tag} className="blog-post-tag">
-      <Link href={`/tags#${tag}`}>{`#${tag}`}</Link>
-    </li>
-  ))
+    if (isTableOfContents) document.addEventListener('scroll', setYPos)
+    return () => {
+      if (isTableOfContents) document.removeEventListener('scroll', setYPos)
+    }
+  }, [yList])
 
-  const mapSeries = series.map((s, i) => {
+  const mapTags = tags.map((tag: string) => {
     return (
-      <li key={i} className={`series-item ${post.slug === s.slug ? 'current-series' : ''}`}>
-        <Link href={s.slug}>
-          {s.num}. {s.title}
+      <li key={tag} className="blog-post-tag">
+        <Link to={`/tag/${tag}`}>{`#${tag}`}</Link>
+      </li>
+    )
+  })
+
+  // const mapSeries = series.map((s: any) => {
+  //   return (
+  //     <li key={`${s.slug}-series-${s.num}`} className={`series-item ${slug === s.slug ? 'current-series' : ''}`}>
+  //       <Link to={s.slug}>
+  //         <span>{s.title}</span>
+  //       </Link>
+  //     </li>
+  //   )
+  // })
+
+  const mapSeries = series.map((s: any) => {
+    return (
+      <li key={`${s.slug}-series-${s.num}`} className={`series-item ${slug === s.slug ? 'current-series' : ''}`}>
+        <Link to={s.slug}>
+          <span>{s.title}</span>
+          <div className="icon-wrap">{slug === s.slug ? <Fa icon={faAngleLeft} /> : null}</div>
         </Link>
       </li>
     )
   })
 
-  const headings = React.useMemo(() => {
-    if (typeof window === 'undefined') return []
+  //disqus
+  const disqusConfig = {
+    shortname: config.disqusShortname,
+    config: {
+      url: `${config.siteUrl + slug}`,
+      identifier: slug,
+      title
+    }
+  }
 
-    const content = document.querySelector('.blog-post-content')
-    if (!content) return []
+  const metaKeywords = (keywordList: Array<string>, tagList: Array<string>) => {
+    const resultKeywords = new Set()
 
-    const headingElements = Array.from(content.querySelectorAll('h1, h2, h3'))
-    return headingElements.map((heading) => {
-      const id = heading.id || heading.textContent?.toLowerCase().replace(/\s+/g, '-') || ''
-      const title = heading.textContent || ''
-      const level = parseInt(heading.tagName[1])
-      return { id, title, level }
-    })
-  }, [post.html])
+    for (const v of [...keywordList, ...tagList]) {
+      resultKeywords.add(v)
+    }
 
-  useEffect(() => {
-    const content = document.querySelector('.blog-post-content')
-    if (!content) return
-
-    const elements = Array.from(content.querySelectorAll('h1, h2, h3'))
-    elements.forEach((heading) => {
-      if (!heading.id) {
-        heading.id = heading.textContent?.toLowerCase().replace(/\s+/g, '-') || ''
-      }
-    })
-  }, [post.html])
-
-  const TocWithLog = React.useMemo(() => {
-    return <Toc headings={headings} />
-  }, [headings])
+    return Array.from(resultKeywords)
+  }
 
   return (
     <>
-      <Head>
+      <Helmet>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      </Head>
+      </Helmet>
 
-      <SEO title={post.title} description={post.excerpt} keywords={metaKeywords(post.keywords, post.tags)} />
+      <SEO title={title} description={excerpt} keywords={metaKeywords(keywords, tags)} />
 
       <Layout>
         <div className="blog-post-container">
           <div className="blog-post">
-            <h1 className="blog-post-title">{post.title}</h1>
+            <h1 className="blog-post-title">{title}</h1>
 
             <div className="blog-post-info">
-              <span className="blog-post-date">{post.date}</span>
+              <span className="blog-post-date">{date}</span>
 
-              {post.tags.length && post.tags[0] !== 'undefined' ? (
+              {tags.length && tags[0] !== 'undefined' ? (
                 <>
                   <span>·</span>
                   <ul className="blog-post-tag-list">{mapTags}</ul>
@@ -153,11 +175,13 @@ const Post = ({ post, series = [] }: PostProps) => {
               )}
             </div>
 
-            {isTableOfContents && (
+            {!isTableOfContents ? null : (
               <div className="inside-toc-wrap" style={{ display: isInsideToc ? 'flex' : 'none' }}>
-                <Toc headings={headings} />
+                <Toc isOutside={false} toc={tableOfContents} />
               </div>
             )}
+
+            {/* {series.length > 1 ? <ul className="series-list">{mapSeries}</ul> : null} */}
 
             {series.length > 1 ? (
               <>
@@ -173,39 +197,39 @@ const Post = ({ post, series = [] }: PostProps) => {
               </>
             ) : null}
 
-            <div className="blog-post-content" dangerouslySetInnerHTML={{ __html: post.html }} />
+            <div className="blog-post-content" dangerouslySetInnerHTML={{ __html: html }} />
           </div>
 
           {isSocialShare ? (
             <div className="social-share">
               <ul>
                 <li className="social-share-item email">
-                  <EmailShareButton url={config.siteUrl + post.slug}>
+                  <EmailShareButton url={config.siteUrl + slug}>
                     <EmailIcon size={24} round={true} />
                   </EmailShareButton>
                 </li>
                 <li className="social-share-item facebook">
-                  <FacebookShareButton url={config.siteUrl + post.slug}>
+                  <FacebookShareButton url={config.siteUrl + slug}>
                     <FacebookIcon size={24} round={true} />
                   </FacebookShareButton>
                 </li>
                 <li className="social-share-item twitter">
-                  <TwitterShareButton url={config.siteUrl + post.slug}>
+                  <TwitterShareButton url={config.siteUrl + slug}>
                     <TwitterIcon size={24} round={true} />
                   </TwitterShareButton>
                 </li>
                 <li className="social-share-item linkedin">
-                  <LinkedinShareButton url={config.siteUrl + post.slug}>
+                  <LinkedinShareButton url={config.siteUrl + slug}>
                     <LinkedinIcon size={24} round={true} />
                   </LinkedinShareButton>
                 </li>
                 <li className="social-share-item reddit">
-                  <RedditShareButton url={config.siteUrl + post.slug}>
+                  <RedditShareButton url={config.siteUrl + slug}>
                     <RedditIcon size={24} round={true} />
                   </RedditShareButton>
                 </li>
                 <li className="social-share-item pocket">
-                  <PocketShareButton url={config.siteUrl + post.slug}>
+                  <PocketShareButton url={config.siteUrl + slug}>
                     <PocketIcon size={24} round={true} />
                   </PocketShareButton>
                 </li>
@@ -247,10 +271,29 @@ const Post = ({ post, series = [] }: PostProps) => {
           )}
         </div>
 
-        {isTableOfContents && headings.length > 0 && <div className="toc outside">{TocWithLog}</div>}
+        {!isTableOfContents ? null : <Toc isOutside={true} toc={tableOfContents} />}
       </Layout>
     </>
   )
 }
+
+export const pageQuery = graphql`
+  query ($slug: String) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
+      html
+      excerpt
+      tableOfContents
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        date(formatString: "MMM DD, YYYY")
+        tags
+        keywords
+      }
+    }
+  }
+`
 
 export default Post
