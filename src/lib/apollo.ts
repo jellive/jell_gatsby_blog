@@ -4,7 +4,7 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: createHttpLink({
-      uri: process.env.NEXT_PUBLIC_API_URL || '/api/graphql',
+      uri: '/api/graphql',
       credentials: 'same-origin'
     }),
     cache: new InMemoryCache({
@@ -13,8 +13,15 @@ function createApolloClient() {
         Query: {
           fields: {
             allMarkdownRemark: {
+              read(existing) {
+                return existing || { edges: [] }
+              },
               merge(existing, incoming) {
-                return incoming
+                return {
+                  ...existing,
+                  edges: incoming?.edges || [],
+                  group: incoming?.group || []
+                }
               }
             }
           }
@@ -30,11 +37,7 @@ export function initializeApollo(initialState: any = null) {
   const _apolloClient = apolloClient ?? createApolloClient()
 
   if (initialState) {
-    const existingCache = _apolloClient.cache.extract()
-    _apolloClient.cache.restore({
-      ...existingCache,
-      ...initialState
-    })
+    _apolloClient.cache.restore(initialState)
   }
 
   if (typeof window === 'undefined') return _apolloClient
