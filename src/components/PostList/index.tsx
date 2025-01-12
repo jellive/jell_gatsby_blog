@@ -16,15 +16,12 @@ export default function PostList() {
     return <div>Error loading posts: {error.message}</div>
   }
 
-  console.log('PostList data:', data?.allMarkdownRemark?.edges[0])
-
   const posts = data?.allMarkdownRemark?.edges || []
 
   return (
     <div className="post-list">
       <ul>
         {posts.map(({ node }: any) => {
-          console.log('Post excerpt:', node.excerpt)
           return (
             <li key={node.id} className="post">
               <article>

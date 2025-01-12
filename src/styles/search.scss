@@ -4,77 +4,61 @@
   max-width: 640px;
   margin: 0 auto;
 
-  h1 {
-    font-size: 1.8rem;
+  .input-wrap {
+    position: relative;
     margin-bottom: 2rem;
-  }
-
-  .search-input {
-    width: 100%;
-    padding: 0.8rem;
-    font-size: 1rem;
-    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+    padding: 0.5rem 1rem;
 
-    &:focus {
+    svg {
+      color: rgba(0, 0, 0, 0.3);
+      margin-right: 0.5rem;
+    }
+
+    input {
+      flex: 1;
+      border: none;
       outline: none;
-      border-color: rgba(0, 0, 0, 0.3);
+      font-size: 1rem;
+      background: transparent;
+
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .search-toggle {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      user-select: none;
+
+      span {
+        transition: opacity 0.2s;
+      }
     }
   }
 
   .search-results {
-    h2 {
-      margin-bottom: 2rem;
-      color: rgba(0, 0, 0, 0.54);
-      font-size: 1rem;
-    }
+    .post-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-    ul {
-      list-style: none;
-      padding: 0;
+      h2 {
+        margin: 0;
+        font-size: 1.3rem;
+        color: rgba(0, 0, 0, 0.8);
+      }
 
-      li {
-        padding: 3rem 1rem;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-
-        &:first-child {
-          padding-top: 0;
-          border-top: 0;
-        }
-
-        h3 {
-          font-size: 1.3rem;
-          margin-bottom: 0.25rem;
-
-          @media screen and (max-width: vars.$break-m) {
-            font-size: 1.1rem;
-          }
-        }
-
-        p {
-          color: rgba(0, 0, 0, 0.74);
-          font-size: 0.95rem;
-          line-height: 1.6;
-          margin-top: 1rem;
-        }
-
-        .tags {
-          display: flex;
-          color: rgba(0, 0, 0, 0.54);
-          font-size: 0.9rem;
-          margin-top: 0.25rem;
-
-          a {
-            margin-right: 0.5rem;
-            color: rgba(0, 0, 0, 0.54);
-            text-decoration: none;
-
-            &:hover {
-              color: rgba(0, 0, 0, 0.74);
-            }
-          }
-        }
+      p {
+        margin: 0.5rem 0 0;
+        font-size: 0.95rem;
+        color: rgba(0, 0, 0, 0.6);
+        line-height: 1.6;
       }
     }
   }

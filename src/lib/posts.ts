@@ -32,29 +32,39 @@ function normalizeDate(date: string): string {
 
 async function markdownToHtml(markdown: string, postPath: string) {
   const processImagePaths = (content: string) => {
-    return content.replace(/!\[([^\]]*)\]\((?!http)(.*?)\)/g, (match, alt, imagePath) => {
-      const slug = postPath.replace(/\.md$/, '')
-      const imageName = path.basename(imagePath.replace('images/', ''))
-      const absoluteImagePath = `/images/${slug}/${imageName}`
-
-      console.log('Processing image:', {
-        original: match,
-        alt,
-        imagePath,
-        absoluteImagePath,
-        slug
+    return content.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, imagePath) => {
+      // 디버깅을 위한 로그
+      console.log('Processing image path:', {
+        original: imagePath.trim(),
+        postPath
       })
+
+      // 외부 URL인 경우 그대로 반환
+      if (imagePath.trim().startsWith('http')) {
+        return match
+      }
+
+      // 이미지 경로 정규화
+      const normalizedPath = imagePath.trim().replace(/^\.?\/?(images\/)?/, '')
+      // 포스트 경로에서 파일명을 제외한 디렉토리 경로만 사용
+      const postDir = postPath.split('/').slice(0, -1).join('/')
+      const absoluteImagePath = `/posts/${postDir}/images/${normalizedPath}`
+
+      console.log('Converted path:', absoluteImagePath)
 
       return `![${alt}](${absoluteImagePath})`
     })
   }
 
-  return processImagePaths(markdown)
+  // 마크다운 내용에서 이미지 경로 처리
+  const processedContent = processImagePaths(markdown)
+
+  return processedContent
 }
 
 export async function getAllPosts(): Promise<Post[]> {
   const postsDirectory = path.join(process.cwd(), '_posts')
-  console.log('Posts directory:', postsDirectory)
+  //   console.log('Posts directory:', postsDirectory)
 
   try {
     const exists = await fs.pathExists(postsDirectory)
@@ -64,7 +74,7 @@ export async function getAllPosts(): Promise<Post[]> {
 
     // 디렉토리 내용 확인
     const dirContents = await fs.readdir(postsDirectory)
-    console.log('Directory contents:', dirContents)
+    //     console.log('Directory contents:', dirContents)
   } catch (error) {
     console.error('Error accessing _posts directory:', error)
     return []
@@ -78,7 +88,7 @@ export async function getAllPosts(): Promise<Post[]> {
     nodir: true,
     dot: false
   })
-  console.log('Found markdown files:', postPaths)
+  //   console.log('Found markdown files:', postPaths)
 
   if (postPaths.length === 0) {
     console.warn('No markdown files found in _posts directory')
@@ -88,32 +98,33 @@ export async function getAllPosts(): Promise<Post[]> {
   const posts = await Promise.all(
     postPaths.map(async (postPath) => {
       const fullPath = path.join(postsDirectory, postPath)
-      console.log('Processing file:', fullPath)
 
       try {
         const fileContents = await fs.readFile(fullPath, 'utf8')
         const { data, content, excerpt } = matter(fileContents)
 
-        // featuredImage가 undefined일 경우 null로 설정
-        const featuredImage = data.featuredImage || null
+        // 포스트 경로 로깅
+        // console.log('Processing post:', {
+        //   path: postPath,
+        //   title: data.title
+        // })
 
         // postPath를 전달하여 이미지 경로 처리
-        const htmlContent = await markdownToHtml(content, postPath)
-        const htmlExcerpt = excerpt ? await markdownToHtml(excerpt, postPath) : ''
+        const processedContent = await markdownToHtml(content, postPath)
 
         return {
-          excerpt: htmlExcerpt,
+          excerpt: excerpt || '',
           fields: {
-            slug: postPath.replace(/\.md$/, '').split('/').join('/')
+            slug: postPath.replace(/\.md$/, '')
           },
           frontmatter: {
             date: normalizeDate(data.date),
             title: data.title,
             tags: data.tags || [],
-            featuredImage, // null로 설정된 값 사용
-            category: data.category || null // category도 같은 방식으로 처리
+            featuredImage: data.featuredImage || null,
+            category: data.category || null
           },
-          rawMarkdownBody: content // HTML로 변환하지 않고 마크다운 그대로 전달
+          rawMarkdownBody: processedContent // 처리된 마크다운 내용 사용
         }
       } catch (error) {
         console.error(`Error processing file ${fullPath}:`, error)
@@ -124,7 +135,7 @@ export async function getAllPosts(): Promise<Post[]> {
 
   // 에러가 있는 포스트 제거
   const validPosts = posts.filter((post): post is Post => post !== null)
-  console.log('Total valid posts:', validPosts.length)
+  //   console.log('Total valid posts:', validPosts.length)
 
   return validPosts.sort((a, b) => {
     const dateA = new Date(a.frontmatter.date)

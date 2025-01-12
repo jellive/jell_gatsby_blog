@@ -3,46 +3,66 @@
 .tags-wrap {
   max-width: 640px;
   margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: center;
 
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: 3rem;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+
+    li {
+      margin: 0;
+      display: inline-block;
+
+      .tag-text {
+        transition: all 0.2s;
+        display: inline-block;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+
+          &:hover {
+            color: rgba(0, 0, 0, 0.8);
+          }
+        }
+      }
+    }
   }
 
-  .tag-group {
-    padding: 3rem 1rem;
+  .selected-tag-posts {
+    margin-top: 3rem;
+    padding-top: 2rem;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-
-    &:first-child {
-      padding-top: 0;
-      border-top: 0;
-    }
+    text-align: left;
 
     h2 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-      color: rgba(0, 0, 0, 0.84);
-
-      @media screen and (max-width: vars.$break-m) {
-        font-size: 1.1rem;
-      }
+      margin: 0 0 1rem;
+      font-size: 1.5rem;
+      color: rgba(0, 0, 0, 0.8);
     }
 
     ul {
-      list-style: none;
-      padding: 0;
+      display: block;
+      justify-content: flex-start;
 
       li {
-        margin: 0.25rem 0;
+        margin: 0.5rem 0;
+        display: block;
 
         a {
-          color: rgba(0, 0, 0, 0.74);
+          color: rgba(0, 0, 0, 0.7);
           text-decoration: none;
-          font-size: 0.95rem;
+          font-size: 1rem;
           line-height: 1.6;
 
           &:hover {
-            color: rgba(0, 0, 0, 0.84);
+            color: rgba(0, 0, 0, 0.9);
           }
         }
       }

@@ -2,44 +2,53 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 interface SEOProps {
-  title: string
+  title?: string
   description?: string
-  image?: string
   keywords?: string[]
+  image?: string
+  url?: string
 }
 
-export default function SEO({ title, description, image, keywords }: SEOProps) {
+const SEO = ({
+  title,
+  description = '개발자의 기술 블로그입니다.',
+  keywords = ['개발', '프로그래밍'],
+  image = '/images/profile.jpeg',
+  url
+}: SEOProps) => {
   const router = useRouter()
-  const config = require('../../config')
-
-  const siteMetadata = {
-    title: config.title,
-    description: config.description,
-    author: config.author
-  }
-
-  const metaDescription = description || siteMetadata.description
+  const siteTitle = 'Jell의 세상 사는 이야기'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://blog.jell.kr'
+  const canonical = url ? `${siteUrl}${url}` : `${siteUrl}${router.asPath}`
+  const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle
 
   return (
     <Head>
-      <title>{`${title} | ${siteMetadata.title}`}</title>
-      <meta name="description" content={metaDescription} />
+      <title>{fullTitle}</title>
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords.join(', ')} />
 
       {/* Open Graph */}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={metaDescription} />
-      <meta property="og:url" content={`${process.env.NEXT_PUBLIC_SITE_URL}${router.asPath}`} />
-      {image && <meta property="og:image" content={image} />}
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={fullTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={`${siteUrl}${image}`} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:site_name" content={siteTitle} />
 
-      {/* Twitter */}
+      {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:creator" content={siteMetadata.author} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={metaDescription} />
-      {image && <meta name="twitter:image" content={image} />}
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={`${siteUrl}${image}`} />
 
-      {/* Keywords */}
-      {keywords && keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+      {/* Canonical URL */}
+      <link rel="canonical" href={canonical} />
+
+      {/* Favicon */}
+      <link rel="icon" href="/favicon.ico" />
     </Head>
   )
 }
+
+export default SEO

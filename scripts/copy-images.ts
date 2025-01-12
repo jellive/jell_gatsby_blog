@@ -3,45 +3,25 @@ import path from 'path'
 import { glob } from 'glob'
 
 async function copyImages() {
-  const postsDirectory = path.join(process.cwd(), '_posts')
-  const publicDirectory = path.join(process.cwd(), 'public')
+  const postsDir = path.join(process.cwd(), '_posts')
+  const publicDir = path.join(process.cwd(), 'public/posts')
 
-  // 이미지 디렉토리 초기화
-  const imagesDirectory = path.join(publicDirectory, 'images')
-  await fs.remove(imagesDirectory)
-  await fs.ensureDir(imagesDirectory)
-
-  // 마크다운 파일 찾기
-  const postFiles = await glob('**/*.md', {
-    cwd: postsDirectory,
-    nocase: true
+  // 이미지 파일 찾기 (images 디렉토리 내의 파일들을 찾음)
+  const images = await glob('**/images/**/*.{jpg,jpeg,png,gif,webp}', {
+    cwd: postsDir,
+    absolute: false
   })
 
-  // 각 포스트의 이미지 복사
-  for (const postFile of postFiles) {
-    const postDir = path.dirname(postFile)
-    const postSlug = postFile.replace(/\.md$/, '')
-    const imagesDir = path.join(postsDirectory, postDir, 'images')
-    const targetDir = path.join(imagesDirectory, postSlug)
+  // 각 이미지를 public 디렉토리로 복사하면서 디렉토리 구조 유지
+  for (const image of images) {
+    const sourcePath = path.join(postsDir, image)
+    // 파일 경로에서 마지막 세그먼트(포스트 이름)를 제외한 디렉토리 경로 사용
+    const dirPath = path.dirname(path.dirname(image))
+    const targetPath = path.join(publicDir, dirPath, 'images', path.basename(image))
 
-    try {
-      // 해당 포스트의 images 디렉토리가 있는지 확인
-      if (await fs.pathExists(imagesDir)) {
-        const imageFiles = await fs.readdir(imagesDir)
-
-        // 각 이미지 파일 복사
-        for (const imageFile of imageFiles) {
-          const sourcePath = path.join(imagesDir, imageFile)
-          const targetPath = path.join(targetDir, imageFile)
-
-          await fs.ensureDir(targetDir)
-          await fs.copy(sourcePath, targetPath)
-          console.log(`Copied: ${imageFile} -> ${targetPath}`)
-        }
-      }
-    } catch (error) {
-      console.error(`Failed to process images for ${postFile}:`, error)
-    }
+    await fs.ensureDir(path.dirname(targetPath))
+    await fs.copy(sourcePath, targetPath)
+    console.log(`Copied: ${image} -> ${targetPath}`)
   }
 }
 
