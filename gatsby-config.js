@@ -27,9 +27,6 @@ const gatsbyConfig = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        tableOfContents: {
-          maxDepth: 3
-        },
         plugins: [
           {
             resolve: `gatsby-remark-images`,
@@ -62,8 +59,7 @@ const gatsbyConfig = {
               }
             }
           },
-          `gatsby-remark-autolink-headers`,
-          `gatsby-remark-katex`
+          `gatsby-remark-autolink-headers`
         ]
       }
     },

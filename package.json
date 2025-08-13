@@ -52,8 +52,12 @@
     "react-share": "^5.1.0",
     "react-typography": "^0.16.23",
     "redux": "^5.0.1",
+    "rehype-stringify": "^10.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
     "sharp": "^0.33.2",
     "typography": "^0.16.24",
+    "unified": "^11.0.5",
     "webpack": "^5.90.3"
   },
   "devDependencies": {
