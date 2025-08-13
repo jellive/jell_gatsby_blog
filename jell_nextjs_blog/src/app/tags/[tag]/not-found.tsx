@@ -7,7 +7,7 @@ export default function TagNotFound() {
         <h1>태그를 찾을 수 없습니다</h1>
         <p>요청하신 태그가 존재하지 않거나 해당 태그로 작성된 포스트가 없습니다.</p>
         <p>
-          만약 "Blog"를 찾고 계신다면, 이는 <strong>카테고리</strong>입니다. 
+          만약 &ldquo;Blog&rdquo;를 찾고 계신다면, 이는 <strong>카테고리</strong>입니다. 
           태그가 아닌 카테고리로 분류되어 있어요.
         </p>
         

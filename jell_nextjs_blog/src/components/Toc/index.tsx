@@ -37,7 +37,7 @@ const Toc = (props: TocProps) => {
                            document.getElementById(rawTargetId) ||
                            document.querySelector(`[id="${targetId}"]`) ||
                            document.querySelector(`[id="${rawTargetId}"]`) ||
-                           document.querySelector(`h1, h2, h3, h4, h5, h6`).parentElement?.querySelector(`[id*="${targetId}"]`) ||
+                           document.querySelector(`h1, h2, h3, h4, h5, h6`)?.parentElement?.querySelector(`[id*="${targetId}"]`) ||
                            Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).find(el => 
                              el.textContent?.trim() === targetId || 
                              el.textContent?.trim() === decodeURIComponent(targetId)
@@ -58,7 +58,7 @@ const Toc = (props: TocProps) => {
           const headerHeight = getComputedStyle(document.documentElement).getPropertyValue(headerHeightVar) || '6rem'
           const offset = parseFloat(headerHeight) * 16 + 32 // Convert rem to px and add padding (32px = 2rem)
           
-          const targetPosition = targetElement.offsetTop - offset
+          const targetPosition = (targetElement as HTMLElement).offsetTop - offset
           
           // Ensure scroll position is valid
           const maxScroll = document.documentElement.scrollHeight - window.innerHeight
@@ -81,15 +81,16 @@ const Toc = (props: TocProps) => {
           // Also highlight the target heading briefly
           setTimeout(() => {
             if (targetElement) {
-              targetElement.style.backgroundColor = 'rgba(66, 153, 225, 0.1)'
-              targetElement.style.borderRadius = '4px'
-              targetElement.style.transition = 'background-color 0.3s ease'
+              const htmlTarget = targetElement as HTMLElement
+              htmlTarget.style.backgroundColor = 'rgba(66, 153, 225, 0.1)'
+              htmlTarget.style.borderRadius = '4px'
+              htmlTarget.style.transition = 'background-color 0.3s ease'
               
               setTimeout(() => {
-                targetElement.style.backgroundColor = ''
+                htmlTarget.style.backgroundColor = ''
                 setTimeout(() => {
-                  targetElement.style.borderRadius = ''
-                  targetElement.style.transition = ''
+                  htmlTarget.style.borderRadius = ''
+                  htmlTarget.style.transition = ''
                 }, 300)
               }, 1000)
             }

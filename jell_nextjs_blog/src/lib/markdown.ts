@@ -216,7 +216,9 @@ export async function getAllTags(): Promise<string[]> {
   const categorySet = new Set(posts.map(post => post.frontMatter.category))
   
   // Combine tags and categories
-  const combinedSet = new Set([...tagSet, ...categorySet])
+  const combinedSet = new Set<string>()
+  tagSet.forEach(tag => combinedSet.add(tag))
+  categorySet.forEach(category => combinedSet.add(category))
   
   const allTags = Array.from(combinedSet)
   return allTags.sort()
