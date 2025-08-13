@@ -71,13 +71,21 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
   const { data: frontMatter, content } = matter(fileContent)
   
   // Transform image paths before processing
-  const transformedContent = transformImagePaths(content, filePath)
+  let transformedContent = transformImagePaths(content, filePath)
+  
+  // Replace ```toc``` code blocks with TOC heading that remarkToc can recognize
+  transformedContent = transformedContent.replace(/```toc\s*```/g, '## Table of Contents')
   
   // Process markdown to HTML with proper remark → rehype pipeline
   const processedContent = await unified()
     .use(remarkParse)
-    .use(remarkToc, { tight: true, ordered: false })
     .use(remarkEmoji)
+    .use(remarkToc, { 
+      tight: true, 
+      ordered: false,
+      heading: 'toc|table[ -]of[ -]contents?', // Custom heading pattern
+      maxDepth: 3 // Limit TOC depth
+    })
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypePrism, {
       ignoreMissing: true,
@@ -88,20 +96,40 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
     })
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(transformedContent)
-  const htmlContent = String(processedContent)
+  let htmlContent = String(processedContent)
   
-  // Generate TOC HTML separately (using original content for TOC structure)
-  const tocProcessor = await unified()
-    .use(remarkParse)
-    .use(remarkToc, { tight: true, ordered: false })
-    .use(remarkRehype)
-    .use(rehypeStringify)
-    .process(content)
-  const tocHtml = String(tocProcessor)
+  // Extract TOC from the main HTML content
+  // remarkToc inserts TOC where <!-- toc --> was placed
+  // Look for TOC by finding ul with anchor links to headings
+  let tableOfContents = ''
   
-  // Extract TOC from the processed content
-  const tocMatch = tocHtml.match(/<ul>[\s\S]*?<\/ul>/)
-  const tableOfContents = tocMatch ? tocMatch[0] : ''
+  // Extract TOC from the generated HTML content
+  // remarkToc generates a "Table of Contents" heading followed by a UL
+  const tocHeadingMatch = htmlContent.match(/<h2[^>]*>Table of Contents<\/h2>([\s\S]*?)(?=<h[1-6]|$)/i)
+  
+  if (tocHeadingMatch) {
+    // Look for the UL that follows the Table of Contents heading
+    const tocContentMatch = tocHeadingMatch[1].match(/<ul[^>]*>[\s\S]*?<\/ul>/)
+    
+    if (tocContentMatch) {
+      tableOfContents = tocContentMatch[0]
+      // Remove both the TOC heading and the UL from main content
+      const fullTocPattern = /<h2[^>]*>Table of Contents<\/h2>\s*<ul[^>]*>[\s\S]*?<\/ul>/i
+      htmlContent = htmlContent.replace(fullTocPattern, '')
+    } else {
+      // Remove just the TOC heading if no list follows (no headings to generate TOC from)
+      htmlContent = htmlContent.replace(/<h2[^>]*>Table of Contents<\/h2>\s*/i, '')
+    }
+  } else {
+    // Fallback: try to find any UL with heading links (direct TOC without heading)
+    const tocPattern = /<ul[^>]*>[\s\S]*?<li[^>]*><a[^>]*href="#[^"]*"[^>]*>[\s\S]*?<\/ul>/
+    const tocMatch = htmlContent.match(tocPattern)
+    
+    if (tocMatch) {
+      tableOfContents = tocMatch[0]
+      htmlContent = htmlContent.replace(tocMatch[0], '')
+    }
+  }
   
   // Generate excerpt from content (first 160 characters of plain text)
   const plainTextContent = content.replace(/#{1,6}\s+/g, '').replace(/\*\*(.+?)\*\*/g, '$1').replace(/\*(.+?)\*/g, '$1')

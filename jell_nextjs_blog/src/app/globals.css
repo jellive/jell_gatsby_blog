@@ -547,17 +547,29 @@ a:active {
 
 .index-post-list-wrap {
   width: 100%;
-  margin-left: 18rem; /* Account for bio sidebar width (14rem + 2rem margin + 2rem spacing) */
+  display: flex;
+  justify-content: center; /* 중앙 정렬을 위한 flex 설정 */
+  padding: 0 1rem; /* 좌우 패딩 추가 */
+}
+
+/* 데스크톱에서 Bio sidebar가 있을 때는 약간 우측으로 조정 */
+@media screen and (min-width: 1120px) {
+  .index-post-list-wrap {
+    padding-left: calc(18rem + 1rem); /* Bio width + 여백 고려한 중앙 정렬 */
+    padding-right: 1rem;
+  }
 }
 
 @media screen and (max-width: 1119px) {
   .index-post-list-wrap {
-    margin-left: 0;
+    padding: 0 1rem; /* 태블릿/모바일에서는 완전한 중앙 정렬 */
   }
 }
 
 .index-post-list-wrap > div {
-  margin: 0 auto;
+  max-width: 720px; /* detail 페이지와 동일한 최대 너비 */
+  width: 100%;
+  margin: 0 auto; /* 중앙 정렬 강화 */
 }
 
 /* Blog Post Template Styles - matching original post.scss */

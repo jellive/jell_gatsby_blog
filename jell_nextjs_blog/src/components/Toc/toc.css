@@ -69,12 +69,14 @@
   position: fixed;
   top: 0;
   right: 0;
-  margin-top: var(--header-height, 6rem);
+  padding-top: calc(var(--header-height, 6rem) + 1rem); /* 헤더 높이 + 추가 여백 */
   opacity: 0.4;
   z-index: 5;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  padding: 1rem 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 1rem;
   border-radius: 8px 0 0 8px;
   border-left: 1px solid #e1e5e9;
   border-top: 1px solid #e1e5e9;
@@ -98,12 +100,12 @@
 /* Mobile responsive adjustments */
 @media screen and (max-width: 720px) {
   .toc.outside {
-    top: var(--header-height-m, 4rem);
+    padding-top: calc(var(--header-height-m, 4rem) + 0.75rem); /* 태블릿에서는 조금 더 작은 여백 */
   }
 }
 
 @media screen and (max-width: 559px) {
   .toc.outside {
-    top: var(--header-height-s, 2.5rem);
+    padding-top: calc(var(--header-height-s, 2.5rem) + 0.5rem); /* 모바일에서는 최소 여백 */
   }
 }
