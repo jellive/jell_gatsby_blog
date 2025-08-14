@@ -1,8 +1,8 @@
 .toc {
   font-family: var(--font-nanum-gothic, 'Nanum Gothic', sans-serif);
   font-size: 0.8rem;
-  max-width: 220px;
-  min-width: 220px;
+  max-width: 300px;
+  min-width: 280px;
   max-height: calc(100vh - var(--header-height, 6rem));
   overflow: auto;
   transition: 0.3s;
@@ -10,7 +10,25 @@
 }
 
 .toc::-webkit-scrollbar {
-  display: none;
+  width: 4px;
+}
+
+.toc::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.toc::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  transition: background 0.2s ease;
+}
+
+.toc:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.toc::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .toc ul {
@@ -30,7 +48,7 @@
 .toc a {
   opacity: 0.4;
   transition: all 0.2s ease;
-  max-width: calc(220px - 1.5rem);
+  max-width: calc(280px - 1.5rem);
   display: block;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -68,7 +86,7 @@
 .toc.outside {
   position: fixed;
   top: 0;
-  right: 0;
+  right: 8px;
   padding-top: calc(var(--header-height, 6rem) + 1rem); /* 헤더 높이 + 추가 여백 */
   opacity: 0.4;
   z-index: 5;
@@ -77,13 +95,11 @@
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-bottom: 1rem;
-  border-radius: 8px 0 0 8px;
-  border-left: 1px solid #e1e5e9;
-  border-top: 1px solid #e1e5e9;
-  border-bottom: 1px solid #e1e5e9;
+  border-radius: 8px;
+  border: 1px solid #e1e5e9;
 }
 
-@media screen and (max-width: 1160px) {
+@media screen and (max-width: 1300px) {
   .toc.outside {
     display: none;
   }

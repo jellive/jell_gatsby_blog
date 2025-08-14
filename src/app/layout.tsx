@@ -67,7 +67,7 @@ export default function RootLayout({
           <main>{children}</main>
           <footer>
             © {new Date().getFullYear()} {siteConfig.author}, Built with{' '}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
+            <a href="https://nextjs.org">Next.js</a>
           </footer>
         </div>
         

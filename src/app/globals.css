@@ -269,7 +269,7 @@ a:active {
   align-items: center;
   grid-column: 2;
   justify-self: center;
-  transform: translateX(-3rem);
+  transform: translateX(-1rem);
 }
 
 #nav ul {
@@ -1491,11 +1491,6 @@ button:focus-visible,
   .blog-post {
     padding: 0.75rem;
   }
-  
-  .back-navigation {
-    position: sticky;
-    top: var(--header-height-s);
-  }
 }
 
 /* High contrast mode improvements */
@@ -1744,9 +1739,6 @@ button:focus-visible,
   border-bottom: 1px solid #e1e5e9;
   padding: 0.75rem 0;
   margin-bottom: 1.5rem;
-  position: sticky;
-  top: var(--header-height);
-  z-index: 10;
 }
 
 .back-nav-container {
@@ -1831,9 +1823,6 @@ button:focus-visible,
 
 /* Mobile responsive */
 @media screen and (max-width: 720px) {
-  .back-navigation {
-    top: var(--header-height-m);
-  }
   
   .back-nav-container {
     flex-direction: column;
@@ -1848,7 +1837,6 @@ button:focus-visible,
 
 @media screen and (max-width: 559px) {
   .back-navigation {
-    top: var(--header-height-s);
     padding: 0.5rem 0;
   }
   
