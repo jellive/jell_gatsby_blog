@@ -1,8 +1,8 @@
 import { getAllPosts } from '@/lib/markdown'
-import SearchInteractive from '@/components/SearchInteractive'
+import SearchPage from '@/components/SearchPage'
 
-export default async function SearchPage() {
+export default async function Search() {
   const allPosts = await getAllPosts()
 
-  return <SearchInteractive allPosts={allPosts} />
+  return <SearchPage allPosts={allPosts} />
 }

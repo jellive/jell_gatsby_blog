@@ -5,9 +5,9 @@ import { Metadata } from 'next'
 import { siteConfig } from '@/lib/config'
 
 interface TagPageProps {
-  params: {
+  params: Promise<{
     tag: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -18,7 +18,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
-  const decodedTag = decodeURIComponent(params.tag)
+  const resolvedParams = await params
+  const decodedTag = decodeURIComponent(resolvedParams.tag)
   const posts = await getPostsByTag(decodedTag)
   
   if (posts.length === 0) {
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
     openGraph: {
       title: `${decodedTag} 태그 | ${siteConfig.title}`,
       description: `${decodedTag} 태그가 포함된 블로그 포스트 ${posts.length}개`,
-      url: `${siteConfig.siteUrl}/tags/${params.tag}`,
+      url: `${siteConfig.siteUrl}/tags/${resolvedParams.tag}`,
       siteName: siteConfig.title,
       locale: 'ko_KR',
       type: 'website',
@@ -47,13 +48,14 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
       site: '@jellive',
     },
     alternates: {
-      canonical: `${siteConfig.siteUrl}/tags/${params.tag}`,
+      canonical: `${siteConfig.siteUrl}/tags/${resolvedParams.tag}`,
     },
   }
 }
 
 export default async function TagPage({ params }: TagPageProps) {
-  const decodedTag = decodeURIComponent(params.tag)
+  const resolvedParams = await params
+  const decodedTag = decodeURIComponent(resolvedParams.tag)
   const posts = await getPostsByTag(decodedTag)
   
   if (posts.length === 0) {

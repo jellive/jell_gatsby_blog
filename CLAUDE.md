@@ -6,6 +6,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal blog built with Gatsby v5, transitioning from Next.js back to Gatsby. The site serves Korean and English content across multiple categories including development, cycling, chat/personal, gaming, and notices. The blog is deployed on Netlify and uses a customized version of the "Borderless" theme.
 
+## Design System Principles
+
+**IMPORTANT**: This project follows the **Modern Tech Blog Design System** as defined in [`design-system.md`](./design-system.md). This design system serves as the primary reference for all design decisions and component implementations.
+
+### Core Design Principles
+- **Developer Experience First**: Prioritize code-first content, syntax highlighting, and technical documentation
+- **Modern Typography**: SF Pro Display font stack with optimized scale system for readability
+- **Accessible Color System**: #3b82f6 primary with comprehensive neutral palette and semantic colors
+- **Component-Based Architecture**: Atomic design with TypeScript strict typing and accessibility built-in
+- **Performance Optimized**: 4px base spacing system, CSS variables, and hardware-accelerated theme switching
+
+### Implementation Guidelines
+- **Always reference** `design-system.md` before implementing new components or features
+- **Use the defined color tokens** rather than arbitrary color values
+- **Follow the typography scale** for consistent text sizing across the blog
+- **Implement responsive breakpoints** as specified (640px/768px/1024px/1280px)
+- **Maintain accessibility standards** with proper ARIA labels and semantic markup
+
+When making design decisions or implementing new features, consult the design system documentation first to ensure consistency with the established patterns and principles.
+
 ## Development Commands
 
 ### Core Development
@@ -117,6 +137,391 @@ This is a personal blog built with Gatsby v5, transitioning from Next.js back to
 - Minimal Redux store for path and size state
 - Wrapped at root level via `wrap-with-provider.tsx`
 - Used primarily for component state coordination
+
+## Shadcn UI Integration Guide
+
+This section provides comprehensive guidance for using Shadcn UI components and maintaining design consistency throughout the blog.
+
+### Overview
+
+The blog uses [Shadcn UI](https://ui.shadcn.com/) as the primary component library, providing modern, accessible, and customizable React components built on top of Radix UI primitives and styled with Tailwind CSS.
+
+### Core Dependencies
+
+```json
+{
+  "class-variance-authority": "^0.7.0",
+  "clsx": "^2.0.0", 
+  "tailwind-merge": "^2.0.0",
+  "lucide-react": "^0.400.0",
+  "@radix-ui/react-slot": "^1.0.2",
+  "tailwindcss-animate": "^1.0.7"
+}
+```
+
+### Configuration Files
+
+#### `components.json`
+Central configuration file for Shadcn UI component generation:
+
+```json
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "src/app/globals.css",
+    "baseColor": "slate",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui"
+  }
+}
+```
+
+#### Utility Function (`src/lib/utils.ts`)
+Essential utility for combining Tailwind classes:
+
+```typescript
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```
+
+### Available Components
+
+#### Core UI Components
+- **Button** (`@/components/ui/button`) - Primary interactive element with variants
+- **Card** (`@/components/ui/card`) - Content containers with header, content, footer
+- **Badge** (`@/components/ui/badge`) - Labels and tags with category-specific styling
+
+#### Migrated Components
+- **ThemeToggle** - Dark/light/system mode toggle with custom animations
+- **Header** - Navigation with Shadcn Button components
+- **PostList** - Card-based blog post listing with responsive grid
+- **BackNavigation** - Breadcrumb navigation with glass morphism effects
+
+### Theme System Integration
+
+#### CSS Variables
+The theme system uses CSS custom properties for consistent color management:
+
+```css
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  /* ... additional color tokens */
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  /* ... dark mode overrides */
+}
+```
+
+#### Tailwind Configuration
+Extended configuration preserves Korean typography while adding Shadcn utilities:
+
+```javascript
+fontFamily: {
+  'nanum-gothic': ['Nanum Gothic', 'sans-serif'],
+  'noto-serif-kr': ['Noto Serif KR', 'serif'],
+  'raleway': ['Raleway', 'sans-serif'],
+},
+keyframes: {
+  "spin-slow": {
+    from: { transform: "rotate(0deg)" },
+    to: { transform: "rotate(360deg)" },
+  },
+  "bounce-subtle": {
+    "0%, 100%": { transform: "translateY(0px)" },
+    "50%": { transform: "translateY(-2px)" },
+  },
+}
+```
+
+### Component Usage Patterns
+
+#### Button Component
+```tsx
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+
+// Basic usage
+<Button variant="default" size="sm">Click me</Button>
+
+// With custom styling
+<Button
+  variant="ghost"
+  size="icon"
+  className={cn(
+    "hover:scale-110 transition-all duration-200",
+    "border border-border/30 rounded-md"
+  )}
+>
+  <Icon />
+</Button>
+
+// Available variants: default, destructive, outline, secondary, ghost, link
+// Available sizes: default, sm, lg, icon
+```
+
+#### Card Component
+```tsx
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+
+<Card className="group transition-all duration-300 hover:shadow-lg">
+  <CardHeader className="pb-3">
+    <CardTitle className="text-xl font-semibold">
+      Title Here
+    </CardTitle>
+  </CardHeader>
+  <CardContent className="pt-0">
+    <p className="text-muted-foreground">Content here</p>
+  </CardContent>
+</Card>
+```
+
+#### Badge Component
+```tsx
+import { Badge } from '@/components/ui/badge'
+
+// Category-specific styling
+const getBadgeVariant = (tag: string) => {
+  if (tag.includes('development')) return "default"
+  if (tag.includes('bicycle')) return "secondary"
+  if (tag.includes('game')) return "outline"
+  return "secondary"
+}
+
+<Badge variant={getBadgeVariant(tag)} className="text-xs hover:scale-105">
+  #{tag}
+</Badge>
+```
+
+### Development Best Practices
+
+#### Component Creation Workflow
+1. **Use Shadcn CLI**: `npx shadcn-ui@latest add [component-name]`
+2. **Customize in place**: Modify generated components in `src/components/ui/`
+3. **Apply design tokens**: Use CSS variables and theme-aware classes
+4. **Maintain accessibility**: Preserve Radix UI accessibility features
+5. **Test responsive behavior**: Verify across all screen sizes
+
+#### Styling Guidelines
+```tsx
+// ✅ Good: Use cn() utility for class composition
+<div className={cn(
+  "base-styles",
+  "responsive:styles",
+  "interaction:states",
+  condition && "conditional-styles"
+)}>
+
+// ✅ Good: Use semantic color tokens
+<div className="bg-card text-card-foreground border-border">
+
+// ✅ Good: Maintain responsive patterns
+<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+
+// ❌ Avoid: Direct color values
+<div className="bg-white text-black border-gray-200">
+
+// ❌ Avoid: Complex inline conditionals
+<div className={`complex ${condition ? 'one thing' : 'another'} more`}>
+```
+
+#### Animation and Interaction
+```tsx
+// Custom animations defined in tailwind.config.js
+<Button className="animate-spin-slow"> // 10s rotation
+<div className="animate-bounce-subtle">  // Subtle bounce effect
+
+// Hover and transition patterns
+<Card className={cn(
+  "transition-all duration-300",
+  "hover:shadow-lg hover:-translate-y-1",
+  "hover:border-border"
+)}>
+```
+
+### Migration Patterns
+
+#### From Legacy CSS to Shadcn
+```tsx
+// Before: Legacy CSS classes
+<button className="back-button custom-styles">
+
+// After: Shadcn Button with equivalent styling
+<Button
+  variant="ghost" 
+  size="sm"
+  className={cn(
+    "gap-2 text-muted-foreground hover:text-foreground",
+    "transition-all duration-200 hover:bg-accent/50"
+  )}
+>
+```
+
+#### Component Wrapper Pattern
+```tsx
+// For complex components, create wrapper that preserves original API
+interface PostListProps {
+  posts: Post[]
+}
+
+const PostList = ({ posts }: PostListProps) => {
+  return (
+    <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
+      {posts.map(post => (
+        <Card key={post.slug} className="group">
+          {/* Shadcn components with legacy logic */}
+        </Card>
+      ))}
+    </div>
+  )
+}
+```
+
+### Performance Considerations
+
+#### Bundle Optimization
+- **Tree Shaking**: Only import used components
+- **CSS Variables**: Runtime theme switching without CSS-in-JS overhead
+- **Tailwind Purging**: Unused classes automatically removed
+- **Component Composition**: Prefer composition over large monolithic components
+
+#### Responsive Performance
+```tsx
+// ✅ Efficient: CSS-only responsive behavior
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+// ✅ Efficient: Use transform for hover effects
+<Card className="hover:-translate-y-1 transition-transform">
+
+// ❌ Avoid: JavaScript-based responsive logic where CSS can handle
+```
+
+### Accessibility Standards
+
+#### WCAG Compliance
+- **Keyboard Navigation**: All interactive elements accessible via keyboard
+- **Screen Reader Support**: Proper ARIA labels and semantic markup
+- **Color Contrast**: Meets WCAG AA standards (4.5:1 ratio)
+- **Focus Management**: Visible focus indicators and logical tab order
+
+#### Implementation Examples
+```tsx
+// Proper ARIA labels and semantics
+<Button 
+  aria-label="뒤로 가기"
+  title="뒤로 가기"
+  onClick={handleBack}
+>
+  <Fa icon={faAngleLeft} />
+  <span>Back</span>
+</Button>
+
+// Navigation landmarks
+<nav role="navigation" aria-label="Breadcrumb">
+  <Button variant="link" asChild>
+    <Link href="/">Home</Link>
+  </Button>
+</nav>
+```
+
+### Customization Guidelines
+
+#### Extending Components
+```tsx
+// Create variant extensions
+const buttonVariants = cva(
+  "base-classes",
+  {
+    variants: {
+      intent: {
+        primary: "primary-styles",
+        secondary: "secondary-styles",
+        // Add custom variants
+        blog: "blog-specific-styles"
+      }
+    }
+  }
+)
+
+// Usage
+<Button variant="blog">Blog Action</Button>
+```
+
+#### Theme Customization
+```css
+/* Add custom CSS variables for blog-specific colors */
+:root {
+  --blog-accent: 200 100% 50%;
+  --blog-secondary: 150 50% 60%;
+}
+
+/* Use in components */
+.blog-component {
+  background-color: hsl(var(--blog-accent));
+}
+```
+
+### Quality Assurance
+
+#### Testing Checklist
+- [ ] All components render without TypeScript errors
+- [ ] Responsive behavior verified across screen sizes
+- [ ] Dark/light theme switching works correctly
+- [ ] Accessibility standards met (keyboard navigation, screen readers)
+- [ ] Performance impact acceptable (bundle size, runtime)
+- [ ] Korean typography preserved and functional
+- [ ] Legacy component functionality maintained
+
+#### Common Issues and Solutions
+
+1. **TypeScript Errors**
+   - Issue: `asChild` prop not supported on all components
+   - Solution: Wrap with component instead of using `asChild`
+
+2. **CSS Conflicts**
+   - Issue: Legacy CSS overriding Shadcn styles
+   - Solution: Use higher specificity or remove conflicting styles
+
+3. **Theme Variables**
+   - Issue: CSS variables not updating in dark mode
+   - Solution: Verify `:root` and `.dark` definitions in globals.css
+
+### Development Commands
+
+```bash
+# Add new Shadcn component
+npx shadcn-ui@latest add [component-name]
+
+# Update existing components
+npx shadcn-ui@latest add [component-name] --overwrite
+
+# Check component status
+npx shadcn-ui@latest list
+
+# Build and verify
+npm run build
+npm run type-check
+```
 
 ## Blog Writing Guide
 

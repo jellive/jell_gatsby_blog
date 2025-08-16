@@ -1,51 +1,596 @@
 /* ========================================
-   Original Gatsby Blog Styles Restoration
+   Modern Tech Blog Design System
    ======================================== */
 
-/* CSS Custom Properties for variables */
-:root {
-  /* Colors */
-  --font-color-0: #24292e;
-  
-  /* Header Heights */
-  --header-height: 6rem;
-  --header-height-m: 4rem;
-  --header-height-s: 2.5rem;
-  
-  /* Media Query Breakpoints */
-  --break-l: 1119px;
-  --break-m: 839px;
-  --break-s: 559px;
-  --break-toc: 1160px;
-  
-  /* Font Family Variables */
-  --font-nanum-gothic: 'Nanum Gothic', sans-serif;
-  --font-noto-serif-kr: 'Noto Serif KR', serif;
-  --font-raleway: 'Raleway', sans-serif;
+/* ===== Pretendard Font Configuration ===== */
+@font-face {
+  font-family: 'Pretendard Variable';
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* Typography.js base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Modern Tech Blog CSS Variables ===== */
+@layer base {
+  :root {
+    /* ===== Shadcn UI Variables (Modern Tech Light Theme) ===== */
+    --background: #ffffff;                      /* Pure white */
+    --foreground: #0f172a;                      /* Primary text color */
+    --card: #f8fafc;                           /* Surface color */
+    --card-foreground: #0f172a;               /* Text on cards */
+    --popover: #f8fafc;                        /* Surface popover */
+    --popover-foreground: #0f172a;             /* Text on popover */
+    --primary: #3b82f6;                        /* Blue 500 - Primary */
+    --primary-foreground: #ffffff;             /* White text on blue */
+    --secondary: #64748b;                      /* Slate 500 - Secondary */
+    --secondary-foreground: #0f172a;           /* Primary text on secondary */
+    --muted: #f8fafc;                          /* Surface muted */
+    --muted-foreground: #64748b;              /* Secondary text */
+    --accent: #06b6d4;                         /* Cyan 500 - Accent */
+    --accent-foreground: #0f172a;              /* Primary text on accent */
+    --destructive: #ef4444;                    /* Red 500 - Error */
+    --destructive-foreground: #ffffff;         /* White text on red */
+    --border: #e2e8f0;                         /* Light border */
+    --input: #e2e8f0;                          /* Light input border */
+    --ring: #3b82f6;                           /* Blue focus ring */
+    --radius: 8px;                             /* Modern border radius */
+    
+    /* ===== Modern Tech Semantic Colors ===== */
+    --success: #10b981;                        /* Emerald 500 */
+    --warning: #f59e0b;                        /* Amber 500 */
+    --error: #ef4444;                          /* Red 500 */
+    --info: #06b6d4;                           /* Cyan 500 */
+    
+    /* ===== Modern Tech Background Variations ===== */
+    --bg-primary: #ffffff;                     /* Pure white */
+    --bg-secondary: #f8fafc;                   /* Surface color */
+    --bg-tertiary: #f1f5f9;                    /* Hover background */
+    --bg-elevated: #f8fafc;                    /* Cards, modals */
+    --bg-glass: rgba(248, 250, 252, 0.95);    /* Backdrop blur */
+    
+    /* ===== Modern Tech Text Variations ===== */
+    --text-primary: #0f172a;                   /* Primary text */
+    --text-secondary: #64748b;                 /* Secondary text */
+    --text-tertiary: #94a3b8;                  /* Muted text */
+    
+    /* ===== Pretendard Font Variables ===== */
+    --font-korean: "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-code: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, Monaco, monospace;
+    --font-english: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    
+    /* ===== Medium Style Typography ===== */
+    --font-serif: "Noto Serif KR", "Apple SD Gothic Neo", Charter, Georgia, "Times New Roman", serif;
+    --font-display: var(--font-korean);
+    --text-muted: #cbd5e1;                     /* Very light text */
+    
+    /* ===== Korean Typography Optimization (Pretendard) ===== */
+    --pretendard-body-size: 16px;
+    --pretendard-body-line-height: 1.65;
+    --pretendard-body-letter-spacing: -0.005em;
+    --pretendard-body-word-break: keep-all;
+    
+    /* Typography Hierarchy (Pretendard) */
+    --pretendard-h1-size: 2.2em;
+    --pretendard-h1-weight: 700;
+    --pretendard-h2-size: 1.8em;
+    --pretendard-h2-weight: 600;
+    --pretendard-h3-size: 1.4em;
+    --pretendard-h3-weight: 600;
+    --pretendard-h4-size: 1.2em;
+    --pretendard-h4-weight: 500;
+    
+    /* Mobile Responsive (Pretendard) */
+    --pretendard-mobile-size: 15px;
+    --pretendard-mobile-line-height: 1.6;
+    
+    /* Dark Mode Adjustments (Pretendard) */
+    --pretendard-dark-weight: 450;
+    --pretendard-dark-letter-spacing: 0.01em;
+    
+    /* ===== Medium Style Typography Variables ===== */
+    --medium-body-size: 21px;
+    --medium-body-line-height: 1.75;
+    --medium-body-letter-spacing: -0.003em;
+    --medium-paragraph-spacing: 32px;
+    
+    /* Medium Heading Scale */
+    --medium-title-size: 42px;
+    --medium-title-weight: 800;
+    --medium-title-line-height: 1.15;
+    --medium-subtitle-size: 22px;
+    --medium-subtitle-weight: 400;
+    --medium-h2-size: 32px;
+    --medium-h2-weight: 700;
+    --medium-h3-size: 24px;
+    --medium-h3-weight: 600;
+    
+    /* Medium Layout - 실제 Medium 크기 (1.5배 확장) */
+    --medium-content-width: 1092px; /* Original 728px * 1.5 = 1092px */
+    --medium-content-padding: 24px;
+    --medium-vertical-rhythm: 32px;
+    
+    /* ===== Modern Tech Border Variations ===== */
+    --border-light: #e2e8f0;                   /* Light border */
+    --border-medium: #cbd5e1;                  /* Medium border */
+    --border-strong: #64748b;                  /* Dark border */
+    --border-focus: #3b82f6;                   /* Blue for focus */
+    
+    /* ===== Modern Tech Interactive States ===== */
+    --hover-bg: #f1f5f9;                       /* Slate 100 hover */
+    --active-bg: #e2e8f0;                      /* Slate 200 active */
+    --disabled-bg: #f8fafc;                    /* Surface disabled */
+    --follow-button: #3b82f6;                  /* Blue primary button */
+    --follow-button-text: #ffffff;             /* White button text */
+    
+    /* ===== Modern Tech Code Highlighting ===== */
+    --code-bg: #f8fafc;                        /* Surface background */
+    --code-border: #e2e8f0;                    /* Light border */
+    --code-text: #334155;                      /* Slate 700 text */
+    --code-comment: #64748b;                   /* Secondary text */
+    --code-keyword: #0f172a;                   /* Primary text bold */
+    --code-string: #059669;                    /* Emerald 600 */
+    --code-number: #dc2626;                    /* Red 600 */
+    --code-function: #3b82f6;                  /* Blue 500 */
+    
+    /* ===== Legacy Color System (Modern Tech) ===== */
+    --color-primary: #3b82f6;         /* Blue 500 */
+    --color-primary-light: #60a5fa;   /* Blue 400 */
+    --color-primary-dark: #2563eb;    /* Blue 600 */
+    --color-accent: #06b6d4;          /* Cyan 500 accent */
+    --color-accent-light: #22d3ee;    /* Cyan 400 */
+    
+    /* Neutral Colors (Modern Tech Style) */
+    --color-text-primary: #0f172a;    /* Primary text */
+    --color-text-secondary: #64748b;  /* Secondary text */
+    --color-text-tertiary: #94a3b8;   /* Muted text */
+    --color-text-muted: #cbd5e1;      /* Very light text */
+    
+    /* Background Colors (Modern Tech Style) */
+    --color-bg-primary: #ffffff;      /* Pure white */
+    --color-bg-secondary: #f8fafc;    /* Surface color */
+    --color-bg-tertiary: #f1f5f9;     /* Hover background */
+    --color-bg-elevated: #f8fafc;     /* Card backgrounds */
+    
+    /* Border Colors (Modern Tech Style) */
+    --color-border-light: #e2e8f0;    /* Light border */
+    --color-border-medium: #cbd5e1;   /* Medium border */
+    --color-border-dark: #64748b;     /* Dark border */
+    
+    /* Shadow System (Medium Compatible) */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    /* Status Colors (Modern Tech Style) */
+    --color-success: #10b981;         /* Emerald 500 */
+    --color-warning: #f59e0b;         /* Amber 500 */
+    --color-error: #ef4444;           /* Red 500 */
+    --color-info: #06b6d4;            /* Cyan 500 */
+    
+    /* Interactive States (Modern Tech Style) */
+    --color-hover-bg: #f1f5f9;        /* Slate 100 hover */
+    --color-active-bg: #e2e8f0;       /* Slate 200 active */
+    
+    /* Legacy Colors (for backward compatibility) */
+    --font-color-0: var(--color-text-primary);
+  
+  /* ===== Layout Variables (Modern Tech Design System) ===== */
+  
+  /* Header Heights - Modern Tech Style */
+  --header-height: 56px;          /* Modern fixed header height matching design tokens */
+  --header-height-m: 56px;        /* Consistent height on mobile */
+  --header-height-s: 56px;        /* Consistent height on small mobile */
+  
+  /* Media Query Breakpoints - Modern Tech Style */
+  --break-desktop: 1280px;        /* xl: Desktop breakpoint */
+  --break-tablet: 1024px;         /* lg: Tablet landscape */
+  --break-mobile: 768px;          /* md: Tablet portrait */
+  --break-mobile-sm: 640px;       /* sm: Mobile landscape */
+  --break-l: 1119px;              /* Legacy support */
+  --break-m: 839px;               /* Legacy support */
+  --break-s: 559px;               /* Legacy support */
+  --break-toc: 1160px;            /* Legacy support */
+  
+  /* Container and Layout Widths - Modern Tech Style */
+  --container-max-width: 1200px;  /* Modern container max width */
+  --sidebar-width: 240px;         /* Modern sidebar width */
+  --main-width: 800px;            /* Modern main content width (optimal reading) */
+  --aside-width: 240px;           /* Modern aside width */
+  --navigation-width: 240px;      /* Modern navigation width */
+  
+  /* Spacing Scale - Modern Tech Style (4px base unit) */
+  --space-1: 4px;                /* Base unit */
+  --space-2: 8px;                /* 2 units */
+  --space-3: 12px;               /* 3 units */
+  --space-4: 16px;               /* 4 units */
+  --space-5: 20px;               /* 5 units */
+  --space-6: 24px;               /* 6 units (content padding) */
+  --space-8: 32px;               /* 8 units */
+  --space-10: 40px;              /* 10 units */
+  --space-12: 48px;              /* 12 units (section margin) */
+  --space-16: 64px;              /* 16 units */
+  --space-20: 80px;              /* 20 units */
+  --space-24: 96px;              /* 24 units */
+  
+  /* Legacy spacing aliases */
+  --space-xs: var(--space-2);    /* 8px */
+  --space-sm: var(--space-3);    /* 12px */
+  --space-md: var(--space-4);    /* 16px */
+  --space-lg: var(--space-6);    /* 24px */
+  --space-xl: var(--space-8);    /* 32px */
+  --space-xxl: var(--space-12);  /* 48px */
+  
+  /* Border Radius - Modern Tech Style */
+  --radius-sm: 4px;              /* Small radius */
+  --radius-md: 6px;              /* Medium radius */
+  --radius-lg: 8px;              /* Large radius (default) */
+  --radius-xl: 12px;             /* Extra large radius */
+  --radius-pill: 999px;          /* Pill button radius */
+  --radius-tag: 6px;             /* Tag radius */
+  
+  /* Font Family Variables - Modern Tech Style with Korean Support */
+  --font-sans: 'SF Pro Display', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  --font-mono: 'SF Mono', 'Monaco', 'Consolas', 'Noto Sans Mono', monospace;
+  --font-serif: 'SF Pro Display', 'Noto Serif KR', Georgia, serif;
+  
+  /* Legacy font aliases for backward compatibility */
+  --font-system: var(--font-sans);
+  --font-nanum-gothic: var(--font-sans);
+  --font-noto-serif-kr: var(--font-serif);
+  --font-raleway: var(--font-sans);
+  
+  /* Typography Scale - Modern Tech Style */
+  --font-size-caption: 12px;     /* 0.75rem - Labels, metadata */
+  --font-size-small: 14px;       /* 0.875rem - Captions */
+  --font-size-body: 16px;        /* 1rem - Regular text */
+  --font-size-body-lg: 18px;     /* 1.125rem - Lead text */
+  --font-size-h4: 20px;          /* 1.25rem - Component headers */
+  --font-size-h3: 24px;          /* 1.5rem - Subsection headers */
+  --font-size-h2: 30px;          /* 1.875rem - Section headers */
+  --font-size-h1: 36px;          /* 2.25rem - Page titles */
+  --font-size-display: 48px;     /* 3rem - Hero titles */
+  
+  --line-height-caption: 16px;   /* 1rem */
+  --line-height-small: 20px;     /* 1.25rem */
+  --line-height-body: 24px;      /* 1.5rem */
+  --line-height-body-lg: 28px;   /* 1.75rem */
+  --line-height-h4: 28px;        /* 1.75rem */
+  --line-height-h3: 32px;        /* 2rem */
+  --line-height-h2: 36px;        /* 2.25rem */
+  --line-height-h1: 40px;        /* 2.5rem */
+  --line-height-display: 52px;   /* 3.25rem */
+  
+  --font-weight-light: 300;      /* Light - Large headings */
+  --font-weight-regular: 400;    /* Regular - Body text */
+  --font-weight-medium: 500;     /* Medium - Buttons, emphasis */
+  --font-weight-semibold: 600;   /* Semibold - Headings */
+  --font-weight-bold: 700;       /* Bold - Strong emphasis */
+  
+  /* Component Sizes - Modern Tech Style */
+  --article-image-size: 120px;   /* Modern article image size */
+  --avatar-small: 24px;          /* Modern small avatar */
+  --avatar-medium: 32px;         /* Modern medium avatar */
+  --avatar-large: 48px;          /* Modern large avatar */
+  --button-height: 44px;         /* Modern button height */
+  --input-height: 44px;          /* Modern input height */
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ===== Theme System - Class-based & System Preference ===== */
+
+/* Dark Mode - Class-based (highest priority) */
+.dark {
+  /* ===== Shadcn UI Variables (Modern Tech Dark Theme) ===== */
+  --background: #0f172a;                      /* Slate 900 dark background */
+  --foreground: #f8fafc;                      /* Slate 50 white text */
+  --card: #1e293b;                           /* Slate 800 dark cards */
+  --card-foreground: #f8fafc;                /* Slate 50 text on cards */
+  --popover: #1e293b;                        /* Slate 800 popover */
+  --popover-foreground: #f8fafc;             /* Slate 50 text on popover */
+  --primary: #60a5fa;                        /* Blue 400 for dark mode */
+  --primary-foreground: #0f172a;             /* Slate 900 text on blue */
+  --secondary: #64748b;                      /* Slate 500 secondary */
+  --secondary-foreground: #f8fafc;           /* Slate 50 text on secondary */
+  --muted: #1e293b;                          /* Slate 800 muted */
+  --muted-foreground: #64748b;              /* Slate 500 muted text */
+  --accent: #22d3ee;                         /* Cyan 400 accent */
+  --accent-foreground: #0f172a;              /* Slate 900 text on accent */
+  --destructive: #f87171;                    /* Red 400 */
+  --destructive-foreground: #f8fafc;         /* Slate 50 text on red */
+  --border: #334155;                         /* Slate 700 border */
+  --input: #334155;                          /* Slate 700 input border */
+  --ring: #60a5fa;                           /* Blue 400 focus ring */
+  --radius: 8px;                             /* Modern border radius */
+  
+  /* ===== Modern Tech Semantic Colors (Dark) ===== */
+  --success: #34d399;                        /* Emerald 400 */
+  --warning: #fbbf24;                        /* Amber 400 */
+  --error: #f87171;                          /* Red 400 */
+  --info: #22d3ee;                           /* Cyan 400 */
+  
+  /* ===== Modern Tech Background Variations (Dark) ===== */
+  --bg-primary: #0f172a;                     /* Slate 900 background */
+  --bg-secondary: #1e293b;                   /* Slate 800 surface */
+  --bg-tertiary: #334155;                    /* Slate 700 hover */
+  --bg-elevated: #1e293b;                    /* Slate 800 cards, modals */
+  --bg-glass: rgba(30, 41, 59, 0.95);       /* Backdrop blur */
+  
+  /* ===== Modern Tech Text Variations (Dark) ===== */
+  --text-primary: #f8fafc;                   /* Slate 50 text */
+  --text-secondary: #64748b;                 /* Slate 500 secondary */
+  --text-tertiary: #94a3b8;                  /* Slate 400 muted */
+  --text-muted: #cbd5e1;                     /* Slate 300 very light */
+  
+  /* ===== Dark Mode Pretendard Adjustments ===== */
+  --pretendard-body-weight: var(--pretendard-dark-weight);
+  --pretendard-body-letter-spacing: var(--pretendard-dark-letter-spacing);
+  
+  /* ===== Modern Tech Border Variations (Dark) ===== */
+  --border-light: #334155;                   /* Slate 700 border */
+  --border-medium: #475569;                  /* Slate 600 medium border */
+  --border-strong: #64748b;                  /* Slate 500 strong border */
+  --border-focus: #60a5fa;                   /* Blue 400 for focus */
+  
+  /* ===== Modern Tech Interactive States (Dark) ===== */
+  --hover-bg: #334155;                       /* Slate 700 hover */
+  --active-bg: #475569;                      /* Slate 600 active */
+  --disabled-bg: #1e293b;                    /* Slate 800 disabled */
+  --follow-button: #60a5fa;                  /* Blue 400 button */
+  --follow-button-text: #0f172a;             /* Slate 900 button text */
+  
+  /* ===== Modern Tech Code Highlighting (Dark) ===== */
+  --code-bg: #1e293b;                        /* Slate 800 background */
+  --code-border: #334155;                    /* Slate 700 border */
+  --code-text: #e2e8f0;                      /* Slate 200 text */
+  --code-comment: #64748b;                   /* Slate 500 comments */
+  --code-keyword: #f8fafc;                   /* Slate 50 keywords bold */
+  --code-string: #34d399;                    /* Emerald 400 strings */
+  --code-number: #f87171;                    /* Red 400 numbers */
+  --code-function: #60a5fa;                  /* Blue 400 functions */
+  
+  /* ===== Legacy Dark Mode Variables (Modern Tech Style) ===== */
+  --color-primary: #60a5fa;         /* Blue 400 for dark mode */
+  --color-primary-light: #93c5fd;   /* Blue 300 */
+  --color-primary-dark: #3b82f6;    /* Blue 500 */
+  --color-accent: #22d3ee;          /* Cyan 400 accent */
+  --color-accent-light: #67e8f9;    /* Cyan 300 */
+  
+  /* Neutral Colors (Dark Modern Tech Style) */
+  --color-text-primary: #f8fafc;    /* Slate 50 text */
+  --color-text-secondary: #64748b;  /* Slate 500 secondary */
+  --color-text-tertiary: #94a3b8;   /* Slate 400 muted */
+  --color-text-muted: #cbd5e1;      /* Slate 300 very light */
+  
+  /* Background Colors (Dark Modern Tech Style) */
+  --color-bg-primary: #0f172a;      /* Slate 900 background */
+  --color-bg-secondary: #1e293b;    /* Slate 800 surface */
+  --color-bg-tertiary: #334155;     /* Slate 700 hover */
+  --color-bg-elevated: #1e293b;     /* Slate 800 card backgrounds */
+  
+  /* Border Colors (Dark Modern Tech Style) */
+  --color-border-light: #334155;    /* Slate 700 border */
+  --color-border-medium: #475569;   /* Slate 600 medium border */
+  --color-border-dark: #64748b;     /* Slate 500 strong border */
+  
+  /* Status Colors (Dark Modern Tech Style) */
+  --color-success: #34d399;         /* Emerald 400 */
+  --color-warning: #fbbf24;         /* Amber 400 */
+  --color-error: #f87171;           /* Red 400 */
+  --color-info: #22d3ee;            /* Cyan 400 */
+  
+  /* Interactive States (Dark Modern Tech Style) */
+  --color-hover-bg: #334155;        /* Slate 700 hover */
+  --color-active-bg: #475569;       /* Slate 600 active */
+  
+  /* Legacy Colors (for backward compatibility) */
+  --font-color-0: var(--color-text-primary);
+}
+
+/* Light Mode - Class-based (explicit) */
+:root.light {
+  /* Light mode uses the Modern Tech variables already defined above */
+  --color-primary: #3b82f6;           /* Blue 500 */
+  --color-accent: #06b6d4;            /* Cyan 500 accent */
+  
+  /* Neutral Colors (Modern Tech Style) */
+  --color-text-primary: #0f172a;      /* Slate 900 text */
+  --color-text-secondary: #64748b;    /* Slate 500 secondary */
+  --color-text-tertiary: #94a3b8;     /* Slate 400 muted */
+  --color-text-muted: #cbd5e1;        /* Slate 300 very light */
+  
+  /* Background Colors (Modern Tech Style) */
+  --color-bg-primary: #ffffff;        /* Pure white */
+  --color-bg-secondary: #f8fafc;      /* Slate 50 surface */
+  --color-bg-tertiary: #f1f5f9;       /* Slate 100 hover */
+  --color-bg-elevated: #f8fafc;       /* Slate 50 card backgrounds */
+  
+  /* Border Colors (Modern Tech Style) */
+  --color-border-light: #e2e8f0;      /* Slate 200 light border */
+  --color-border-medium: #cbd5e1;     /* Slate 300 medium border */
+  --color-border-dark: #64748b;       /* Slate 500 dark border */
+  
+  /* Interactive States (Modern Tech Style) */
+  --color-hover-bg: #f1f5f9;          /* Slate 100 hover */
+  --color-active-bg: #e2e8f0;         /* Slate 200 active */
+  
+  /* Status Colors (Modern Tech Style) */
+  --color-success: #10b981;           /* Emerald 500 */
+  --color-warning: #f59e0b;           /* Amber 500 */
+  --color-error: #ef4444;             /* Red 500 */
+  --color-info: #06b6d4;              /* Cyan 500 */
+  
+  /* Legacy Colors (for backward compatibility) */
+  --font-color-0: var(--color-text-primary);
+}
+
+/* System Preference Fallback (when no class is set) */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    /* Modern Tech Dark Theme Colors for System Preference */
+    --color-primary: #60a5fa;           /* Blue 400 for dark mode */
+    --color-accent: #22d3ee;            /* Cyan 400 accent */
+    
+    /* Neutral Colors (Dark Modern Tech Style) */
+    --color-text-primary: #f8fafc;      /* Slate 50 text */
+    --color-text-secondary: #64748b;    /* Slate 500 secondary */
+    --color-text-tertiary: #94a3b8;     /* Slate 400 muted */
+    --color-text-muted: #cbd5e1;        /* Slate 300 very light */
+    
+    /* Background Colors (Dark Modern Tech Style) */
+    --color-bg-primary: #0f172a;        /* Slate 900 background */
+    --color-bg-secondary: #1e293b;      /* Slate 800 surface */
+    --color-bg-tertiary: #334155;       /* Slate 700 hover */
+    --color-bg-elevated: #1e293b;       /* Slate 800 card backgrounds */
+    
+    /* Border Colors (Dark Modern Tech Style) */
+    --color-border-light: #334155;      /* Slate 700 border */
+    --color-border-medium: #475569;     /* Slate 600 medium border */
+    --color-border-dark: #64748b;       /* Slate 500 strong border */
+    
+    /* Interactive States (Dark Modern Tech Style) */
+    --color-hover-bg: #334155;          /* Slate 700 hover */
+    --color-active-bg: #475569;         /* Slate 600 active */
+    
+    /* Status Colors (Dark Modern Tech Style) */
+    --color-success: #34d399;           /* Emerald 400 */
+    --color-warning: #fbbf24;           /* Amber 400 */
+    --color-error: #f87171;             /* Red 400 */
+    --color-info: #22d3ee;              /* Cyan 400 */
+    
+    /* Legacy Colors (for backward compatibility) */
+    --font-color-0: var(--color-text-primary);
+  }
+}
+
+} /* End @layer base */
+
+/* ===== Pretendard Dark Mode Typography Adjustments ===== */
+.dark body {
+  background-color: var(--background);
+  font-weight: var(--pretendard-dark-weight);
+  letter-spacing: var(--pretendard-dark-letter-spacing);
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  font-weight: calc(var(--pretendard-h1-weight) - 50);
+  letter-spacing: var(--pretendard-dark-letter-spacing);
+}
+
+.dark .blog-post-title {
+  font-weight: calc(var(--pretendard-h1-weight) - 50);
+  letter-spacing: var(--pretendard-dark-letter-spacing);
+}
+
+.dark .blog-post-content {
+  font-weight: var(--pretendard-dark-weight);
+  letter-spacing: var(--pretendard-dark-letter-spacing);
+}
+
+.dark .blog-post-content h1 {
+  font-weight: calc(var(--pretendard-h1-weight) - 50);
+}
+
+.dark .blog-post-content h2 {
+  font-weight: calc(var(--pretendard-h2-weight) - 50);
+}
+
+.dark .blog-post-content h3 {
+  font-weight: calc(var(--pretendard-h3-weight) - 50);
+}
+
+.dark .blog-post-content h4 {
+  font-weight: calc(var(--pretendard-h4-weight) - 50);
+}
+
+/* ===== Medium Style Dark Mode Adjustments ===== */
+.dark .blog-post-title {
+  font-weight: calc(var(--medium-title-weight) - 100);
+  color: var(--text-primary);
+}
+
+.dark .blog-post-content p {
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.dark .blog-post-content blockquote {
+  color: var(--text-secondary);
+  border-left-color: var(--border-medium);
+}
+
+/* ===== Pretendard Mobile Responsive Typography ===== */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: var(--pretendard-mobile-size);
+    line-height: var(--pretendard-mobile-line-height);
+  }
+  
+  h1 {
+    font-size: calc(var(--pretendard-h1-size) * 0.85);
+  }
+  
+  h2 {
+    font-size: calc(var(--pretendard-h2-size) * 0.9);
+  }
+  
+  h3 {
+    font-size: calc(var(--pretendard-h3-size) * 0.95);
+  }
+}
+
+/* Dark mode post-list styling now handled by Shadcn UI */
+
+/* Dark mode header styling */
+:root.dark #Header {
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+
+@media screen and (min-width: 1120px) {
+  :root.dark #Header {
+    background-color: transparent;
+    border-bottom: none;
+  }
+}
+
+/* Typography.js base styles - Modern Tech Design System */
 html {
-  font-family: var(--font-noto-serif-kr);
-  font-size: 16px;
-  line-height: 1.666;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  font-family: var(--font-noto-serif-kr);
-  font-weight: normal;
+  font-family: var(--font-korean);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--pretendard-body-size);
+  line-height: var(--pretendard-body-line-height);
+  letter-spacing: var(--pretendard-body-letter-spacing);
+  word-break: var(--pretendard-body-word-break);
   word-wrap: break-word;
   font-kerning: normal;
-  color: var(--font-color-0);
+  color: var(--color-text-primary);
+  background-color: var(--background);
   overscroll-behavior-y: none;
+  transition: background-color var(--transition-normal);
 }
 
-/* Headings use Nanum Gothic */
+/* Headings use Pretendard Typography Hierarchy with Korean optimization */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-nanum-gothic);
+  font-family: var(--font-korean);
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -54,8 +599,36 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 0;
   padding-top: 0;
   color: inherit;
-  font-weight: bold;
   text-rendering: optimizeLegibility;
+  word-break: var(--pretendard-body-word-break);
+}
+
+h1 {
+  font-size: var(--pretendard-h1-size);
+  font-weight: var(--pretendard-h1-weight);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: var(--pretendard-h2-size);
+  font-weight: var(--pretendard-h2-weight);
+  line-height: 1.3;
+  letter-spacing: -0.008em;
+}
+
+h3 {
+  font-size: var(--pretendard-h3-size);
+  font-weight: var(--pretendard-h3-weight);
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+}
+
+h4 {
+  font-size: var(--pretendard-h4-size);
+  font-weight: var(--pretendard-h4-weight);
+  line-height: 1.5;
+  letter-spacing: -0.003em;
 }
 
 /* Links */
@@ -68,25 +641,23 @@ a:active {
   color: var(--font-color-0);
 }
 
-/* Layout Structure - matching original layout.scss */
+/* Layout Structure - Medium Design System with Proper Header Spacing */
 #content {
   display: flex;
   flex-direction: column;
-  padding-top: var(--header-height);
+  padding-top: calc(var(--header-height) + 32px); /* Increased padding to prevent header overlap - now 56px + 32px = 88px */
   min-height: 100vh;
 }
 
-@media screen and (max-width: 839px) {
-  #content {
-    padding-top: var(--header-height-m);
-  }
+/* Blog Post 컨테이너 추가 여백 */
+.blog-post-container {
+  margin-top: 24px;
+  margin-bottom: 2rem;
+  position: relative;
 }
 
-@media screen and (max-width: 559px) {
-  #content {
-    padding-top: var(--header-height-s);
-  }
-}
+/* Consistent header height means consistent padding-top */
+/* No responsive changes needed - 56px height on all devices */
 
 #content main {
   flex-grow: 1;
@@ -100,82 +671,41 @@ a:active {
   opacity: 0.8;
 }
 
-/* Scroll to top button - matching original */
-#top {
-  display: flex;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  user-select: none;
-  width: 2.5rem;
-  height: 2.5rem;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  border-radius: 100%;
-  margin-right: 2rem;
-  margin-bottom: 2.2rem;
-  transition: 0.5s;
-  cursor: pointer;
-}
+/* ScrollToTop component now uses Shadcn UI Button - legacy CSS removed */
 
-@media screen and (max-width: 559px) {
-  #top {
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-  }
-}
-
-#top svg {
-  color: #6a737d;
-  margin: 0;
-  opacity: 0.5;
-  transition: all 0.2s;
-  width: 2rem;
-  height: 2rem;
-}
-
-#top:hover svg {
-  opacity: 1;
-}
-
-/* Header Styles - matching original header.scss */
+/* Header Styles - Medium Design System */
 #Header {
   display: grid;
   grid-template-columns: auto 1fr auto;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 1001; /* Highest z-index - appears above all other elements */
   width: 100%;
-  align-items: flex-end;
-  gap: 1rem;
-  padding: 0 2rem 1rem 2rem;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 0 var(--space-lg);
   height: var(--header-height);
   max-height: var(--header-height);
   transition: top 0.3s;
   transition-delay: 0.2s;
-  background-color: transparent;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border-light);
   user-select: none;
+  backdrop-filter: blur(8px); /* Add backdrop blur for better visual separation */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Add subtle shadow for better layer separation */
 }
 
-@media screen and (max-width: 1119px) {
+/* Consistent header height across all screen sizes */
+@media screen and (max-width: 1024px) {
   #Header {
-    background-color: #fff;
-    padding: 0 1.5rem 1rem 1.5rem;
+    padding: 0 var(--space-md);
   }
 }
 
-@media screen and (max-width: 839px) {
+@media screen and (max-width: 768px) {
   #Header {
-    padding: 0 1rem 0.5rem 1rem;
-    height: var(--header-height-m);
-  }
-}
-
-@media screen and (max-width: 559px) {
-  #Header {
-    height: var(--header-height-s);
-    padding: 0 1rem 0.25rem 1rem;
+    padding: 0 var(--space-md);
+    /* Height remains 56px on all devices */
   }
 }
 
@@ -248,7 +778,7 @@ a:active {
   margin: 0;
   font-size: 1.6rem;
   font-weight: normal;
-  font-family: var(--font-raleway);
+  font-family: var(--font-korean);
   opacity: 0.9;
   transition: 0.3s;
 }
@@ -315,11 +845,12 @@ a:active {
 }
 
 #nav li span {
-  font-family: var(--font-raleway);
+  font-family: var(--font-korean);
 }
 
 #nav li .search-wrap,
-#nav li .tag-wrap {
+#nav li .tag-wrap,
+#nav li .theme-wrap {
   display: flex;
   align-items: center;
   height: 1.5rem;
@@ -330,11 +861,21 @@ a:active {
   margin-top: 3px;
 }
 
-/* Ensure search button is always visible */
+#nav li .theme-wrap {
+  height: auto;
+  margin-top: -2px;
+}
+
+/* Ensure navigation buttons are always visible */
 #nav li .search-wrap,
-#nav li .tag-wrap {
+#nav li .tag-wrap,
+#nav li .theme-wrap {
   display: flex !important;
   align-items: center !important;
+}
+
+#nav li .search-wrap,
+#nav li .tag-wrap {
   height: 1.5rem !important;
 }
 
@@ -368,265 +909,81 @@ a:active {
   transition: opacity 0.5s, visibility 0.5s;
   user-select: none;
   pointer-events: none;
-  font-family: var(--font-raleway);
+  font-family: var(--font-korean);
 }
 
-/* Bio Styles - matching original bio.scss */
-.bio {
-  min-width: 14rem;
-  width: 14rem;
-  margin-left: 2rem;
-  font-family: var(--font-nanum-gothic);
-}
-
-.bio p,
-.bio span {
-  display: block;
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.bio-item {
-  margin-bottom: 0.8rem;
-  display: flex;
-  font-size: 0.9rem;
-}
-
-.bio-item.name,
-.bio-item.company,
-.bio-item.location {
-  cursor: default;
-}
-
-.bio-item .icon-wrap {
-  display: inline-flex;
-  font-size: 0.9rem;
-  margin-right: 0.4rem;
-  min-width: 1.1rem;
-  width: 1.1rem;
-  justify-content: center;
-}
-
-.bio-item .icon-wrap svg {
-  margin-top: 1px;
-  color: #6a737d;
-  opacity: 0.9;
-  width: 0.9rem;
-  height: 0.9rem;
-}
-
-.bio-item > :nth-child(2) {
-  line-height: 1.1;
-  overflow: hidden;
-}
-
-.bio .comment {
-  margin-bottom: 1rem;
-}
-
-.bio .social {
-  margin-left: 0.2rem;
-  margin-top: 2rem;
-}
-
-.bio .social a {
-  display: inline-flex;
-  font-size: 1.3rem;
-  margin-right: 0.5rem;
-}
-
-.bio .social svg {
-  color: #6a737d;
-  transition: color 0.3s;
-  width: 1.3rem;
-  height: 1.3rem;
-}
-
-.bio .social a:hover .rss { color: rgb(226, 143, 72); }
-.bio .social a:hover .linkedin { color: #0077b5; }
-.bio .social a:hover .facebook { color: #1877f2; }
-.bio .social a:hover .instagram { color: #e4405f; }
-.bio .social a:hover .github { color: #181717; }
+/* Bio component now uses Shadcn UI Card and Badge components - legacy CSS removed */
 
 /* PostList Styles - matching original postList.scss */
-.post-list {
-  max-width: 640px;
-}
+/* PostList component now uses Shadcn UI Card and Badge components - legacy CSS removed */
 
-.post-list ul,
-.post-list li,
-.post-list h2 {
-  margin: 0;
-}
-
-.post-list li {
-  list-style: none;
-}
-
-.post-list .post {
-  display: flex;
-  flex-direction: column;
-  max-width: inherit;
-  padding: 3rem 1rem;
-}
-
-@media screen and (max-width: 839px) {
-  .post-list .post {
-    padding: 2rem 1rem;
-  }
-}
-
-.post-list .post:nth-child(1) {
-  padding-top: 0;
-  border-top: 0;
-}
-
-.post-list .post > * > * {
-  margin-bottom: 0.25rem;
-}
-
-@media screen and (max-width: 839px) {
-  .post-list .post > * > * {
-    margin-bottom: 0.2rem;
-  }
-}
-
-@media screen and (max-width: 559px) {
-  .post-list .post > * > * {
-    margin-bottom: 0.1rem;
-  }
-}
-
-.post-list .title {
-  font-size: 1.3rem;
-}
-
-@media screen and (max-width: 839px) {
-  .post-list .title {
-    font-size: 1.1rem;
-  }
-}
-
-.post-list .info {
-  display: flex;
-  color: rgba(0, 0, 0, 0.54);
-  font-size: 0.9rem;
-}
-
-.post-list .date {
-  display: block;
-  white-space: nowrap;
-}
-
-.post-list .info-dot {
-  margin: 0 0.25rem;
-}
-
-.post-list .tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.post-list .tag-list .tag {
-  margin: 0;
-  margin-right: 0.5rem;
-}
-
-.post-list .tag-list .tag span a {
-  color: rgba(0, 0, 0, 0.54);
-}
-
-.post-list .excerpt {
-  display: -webkit-box;
-  overflow: hidden;
-  color: rgba(0, 0, 0, 0.74);
-  max-width: calc(640px - 2rem);
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  font-size: 0.95rem;
-}
-
-@media screen and (max-width: 839px) {
-  .post-list .excerpt {
-    font-size: 0.82rem;
-  }
-}
-
-/* Index Page Layout - matching original index.scss */
+/* Index Page Layout - Medium Design System 3-Column Layout */
 .index-wrap {
-  display: flex;
+  display: grid;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  grid-template-columns: 1fr; /* Mobile: single column */
+  gap: var(--grid-gap);
+  min-height: 100vh;
 }
 
-@media screen and (max-width: 1119px) {
+/* Tablet Layout: 2 columns (sidebar + main) */
+@media screen and (min-width: 1024px) {
   .index-wrap {
-    margin-top: 0.5rem;
+    grid-template-columns: var(--sidebar-width) 1fr;
   }
 }
 
-@media screen and (max-width: 839px) {
+/* Desktop Layout: 3 columns (sidebar + main + aside) */
+@media screen and (min-width: 1200px) {
   .index-wrap {
-    margin-top: 1rem;
+    grid-template-columns: var(--sidebar-width) var(--main-width) var(--aside-width);
   }
 }
 
+/* Legacy bio positioning - deprecated in favor of grid */
 .index-wrap .bio {
-  position: fixed;
-  top: var(--header-height);
-  left: 0;
-  transition: all 0.2s;
-  transition-timing-function: ease-in-out;
-  transition-delay: 0.1s;
+  /* Legacy styles removed - now handled by grid layout */
 }
 
-@media screen and (max-width: 1119px) {
-  .index-wrap .bio {
-    display: none;
-  }
-}
-
+/* Legacy post list wrapper - simplified for grid layout */
 .index-post-list-wrap {
   width: 100%;
-  display: flex;
-  justify-content: center; /* 중앙 정렬을 위한 flex 설정 */
-  padding: 0 1rem; /* 좌우 패딩 추가 */
-}
-
-/* 데스크톱에서 Bio sidebar가 있을 때는 약간 우측으로 조정 */
-@media screen and (min-width: 1120px) {
-  .index-post-list-wrap {
-    padding-left: calc(18rem + 1rem); /* Bio width + 여백 고려한 중앙 정렬 */
-    padding-right: 1rem;
-  }
-}
-
-@media screen and (max-width: 1119px) {
-  .index-post-list-wrap {
-    padding: 0 1rem; /* 태블릿/모바일에서는 완전한 중앙 정렬 */
-  }
+  /* Simplified - grid now handles positioning */
 }
 
 .index-post-list-wrap > div {
-  max-width: 720px; /* detail 페이지와 동일한 최대 너비 */
   width: 100%;
-  margin: 0 auto; /* 중앙 정렬 강화 */
+  /* Grid handles max-width constraints */
 }
 
-/* Blog Post Template Styles - matching original post.scss */
+/* Blog Post Template Styles - Medium Layout with TOC Space */
 .blog-post-container {
   margin-bottom: 2rem;
+  position: relative;
 }
 
 .blog-post-container > div,
 .blog-post-container .ad {
-  max-width: 720px;
+  max-width: var(--medium-content-width);
   margin: 0 auto;
+  padding: 0 var(--medium-content-padding);
 }
 
 .blog-post {
-  padding: 1rem;
+  padding: var(--medium-content-padding);
+  max-width: var(--medium-content-width);
+  margin: 0 auto;
+}
+
+/* TOC가 있을 때 적절한 간격 유지 (1280px 이상에서만) */
+@media screen and (min-width: 1280px) {
+  .blog-post-container {
+    /* TOC 공간을 위한 여백 처리 - 컨테이너 너비는 유지하고 TOC가 오버레이 */
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 .blog-post a {
@@ -634,70 +991,17 @@ a:active {
 }
 
 .blog-post-title {
-  font-size: 1.8rem;
-  margin: 0;
-  font-family: var(--font-noto-serif-kr);
-  line-height: 1.5;
-  word-break: keep-all;
+  font-size: var(--medium-title-size);
+  font-weight: var(--medium-title-weight);
+  margin: 48px 0 var(--medium-vertical-rhythm) 0;
+  font-family: var(--font-display);
+  line-height: var(--medium-title-line-height);
+  letter-spacing: -0.015em;
+  word-break: var(--pretendard-body-word-break);
+  color: var(--text-primary);
 }
 
-.blog-post-info {
-  margin-top: 1rem;
-  color: rgba(0, 0, 0, 0.64);
-  display: flex;
-  font-family: var(--font-nanum-gothic);
-  font-size: 0.84rem;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.blog-post-info > span:nth-child(2) {
-  margin: 0 0.5rem;
-}
-
-.blog-post-tag-list {
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  flex-grow: 1;
-}
-
-.blog-post-tag {
-  list-style: none;
-  margin: 0;
-  margin-right: 0.3rem;
-}
-
-.blog-post-tag a {
-  color: rgba(0, 0, 0, 0.64);
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.blog-post-tag a:hover {
-  color: rgba(0, 0, 0, 0.84);
-}
-
-.blog-post-inside-toc {
-  align-self: flex-end;
-  display: none;
-}
-
-@media screen and (max-width: 1160px) {
-  .blog-post-inside-toc {
-    display: inline-block;
-  }
-}
-
-.toc-button {
-  cursor: pointer;
-  color: #6a737d;
-  opacity: 0.5;
-}
-
-.toc-button:hover {
-  opacity: 0.9;
-}
+/* Post meta info now uses Shadcn UI Badge components - legacy CSS cleaned up */
 
 .series-list {
   margin: 0;
@@ -705,7 +1009,7 @@ a:active {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  font-family: var(--font-nanum-gothic);
+  font-family: var(--font-korean);
   font-size: 0.9rem;
 }
 
@@ -728,13 +1032,27 @@ a:active {
   opacity: 0.7;
 }
 
+/* Inside TOC wrapper - minimal styling for modernized component */
 .inside-toc-wrap {
-  display: flex;
-  justify-content: flex-end;
+  margin-top: 1rem;
 }
 
 .blog-post-content {
-  margin-top: 3rem;
+  margin-top: var(--medium-vertical-rhythm);
+  font-family: var(--font-serif);
+  font-size: var(--medium-body-size);
+  line-height: var(--medium-body-line-height);
+  letter-spacing: var(--medium-body-letter-spacing);
+  word-break: var(--pretendard-body-word-break);
+  color: var(--text-primary);
+}
+
+.blog-post-content p {
+  margin-bottom: var(--medium-paragraph-spacing);
+  font-family: var(--font-serif);
+  font-size: var(--medium-body-size);
+  line-height: var(--medium-body-line-height);
+  letter-spacing: var(--medium-body-letter-spacing);
 }
 
 .blog-post-content h1,
@@ -743,129 +1061,111 @@ a:active {
 .blog-post-content h4,
 .blog-post-content h5,
 .blog-post-content h6 {
-  font-family: var(--font-noto-serif-kr);
+  font-family: var(--font-display);
+  word-break: var(--pretendard-body-word-break);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
 }
 
 .blog-post-content h1 {
-  margin-top: 4rem;
+  font-size: var(--medium-h2-size);
+  font-weight: var(--medium-h2-weight);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-top: calc(var(--medium-vertical-rhythm) * 2);
+  margin-bottom: var(--medium-vertical-rhythm);
 }
 
 .blog-post-content h2 {
-  margin-top: 3rem;
+  font-size: var(--medium-h2-size);
+  font-weight: var(--medium-h2-weight);
+  line-height: 1.25;
+  letter-spacing: -0.008em;
+  margin-top: calc(var(--medium-vertical-rhythm) * 1.5);
+  margin-bottom: calc(var(--medium-vertical-rhythm) * 0.75);
 }
 
 .blog-post-content h3 {
-  margin-top: 2rem;
+  font-size: var(--medium-h3-size);
+  font-weight: var(--medium-h3-weight);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  margin-top: calc(var(--medium-vertical-rhythm) * 1.25);
+  margin-bottom: calc(var(--medium-vertical-rhythm) * 0.5);
+}
+
+.blog-post-content h4 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.003em;
+  margin-top: var(--medium-vertical-rhythm);
+  margin-bottom: calc(var(--medium-vertical-rhythm) * 0.5);
+}
+
+.blog-post-content ul,
+.blog-post-content ol {
+  margin: var(--medium-paragraph-spacing) 0;
+  padding-left: 24px;
 }
 
 .blog-post-content li {
-  margin-bottom: 0.25rem;
+  margin-bottom: 12px;
+  font-family: var(--font-serif);
+  font-size: var(--medium-body-size);
+  line-height: var(--medium-body-line-height);
 }
 
-.blog-post-content li ul {
-  margin-top: 0.25rem;
+.blog-post-content li ul,
+.blog-post-content li ol {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+.blog-post-content blockquote {
+  margin: calc(var(--medium-vertical-rhythm) * 1.5) 0;
+  padding: 0 32px;
+  border-left: 3px solid var(--border-medium);
+  font-style: italic;
+  font-size: calc(var(--medium-body-size) * 1.05);
+  color: var(--text-secondary);
 }
 
 .blog-post-content code {
-  font-family: 'Nanum Gothic Coding', monospace;
+  font-family: var(--font-code);
 }
 
-.social-share {
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  padding: 1.5rem 0;
-  border-top: 1px solid #e1e5e9;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+/* ===== TOC Selected State (Enhanced Visual) ===== */
+.toc-content a.toc-active {
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  background-color: hsl(var(--primary) / 0.15) !important;
+  border-left: 3px solid var(--primary) !important;
+  padding-left: 8px !important;
+  margin-left: -3px !important;
+  transform: translateX(4px) !important;
+  box-shadow: 0 2px 8px hsl(var(--primary) / 0.2) !important;
 }
 
-.social-share-title {
-  font-family: var(--font-nanum-gothic);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #6a737d;
-  margin: 0;
-  text-align: center;
+.toc-content a.toc-active:hover {
+  opacity: 1 !important;
+  background-color: hsl(var(--primary) / 0.2) !important;
+  transform: translateX(6px) !important;
 }
 
-.social-share-list {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  flex-wrap: wrap;
+/* TOC 일반 링크 스타일 향상 */
+.toc-content a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
 }
 
-.social-share-item {
-  margin: 0;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.toc-content a:not(.toc-active):hover {
+  transform: translateX(2px) !important;
+  background-color: hsl(var(--secondary) / 0.8) !important;
 }
 
-.social-share-item > div {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  border-radius: 50%;
-  padding: 2px;
-}
-
-.social-share-item > div:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.social-share-item circle {
-  fill: #6a737d;
-  transition: all 0.3s ease;
-}
-
-.social-share-item:hover.email > div circle {
-  fill: #7f7f7f;
-}
-
-.social-share-item:hover.facebook > div circle {
-  fill: #1877f2;
-}
-
-.social-share-item:hover.twitter > div circle {
-  fill: #1da1f2;
-}
-
-.social-share-item:hover.linkedin > div circle {
-  fill: #0077b5;
-}
-
-.social-share-item:hover.reddit > div circle {
-  fill: #ff4500;
-}
-
-.social-share-item:hover.pocket > div circle {
-  fill: #ef3f56;
-}
-
-/* Mobile responsive adjustments */
-@media screen and (max-width: 559px) {
-  .social-share {
-    margin-top: 2rem;
-    padding: 1rem 0;
-  }
-  
-  .social-share-list {
-    gap: 0.5rem;
-  }
-  
-  .social-share-title {
-    font-size: 0.8rem;
-  }
-}
+/* SocialShare component now uses Shadcn UI Card and Button components - legacy CSS removed */
 
 .ad {
   margin-top: 2rem;
@@ -881,7 +1181,7 @@ a:active {
   align-items: center;
   justify-content: center;
   user-select: none;
-  font-family: var(--font-nanum-gothic);
+  font-family: var(--font-korean);
 }
 
 .ad-dev > :nth-child(1),
@@ -903,75 +1203,12 @@ a:active {
   padding: 1rem;
 }
 
-/* TOC (Table of Contents) Styles - matching original toc.scss */
-.toc {
-  font-family: var(--font-nanum-gothic);
-  font-size: 0.8rem;
-  max-width: 220px;
-  min-width: 220px;
-  max-height: calc(100vh - var(--header-height));
-  overflow: auto;
-  transition: 0.3s;
-  padding-right: 0.5rem;
+/* TOC component styling - ensure proper positioning */
+.toc-container.fixed {
+  top: 104px !important; /* 56px header + 48px reading progress */
 }
 
-.toc::-webkit-scrollbar {
-  display: none;
-}
-
-.toc ul {
-  margin-top: 0;
-  margin-left: 0.5rem;
-}
-
-.toc ul li {
-  list-style: none;
-  margin: 0;
-}
-
-.toc p {
-  margin: 0;
-}
-
-.toc a {
-  opacity: 0.4;
-  transition: 0.2s;
-  max-width: calc(220px - 1.5rem);
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.toc a:hover {
-  opacity: 1 !important;
-}
-
-.toc a img {
-  display: none !important;
-}
-
-.toc.outside {
-  position: fixed;
-  top: 0;
-  right: 0;
-  margin-top: var(--header-height);
-  opacity: 0.4;
-}
-
-@media screen and (max-width: 1160px) {
-  .toc.outside {
-    display: none;
-  }
-}
-
-.toc.outside:hover {
-  opacity: 0.9;
-}
-
-.toc.inside a {
-  text-decoration: none;
-}
+/* TOC component now uses Shadcn UI Card structure - legacy CSS removed */
 
 /* Syntax Highlighting - Prism.js Theme */
 /* Based on the original Gatsby blog's code highlighting */
@@ -980,7 +1217,7 @@ pre[class*="language-"] {
   color: #24292e;
   background: none;
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-  font-family: 'Nanum Gothic Coding', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-family: var(--font-code);
   font-size: 1em;
   text-align: left;
   white-space: pre;
@@ -1110,177 +1347,18 @@ pre[class*="language-"] {
 .blog-post-content code:not([class*="language-"]) {
   background: rgba(27, 31, 35, 0.05);
   border-radius: 3px;
-  font-family: 'Nanum Gothic Coding', monospace;
+  font-family: var(--font-code);
   font-size: 0.85em;
   padding: 0.2em 0.4em;
   color: #d73a49;
 }
 
 /* Tags Page Styles - matching original tags.scss */
-#tags {
-  max-width: 720px;
-  margin: 1rem auto;
-}
+/* Tags page styles now handled by Shadcn UI components */
 
-#tags .tag-list-wrap {
-  margin-bottom: 5rem;
-}
+/* TagsInteractive component now uses Shadcn UI Card and Badge components - legacy CSS removed */
 
-@media screen and (max-width: 559px) {
-  #tags .tag-list-wrap {
-    margin-bottom: 3rem;
-  }
-}
-
-#tags .tag-list-wrap ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0;
-  list-style: none;
-  padding: 0;
-}
-
-#tags .tag-list-wrap li {
-  display: flex;
-  align-items: center;
-  margin: 0.25rem 0.5rem;
-  list-style: none;
-}
-
-@media screen and (max-width: 559px) {
-  #tags .tag-list-wrap li {
-    margin: 0 0.4rem;
-  }
-}
-
-#tags .tag-list-wrap span {
-  font-family: var(--font-nanum-gothic);
-  cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.2s;
-}
-
-#tags .tag-list-wrap span:hover {
-  opacity: 0.9 !important;
-}
-
-#tags .tag-list-wrap span a {
-  color: inherit;
-  text-decoration: none;
-}
-
-#tags .post-list {
-  margin: 0 auto;
-}
-
-/* Tags page intro section */
-.tags-page-intro {
-  max-width: 720px;
-  margin: 3rem auto 2rem auto;
-  padding: 2rem;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.02);
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.tags-page-intro h2 {
-  font-family: var(--font-nanum-gothic);
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0 0 1rem 0;
-  color: var(--font-color-0);
-}
-
-.tags-page-intro p {
-  font-family: var(--font-noto-serif-kr);
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #6a737d;
-  margin: 0.5rem 0;
-}
-
-@media screen and (max-width: 720px) {
-  .tags-page-intro {
-    margin: 2rem 1rem;
-    padding: 1.5rem;
-  }
-  
-  .tags-page-intro h2 {
-    font-size: 1.3rem;
-  }
-  
-  .tags-page-intro p {
-    font-size: 0.9rem;
-  }
-}
-
-/* Search Page Styles - matching original search.scss */
-#Search {
-  max-width: 720px;
-  margin: 0 auto;
-  font-family: var(--font-nanum-gothic);
-}
-
-#Search .search-inner-wrap .input-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4rem;
-  padding: 1rem;
-}
-
-@media screen and (max-width: 559px) {
-  #Search .search-inner-wrap .input-wrap {
-    margin-bottom: 2rem;
-  }
-}
-
-#Search .search-inner-wrap .input-wrap input {
-  all: unset;
-  margin: 0 1rem;
-  margin-top: 0.1rem;
-  font-size: 1.2rem;
-  text-align: center;
-  min-width: 200px;
-}
-
-#Search .search-inner-wrap .input-wrap .search-toggle {
-  display: flex;
-  flex-direction: row;
-  font-size: 0.8rem;
-}
-
-@media screen and (max-width: 559px) {
-  #Search .search-inner-wrap .input-wrap .search-toggle {
-    flex-direction: column;
-  }
-}
-
-#Search .search-inner-wrap .input-wrap .search-toggle span {
-  cursor: pointer;
-  user-select: none;
-  transition: 0.2s;
-  opacity: 0.8;
-  white-space: nowrap;
-}
-
-#Search .search-inner-wrap .input-wrap .search-toggle span:nth-child(1) {
-  margin-right: 0.5rem;
-}
-
-#Search .search-inner-wrap .post-list {
-  margin: 0 auto;
-}
-
-#Search .search-inner-wrap .no-result {
-  display: block;
-  text-align: center;
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  color: #6a737d;
-}
+/* SearchInteractive component now uses Shadcn UI Input, Toggle, and Card components - legacy CSS removed */
 
 /* ========================================
    Responsive Image Styles 
@@ -1416,7 +1494,6 @@ pre[class*="language-"] {
 
 /* Better button focus states */
 button:focus-visible,
-.back-button:focus-visible,
 .toc-button:focus-visible {
   outline: 2px solid #4285f4;
   outline-offset: 2px;
@@ -1440,9 +1517,15 @@ button:focus-visible,
   top: 6px;
 }
 
-/* Enhanced mobile touch targets */
-@media screen and (max-width: 720px) {
-  .back-button,
+/* Enhanced mobile touch targets - Medium Style Mobile Optimization */
+@media screen and (max-width: 768px) {
+  /* Mobile Container */
+  .max-w-container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  
+  /* Mobile Touch Targets */
   .toc-button,
   .social-share-item > div {
     min-height: 44px;
@@ -1452,50 +1535,172 @@ button:focus-visible,
     justify-content: center;
   }
   
-  /* Improved touch spacing */
+  /* Mobile Spacing */
   .social-share-list {
-    gap: 1rem;
+    gap: var(--space-md);
   }
   
-  /* Better mobile typography */
+  /* Mobile Typography - Medium Style Optimized */
+  .blog-post-container > div,
+  .blog-post-container .ad {
+    padding: 0 16px;
+  }
+  
+  .blog-post {
+    padding: 16px;
+  }
+  
   .blog-post-title {
-    font-size: 1.6rem;
-    line-height: 1.4;
+    font-size: calc(var(--medium-title-size) * 0.8);
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    margin-bottom: 24px;
+  }
+  
+  .blog-post-content {
+    font-size: 18px;
+    line-height: 1.65;
+  }
+  
+  .blog-post-content p {
+    font-size: 18px;
+    line-height: 1.65;
+    margin-bottom: 24px;
   }
   
   .blog-post-content h1 {
-    font-size: 1.5rem;
+    font-size: calc(var(--medium-h2-size) * 0.85);
+    line-height: 1.25;
+    margin-top: 48px;
+    margin-bottom: 24px;
   }
   
   .blog-post-content h2 {
-    font-size: 1.3rem;
+    font-size: calc(var(--medium-h2-size) * 0.85);
+    line-height: 1.25;
+    margin-top: 40px;
+    margin-bottom: 20px;
   }
   
   .blog-post-content h3 {
-    font-size: 1.15rem;
+    font-size: calc(var(--medium-h3-size) * 0.9);
+    line-height: 1.3;
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
+  
+  /* Mobile Grid - Single column layout */
+  .grid-cols-medium-3,
+  .grid-cols-medium-2 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Mobile Header Adjustments */
+  #Header {
+    height: var(--header-height);
+    padding: 0 var(--space-md);
+  }
+}
+
+/* Tablet Responsive Design - Medium Style */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* Tablet Container */
+  .max-w-container {
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
+  }
+  
+  /* Tablet Grid - 2 columns (sidebar + main) */
+  .grid-cols-medium-3 {
+    grid-template-columns: var(--sidebar-width) 1fr !important;
+  }
+  
+  /* Hide aside on tablet */
+  .desktop\\:block {
+    display: none !important;
+  }
+}
+
+/* Desktop Responsive Design - Medium Style */
+@media screen and (min-width: 1200px) {
+  /* Desktop Container */
+  .max-w-container {
+    max-width: var(--container-max-width);
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
+  }
+  
+  /* Desktop Grid - Full 3 columns */
+  .grid-cols-medium-3 {
+    grid-template-columns: var(--sidebar-width) var(--main-width) var(--aside-width) !important;
+  }
+  
+  /* Show all columns on desktop */
+  .desktop\\:block {
+    display: block !important;
   }
 }
 
 @media screen and (max-width: 559px) {
-  /* Even smaller mobile adjustments */
+  /* Small mobile adjustments */
+  .max-w-container {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
+  }
+  
+  .blog-post-container > div,
+  .blog-post-container .ad {
+    padding: 0 12px;
+  }
+  
+  .blog-post {
+    padding: 12px;
+  }
+  
   .blog-post-title {
-    font-size: 1.4rem;
+    font-size: calc(var(--medium-title-size) * 0.7);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
   }
   
   .blog-post-content {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .blog-post-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .blog-post-content h1 {
+    font-size: calc(var(--medium-h2-size) * 0.75);
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .blog-post-content h2 {
+    font-size: calc(var(--medium-h2-size) * 0.75);
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
+  
+  .blog-post-content h3 {
+    font-size: calc(var(--medium-h3-size) * 0.8);
+    margin-top: 24px;
+    margin-bottom: 12px;
   }
   
   /* Better mobile spacing */
   .blog-post {
-    padding: 0.75rem;
+    padding: var(--space-sm);
   }
 }
 
 /* High contrast mode improvements */
 @media (prefers-contrast: high) {
-  .back-button,
   .toc-button {
     border: 2px solid currentColor;
   }
@@ -1504,18 +1709,12 @@ button:focus-visible,
     stroke: currentColor;
     stroke-width: 1;
   }
-  
-  .breadcrumb-item {
-    border: 1px solid currentColor;
-  }
 }
 
 /* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .back-button,
   .toc a,
-  .social-share-item > div,
-  .breadcrumb-item {
+  .social-share-item > div {
     transition: none;
   }
   
@@ -1595,7 +1794,7 @@ button:focus-visible,
 }
 
 .tag-title {
-  font-family: var(--font-nanum-gothic);
+  font-family: var(--font-korean);
   font-size: 2.5rem;
   font-weight: 700;
   margin: 0 0 0.5rem 0;
@@ -1657,7 +1856,7 @@ button:focus-visible,
 }
 
 .tag-not-found h1 {
-  font-family: var(--font-nanum-gothic);
+  font-family: var(--font-korean);
   font-size: 2.5rem;
   font-weight: 700;
   margin: 0 0 1rem 0;
@@ -1729,130 +1928,4 @@ button:focus-visible,
   }
 }
 
-/* ========================================
-   Back Navigation & Breadcrumb Styles
-   ======================================== */
-
-.back-navigation {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #e1e5e9;
-  padding: 0.75rem 0;
-  margin-bottom: 1.5rem;
-}
-
-.back-nav-container {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-/* Back Button */
-.back-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: none;
-  border: none;
-  color: #6a737d;
-  font-family: var(--font-nanum-gothic);
-  font-size: 0.9rem;
-  cursor: pointer;
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-}
-
-.back-button:hover {
-  color: var(--font-color-0);
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.back-button svg {
-  font-size: 0.8rem;
-}
-
-/* Breadcrumb */
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-nanum-gothic);
-  font-size: 0.85rem;
-  flex-wrap: wrap;
-}
-
-.breadcrumb-item {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  color: #6a737d;
-  text-decoration: none;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.breadcrumb-item:hover:not(.current) {
-  color: var(--font-color-0);
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.breadcrumb-item.current {
-  color: var(--font-color-0);
-  font-weight: 500;
-}
-
-.breadcrumb-item.current .post-title {
-  max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.breadcrumb-separator {
-  color: #ccc;
-  font-size: 0.8rem;
-  margin: 0 0.25rem;
-}
-
-/* Mobile responsive */
-@media screen and (max-width: 720px) {
-  
-  .back-nav-container {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.75rem;
-  }
-  
-  .breadcrumb-item.current .post-title {
-    max-width: 150px;
-  }
-}
-
-@media screen and (max-width: 559px) {
-  .back-navigation {
-    padding: 0.5rem 0;
-  }
-  
-  .back-nav-container {
-    padding: 0 0.75rem;
-  }
-  
-  .back-button span {
-    display: none;
-  }
-  
-  .breadcrumb {
-    font-size: 0.75rem;
-  }
-  
-  .breadcrumb-item.current .post-title {
-    max-width: 120px;
-  }
-}
+/* BackNavigation component now uses Shadcn UI components - legacy CSS removed */

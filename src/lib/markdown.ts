@@ -118,7 +118,7 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
       tight: true, 
       ordered: false,
       // Remove heading pattern to use default (matches "Table of Contents")
-      maxDepth: 6 // Include h2, h3, h4, h5, h6 headings in TOC
+      maxDepth: 3 // Include only h2, h3 headings in TOC (exclude h4, h5, h6)
     })
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypePrism, {
@@ -151,7 +151,13 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
   console.log('📝 All Headings Found:', allHeadingMatches.length)
   
   // Debug: Extract heading IDs more precisely
-  const headingIDMatches = []
+  const headingIDMatches: Array<{
+    index: number
+    hasId: boolean
+    id: string
+    text: string
+    fullHeading: string
+  }> = []
   allHeadingMatches.forEach((heading, index) => {
     const idMatch = heading.match(/id="([^"]*)"/)
     const textMatch = heading.match(/<h[1-6][^>]*>([^<]*)</)?.[1] || 
@@ -269,9 +275,16 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
         htmlContent = htmlContent.replace(fullTocContent, '')
         console.log('✅ TOC Removed from main content')
       }
+      
+      // Additional cleanup: Remove any remaining "Table of Contents" heading
+      htmlContent = htmlContent.replace(/<h[1-6][^>]*>Table of Contents<\/h[1-6]>/gi, '')
+      htmlContent = htmlContent.replace(/<h[1-6][^>]*>목차<\/h[1-6]>/gi, '')
     } else {
       // Remove just the TOC heading if no list follows (no headings to generate TOC from)
       htmlContent = htmlContent.replace(/<h2[^>]*>Table of Contents<\/h2>\s*/i, '')
+      // Additional cleanup for any level of TOC heading
+      htmlContent = htmlContent.replace(/<h[1-6][^>]*>Table of Contents<\/h[1-6]>/gi, '')
+      htmlContent = htmlContent.replace(/<h[1-6][^>]*>목차<\/h[1-6]>/gi, '')
       console.log('⚠️ No UL found, removed TOC heading only')
     }
   } else {
@@ -291,9 +304,15 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
         }
       })
       htmlContent = htmlContent.replace(completeUL, '')
+      // Remove any remaining TOC headings in fallback case too
+      htmlContent = htmlContent.replace(/<h[1-6][^>]*>Table of Contents<\/h[1-6]>/gi, '')
+      htmlContent = htmlContent.replace(/<h[1-6][^>]*>목차<\/h[1-6]>/gi, '')
       console.log('🔄 Fallback TOC extraction successful with link fixing')
     } else {
       console.log('❌ No TOC found in fallback')
+      // Even if no TOC found, remove any TOC headings
+      htmlContent = htmlContent.replace(/<h[1-6][^>]*>Table of Contents<\/h[1-6]>/gi, '')
+      htmlContent = htmlContent.replace(/<h[1-6][^>]*>목차<\/h[1-6]>/gi, '')
     }
   }
   

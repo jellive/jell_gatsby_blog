@@ -3,11 +3,12 @@ import { getAllPosts, getPostBySlug } from '@/lib/markdown'
 import { siteConfig } from '@/lib/config'
 import { Metadata } from 'next'
 import PostContent from '@/components/PostContent'
+import StructuredData from '@/components/StructuredData'
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -18,7 +19,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
-  const post = await getPostBySlug(decodeURIComponent(params.slug))
+  const resolvedParams = await params
+  const post = await getPostBySlug(decodeURIComponent(resolvedParams.slug))
   
   if (!post) {
     return {
@@ -26,7 +28,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     }
   }
 
-  const postUrl = `${siteConfig.siteUrl}/posts/${params.slug}`
+  const postUrl = `${siteConfig.siteUrl}/posts/${resolvedParams.slug}`
   const description = post.content.substring(0, 160).replace(/\n/g, ' ').trim()
   const excerpt = description.length > 155 ? description.substring(0, 155) + '...' : description
 
@@ -65,11 +67,33 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-  const post = await getPostBySlug(decodeURIComponent(params.slug))
+  const resolvedParams = await params
+  const post = await getPostBySlug(decodeURIComponent(resolvedParams.slug))
   
   if (!post) {
     notFound()
   }
 
-  return <PostContent post={post} slug={decodeURIComponent(params.slug)} />
+  const postUrl = `${siteConfig.siteUrl}/posts/${resolvedParams.slug}`
+  const description = post.content.substring(0, 160).replace(/\n/g, ' ').trim()
+  const excerpt = description.length > 155 ? description.substring(0, 155) + '...' : description
+
+  return (
+    <>
+      <StructuredData 
+        type="article" 
+        data={{
+          title: post.frontMatter.title,
+          description: excerpt,
+          url: postUrl,
+          datePublished: post.frontMatter.date,
+          dateModified: post.frontMatter.date,
+          author: siteConfig.author,
+          tags: post.frontMatter.tags,
+          category: post.frontMatter.category
+        }} 
+      />
+      <PostContent post={post} slug={decodeURIComponent(resolvedParams.slug)} />
+    </>
+  )
 }

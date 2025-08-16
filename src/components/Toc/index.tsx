@@ -1,7 +1,11 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
-import './toc.css'
+import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
+import { faListUl, faLink } from '@fortawesome/free-solid-svg-icons'
+import { Card, CardHeader, CardContent } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
 
 interface TocProps {
   toc: string
@@ -134,9 +138,19 @@ const Toc = (props: TocProps) => {
             history.replaceState(null, '', target.hash)
           }
           
-          // Add temporary focus indicator
+          // Remove active class from all TOC links
+          const allTocLinks = tocRef.current?.querySelectorAll('a') || []
+          allTocLinks.forEach(link => {
+            link.classList.remove('toc-active')
+            link.style.opacity = ''
+            link.style.fontWeight = ''
+          })
+          
+          // Add persistent active state to clicked link
+          target.classList.add('toc-active')
           target.style.opacity = '1'
           target.style.fontWeight = 'bold'
+          target.style.color = 'var(--primary)'
           
           // Also highlight the target heading briefly
           setTimeout(() => {
@@ -155,11 +169,6 @@ const Toc = (props: TocProps) => {
               }, 1000)
             }
           }, 100)
-          
-          setTimeout(() => {
-            target.style.opacity = ''
-            target.style.fontWeight = ''
-          }, 1500)
         } else {
           console.error('❌ TOC Scroll: No target element found for:', targetId)
         }
@@ -186,11 +195,73 @@ const Toc = (props: TocProps) => {
   }
 
   return (
-    <div 
-      ref={tocRef}
-      className={`toc ${isOutside ? 'outside' : 'inside'}`} 
-      dangerouslySetInnerHTML={{ __html: toc }}
-    />
+    <Card className={cn(
+      "toc-container font-nanum-gothic transition-all duration-300",
+      isOutside
+        ? cn(
+            "fixed right-2 z-[999] max-w-[300px] min-w-[280px]", // Positioned below header (56px) + ReadingProgress (48px) = ~104px
+            "bg-card/95 backdrop-blur-sm border-border/50",
+            "shadow-lg opacity-40 hover:opacity-95",
+            "max-h-[calc(100vh-8rem)] overflow-hidden", // Adjusted for header + reading progress positioning
+            "hidden lg:block" // Hidden on screens smaller than 1024px
+          )
+        : cn(
+            "bg-secondary/30 border-border/30",
+            "max-w-full"
+          )
+    )}>
+      {isOutside && (
+        <CardHeader className="pb-3 pt-4">
+          <div className="flex items-center gap-2">
+            <Fa icon={faListUl} className="text-primary text-sm" />
+            <span className="text-sm font-semibold text-foreground">
+              Table of Contents
+            </span>
+          </div>
+          <Separator className="mt-2" />
+        </CardHeader>
+      )}
+      
+      <CardContent className={cn(
+        "p-3",
+        isOutside && "max-h-[calc(100vh-12rem)] overflow-y-auto scrollbar-thin", // Adjusted for header + reading progress + TOC header
+        "[&::-webkit-scrollbar]:w-1",
+        "[&::-webkit-scrollbar-track]:bg-transparent",
+        "[&::-webkit-scrollbar-thumb]:bg-border",
+        "[&::-webkit-scrollbar-thumb]:rounded-full",
+        "[&::-webkit-scrollbar-thumb:hover]:bg-border/80"
+      )}>
+        <div 
+          ref={tocRef}
+          className={cn(
+            "toc-content text-sm",
+            "[&_ul]:list-none [&_ul]:ml-4 [&_ul]:space-y-1",
+            "[&_li]:leading-relaxed",
+            "[&_p]:mb-0",
+            "[&_a]:no-underline [&_a]:text-muted-foreground",
+            "[&_a]:block [&_a]:py-1 [&_a]:px-2 [&_a]:rounded-md",
+            "[&_a]:transition-all [&_a]:duration-200 [&_a]:opacity-60",
+            "[&_a]:hover:opacity-100 [&_a]:hover:bg-secondary/50",
+            "[&_a]:focus:opacity-100 [&_a]:focus:bg-secondary",
+            "[&_a]:focus:ring-2 [&_a]:focus:ring-primary/20",
+            "[&_a.active]:opacity-100 [&_a.active]:bg-primary/10",
+            "[&_a.active]:text-primary [&_a.active]:font-medium",
+            "[&_a]:truncate [&_a]:max-w-full",
+            "[&_img]:hidden" // Hide any images in TOC
+          )}
+          dangerouslySetInnerHTML={{ __html: toc }}
+        />
+        
+        {isOutside && (
+          <div className="mt-3 pt-2 border-t border-border/30">
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <Fa icon={faLink} className="text-xs" />
+              <span>클릭하여 이동</span>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
   )
 }
 

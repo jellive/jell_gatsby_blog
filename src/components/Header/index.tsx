@@ -2,10 +2,20 @@
 
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { faTags, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faTags, faSearch, faKeyboard } from '@fortawesome/free-solid-svg-icons'
 import { siteConfig } from '@/lib/config'
+import ThemeToggle from '@/components/ThemeToggle'
+import { Button } from '@/components/ui/button'
+import { 
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import { cn } from '@/lib/utils'
+import { useCommandPalette } from '@/components/CommandPalette/CommandPaletteProvider'
 
 export interface HeaderProps {
   siteTitle: string
@@ -17,6 +27,8 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
   const [isMobile, setIsMobile] = useState(false)
   const [profileSize, setProfileSize] = useState('25px')
   const pathname = usePathname()
+  const router = useRouter()
+  const { openPalette } = useCommandPalette()
 
   // Handle bio opacity based on header visibility
   useEffect(() => {
@@ -43,15 +55,27 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
     
     checkMobile()
 
-    // Handle profile image sizing based on route
+    // Handle profile image sizing based on route - Medium style avatars
     const updateProfileSize = () => {
-      setProfileSize(pathname === '/' ? '50px' : '25px')
+      // Use Medium avatar sizes: 48px (large), 32px (medium), 20px (small)
+      setProfileSize(pathname === '/' ? '48px' : '32px')
     }
     
     updateProfileSize()
+    
+    // Ensure header is always visible on main page
+    if (pathname === '/') {
+      setIsHide(false)
+    }
 
-    // Scroll listener for header hide/show
+    // Scroll listener for header hide/show (disabled on main page)
     const handleScroll = () => {
+      // Don't hide header on main page
+      if (pathname === '/') {
+        setIsHide(false)
+        return
+      }
+      
       setYPos((prevYPos) => {
         const currentYPos = window.pageYOffset
         setIsHide(prevYPos < currentYPos)
@@ -77,53 +101,139 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
   }
 
   return (
-    <header id="Header" className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''}`}>
-      <div className="header-title">
-        <Link href="/">
-          <div className="header-profile-image-wrap">
-            <img
-              src="https://avatars.githubusercontent.com/u/7909227?v=4"
-              alt="title profile picture"
-              width={profileSize}
-              height={profileSize}
-            />
-          </div>
-        </Link>
-
-        <Link href="/">
-          <h1 className="header-title-text">{siteTitle}</h1>
-        </Link>
-      </div>
-
-      <nav id="nav">
-        <ul>
-          <li>
-            <div className="tag-wrap">
-              <span>TAG</span>
-              <Link href="/tags">
-                <Fa
-                  icon={faTags}
-                  onMouseEnter={() => {
-                    tagSpanVisibleToggle(true)
-                  }}
-                  onMouseLeave={() => {
-                    tagSpanVisibleToggle(false)
-                  }}
-                />
-              </Link>
+    <TooltipProvider>
+      <header id="Header" className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''}`}>
+        <div className="header-title">
+          <Link href="/">
+            <div className="header-profile-image-wrap">
+              <img
+                src="https://avatars.githubusercontent.com/u/7909227?v=4"
+                alt="title profile picture"
+                width={profileSize}
+                height={profileSize}
+              />
             </div>
-          </li>
+          </Link>
 
-          <li>
-            <div className="search-wrap">
-              <Link href="/search" className="search">
-                <Fa icon={faSearch} />
-              </Link>
-            </div>
-          </li>
-        </ul>
-      </nav>
-    </header>
+          <Link href="/">
+            <h1 className="header-title-text">{siteTitle}</h1>
+          </Link>
+        </div>
+
+        <nav id="nav">
+          <ul className="flex items-center justify-center gap-2">
+            <li className="flex items-center justify-center">
+              <div className="tag-wrap flex items-center justify-center">
+                <span>TAG</span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => router.push('/tags')}
+                      className={cn(
+                        "w-10 h-10 relative group flex items-center justify-center",
+                        "border border-border/30 rounded-md",
+                        "hover:border-border/60 hover:scale-105",
+                        "active:scale-95",
+                        "transition-all duration-200",
+                        "bg-transparent hover:bg-accent/10",
+                        // Responsive sizing  
+                        "max-md:w-9 max-md:h-9",
+                        "max-sm:w-8 max-sm:h-8"
+                      )}
+                      onMouseEnter={() => {
+                        tagSpanVisibleToggle(true)
+                      }}
+                      onMouseLeave={() => {
+                        tagSpanVisibleToggle(false)
+                      }}
+                      aria-label="태그 페이지로 이동"
+                    >
+                      <Fa
+                        icon={faTags}
+                        className={cn(
+                          "text-base transition-all duration-200",
+                          "group-hover:scale-110",
+                          "max-md:text-sm max-sm:text-xs",
+                          "text-green-500 dark:text-green-400",
+                          "group-hover:text-green-600 dark:group-hover:text-green-300",
+                          "group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]"
+                        )}
+                      />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>모든 태그 보기</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </li>
+
+            <li className="flex items-center justify-center">
+              <div className="search-wrap flex items-center justify-center">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={openPalette}
+                      className={cn(
+                        "w-10 h-10 relative group flex items-center justify-center",
+                        "border border-border/30 rounded-md",
+                        "hover:border-border/60 hover:scale-105",
+                        "active:scale-95",
+                        "transition-all duration-200",
+                        "bg-transparent hover:bg-accent/10",
+                        // Responsive sizing
+                        "max-md:w-9 max-md:h-9",
+                        "max-sm:w-8 max-sm:h-8"
+                      )}
+                      aria-label="검색하기 (Cmd+K)"
+                    >
+                      <Fa 
+                        icon={faSearch} 
+                        className={cn(
+                          "text-base transition-all duration-200",
+                          "group-hover:scale-110",
+                          "max-md:text-sm max-sm:text-xs",
+                          "text-purple-500 dark:text-purple-400",
+                          "group-hover:text-purple-600 dark:group-hover:text-purple-300",
+                          "group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]"
+                        )}
+                      />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <div className="flex items-center gap-2">
+                      <span>빠른 검색</span>
+                      <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                        ⌘K
+                      </kbd>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </li>
+
+            <li className="flex items-center justify-center">
+              <div className="theme-wrap flex items-center justify-center">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex items-center justify-center">
+                      <ThemeToggle />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>테마 변경 (라이트 → 다크 → 시스템)</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </TooltipProvider>
   )
 }
 
