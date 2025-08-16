@@ -2,13 +2,11 @@
 .vscode
 
 # Project dependencies
-.cache
 node_modules
 yarn-error.log
 
 # Build directory
 .DS_Store
-public/
 
 # Next.js
 .next/
@@ -42,4 +40,7 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-.yarn/
+CLAUDE.md
+.cache
+.yarn
+.claude
