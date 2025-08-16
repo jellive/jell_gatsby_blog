@@ -3,7 +3,7 @@
   command = "npm run build"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "22"
   NPM_VERSION = "9"
 
 # Redirects for Next.js static export (SSG)
