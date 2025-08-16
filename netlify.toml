@@ -5,6 +5,9 @@
 [build.environment]
   NODE_VERSION = "22"
   NPM_VERSION = "9"
+  DISABLE_MISE = "true"
+  PYTHON_VERSION = ""
+  PIPENV_VENV_IN_PROJECT = ""
 
 # Redirects for Next.js static export (SSG)
 [[redirects]]
