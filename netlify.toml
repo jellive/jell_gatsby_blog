@@ -60,8 +60,8 @@
   [headers.values]
     Content-Encoding = "gzip"
 
-# CSP for security
-[[headers]]
-  for = "/*.html"
-  [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.disquscdn.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: http:; connect-src 'self' https://www.google-analytics.com https://*.disqus.com; frame-src https://*.disqus.com https://disqus.com;"
+# Temporarily disable CSP for debugging - Next.js 15.x compatibility issue
+# [[headers]]
+#   for = "/*.html"
+#   [headers.values]
+#     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.disquscdn.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: http:; connect-src 'self' https://www.google-analytics.com https://*.disqus.com; frame-src https://*.disqus.com https://disqus.com;"

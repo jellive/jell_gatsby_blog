@@ -12,12 +12,11 @@ const nextConfig = {
   distDir: 'out',
   assetPrefix: '',
   basePath: '',
-  // Disable React strict mode to prevent hydration issues
-  reactStrictMode: false,
-  // Experimental features for better static export
-  experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-slot']
-  }
+  // Enable React strict mode - stable in Next.js 14.x
+  reactStrictMode: true,
+  // Remove experimental features - not needed in 14.x
+  swcMinify: true,
+  compress: true
 }
 
 module.exports = nextConfig
