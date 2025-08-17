@@ -1,3 +1,4 @@
+# Next.js static export optimized for Netlify
 [build]
   publish = "out"
   command = "npm run build"
@@ -7,23 +8,16 @@
   NPM_VERSION = "9"
   NODE_ENV = "production"
   NEXT_TELEMETRY_DISABLED = "1"
-  DISABLE_MISE = "true"
-  PYTHON_VERSION = ""
-  PIPENV_VENV_IN_PROJECT = ""
+  # Skip Netlify Next.js plugin for static export
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
-# Static site redirects - removed problematic catch-all redirect
-# For Next.js static export, let Netlify handle standard routing
-# Only add specific redirects if needed for legacy URLs
-
-# Headers for security and performance
+# Essential security headers only - minimal configuration
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
-    X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
 # Cache static assets
 [[headers]]
@@ -35,9 +29,15 @@
 [[headers]]
   for = "/images/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000"
+    Cache-Control = "public, max-age=2592000"
 
-# RSS and sitemap
+# Content type for API routes
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Content-Type = "application/json"
+
+# RSS and sitemap content types
 [[headers]]
   for = "/rss"
   [headers.values]
@@ -47,21 +47,3 @@
   for = "/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml"
-
-# Preconnect to external domains
-[[headers]]
-  for = "/*.html"
-  [headers.values]
-    Link = "</fonts.googleapis.com>; rel=preconnect; crossorigin, <https://www.google-analytics.com>; rel=preconnect"
-
-# Compress responses
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Content-Encoding = "gzip"
-
-# Temporarily disable CSP for debugging - Next.js 15.x compatibility issue
-# [[headers]]
-#   for = "/*.html"
-#   [headers.values]
-#     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.disquscdn.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: http:; connect-src 'self' https://www.google-analytics.com https://*.disqus.com; frame-src https://*.disqus.com https://disqus.com;"
