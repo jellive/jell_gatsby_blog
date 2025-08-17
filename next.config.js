@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // Enable static export for Netlify deployment
+  // Conditional output for build vs dev
+  ...(process.env.NODE_ENV === 'production' && {
+    output: 'export', // Enable static export for Netlify deployment only in production
+    distDir: 'out',
+  }),
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   images: {
@@ -8,15 +12,13 @@ const nextConfig = {
     domains: [],
     formats: ['image/webp', 'image/avif']
   },
-  // Additional optimization for static export
-  distDir: 'out',
+  // Clean base configuration
   assetPrefix: '',
   basePath: '',
-  // Enable React strict mode - stable in Next.js 14.x
+  // Enable React strict mode
   reactStrictMode: true,
-  // Remove experimental features - not needed in 14.x
-  swcMinify: true,
-  compress: true
+  // Note: swcMinify removed in Next.js 15 - SWC is default now
+  // Note: compress removed - Next.js handles compression automatically
 }
 
 module.exports = nextConfig
