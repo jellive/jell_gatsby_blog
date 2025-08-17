@@ -113,7 +113,7 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
               <Fa icon={faSearch} className="text-muted-foreground text-sm" />
             </div>
             <Input
-              type="text"
+              type="search"
               name="search"
               id="searchInput"
               value={value}
@@ -126,6 +126,7 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                 "bg-background/50 focus:bg-background",
                 "transition-all duration-200"
               )}
+              data-testid="search-input"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setValue(e.target.value)
               }}
@@ -215,7 +216,7 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
       </Card>
 
       {/* Search Results with Tabs */}
-      <div className="search-results">
+      <div className="search-results" data-testid="search-results">
         {showingAllPosts ? (
           <div className="mb-4">
             <Badge variant="outline" className="text-xs">
@@ -271,7 +272,9 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                         포스트 ({searchResults.posts.length})
                       </h3>
                     </div>
-                    <PostList posts={searchResults.posts} />
+                    <div data-testid="search-result-item">
+                      <PostList posts={searchResults.posts} />
+                    </div>
                   </div>
                 )}
 
@@ -341,7 +344,7 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
 
                 {/* No Results */}
                 {searchResults.totalCount === 0 && (
-                  <div className="text-center py-12">
+                  <div className="text-center py-12" data-testid="no-search-results">
                     <Fa icon={faSearch} className="text-4xl text-muted-foreground mb-4" />
                     <h3 className="text-lg font-semibold text-foreground mb-2">
                       검색 결과가 없습니다

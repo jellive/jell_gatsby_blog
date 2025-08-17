@@ -7,20 +7,30 @@ import StructuredData from '@/components/StructuredData'
 
 interface PostPageProps {
   params: Promise<{
-    slug: string
+    slug: string[]
   }>
 }
 
 export async function generateStaticParams() {
   const posts = await getAllPosts()
   return posts.map((post) => ({
-    slug: encodeURIComponent(post.slug),
+    slug: post.slug.split('/'),
   }))
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const resolvedParams = await params
-  const post = await getPostBySlug(decodeURIComponent(resolvedParams.slug))
+  // URL decode each slug segment to handle encoded paths like dev%2Fblog
+  const decodedSlug = resolvedParams.slug.map(segment => {
+    try {
+      return decodeURIComponent(segment)
+    } catch (error) {
+      console.warn('Failed to decode URL segment:', segment, error)
+      return segment
+    }
+  }).join('/')
+  
+  const post = await getPostBySlug(decodedSlug)
   
   if (!post) {
     return {
@@ -28,7 +38,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     }
   }
 
-  const postUrl = `${siteConfig.siteUrl}/posts/${resolvedParams.slug}`
+  const postUrl = `${siteConfig.siteUrl}/posts/${resolvedParams.slug.join('/')}`
   const description = post.content.substring(0, 160).replace(/\n/g, ' ').trim()
   const excerpt = description.length > 155 ? description.substring(0, 155) + '...' : description
 
@@ -68,13 +78,23 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
 export default async function PostPage({ params }: PostPageProps) {
   const resolvedParams = await params
-  const post = await getPostBySlug(decodeURIComponent(resolvedParams.slug))
+  // URL decode each slug segment to handle encoded paths like dev%2Fblog
+  const decodedSlug = resolvedParams.slug.map(segment => {
+    try {
+      return decodeURIComponent(segment)
+    } catch (error) {
+      console.warn('Failed to decode URL segment:', segment, error)
+      return segment
+    }
+  }).join('/')
+  
+  const post = await getPostBySlug(decodedSlug)
   
   if (!post) {
     notFound()
   }
 
-  const postUrl = `${siteConfig.siteUrl}/posts/${resolvedParams.slug}`
+  const postUrl = `${siteConfig.siteUrl}/posts/${decodedSlug}`
   const description = post.content.substring(0, 160).replace(/\n/g, ' ').trim()
   const excerpt = description.length > 155 ? description.substring(0, 155) + '...' : description
 
@@ -93,7 +113,7 @@ export default async function PostPage({ params }: PostPageProps) {
           category: post.frontMatter.category
         }} 
       />
-      <PostContent post={post} slug={decodeURIComponent(resolvedParams.slug)} />
+      <PostContent post={post} slug={decodedSlug} />
     </>
   )
 }

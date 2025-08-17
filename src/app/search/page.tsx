@@ -1,8 +1,19 @@
 import { getAllPosts } from '@/lib/markdown'
-import SearchPage from '@/components/SearchPage'
+import SearchInteractive from '@/components/SearchInteractive'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Search | Jell의 세상 사는 이야기',
+  description: '블로그 포스트를 검색해보세요.',
+}
 
 export default async function Search() {
   const allPosts = await getAllPosts()
 
-  return <SearchPage allPosts={allPosts} />
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">Search</h1>
+      <SearchInteractive allPosts={allPosts} />
+    </div>
+  )
 }

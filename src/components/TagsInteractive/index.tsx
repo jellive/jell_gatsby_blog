@@ -105,7 +105,11 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
       )
     }
     
-    return <PostList posts={posts} />
+    return (
+      <div data-testid="tag-post-list">
+        <PostList posts={posts} />
+      </div>
+    )
   }
 
   const validTags = tagGroups.filter(g => g.fieldValue !== 'undefined')
@@ -116,27 +120,27 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
     const isSelected = g.fieldValue === targetTag
     
     return (
-      <Badge
-        key={g.fieldValue}
-        variant={isSelected ? 'default' : variant}
-        className={cn(
-          "cursor-pointer transition-all duration-200 hover:scale-105",
-          "border-border/50 hover:border-border",
-          "px-3 py-2 text-sm font-medium",
-          isSelected 
-            ? "bg-primary text-primary-foreground border-primary" 
-            : "hover:bg-secondary/80",
-          // Size-based styling
-          getBadgeSize(g.totalCount) === 'lg' && "text-base px-4 py-2.5",
-          getBadgeSize(g.totalCount) === 'sm' && "text-xs px-2 py-1.5"
-        )}
-        onClick={() => {
-          setTargetTag(g.fieldValue)
-          if (typeof window !== 'undefined') {
-            window.location.href = `/tags/${encodeURIComponent(g.fieldValue)}`
-          }
-        }}
-      >
+      <div key={g.fieldValue} data-testid="tag-item">
+        <Badge
+          variant={isSelected ? 'default' : variant}
+          className={cn(
+            "cursor-pointer transition-all duration-200 hover:scale-105",
+            "border-border/50 hover:border-border",
+            "px-3 py-2 text-sm font-medium",
+            isSelected 
+              ? "bg-primary text-primary-foreground border-primary" 
+              : "hover:bg-secondary/80",
+            // Size-based styling
+            getBadgeSize(g.totalCount) === 'lg' && "text-base px-4 py-2.5",
+            getBadgeSize(g.totalCount) === 'sm' && "text-xs px-2 py-1.5"
+          )}
+          onClick={() => {
+            setTargetTag(g.fieldValue)
+            if (typeof window !== 'undefined') {
+              window.location.href = `/tags/${encodeURIComponent(g.fieldValue)}`
+            }
+          }}
+        >
         <Fa icon={faHashtag} className="mr-1 text-xs opacity-70" />
         {g.fieldValue}
         <span className={cn(
@@ -145,7 +149,8 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
         )}>
           {g.totalCount}
         </span>
-      </Badge>
+        </Badge>
+      </div>
     )
   })
 
@@ -170,10 +175,13 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
 
         <CardContent className="space-y-4">
           {/* Tags Grid */}
-          <div className={cn(
-            "flex flex-wrap gap-2 p-4 rounded-md",
-            "bg-secondary/20 border border-border/30"
-          )}>
+          <div 
+            className={cn(
+              "flex flex-wrap gap-2 p-4 rounded-md",
+              "bg-secondary/20 border border-border/30"
+            )}
+            data-testid="tag-list"
+          >
             {tagElements.length > 0 ? (
               tagElements
             ) : (
@@ -201,7 +209,7 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
       </Card>
 
       {/* Post Results */}
-      <div className="tag-results">
+      <div className="tag-results" data-testid="tag-posts">
         {renderPostListSection()}
       </div>
     </div>

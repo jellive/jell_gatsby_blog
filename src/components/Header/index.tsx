@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { faTags, faSearch, faKeyboard } from '@fortawesome/free-solid-svg-icons'
+import { faTags, faSearch, faKeyboard, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { siteConfig } from '@/lib/config'
 import ThemeToggle from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
@@ -25,6 +25,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
   const [yPos, setYPos] = useState(0)
   const [isHide, setIsHide] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [profileSize, setProfileSize] = useState('25px')
   const pathname = usePathname()
   const router = useRouter()
@@ -102,7 +103,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
 
   return (
     <TooltipProvider>
-      <header id="Header" className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''}`}>
+      <header id="Header" className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''} relative`}>
         <div className="header-title">
           <Link href="/">
             <div className="header-profile-image-wrap">
@@ -120,7 +121,31 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
           </Link>
         </div>
 
-        <nav id="nav">
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className={cn(
+              "w-10 h-10 relative group flex items-center justify-center",
+              "border border-border/30 rounded-md",
+              "hover:border-border/60 hover:scale-105",
+              "active:scale-95",
+              "transition-all duration-200",
+              "bg-transparent hover:bg-accent/10"
+            )}
+            aria-label="모바일 메뉴 열기"
+            data-testid="mobile-menu-toggle"
+          >
+            <Fa 
+              icon={mobileMenuOpen ? faTimes : faBars} 
+              className="text-base transition-all duration-200"
+            />
+          </Button>
+        </div>
+
+        <nav id="nav" className="hidden md:block">
           <ul className="flex items-center justify-center gap-2">
             <li className="flex items-center justify-center">
               <div className="tag-wrap flex items-center justify-center">
@@ -232,6 +257,49 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
             </li>
           </ul>
         </nav>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div 
+            className={cn(
+              "md:hidden absolute top-full left-0 right-0 z-50",
+              "bg-background/95 backdrop-blur-sm border-b border-border",
+              "shadow-lg"
+            )}
+            data-testid="mobile-menu"
+          >
+            <div className="p-4 space-y-4">
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  router.push('/tags')
+                  setMobileMenuOpen(false)
+                }}
+                className="w-full justify-start gap-2"
+              >
+                <Fa icon={faTags} className="text-green-500" />
+                <span>Tags</span>
+              </Button>
+              
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  openPalette()
+                  setMobileMenuOpen(false)
+                }}
+                className="w-full justify-start gap-2"
+              >
+                <Fa icon={faSearch} className="text-purple-500" />
+                <span>Search</span>
+              </Button>
+              
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Theme</span>
+                <ThemeToggle />
+              </div>
+            </div>
+          </div>
+        )}
       </header>
     </TooltipProvider>
   )

@@ -1,5 +1,11 @@
 import { getAllTags, getPostsByTag } from '@/lib/markdown'
 import TagsInteractive from '@/components/TagsInteractive'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Tags | Jell의 세상 사는 이야기',
+  description: '블로그의 모든 태그를 확인해보세요.',
+}
 
 interface TagGroup {
   fieldValue: string
