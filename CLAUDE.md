@@ -11,6 +11,7 @@ This is a personal blog built with Gatsby v5, transitioning from Next.js back to
 **IMPORTANT**: This project follows the **Modern Tech Blog Design System** as defined in [`design-system.md`](./design-system.md). This design system serves as the primary reference for all design decisions and component implementations.
 
 ### Core Design Principles
+
 - **Developer Experience First**: Prioritize code-first content, syntax highlighting, and technical documentation
 - **Modern Typography**: SF Pro Display font stack with optimized scale system for readability
 - **Accessible Color System**: #3b82f6 primary with comprehensive neutral palette and semantic colors
@@ -18,6 +19,7 @@ This is a personal blog built with Gatsby v5, transitioning from Next.js back to
 - **Performance Optimized**: 4px base spacing system, CSS variables, and hardware-accelerated theme switching
 
 ### Implementation Guidelines
+
 - **Always reference** `design-system.md` before implementing new components or features
 - **Use the defined color tokens** rather than arbitrary color values
 - **Follow the typography scale** for consistent text sizing across the blog
@@ -29,28 +31,33 @@ When making design decisions or implementing new features, consult the design sy
 ## Development Commands
 
 ### Core Development
+
 - `npm run develop` - Start development server
-- `npm run start` - Alias for develop  
+- `npm run start` - Alias for develop
 - `npm run build` - Build production site
 - `npm run serve` - Serve built site locally
 - `npm run clean` - Clean Gatsby cache and public folder
 
 ### Code Quality
+
 - `npm run lint` - Run TSLint on TypeScript files
 - `npm run type-check` - Run TypeScript compiler without emitting files
 - `npm run tsc` - Run TypeScript compiler
 - `npm run format` - Format code with Prettier
 
 ### Deployment
+
 - `npm run deploy` - Clean, build, and deploy to GitHub Pages
 - Build process: `rm -rf .cache/ && rm -rf public/ && gatsby build && gh-pages -b master -d public`
 
 ### Testing
+
 - Tests not yet implemented (placeholder command exists)
 
 ## Architecture
 
 ### Content Structure
+
 - **Blog Posts**: Located in `_posts/` with category-based folder structure
   - `bicycle/` - Cycling content
   - `chat/` - Personal/casual posts
@@ -60,11 +67,13 @@ When making design decisions or implementing new features, consult the design sy
 - **Draft Posts**: Located in `_drafts/` (included only in development)
 
 ### Core Configuration
+
 - `config.js` - Main site configuration (title, author, social links, analytics)
 - `gatsby-config.js` - Gatsby plugins and build configuration
 - `gatsby-node.js` - Build-time page generation and content processing
 
 ### Source Architecture
+
 - **Components**: Reusable React components in `src/components/`
   - `Layout/` - Main layout wrapper with header and navigation
   - `Header/` - Site header
@@ -83,6 +92,7 @@ When making design decisions or implementing new features, consult the design sy
 - **Utilities**: Typography configuration and SCSS variables in `src/utils/`
 
 ### Key Features
+
 - **Markdown Processing**: Full remark ecosystem with syntax highlighting, math (KaTeX), emojis, and auto-linking
 - **Commenting**: Disqus integration
 - **Analytics**: Google Analytics integration
@@ -95,12 +105,14 @@ When making design decisions or implementing new features, consult the design sy
 - **PWA**: Manifest and offline support
 
 ### Build System
+
 - **TypeScript**: Full TypeScript support with strict configuration
 - **SCSS**: Sass preprocessing for styles
 - **Linting**: TSLint with Prettier integration
 - **Package Management**: Yarn with Yarn 4.4.0 (`packageManager: "yarn@4.4.0"`)
 
 ### Content Processing Pipeline
+
 - Markdown files processed through `gatsby-transformer-remark`
 - Automatic slug generation from file paths
 - Series detection based on filename patterns
@@ -109,6 +121,7 @@ When making design decisions or implementing new features, consult the design sy
 - Frontmatter validation and defaults
 
 ### Deployment
+
 - **Platform**: Netlify
 - **Build**: Node.js 20 with esbuild bundler
 - **Branch**: Deploys from `master` branch
@@ -117,23 +130,27 @@ When making design decisions or implementing new features, consult the design sy
 ## Development Notes
 
 ### File Organization
+
 - Blog posts use date-based folder structure: `category/YYYY/MM/DD/post-name.md`
 - Images stored alongside posts in `images/` subfolders
 - Static assets in `static/` directory
 
 ### Content Guidelines
+
 - Posts require frontmatter: `title`, `date`, `tags`
 - Optional frontmatter: `keywords` (defaults to site title and author)
 - Images referenced relatively from post directory
 - Series posts use filename pattern ending with numbers
 
 ### Styling
+
 - Component-scoped SCSS files alongside TypeScript files
 - Global variables in `src/utils/variables.scss`
 - Typography configuration in `src/utils/typography.ts`
 - FontAwesome icons integrated throughout
 
 ### State Management
+
 - Minimal Redux store for path and size state
 - Wrapped at root level via `wrap-with-provider.tsx`
 - Used primarily for component state coordination
@@ -151,7 +168,7 @@ The blog uses [Shadcn UI](https://ui.shadcn.com/) as the primary component libra
 ```json
 {
   "class-variance-authority": "^0.7.0",
-  "clsx": "^2.0.0", 
+  "clsx": "^2.0.0",
   "tailwind-merge": "^2.0.0",
   "lucide-react": "^0.400.0",
   "@radix-ui/react-slot": "^1.0.2",
@@ -162,6 +179,7 @@ The blog uses [Shadcn UI](https://ui.shadcn.com/) as the primary component libra
 ### Configuration Files
 
 #### `components.json`
+
 Central configuration file for Shadcn UI component generation:
 
 ```json
@@ -186,11 +204,12 @@ Central configuration file for Shadcn UI component generation:
 ```
 
 #### Utility Function (`src/lib/utils.ts`)
+
 Essential utility for combining Tailwind classes:
 
 ```typescript
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -200,11 +219,13 @@ export function cn(...inputs: ClassValue[]) {
 ### Available Components
 
 #### Core UI Components
+
 - **Button** (`@/components/ui/button`) - Primary interactive element with variants
 - **Card** (`@/components/ui/card`) - Content containers with header, content, footer
 - **Badge** (`@/components/ui/badge`) - Labels and tags with category-specific styling
 
 #### Migrated Components
+
 - **ThemeToggle** - Dark/light/system mode toggle with custom animations
 - **Header** - Navigation with Shadcn Button components
 - **PostList** - Card-based blog post listing with responsive grid
@@ -213,6 +234,7 @@ export function cn(...inputs: ClassValue[]) {
 ### Theme System Integration
 
 #### CSS Variables
+
 The theme system uses CSS custom properties for consistent color management:
 
 ```css
@@ -234,6 +256,7 @@ The theme system uses CSS custom properties for consistent color management:
 ```
 
 #### Tailwind Configuration
+
 Extended configuration preserves Korean typography while adding Shadcn utilities:
 
 ```javascript
@@ -257,6 +280,7 @@ keyframes: {
 ### Component Usage Patterns
 
 #### Button Component
+
 ```tsx
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -281,14 +305,12 @@ import { cn } from '@/lib/utils'
 ```
 
 #### Card Component
+
 ```tsx
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-
-<Card className="group transition-all duration-300 hover:shadow-lg">
+;<Card className="group transition-all duration-300 hover:shadow-lg">
   <CardHeader className="pb-3">
-    <CardTitle className="text-xl font-semibold">
-      Title Here
-    </CardTitle>
+    <CardTitle className="text-xl font-semibold">Title Here</CardTitle>
   </CardHeader>
   <CardContent className="pt-0">
     <p className="text-muted-foreground">Content here</p>
@@ -297,18 +319,19 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 ```
 
 #### Badge Component
+
 ```tsx
 import { Badge } from '@/components/ui/badge'
 
 // Category-specific styling
 const getBadgeVariant = (tag: string) => {
-  if (tag.includes('development')) return "default"
-  if (tag.includes('bicycle')) return "secondary"
-  if (tag.includes('game')) return "outline"
-  return "secondary"
+  if (tag.includes('development')) return 'default'
+  if (tag.includes('bicycle')) return 'secondary'
+  if (tag.includes('game')) return 'outline'
+  return 'secondary'
 }
 
-<Badge variant={getBadgeVariant(tag)} className="text-xs hover:scale-105">
+;<Badge variant={getBadgeVariant(tag)} className="text-xs hover:scale-105">
   #{tag}
 </Badge>
 ```
@@ -316,6 +339,7 @@ const getBadgeVariant = (tag: string) => {
 ### Development Best Practices
 
 #### Component Creation Workflow
+
 1. **Use Shadcn CLI**: `npx shadcn-ui@latest add [component-name]`
 2. **Customize in place**: Modify generated components in `src/components/ui/`
 3. **Apply design tokens**: Use CSS variables and theme-aware classes
@@ -323,6 +347,7 @@ const getBadgeVariant = (tag: string) => {
 5. **Test responsive behavior**: Verify across all screen sizes
 
 #### Styling Guidelines
+
 ```tsx
 // ✅ Good: Use cn() utility for class composition
 <div className={cn(
@@ -346,6 +371,7 @@ const getBadgeVariant = (tag: string) => {
 ```
 
 #### Animation and Interaction
+
 ```tsx
 // Custom animations defined in tailwind.config.js
 <Button className="animate-spin-slow"> // 10s rotation
@@ -362,13 +388,14 @@ const getBadgeVariant = (tag: string) => {
 ### Migration Patterns
 
 #### From Legacy CSS to Shadcn
+
 ```tsx
 // Before: Legacy CSS classes
 <button className="back-button custom-styles">
 
 // After: Shadcn Button with equivalent styling
 <Button
-  variant="ghost" 
+  variant="ghost"
   size="sm"
   className={cn(
     "gap-2 text-muted-foreground hover:text-foreground",
@@ -378,6 +405,7 @@ const getBadgeVariant = (tag: string) => {
 ```
 
 #### Component Wrapper Pattern
+
 ```tsx
 // For complex components, create wrapper that preserves original API
 interface PostListProps {
@@ -387,7 +415,7 @@ interface PostListProps {
 const PostList = ({ posts }: PostListProps) => {
   return (
     <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
-      {posts.map(post => (
+      {posts.map((post) => (
         <Card key={post.slug} className="group">
           {/* Shadcn components with legacy logic */}
         </Card>
@@ -400,12 +428,14 @@ const PostList = ({ posts }: PostListProps) => {
 ### Performance Considerations
 
 #### Bundle Optimization
+
 - **Tree Shaking**: Only import used components
 - **CSS Variables**: Runtime theme switching without CSS-in-JS overhead
 - **Tailwind Purging**: Unused classes automatically removed
 - **Component Composition**: Prefer composition over large monolithic components
 
 #### Responsive Performance
+
 ```tsx
 // ✅ Efficient: CSS-only responsive behavior
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -419,15 +449,17 @@ const PostList = ({ posts }: PostListProps) => {
 ### Accessibility Standards
 
 #### WCAG Compliance
+
 - **Keyboard Navigation**: All interactive elements accessible via keyboard
 - **Screen Reader Support**: Proper ARIA labels and semantic markup
 - **Color Contrast**: Meets WCAG AA standards (4.5:1 ratio)
 - **Focus Management**: Visible focus indicators and logical tab order
 
 #### Implementation Examples
+
 ```tsx
 // Proper ARIA labels and semantics
-<Button 
+<Button
   aria-label="뒤로 가기"
   title="뒤로 가기"
   onClick={handleBack}
@@ -447,6 +479,7 @@ const PostList = ({ posts }: PostListProps) => {
 ### Customization Guidelines
 
 #### Extending Components
+
 ```tsx
 // Create variant extensions
 const buttonVariants = cva(
@@ -468,6 +501,7 @@ const buttonVariants = cva(
 ```
 
 #### Theme Customization
+
 ```css
 /* Add custom CSS variables for blog-specific colors */
 :root {
@@ -484,6 +518,7 @@ const buttonVariants = cva(
 ### Quality Assurance
 
 #### Testing Checklist
+
 - [ ] All components render without TypeScript errors
 - [ ] Responsive behavior verified across screen sizes
 - [ ] Dark/light theme switching works correctly
@@ -495,10 +530,12 @@ const buttonVariants = cva(
 #### Common Issues and Solutions
 
 1. **TypeScript Errors**
+
    - Issue: `asChild` prop not supported on all components
    - Solution: Wrap with component instead of using `asChild`
 
 2. **CSS Conflicts**
+
    - Issue: Legacy CSS overriding Shadcn styles
    - Solution: Use higher specificity or remove conflicting styles
 
@@ -586,9 +623,9 @@ This section provides comprehensive guidance for creating and managing blog post
 
 ```yaml
 ---
-category: 'CategoryName'        # Capitalized category name
-date: 'YYYY-MM-DD'             # or 'YYYY-MM-DDTHH:MM:SSZ' for specific time
-title: 'Post Title Here'        # Post title (can include Korean characters)
+category: 'CategoryName' # Capitalized category name
+date: 'YYYY-MM-DD' # or 'YYYY-MM-DDTHH:MM:SSZ' for specific time
+title: 'Post Title Here' # Post title (can include Korean characters)
 tags: ['tag1', 'tag2', 'tag3'] # Array of relevant tags
 ---
 ```
@@ -597,8 +634,8 @@ tags: ['tag1', 'tag2', 'tag3'] # Array of relevant tags
 
 ```yaml
 ---
-featuredImage: 'images/filename.png'  # Featured image for the post (only if image file exists)
-keywords: ['keyword1', 'keyword2']    # SEO keywords (defaults to site + author)
+featuredImage: 'images/filename.png' # Featured image for the post (only if image file exists)
+keywords: ['keyword1', 'keyword2'] # SEO keywords (defaults to site + author)
 ---
 ```
 
@@ -616,7 +653,7 @@ keywords: ['keyword1', 'keyword2']    # SEO keywords (defaults to site + author)
 ```yaml
 ---
 title: 'Draft Post Title'
-date: 'YYYY-MM-DD'             # Can use any date, even future dates
+date: 'YYYY-MM-DD' # Can use any date, even future dates
 ---
 ```
 
@@ -674,7 +711,7 @@ code here
 #### Table of Contents
 
 ```markdown
-```toc```
+`toc`
 ```
 
 - Automatically generates TOC from headings (h2, h3)
@@ -748,7 +785,7 @@ mv _drafts/old-file.md _drafts/category/YYYY/MM/DD/new-file.md
    ```yaml
    ---
    title: 'Your Post Title'
-   date: '2025-08-14'  # Use current date from step 1
+   date: '2025-08-14' # Use current date from step 1
    category: 'Category'
    tags: ['tag1', 'tag2']
    ---
@@ -787,12 +824,14 @@ mv _drafts/old-file.md _drafts/category/YYYY/MM/DD/new-file.md
 **Formal Language Guidelines**:
 
 - **Sentence Endings**: Use formal endings consistently:
+
   - `-습니다/-ㅂ니다` (formal declarative)
   - `-셨습니다/-으셨습니다` (formal past honorific)
   - `-겠습니다` (formal future/intention)
   - `-입니다` (formal copula)
 
 - **Verb Forms**: Use formal verb conjugations:
+
   - `했습니다` not `했어요` or `했다`
   - `보겠습니다` not `볼게요` or `보겠어`
   - `드립니다` not `드려요` (when giving/offering)
@@ -803,13 +842,14 @@ mv _drafts/old-file.md _drafts/category/YYYY/MM/DD/new-file.md
   ✅ Good (Formal):
   오늘은 Next.js 마이그레이션에 대해 알아보겠습니다.
   이 방법을 사용하면 더 나은 성능을 얻을 수 있습니다.
-  
+
   ❌ Avoid (Informal):
   오늘은 Next.js 마이그레이션에 대해 알아볼게요.
   이 방법을 사용하면 더 나은 성능을 얻을 수 있어요.
   ```
 
 - **Reader Address**: Maintain respectful tone when addressing readers:
+
   - Use `여러분` (everyone) when addressing readers collectively
   - Avoid overly casual expressions like `그냥`, `막`, `대충`
   - Use `참고하시기 바랍니다` instead of `참고해주세요`
@@ -856,3 +896,9 @@ mv _drafts/old-file.md _drafts/category/YYYY/MM/DD/new-file.md
 - Drafts only appear in development (`npm run develop`)
 - All `_posts/` content appears in both development and production
 - Use drafts for work-in-progress content
+
+I have provided you with two files:
+
+- The file \@general_index.md contains a list of all the files in the codebase along with a simple description of what it does.
+- The file \@detailed_index.md contains the names of all the functions in the file along with its explanation/docstring.
+  This index may or may not be up to date.
