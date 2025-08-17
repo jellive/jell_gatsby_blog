@@ -120,11 +120,14 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
   ]
 
   return (
-    <Card className={cn(
-      "social-share-card",
-      "border-border/50 bg-card/50 backdrop-blur-sm",
-      "hover:border-border transition-all duration-300"
-    )}>
+    <Card 
+      className={cn(
+        "social-share-card",
+        "border-border/50 bg-card/50 backdrop-blur-sm",
+        "hover:border-border transition-all duration-300"
+      )}
+      data-testid="social-share"
+    >
       <CardHeader className="pb-4">
         <div className="flex items-center gap-2">
           <Fa icon={faShare} className="text-primary text-lg" />
@@ -201,6 +204,7 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
                 {...props}
                 aria-label={`${name}으로 공유하기`}
                 className="w-full"
+                data-testid={`share-${name.toLowerCase()}`}
               >
                 <Button
                   variant="outline"

@@ -17,6 +17,7 @@ export interface PostFrontMatter {
   date: string
   title: string
   tags: string[]
+  featuredImage?: string
 }
 
 export interface PostData {
@@ -68,10 +69,10 @@ function transformImagePaths(content: string, filePath: string): string {
     const month = pathParts[2]
     const day = pathParts[3]
     
-    // Replace image references with absolute paths
+    // Replace image references with absolute paths  
     return content.replace(
       /!\[([^\]]*)\]\(images\/([^)]+)\)/g, 
-      `![$1](/images/${category}/${year}/${month}/${day}/$2)`
+      `![$1](/${category}/${year}/${month}/${day}/images/$2)`
     )
   }
   
@@ -331,12 +332,29 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
   const relativePath = path.relative(baseDirectory, filePath)
   const slug = relativePath.replace(/\.md$/, '')
   
+  // Transform featuredImage path if exists
+  let transformedFeaturedImage: string | undefined
+  if (frontMatter?.featuredImage && frontMatter.featuredImage.startsWith('images/')) {
+    const pathParts = relativePath.split(path.sep)
+    if (pathParts.length >= 4) {
+      const category = pathParts[0]
+      const year = pathParts[1] 
+      const month = pathParts[2]
+      const day = pathParts[3]
+      const imageName = frontMatter.featuredImage.replace('images/', '')
+      transformedFeaturedImage = `/${category}/${year}/${month}/${day}/images/${imageName}`
+    }
+  } else {
+    transformedFeaturedImage = frontMatter?.featuredImage
+  }
+
   // Ensure frontMatter has all required properties with defaults
   const safeFrontMatter: PostFrontMatter = {
     category: frontMatter?.category || 'Uncategorized',
     date: frontMatter?.date || new Date().toISOString().split('T')[0],
     title: frontMatter?.title || path.basename(filePath, '.md'),
-    tags: Array.isArray(frontMatter?.tags) ? frontMatter.tags.filter(Boolean) : []
+    tags: Array.isArray(frontMatter?.tags) ? frontMatter.tags.filter(Boolean) : [],
+    featuredImage: transformedFeaturedImage
   }
   
   return {

@@ -106,9 +106,10 @@ const PostList = (props: PostListProps) => {
           "p-content border border-border rounded-xl",
           "hover:bg-accent/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
         )}
+        data-testid="post-item"
       >
         <Link 
-          href={`/posts/${encodeURIComponent(slug)}`}
+          href={`/posts/${slug}`}
           className="block no-underline text-inherit hover:text-inherit"
         >
           <div className="flex gap-6 items-start">
@@ -135,11 +136,11 @@ const PostList = (props: PostListProps) => {
               
               {/* Metadata */}
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                <time>{formattedDate}</time>
+                <time data-testid="post-date">{formattedDate}</time>
                 {validTags.length > 0 && (
                   <>
                     <span>·</span>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2" data-testid="post-tags">
                       {tagBadges}
                     </div>
                   </>
@@ -171,7 +172,7 @@ const PostList = (props: PostListProps) => {
   })
 
   return (
-    <div className="w-full">
+    <div className="w-full" data-testid="post-list">
       <div className="grid gap-6">
         {mapPost}
       </div>

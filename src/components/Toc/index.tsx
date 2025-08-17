@@ -195,21 +195,24 @@ const Toc = (props: TocProps) => {
   }
 
   return (
-    <Card className={cn(
-      "toc-container font-nanum-gothic transition-all duration-300",
-      isOutside
-        ? cn(
-            "fixed right-2 z-[999] max-w-[300px] min-w-[280px]", // Positioned below header (56px) + ReadingProgress (48px) = ~104px
-            "bg-card/95 backdrop-blur-sm border-border/50",
-            "shadow-lg opacity-40 hover:opacity-95",
-            "max-h-[calc(100vh-8rem)] overflow-hidden", // Adjusted for header + reading progress positioning
-            "hidden lg:block" // Hidden on screens smaller than 1024px
-          )
-        : cn(
-            "bg-secondary/30 border-border/30",
-            "max-w-full"
-          )
-    )}>
+    <Card 
+      className={cn(
+        "toc-container font-nanum-gothic transition-all duration-300",
+        isOutside
+          ? cn(
+              "fixed right-2 z-[999] max-w-[300px] min-w-[280px]", // Positioned below header (56px) + ReadingProgress (48px) = ~104px
+              "bg-card/95 backdrop-blur-sm border-border/50",
+              "shadow-lg opacity-40 hover:opacity-95",
+              "max-h-[calc(100vh-8rem)] overflow-hidden", // Adjusted for header + reading progress positioning
+              "hidden lg:block" // Hidden on screens smaller than 1024px
+            )
+          : cn(
+              "bg-secondary/30 border-border/30",
+              "max-w-full"
+            )
+      )}
+      data-testid={isOutside ? "toc-outside" : "toc-inside"}
+    >
       {isOutside && (
         <CardHeader className="pb-3 pt-4">
           <div className="flex items-center gap-2">
@@ -249,6 +252,7 @@ const Toc = (props: TocProps) => {
             "[&_a]:truncate [&_a]:max-w-full",
             "[&_img]:hidden" // Hide any images in TOC
           )}
+          data-testid="table-of-contents"
           dangerouslySetInnerHTML={{ __html: toc }}
         />
         

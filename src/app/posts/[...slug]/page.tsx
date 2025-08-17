@@ -20,7 +20,17 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const resolvedParams = await params
-  const post = await getPostBySlug(resolvedParams.slug.join('/'))
+  // URL decode each slug segment to handle encoded paths like dev%2Fblog
+  const decodedSlug = resolvedParams.slug.map(segment => {
+    try {
+      return decodeURIComponent(segment)
+    } catch (error) {
+      console.warn('Failed to decode URL segment:', segment, error)
+      return segment
+    }
+  }).join('/')
+  
+  const post = await getPostBySlug(decodedSlug)
   
   if (!post) {
     return {
@@ -68,13 +78,23 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
 export default async function PostPage({ params }: PostPageProps) {
   const resolvedParams = await params
-  const post = await getPostBySlug(resolvedParams.slug.join('/'))
+  // URL decode each slug segment to handle encoded paths like dev%2Fblog
+  const decodedSlug = resolvedParams.slug.map(segment => {
+    try {
+      return decodeURIComponent(segment)
+    } catch (error) {
+      console.warn('Failed to decode URL segment:', segment, error)
+      return segment
+    }
+  }).join('/')
+  
+  const post = await getPostBySlug(decodedSlug)
   
   if (!post) {
     notFound()
   }
 
-  const postUrl = `${siteConfig.siteUrl}/posts/${resolvedParams.slug.join('/')}`
+  const postUrl = `${siteConfig.siteUrl}/posts/${decodedSlug}`
   const description = post.content.substring(0, 160).replace(/\n/g, ' ').trim()
   const excerpt = description.length > 155 ? description.substring(0, 155) + '...' : description
 
@@ -93,7 +113,7 @@ export default async function PostPage({ params }: PostPageProps) {
           category: post.frontMatter.category
         }} 
       />
-      <PostContent post={post} slug={resolvedParams.slug.join('/')} />
+      <PostContent post={post} slug={decodedSlug} />
     </>
   )
 }

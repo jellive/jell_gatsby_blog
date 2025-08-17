@@ -173,7 +173,7 @@ export default function PostContent({ post, slug }: PostContentProps) {
         title={post.frontMatter.title}
       />
       
-      <div className="blog-post-container">
+      <div className="blog-post-container" data-testid="post-content">
         <div>
           <article className="blog-post">
             {/* Post Header */}
@@ -187,18 +187,28 @@ export default function PostContent({ post, slug }: PostContentProps) {
                 </h1>
                 
                 {/* Post Meta Information */}
-                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground" data-testid="post-metadata">
+                  <div className="flex items-center gap-2" data-testid="post-date">
                     <Fa icon={faCalendarAlt} className="text-xs" />
                     <span>{formattedDate}</span>
                   </div>
+                  
+                  {post.frontMatter.category && (
+                    <>
+                      <Separator orientation="vertical" className="h-4" />
+                      <div className="flex items-center gap-2" data-testid="post-category">
+                        <Fa icon={faTag} className="text-xs" />
+                        <span>{post.frontMatter.category}</span>
+                      </div>
+                    </>
+                  )}
                   
                   {post.frontMatter.tags.length > 0 && (
                     <>
                       <Separator orientation="vertical" className="h-4" />
                       <div className="flex items-center gap-2">
                         <Fa icon={faTag} className="text-xs" />
-                        <div className="flex flex-wrap gap-1">
+                        <div className="flex flex-wrap gap-1" data-testid="post-tags">
                           {post.frontMatter.tags.map((tag) => (
                             <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`}>
                               <Badge 
@@ -260,6 +270,7 @@ export default function PostContent({ post, slug }: PostContentProps) {
                     "prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground",
                     "prose-img:rounded-lg prose-img:shadow-md"
                   )}
+                  data-testid="post-body"
                   dangerouslySetInnerHTML={{ __html: post.htmlContent }}
                 />
               </CardContent>
@@ -286,7 +297,7 @@ export default function PostContent({ post, slug }: PostContentProps) {
       {isTableOfContents && <Toc isOutside={true} toc={post.tableOfContents} />}
       
       {/* Comments moved to bottom */}
-      <div className="comments-bottom">
+      <div className="comments-bottom" data-testid="comments">
         <div className="max-w-[728px] mx-auto px-6 mt-16 mb-8">
           <Disqus
             url={postUrl}

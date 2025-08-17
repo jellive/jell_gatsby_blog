@@ -124,6 +124,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
       )}
       aria-label={`현재 테마: ${theme === 'system' ? '시스템' : theme === 'light' ? '라이트' : '다크'}, 클릭하여 변경`}
       title={`테마 변경 (현재: ${theme === 'system' ? '시스템 설정' : theme === 'light' ? '라이트 모드' : '다크 모드'})`}
+      data-testid="theme-toggle"
     >
       {/* Icon container */}
       <div className="relative flex items-center justify-center w-full h-full">

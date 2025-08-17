@@ -44,3 +44,6 @@ CLAUDE.md
 .cache
 .yarn
 .claude
+
+playwright-report/
+playwright-test-results/

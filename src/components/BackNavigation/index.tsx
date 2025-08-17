@@ -67,6 +67,7 @@ export default function BackNavigation({ category, title }: BackNavigationProps)
           )}
           aria-label="뒤로 가기"
           title="뒤로 가기"
+          data-testid="back-navigation"
         >
           <Fa icon={faAngleLeft} className="text-sm" />
           <span className="font-medium">Back</span>
