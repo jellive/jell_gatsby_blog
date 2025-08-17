@@ -5,7 +5,8 @@
 /* ===== Pretendard Font Configuration ===== */
 @font-face {
   font-family: 'Pretendard Variable';
-  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2')
+    format('woff2-variations');
   font-weight: 45 920;
   font-style: normal;
   font-display: swap;
@@ -19,61 +20,63 @@
 @layer base {
   :root {
     /* ===== Shadcn UI Variables (Modern Tech Light Theme) ===== */
-    --background: #ffffff;                      /* Pure white */
-    --foreground: #0f172a;                      /* Primary text color */
-    --card: #f8fafc;                           /* Surface color */
-    --card-foreground: #0f172a;               /* Text on cards */
-    --popover: #f8fafc;                        /* Surface popover */
-    --popover-foreground: #0f172a;             /* Text on popover */
-    --primary: #3b82f6;                        /* Blue 500 - Primary */
-    --primary-foreground: #ffffff;             /* White text on blue */
-    --secondary: #64748b;                      /* Slate 500 - Secondary */
-    --secondary-foreground: #0f172a;           /* Primary text on secondary */
-    --muted: #f8fafc;                          /* Surface muted */
-    --muted-foreground: #64748b;              /* Secondary text */
-    --accent: #06b6d4;                         /* Cyan 500 - Accent */
-    --accent-foreground: #0f172a;              /* Primary text on accent */
-    --destructive: #ef4444;                    /* Red 500 - Error */
-    --destructive-foreground: #ffffff;         /* White text on red */
-    --border: #e2e8f0;                         /* Light border */
-    --input: #e2e8f0;                          /* Light input border */
-    --ring: #3b82f6;                           /* Blue focus ring */
-    --radius: 8px;                             /* Modern border radius */
-    
+    --background: #ffffff; /* Pure white */
+    --foreground: #0f172a; /* Primary text color */
+    --card: #f8fafc; /* Surface color */
+    --card-foreground: #0f172a; /* Text on cards */
+    --popover: #f8fafc; /* Surface popover */
+    --popover-foreground: #0f172a; /* Text on popover */
+    --primary: #3b82f6; /* Blue 500 - Primary */
+    --primary-foreground: #ffffff; /* White text on blue */
+    --secondary: #64748b; /* Slate 500 - Secondary */
+    --secondary-foreground: #0f172a; /* Primary text on secondary */
+    --muted: #f8fafc; /* Surface muted */
+    --muted-foreground: #64748b; /* Secondary text */
+    --accent: #06b6d4; /* Cyan 500 - Accent */
+    --accent-foreground: #0f172a; /* Primary text on accent */
+    --destructive: #ef4444; /* Red 500 - Error */
+    --destructive-foreground: #ffffff; /* White text on red */
+    --border: #e2e8f0; /* Light border */
+    --input: #e2e8f0; /* Light input border */
+    --ring: #3b82f6; /* Blue focus ring */
+    --radius: 8px; /* Modern border radius */
+
     /* ===== Modern Tech Semantic Colors ===== */
-    --success: #10b981;                        /* Emerald 500 */
-    --warning: #f59e0b;                        /* Amber 500 */
-    --error: #ef4444;                          /* Red 500 */
-    --info: #06b6d4;                           /* Cyan 500 */
-    
+    --success: #10b981; /* Emerald 500 */
+    --warning: #f59e0b; /* Amber 500 */
+    --error: #ef4444; /* Red 500 */
+    --info: #06b6d4; /* Cyan 500 */
+
     /* ===== Modern Tech Background Variations ===== */
-    --bg-primary: #ffffff;                     /* Pure white */
-    --bg-secondary: #f8fafc;                   /* Surface color */
-    --bg-tertiary: #f1f5f9;                    /* Hover background */
-    --bg-elevated: #f8fafc;                    /* Cards, modals */
-    --bg-glass: rgba(248, 250, 252, 0.95);    /* Backdrop blur */
-    
+    --bg-primary: #ffffff; /* Pure white */
+    --bg-secondary: #f8fafc; /* Surface color */
+    --bg-tertiary: #f1f5f9; /* Hover background */
+    --bg-elevated: #f8fafc; /* Cards, modals */
+    --bg-glass: rgba(248, 250, 252, 0.95); /* Backdrop blur */
+
     /* ===== Modern Tech Text Variations ===== */
-    --text-primary: #0f172a;                   /* Primary text */
-    --text-secondary: #64748b;                 /* Secondary text */
-    --text-tertiary: #94a3b8;                  /* Muted text */
-    
+    --text-primary: #0f172a; /* Primary text */
+    --text-secondary: #64748b; /* Secondary text */
+    --text-tertiary: #94a3b8; /* Muted text */
+
     /* ===== Pretendard Font Variables ===== */
-    --font-korean: "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    --font-code: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, Monaco, monospace;
-    --font-english: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    
+    --font-korean: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic',
+      -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-code: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Consolas, Monaco, monospace;
+    --font-english: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      Helvetica, Arial, sans-serif;
+
     /* ===== Medium Style Typography ===== */
-    --font-serif: "Noto Serif KR", "Apple SD Gothic Neo", Charter, Georgia, "Times New Roman", serif;
+    --font-serif: 'Noto Serif KR', 'Apple SD Gothic Neo', Charter, Georgia, 'Times New Roman', serif;
     --font-display: var(--font-korean);
-    --text-muted: #cbd5e1;                     /* Very light text */
-    
+    --text-muted: #cbd5e1; /* Very light text */
+
     /* ===== Korean Typography Optimization (Pretendard) ===== */
     --pretendard-body-size: 16px;
     --pretendard-body-line-height: 1.65;
     --pretendard-body-letter-spacing: -0.005em;
     --pretendard-body-word-break: keep-all;
-    
+
     /* Typography Hierarchy (Pretendard) */
     --pretendard-h1-size: 2.2em;
     --pretendard-h1-weight: 700;
@@ -83,21 +86,21 @@
     --pretendard-h3-weight: 600;
     --pretendard-h4-size: 1.2em;
     --pretendard-h4-weight: 500;
-    
+
     /* Mobile Responsive (Pretendard) */
     --pretendard-mobile-size: 15px;
     --pretendard-mobile-line-height: 1.6;
-    
+
     /* Dark Mode Adjustments (Pretendard) */
     --pretendard-dark-weight: 450;
     --pretendard-dark-letter-spacing: 0.01em;
-    
+
     /* ===== Medium Style Typography Variables ===== */
     --medium-body-size: 21px;
     --medium-body-line-height: 1.75;
     --medium-body-letter-spacing: -0.003em;
     --medium-paragraph-spacing: 32px;
-    
+
     /* Medium Heading Scale */
     --medium-title-size: 42px;
     --medium-title-weight: 800;
@@ -108,370 +111,369 @@
     --medium-h2-weight: 700;
     --medium-h3-size: 24px;
     --medium-h3-weight: 600;
-    
+
     /* Medium Layout - 실제 Medium 크기 (1.5배 확장) */
     --medium-content-width: 1092px; /* Original 728px * 1.5 = 1092px */
     --medium-content-padding: 24px;
     --medium-vertical-rhythm: 32px;
-    
+
     /* ===== Modern Tech Border Variations ===== */
-    --border-light: #e2e8f0;                   /* Light border */
-    --border-medium: #cbd5e1;                  /* Medium border */
-    --border-strong: #64748b;                  /* Dark border */
-    --border-focus: #3b82f6;                   /* Blue for focus */
-    
+    --border-light: #e2e8f0; /* Light border */
+    --border-medium: #cbd5e1; /* Medium border */
+    --border-strong: #64748b; /* Dark border */
+    --border-focus: #3b82f6; /* Blue for focus */
+
     /* ===== Modern Tech Interactive States ===== */
-    --hover-bg: #f1f5f9;                       /* Slate 100 hover */
-    --active-bg: #e2e8f0;                      /* Slate 200 active */
-    --disabled-bg: #f8fafc;                    /* Surface disabled */
-    --follow-button: #3b82f6;                  /* Blue primary button */
-    --follow-button-text: #ffffff;             /* White button text */
-    
+    --hover-bg: #f1f5f9; /* Slate 100 hover */
+    --active-bg: #e2e8f0; /* Slate 200 active */
+    --disabled-bg: #f8fafc; /* Surface disabled */
+    --follow-button: #3b82f6; /* Blue primary button */
+    --follow-button-text: #ffffff; /* White button text */
+
     /* ===== Modern Tech Code Highlighting ===== */
-    --code-bg: #f8fafc;                        /* Surface background */
-    --code-border: #e2e8f0;                    /* Light border */
-    --code-text: #334155;                      /* Slate 700 text */
-    --code-comment: #64748b;                   /* Secondary text */
-    --code-keyword: #0f172a;                   /* Primary text bold */
-    --code-string: #059669;                    /* Emerald 600 */
-    --code-number: #dc2626;                    /* Red 600 */
-    --code-function: #3b82f6;                  /* Blue 500 */
-    
+    --code-bg: #f8fafc; /* Surface background */
+    --code-border: #e2e8f0; /* Light border */
+    --code-text: #334155; /* Slate 700 text */
+    --code-comment: #64748b; /* Secondary text */
+    --code-keyword: #0f172a; /* Primary text bold */
+    --code-string: #059669; /* Emerald 600 */
+    --code-number: #dc2626; /* Red 600 */
+    --code-function: #3b82f6; /* Blue 500 */
+
     /* ===== Legacy Color System (Modern Tech) ===== */
-    --color-primary: #3b82f6;         /* Blue 500 */
-    --color-primary-light: #60a5fa;   /* Blue 400 */
-    --color-primary-dark: #2563eb;    /* Blue 600 */
-    --color-accent: #06b6d4;          /* Cyan 500 accent */
-    --color-accent-light: #22d3ee;    /* Cyan 400 */
-    
+    --color-primary: #3b82f6; /* Blue 500 */
+    --color-primary-light: #60a5fa; /* Blue 400 */
+    --color-primary-dark: #2563eb; /* Blue 600 */
+    --color-accent: #06b6d4; /* Cyan 500 accent */
+    --color-accent-light: #22d3ee; /* Cyan 400 */
+
     /* Neutral Colors (Modern Tech Style) */
-    --color-text-primary: #0f172a;    /* Primary text */
-    --color-text-secondary: #64748b;  /* Secondary text */
-    --color-text-tertiary: #94a3b8;   /* Muted text */
-    --color-text-muted: #cbd5e1;      /* Very light text */
-    
+    --color-text-primary: #0f172a; /* Primary text */
+    --color-text-secondary: #64748b; /* Secondary text */
+    --color-text-tertiary: #94a3b8; /* Muted text */
+    --color-text-muted: #cbd5e1; /* Very light text */
+
     /* Background Colors (Modern Tech Style) */
-    --color-bg-primary: #ffffff;      /* Pure white */
-    --color-bg-secondary: #f8fafc;    /* Surface color */
-    --color-bg-tertiary: #f1f5f9;     /* Hover background */
-    --color-bg-elevated: #f8fafc;     /* Card backgrounds */
-    
+    --color-bg-primary: #ffffff; /* Pure white */
+    --color-bg-secondary: #f8fafc; /* Surface color */
+    --color-bg-tertiary: #f1f5f9; /* Hover background */
+    --color-bg-elevated: #f8fafc; /* Card backgrounds */
+
     /* Border Colors (Modern Tech Style) */
-    --color-border-light: #e2e8f0;    /* Light border */
-    --color-border-medium: #cbd5e1;   /* Medium border */
-    --color-border-dark: #64748b;     /* Dark border */
-    
+    --color-border-light: #e2e8f0; /* Light border */
+    --color-border-medium: #cbd5e1; /* Medium border */
+    --color-border-dark: #64748b; /* Dark border */
+
     /* Shadow System (Medium Compatible) */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    
+
     /* Status Colors (Modern Tech Style) */
-    --color-success: #10b981;         /* Emerald 500 */
-    --color-warning: #f59e0b;         /* Amber 500 */
-    --color-error: #ef4444;           /* Red 500 */
-    --color-info: #06b6d4;            /* Cyan 500 */
-    
+    --color-success: #10b981; /* Emerald 500 */
+    --color-warning: #f59e0b; /* Amber 500 */
+    --color-error: #ef4444; /* Red 500 */
+    --color-info: #06b6d4; /* Cyan 500 */
+
     /* Interactive States (Modern Tech Style) */
-    --color-hover-bg: #f1f5f9;        /* Slate 100 hover */
-    --color-active-bg: #e2e8f0;       /* Slate 200 active */
-    
+    --color-hover-bg: #f1f5f9; /* Slate 100 hover */
+    --color-active-bg: #e2e8f0; /* Slate 200 active */
+
     /* Legacy Colors (for backward compatibility) */
     --font-color-0: var(--color-text-primary);
-  
-  /* ===== Layout Variables (Modern Tech Design System) ===== */
-  
-  /* Header Heights - Modern Tech Style */
-  --header-height: 56px;          /* Modern fixed header height matching design tokens */
-  --header-height-m: 56px;        /* Consistent height on mobile */
-  --header-height-s: 56px;        /* Consistent height on small mobile */
-  
-  /* Media Query Breakpoints - Modern Tech Style */
-  --break-desktop: 1280px;        /* xl: Desktop breakpoint */
-  --break-tablet: 1024px;         /* lg: Tablet landscape */
-  --break-mobile: 768px;          /* md: Tablet portrait */
-  --break-mobile-sm: 640px;       /* sm: Mobile landscape */
-  --break-l: 1119px;              /* Legacy support */
-  --break-m: 839px;               /* Legacy support */
-  --break-s: 559px;               /* Legacy support */
-  --break-toc: 1160px;            /* Legacy support */
-  
-  /* Container and Layout Widths - Modern Tech Style */
-  --container-max-width: 1200px;  /* Modern container max width */
-  --sidebar-width: 240px;         /* Modern sidebar width */
-  --main-width: 800px;            /* Modern main content width (optimal reading) */
-  --aside-width: 240px;           /* Modern aside width */
-  --navigation-width: 240px;      /* Modern navigation width */
-  
-  /* Spacing Scale - Modern Tech Style (4px base unit) */
-  --space-1: 4px;                /* Base unit */
-  --space-2: 8px;                /* 2 units */
-  --space-3: 12px;               /* 3 units */
-  --space-4: 16px;               /* 4 units */
-  --space-5: 20px;               /* 5 units */
-  --space-6: 24px;               /* 6 units (content padding) */
-  --space-8: 32px;               /* 8 units */
-  --space-10: 40px;              /* 10 units */
-  --space-12: 48px;              /* 12 units (section margin) */
-  --space-16: 64px;              /* 16 units */
-  --space-20: 80px;              /* 20 units */
-  --space-24: 96px;              /* 24 units */
-  
-  /* Legacy spacing aliases */
-  --space-xs: var(--space-2);    /* 8px */
-  --space-sm: var(--space-3);    /* 12px */
-  --space-md: var(--space-4);    /* 16px */
-  --space-lg: var(--space-6);    /* 24px */
-  --space-xl: var(--space-8);    /* 32px */
-  --space-xxl: var(--space-12);  /* 48px */
-  
-  /* Border Radius - Modern Tech Style */
-  --radius-sm: 4px;              /* Small radius */
-  --radius-md: 6px;              /* Medium radius */
-  --radius-lg: 8px;              /* Large radius (default) */
-  --radius-xl: 12px;             /* Extra large radius */
-  --radius-pill: 999px;          /* Pill button radius */
-  --radius-tag: 6px;             /* Tag radius */
-  
-  /* Font Family Variables - Modern Tech Style with Korean Support */
-  --font-sans: 'SF Pro Display', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
-  --font-mono: 'SF Mono', 'Monaco', 'Consolas', 'Noto Sans Mono', monospace;
-  --font-serif: 'SF Pro Display', 'Noto Serif KR', Georgia, serif;
-  
-  /* Legacy font aliases for backward compatibility */
-  --font-system: var(--font-sans);
-  --font-nanum-gothic: var(--font-sans);
-  --font-noto-serif-kr: var(--font-serif);
-  --font-raleway: var(--font-sans);
-  
-  /* Typography Scale - Modern Tech Style */
-  --font-size-caption: 12px;     /* 0.75rem - Labels, metadata */
-  --font-size-small: 14px;       /* 0.875rem - Captions */
-  --font-size-body: 16px;        /* 1rem - Regular text */
-  --font-size-body-lg: 18px;     /* 1.125rem - Lead text */
-  --font-size-h4: 20px;          /* 1.25rem - Component headers */
-  --font-size-h3: 24px;          /* 1.5rem - Subsection headers */
-  --font-size-h2: 30px;          /* 1.875rem - Section headers */
-  --font-size-h1: 36px;          /* 2.25rem - Page titles */
-  --font-size-display: 48px;     /* 3rem - Hero titles */
-  
-  --line-height-caption: 16px;   /* 1rem */
-  --line-height-small: 20px;     /* 1.25rem */
-  --line-height-body: 24px;      /* 1.5rem */
-  --line-height-body-lg: 28px;   /* 1.75rem */
-  --line-height-h4: 28px;        /* 1.75rem */
-  --line-height-h3: 32px;        /* 2rem */
-  --line-height-h2: 36px;        /* 2.25rem */
-  --line-height-h1: 40px;        /* 2.5rem */
-  --line-height-display: 52px;   /* 3.25rem */
-  
-  --font-weight-light: 300;      /* Light - Large headings */
-  --font-weight-regular: 400;    /* Regular - Body text */
-  --font-weight-medium: 500;     /* Medium - Buttons, emphasis */
-  --font-weight-semibold: 600;   /* Semibold - Headings */
-  --font-weight-bold: 700;       /* Bold - Strong emphasis */
-  
-  /* Component Sizes - Modern Tech Style */
-  --article-image-size: 120px;   /* Modern article image size */
-  --avatar-small: 24px;          /* Modern small avatar */
-  --avatar-medium: 32px;         /* Modern medium avatar */
-  --avatar-large: 48px;          /* Modern large avatar */
-  --button-height: 44px;         /* Modern button height */
-  --input-height: 44px;          /* Modern input height */
-  
-  /* Transitions */
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s ease;
-}
 
-/* ===== Theme System - Class-based & System Preference ===== */
+    /* ===== Layout Variables (Modern Tech Design System) ===== */
 
-/* Dark Mode - Class-based (highest priority) */
-.dark {
-  /* ===== Shadcn UI Variables (Modern Tech Dark Theme) ===== */
-  --background: #0f172a;                      /* Slate 900 dark background */
-  --foreground: #f8fafc;                      /* Slate 50 white text */
-  --card: #1e293b;                           /* Slate 800 dark cards */
-  --card-foreground: #f8fafc;                /* Slate 50 text on cards */
-  --popover: #1e293b;                        /* Slate 800 popover */
-  --popover-foreground: #f8fafc;             /* Slate 50 text on popover */
-  --primary: #60a5fa;                        /* Blue 400 for dark mode */
-  --primary-foreground: #0f172a;             /* Slate 900 text on blue */
-  --secondary: #64748b;                      /* Slate 500 secondary */
-  --secondary-foreground: #f8fafc;           /* Slate 50 text on secondary */
-  --muted: #1e293b;                          /* Slate 800 muted */
-  --muted-foreground: #64748b;              /* Slate 500 muted text */
-  --accent: #22d3ee;                         /* Cyan 400 accent */
-  --accent-foreground: #0f172a;              /* Slate 900 text on accent */
-  --destructive: #f87171;                    /* Red 400 */
-  --destructive-foreground: #f8fafc;         /* Slate 50 text on red */
-  --border: #334155;                         /* Slate 700 border */
-  --input: #334155;                          /* Slate 700 input border */
-  --ring: #60a5fa;                           /* Blue 400 focus ring */
-  --radius: 8px;                             /* Modern border radius */
-  
-  /* ===== Modern Tech Semantic Colors (Dark) ===== */
-  --success: #34d399;                        /* Emerald 400 */
-  --warning: #fbbf24;                        /* Amber 400 */
-  --error: #f87171;                          /* Red 400 */
-  --info: #22d3ee;                           /* Cyan 400 */
-  
-  /* ===== Modern Tech Background Variations (Dark) ===== */
-  --bg-primary: #0f172a;                     /* Slate 900 background */
-  --bg-secondary: #1e293b;                   /* Slate 800 surface */
-  --bg-tertiary: #334155;                    /* Slate 700 hover */
-  --bg-elevated: #1e293b;                    /* Slate 800 cards, modals */
-  --bg-glass: rgba(30, 41, 59, 0.95);       /* Backdrop blur */
-  
-  /* ===== Modern Tech Text Variations (Dark) ===== */
-  --text-primary: #f8fafc;                   /* Slate 50 text */
-  --text-secondary: #64748b;                 /* Slate 500 secondary */
-  --text-tertiary: #94a3b8;                  /* Slate 400 muted */
-  --text-muted: #cbd5e1;                     /* Slate 300 very light */
-  
-  /* ===== Dark Mode Pretendard Adjustments ===== */
-  --pretendard-body-weight: var(--pretendard-dark-weight);
-  --pretendard-body-letter-spacing: var(--pretendard-dark-letter-spacing);
-  
-  /* ===== Modern Tech Border Variations (Dark) ===== */
-  --border-light: #334155;                   /* Slate 700 border */
-  --border-medium: #475569;                  /* Slate 600 medium border */
-  --border-strong: #64748b;                  /* Slate 500 strong border */
-  --border-focus: #60a5fa;                   /* Blue 400 for focus */
-  
-  /* ===== Modern Tech Interactive States (Dark) ===== */
-  --hover-bg: #334155;                       /* Slate 700 hover */
-  --active-bg: #475569;                      /* Slate 600 active */
-  --disabled-bg: #1e293b;                    /* Slate 800 disabled */
-  --follow-button: #60a5fa;                  /* Blue 400 button */
-  --follow-button-text: #0f172a;             /* Slate 900 button text */
-  
-  /* ===== Modern Tech Code Highlighting (Dark) ===== */
-  --code-bg: #1e293b;                        /* Slate 800 background */
-  --code-border: #334155;                    /* Slate 700 border */
-  --code-text: #e2e8f0;                      /* Slate 200 text */
-  --code-comment: #64748b;                   /* Slate 500 comments */
-  --code-keyword: #f8fafc;                   /* Slate 50 keywords bold */
-  --code-string: #34d399;                    /* Emerald 400 strings */
-  --code-number: #f87171;                    /* Red 400 numbers */
-  --code-function: #60a5fa;                  /* Blue 400 functions */
-  
-  /* ===== Legacy Dark Mode Variables (Modern Tech Style) ===== */
-  --color-primary: #60a5fa;         /* Blue 400 for dark mode */
-  --color-primary-light: #93c5fd;   /* Blue 300 */
-  --color-primary-dark: #3b82f6;    /* Blue 500 */
-  --color-accent: #22d3ee;          /* Cyan 400 accent */
-  --color-accent-light: #67e8f9;    /* Cyan 300 */
-  
-  /* Neutral Colors (Dark Modern Tech Style) */
-  --color-text-primary: #f8fafc;    /* Slate 50 text */
-  --color-text-secondary: #64748b;  /* Slate 500 secondary */
-  --color-text-tertiary: #94a3b8;   /* Slate 400 muted */
-  --color-text-muted: #cbd5e1;      /* Slate 300 very light */
-  
-  /* Background Colors (Dark Modern Tech Style) */
-  --color-bg-primary: #0f172a;      /* Slate 900 background */
-  --color-bg-secondary: #1e293b;    /* Slate 800 surface */
-  --color-bg-tertiary: #334155;     /* Slate 700 hover */
-  --color-bg-elevated: #1e293b;     /* Slate 800 card backgrounds */
-  
-  /* Border Colors (Dark Modern Tech Style) */
-  --color-border-light: #334155;    /* Slate 700 border */
-  --color-border-medium: #475569;   /* Slate 600 medium border */
-  --color-border-dark: #64748b;     /* Slate 500 strong border */
-  
-  /* Status Colors (Dark Modern Tech Style) */
-  --color-success: #34d399;         /* Emerald 400 */
-  --color-warning: #fbbf24;         /* Amber 400 */
-  --color-error: #f87171;           /* Red 400 */
-  --color-info: #22d3ee;            /* Cyan 400 */
-  
-  /* Interactive States (Dark Modern Tech Style) */
-  --color-hover-bg: #334155;        /* Slate 700 hover */
-  --color-active-bg: #475569;       /* Slate 600 active */
-  
-  /* Legacy Colors (for backward compatibility) */
-  --font-color-0: var(--color-text-primary);
-}
+    /* Header Heights - Modern Tech Style */
+    --header-height: 56px; /* Modern fixed header height matching design tokens */
+    --header-height-m: 56px; /* Consistent height on mobile */
+    --header-height-s: 56px; /* Consistent height on small mobile */
 
-/* Light Mode - Class-based (explicit) */
-:root.light {
-  /* Light mode uses the Modern Tech variables already defined above */
-  --color-primary: #3b82f6;           /* Blue 500 */
-  --color-accent: #06b6d4;            /* Cyan 500 accent */
-  
-  /* Neutral Colors (Modern Tech Style) */
-  --color-text-primary: #0f172a;      /* Slate 900 text */
-  --color-text-secondary: #64748b;    /* Slate 500 secondary */
-  --color-text-tertiary: #94a3b8;     /* Slate 400 muted */
-  --color-text-muted: #cbd5e1;        /* Slate 300 very light */
-  
-  /* Background Colors (Modern Tech Style) */
-  --color-bg-primary: #ffffff;        /* Pure white */
-  --color-bg-secondary: #f8fafc;      /* Slate 50 surface */
-  --color-bg-tertiary: #f1f5f9;       /* Slate 100 hover */
-  --color-bg-elevated: #f8fafc;       /* Slate 50 card backgrounds */
-  
-  /* Border Colors (Modern Tech Style) */
-  --color-border-light: #e2e8f0;      /* Slate 200 light border */
-  --color-border-medium: #cbd5e1;     /* Slate 300 medium border */
-  --color-border-dark: #64748b;       /* Slate 500 dark border */
-  
-  /* Interactive States (Modern Tech Style) */
-  --color-hover-bg: #f1f5f9;          /* Slate 100 hover */
-  --color-active-bg: #e2e8f0;         /* Slate 200 active */
-  
-  /* Status Colors (Modern Tech Style) */
-  --color-success: #10b981;           /* Emerald 500 */
-  --color-warning: #f59e0b;           /* Amber 500 */
-  --color-error: #ef4444;             /* Red 500 */
-  --color-info: #06b6d4;              /* Cyan 500 */
-  
-  /* Legacy Colors (for backward compatibility) */
-  --font-color-0: var(--color-text-primary);
-}
+    /* Media Query Breakpoints - Modern Tech Style */
+    --break-desktop: 1280px; /* xl: Desktop breakpoint */
+    --break-tablet: 1024px; /* lg: Tablet landscape */
+    --break-mobile: 768px; /* md: Tablet portrait */
+    --break-mobile-sm: 640px; /* sm: Mobile landscape */
+    --break-l: 1119px; /* Legacy support */
+    --break-m: 839px; /* Legacy support */
+    --break-s: 559px; /* Legacy support */
+    --break-toc: 1160px; /* Legacy support */
 
-/* System Preference Fallback (when no class is set) */
-@media (prefers-color-scheme: dark) {
-  :root:not(.light):not(.dark) {
-    /* Modern Tech Dark Theme Colors for System Preference */
-    --color-primary: #60a5fa;           /* Blue 400 for dark mode */
-    --color-accent: #22d3ee;            /* Cyan 400 accent */
-    
+    /* Container and Layout Widths - Modern Tech Style */
+    --container-max-width: 1200px; /* Modern container max width */
+    --sidebar-width: 240px; /* Modern sidebar width */
+    --main-width: 800px; /* Modern main content width (optimal reading) */
+    --aside-width: 240px; /* Modern aside width */
+    --navigation-width: 240px; /* Modern navigation width */
+
+    /* Spacing Scale - Modern Tech Style (4px base unit) */
+    --space-1: 4px; /* Base unit */
+    --space-2: 8px; /* 2 units */
+    --space-3: 12px; /* 3 units */
+    --space-4: 16px; /* 4 units */
+    --space-5: 20px; /* 5 units */
+    --space-6: 24px; /* 6 units (content padding) */
+    --space-8: 32px; /* 8 units */
+    --space-10: 40px; /* 10 units */
+    --space-12: 48px; /* 12 units (section margin) */
+    --space-16: 64px; /* 16 units */
+    --space-20: 80px; /* 20 units */
+    --space-24: 96px; /* 24 units */
+
+    /* Legacy spacing aliases */
+    --space-xs: var(--space-2); /* 8px */
+    --space-sm: var(--space-3); /* 12px */
+    --space-md: var(--space-4); /* 16px */
+    --space-lg: var(--space-6); /* 24px */
+    --space-xl: var(--space-8); /* 32px */
+    --space-xxl: var(--space-12); /* 48px */
+
+    /* Border Radius - Modern Tech Style */
+    --radius-sm: 4px; /* Small radius */
+    --radius-md: 6px; /* Medium radius */
+    --radius-lg: 8px; /* Large radius (default) */
+    --radius-xl: 12px; /* Extra large radius */
+    --radius-pill: 999px; /* Pill button radius */
+    --radius-tag: 6px; /* Tag radius */
+
+    /* Font Family Variables - Modern Tech Style with Korean Support */
+    --font-sans: 'SF Pro Display', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+    --font-mono: 'SF Mono', 'Monaco', 'Consolas', 'Noto Sans Mono', monospace;
+    --font-serif: 'SF Pro Display', 'Noto Serif KR', Georgia, serif;
+
+    /* Legacy font aliases for backward compatibility */
+    --font-system: var(--font-sans);
+    --font-nanum-gothic: var(--font-sans);
+    --font-noto-serif-kr: var(--font-serif);
+    --font-raleway: var(--font-sans);
+
+    /* Typography Scale - Modern Tech Style */
+    --font-size-caption: 12px; /* 0.75rem - Labels, metadata */
+    --font-size-small: 14px; /* 0.875rem - Captions */
+    --font-size-body: 16px; /* 1rem - Regular text */
+    --font-size-body-lg: 18px; /* 1.125rem - Lead text */
+    --font-size-h4: 20px; /* 1.25rem - Component headers */
+    --font-size-h3: 24px; /* 1.5rem - Subsection headers */
+    --font-size-h2: 30px; /* 1.875rem - Section headers */
+    --font-size-h1: 36px; /* 2.25rem - Page titles */
+    --font-size-display: 48px; /* 3rem - Hero titles */
+
+    --line-height-caption: 16px; /* 1rem */
+    --line-height-small: 20px; /* 1.25rem */
+    --line-height-body: 24px; /* 1.5rem */
+    --line-height-body-lg: 28px; /* 1.75rem */
+    --line-height-h4: 28px; /* 1.75rem */
+    --line-height-h3: 32px; /* 2rem */
+    --line-height-h2: 36px; /* 2.25rem */
+    --line-height-h1: 40px; /* 2.5rem */
+    --line-height-display: 52px; /* 3.25rem */
+
+    --font-weight-light: 300; /* Light - Large headings */
+    --font-weight-regular: 400; /* Regular - Body text */
+    --font-weight-medium: 500; /* Medium - Buttons, emphasis */
+    --font-weight-semibold: 600; /* Semibold - Headings */
+    --font-weight-bold: 700; /* Bold - Strong emphasis */
+
+    /* Component Sizes - Modern Tech Style */
+    --article-image-size: 120px; /* Modern article image size */
+    --avatar-small: 24px; /* Modern small avatar */
+    --avatar-medium: 32px; /* Modern medium avatar */
+    --avatar-large: 48px; /* Modern large avatar */
+    --button-height: 44px; /* Modern button height */
+    --input-height: 44px; /* Modern input height */
+
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+  }
+
+  /* ===== Theme System - Class-based & System Preference ===== */
+
+  /* Dark Mode - Class-based (highest priority) */
+  .dark {
+    /* ===== Shadcn UI Variables (Modern Tech Dark Theme) ===== */
+    --background: #0f172a; /* Slate 900 dark background */
+    --foreground: #f8fafc; /* Slate 50 white text */
+    --card: #1e293b; /* Slate 800 dark cards */
+    --card-foreground: #f8fafc; /* Slate 50 text on cards */
+    --popover: #1e293b; /* Slate 800 popover */
+    --popover-foreground: #f8fafc; /* Slate 50 text on popover */
+    --primary: #60a5fa; /* Blue 400 for dark mode */
+    --primary-foreground: #0f172a; /* Slate 900 text on blue */
+    --secondary: #64748b; /* Slate 500 secondary */
+    --secondary-foreground: #f8fafc; /* Slate 50 text on secondary */
+    --muted: #1e293b; /* Slate 800 muted */
+    --muted-foreground: #64748b; /* Slate 500 muted text */
+    --accent: #22d3ee; /* Cyan 400 accent */
+    --accent-foreground: #0f172a; /* Slate 900 text on accent */
+    --destructive: #f87171; /* Red 400 */
+    --destructive-foreground: #f8fafc; /* Slate 50 text on red */
+    --border: #334155; /* Slate 700 border */
+    --input: #334155; /* Slate 700 input border */
+    --ring: #60a5fa; /* Blue 400 focus ring */
+    --radius: 8px; /* Modern border radius */
+
+    /* ===== Modern Tech Semantic Colors (Dark) ===== */
+    --success: #34d399; /* Emerald 400 */
+    --warning: #fbbf24; /* Amber 400 */
+    --error: #f87171; /* Red 400 */
+    --info: #22d3ee; /* Cyan 400 */
+
+    /* ===== Modern Tech Background Variations (Dark) ===== */
+    --bg-primary: #0f172a; /* Slate 900 background */
+    --bg-secondary: #1e293b; /* Slate 800 surface */
+    --bg-tertiary: #334155; /* Slate 700 hover */
+    --bg-elevated: #1e293b; /* Slate 800 cards, modals */
+    --bg-glass: rgba(30, 41, 59, 0.95); /* Backdrop blur */
+
+    /* ===== Modern Tech Text Variations (Dark) ===== */
+    --text-primary: #f8fafc; /* Slate 50 text */
+    --text-secondary: #64748b; /* Slate 500 secondary */
+    --text-tertiary: #94a3b8; /* Slate 400 muted */
+    --text-muted: #cbd5e1; /* Slate 300 very light */
+
+    /* ===== Dark Mode Pretendard Adjustments ===== */
+    --pretendard-body-weight: var(--pretendard-dark-weight);
+    --pretendard-body-letter-spacing: var(--pretendard-dark-letter-spacing);
+
+    /* ===== Modern Tech Border Variations (Dark) ===== */
+    --border-light: #334155; /* Slate 700 border */
+    --border-medium: #475569; /* Slate 600 medium border */
+    --border-strong: #64748b; /* Slate 500 strong border */
+    --border-focus: #60a5fa; /* Blue 400 for focus */
+
+    /* ===== Modern Tech Interactive States (Dark) ===== */
+    --hover-bg: #334155; /* Slate 700 hover */
+    --active-bg: #475569; /* Slate 600 active */
+    --disabled-bg: #1e293b; /* Slate 800 disabled */
+    --follow-button: #60a5fa; /* Blue 400 button */
+    --follow-button-text: #0f172a; /* Slate 900 button text */
+
+    /* ===== Modern Tech Code Highlighting (Dark) ===== */
+    --code-bg: #1e293b; /* Slate 800 background */
+    --code-border: #334155; /* Slate 700 border */
+    --code-text: #e2e8f0; /* Slate 200 text */
+    --code-comment: #64748b; /* Slate 500 comments */
+    --code-keyword: #f8fafc; /* Slate 50 keywords bold */
+    --code-string: #34d399; /* Emerald 400 strings */
+    --code-number: #f87171; /* Red 400 numbers */
+    --code-function: #60a5fa; /* Blue 400 functions */
+
+    /* ===== Legacy Dark Mode Variables (Modern Tech Style) ===== */
+    --color-primary: #60a5fa; /* Blue 400 for dark mode */
+    --color-primary-light: #93c5fd; /* Blue 300 */
+    --color-primary-dark: #3b82f6; /* Blue 500 */
+    --color-accent: #22d3ee; /* Cyan 400 accent */
+    --color-accent-light: #67e8f9; /* Cyan 300 */
+
     /* Neutral Colors (Dark Modern Tech Style) */
-    --color-text-primary: #f8fafc;      /* Slate 50 text */
-    --color-text-secondary: #64748b;    /* Slate 500 secondary */
-    --color-text-tertiary: #94a3b8;     /* Slate 400 muted */
-    --color-text-muted: #cbd5e1;        /* Slate 300 very light */
-    
+    --color-text-primary: #f8fafc; /* Slate 50 text */
+    --color-text-secondary: #64748b; /* Slate 500 secondary */
+    --color-text-tertiary: #94a3b8; /* Slate 400 muted */
+    --color-text-muted: #cbd5e1; /* Slate 300 very light */
+
     /* Background Colors (Dark Modern Tech Style) */
-    --color-bg-primary: #0f172a;        /* Slate 900 background */
-    --color-bg-secondary: #1e293b;      /* Slate 800 surface */
-    --color-bg-tertiary: #334155;       /* Slate 700 hover */
-    --color-bg-elevated: #1e293b;       /* Slate 800 card backgrounds */
-    
+    --color-bg-primary: #0f172a; /* Slate 900 background */
+    --color-bg-secondary: #1e293b; /* Slate 800 surface */
+    --color-bg-tertiary: #334155; /* Slate 700 hover */
+    --color-bg-elevated: #1e293b; /* Slate 800 card backgrounds */
+
     /* Border Colors (Dark Modern Tech Style) */
-    --color-border-light: #334155;      /* Slate 700 border */
-    --color-border-medium: #475569;     /* Slate 600 medium border */
-    --color-border-dark: #64748b;       /* Slate 500 strong border */
-    
-    /* Interactive States (Dark Modern Tech Style) */
-    --color-hover-bg: #334155;          /* Slate 700 hover */
-    --color-active-bg: #475569;         /* Slate 600 active */
-    
+    --color-border-light: #334155; /* Slate 700 border */
+    --color-border-medium: #475569; /* Slate 600 medium border */
+    --color-border-dark: #64748b; /* Slate 500 strong border */
+
     /* Status Colors (Dark Modern Tech Style) */
-    --color-success: #34d399;           /* Emerald 400 */
-    --color-warning: #fbbf24;           /* Amber 400 */
-    --color-error: #f87171;             /* Red 400 */
-    --color-info: #22d3ee;              /* Cyan 400 */
-    
+    --color-success: #34d399; /* Emerald 400 */
+    --color-warning: #fbbf24; /* Amber 400 */
+    --color-error: #f87171; /* Red 400 */
+    --color-info: #22d3ee; /* Cyan 400 */
+
+    /* Interactive States (Dark Modern Tech Style) */
+    --color-hover-bg: #334155; /* Slate 700 hover */
+    --color-active-bg: #475569; /* Slate 600 active */
+
     /* Legacy Colors (for backward compatibility) */
     --font-color-0: var(--color-text-primary);
   }
-}
 
+  /* Light Mode - Class-based (explicit) */
+  :root.light {
+    /* Light mode uses the Modern Tech variables already defined above */
+    --color-primary: #3b82f6; /* Blue 500 */
+    --color-accent: #06b6d4; /* Cyan 500 accent */
+
+    /* Neutral Colors (Modern Tech Style) */
+    --color-text-primary: #0f172a; /* Slate 900 text */
+    --color-text-secondary: #64748b; /* Slate 500 secondary */
+    --color-text-tertiary: #94a3b8; /* Slate 400 muted */
+    --color-text-muted: #cbd5e1; /* Slate 300 very light */
+
+    /* Background Colors (Modern Tech Style) */
+    --color-bg-primary: #ffffff; /* Pure white */
+    --color-bg-secondary: #f8fafc; /* Slate 50 surface */
+    --color-bg-tertiary: #f1f5f9; /* Slate 100 hover */
+    --color-bg-elevated: #f8fafc; /* Slate 50 card backgrounds */
+
+    /* Border Colors (Modern Tech Style) */
+    --color-border-light: #e2e8f0; /* Slate 200 light border */
+    --color-border-medium: #cbd5e1; /* Slate 300 medium border */
+    --color-border-dark: #64748b; /* Slate 500 dark border */
+
+    /* Interactive States (Modern Tech Style) */
+    --color-hover-bg: #f1f5f9; /* Slate 100 hover */
+    --color-active-bg: #e2e8f0; /* Slate 200 active */
+
+    /* Status Colors (Modern Tech Style) */
+    --color-success: #10b981; /* Emerald 500 */
+    --color-warning: #f59e0b; /* Amber 500 */
+    --color-error: #ef4444; /* Red 500 */
+    --color-info: #06b6d4; /* Cyan 500 */
+
+    /* Legacy Colors (for backward compatibility) */
+    --font-color-0: var(--color-text-primary);
+  }
+
+  /* System Preference Fallback (when no class is set) */
+  @media (prefers-color-scheme: dark) {
+    :root:not(.light):not(.dark) {
+      /* Modern Tech Dark Theme Colors for System Preference */
+      --color-primary: #60a5fa; /* Blue 400 for dark mode */
+      --color-accent: #22d3ee; /* Cyan 400 accent */
+
+      /* Neutral Colors (Dark Modern Tech Style) */
+      --color-text-primary: #f8fafc; /* Slate 50 text */
+      --color-text-secondary: #64748b; /* Slate 500 secondary */
+      --color-text-tertiary: #94a3b8; /* Slate 400 muted */
+      --color-text-muted: #cbd5e1; /* Slate 300 very light */
+
+      /* Background Colors (Dark Modern Tech Style) */
+      --color-bg-primary: #0f172a; /* Slate 900 background */
+      --color-bg-secondary: #1e293b; /* Slate 800 surface */
+      --color-bg-tertiary: #334155; /* Slate 700 hover */
+      --color-bg-elevated: #1e293b; /* Slate 800 card backgrounds */
+
+      /* Border Colors (Dark Modern Tech Style) */
+      --color-border-light: #334155; /* Slate 700 border */
+      --color-border-medium: #475569; /* Slate 600 medium border */
+      --color-border-dark: #64748b; /* Slate 500 strong border */
+
+      /* Interactive States (Dark Modern Tech Style) */
+      --color-hover-bg: #334155; /* Slate 700 hover */
+      --color-active-bg: #475569; /* Slate 600 active */
+
+      /* Status Colors (Dark Modern Tech Style) */
+      --color-success: #34d399; /* Emerald 400 */
+      --color-warning: #fbbf24; /* Amber 400 */
+      --color-error: #f87171; /* Red 400 */
+      --color-info: #22d3ee; /* Cyan 400 */
+
+      /* Legacy Colors (for backward compatibility) */
+      --font-color-0: var(--color-text-primary);
+    }
+  }
 } /* End @layer base */
 
 /* ===== Pretendard Dark Mode Typography Adjustments ===== */
@@ -481,7 +483,12 @@
   letter-spacing: var(--pretendard-dark-letter-spacing);
 }
 
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
   font-weight: calc(var(--pretendard-h1-weight) - 50);
   letter-spacing: var(--pretendard-dark-letter-spacing);
 }
@@ -534,15 +541,15 @@
     font-size: var(--pretendard-mobile-size);
     line-height: var(--pretendard-mobile-line-height);
   }
-  
+
   h1 {
     font-size: calc(var(--pretendard-h1-size) * 0.85);
   }
-  
+
   h2 {
     font-size: calc(var(--pretendard-h2-size) * 0.9);
   }
-  
+
   h3 {
     font-size: calc(var(--pretendard-h3-size) * 0.95);
   }
@@ -589,7 +596,12 @@ body {
 }
 
 /* Headings use Pretendard Typography Hierarchy with Korean optimization */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-korean);
   margin-left: 0;
   margin-right: 0;
@@ -645,7 +657,9 @@ a:active {
 #content {
   display: flex;
   flex-direction: column;
-  padding-top: calc(var(--header-height) + 32px); /* Increased padding to prevent header overlap - now 56px + 32px = 88px */
+  padding-top: calc(
+    var(--header-height) + 32px
+  ); /* Increased padding to prevent header overlap - now 56px + 32px = 88px */
   min-height: 100vh;
 }
 
@@ -829,7 +843,7 @@ a:active {
   #Header {
     grid-template-columns: 1fr auto;
   }
-  
+
   #nav {
     grid-column: 2;
     justify-self: end;
@@ -891,7 +905,6 @@ a:active {
 #nav li .tag-wrap svg:hover {
   opacity: 0.8 !important;
 }
-
 
 #nav li .tag-wrap {
   position: relative;
@@ -984,10 +997,6 @@ a:active {
     margin-right: auto;
     margin-left: auto;
   }
-}
-
-.blog-post a {
-  text-decoration-line: underline;
 }
 
 .blog-post-title {
@@ -1212,8 +1221,8 @@ a:active {
 
 /* Syntax Highlighting - Prism.js Theme */
 /* Based on the original Gatsby blog's code highlighting */
-code[class*="language-"],
-pre[class*="language-"] {
+code[class*='language-'],
+pre[class*='language-'] {
   color: #24292e;
   background: none;
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
@@ -1234,24 +1243,24 @@ pre[class*="language-"] {
   hyphens: none;
 }
 
-pre[class*="language-"] {
+pre[class*='language-'] {
   padding: 1em;
-  margin: .5em 0;
+  margin: 0.5em 0;
   overflow: auto;
   border-radius: 0.3em;
   background: #f6f8fa;
   border: 1px solid #e1e4e8;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
   background: #f6f8fa;
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
-  padding: .1em .3em;
-  border-radius: .3em;
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
   white-space: normal;
   color: #d73a49;
   background: rgba(27, 31, 35, 0.05);
@@ -1270,7 +1279,7 @@ pre[class*="language-"] {
 }
 
 .token.namespace {
-  opacity: .7;
+  opacity: 0.7;
 }
 
 .token.property,
@@ -1344,7 +1353,7 @@ pre[class*="language-"] {
   overflow-x: auto;
 }
 
-.blog-post-content code:not([class*="language-"]) {
+.blog-post-content code:not([class*='language-']) {
   background: rgba(27, 31, 35, 0.05);
   border-radius: 3px;
   font-family: var(--font-code);
@@ -1371,17 +1380,17 @@ pre[class*="language-"] {
   height: auto;
   display: block;
   margin: 1.5rem auto;
-  
+
   /* Matching Gatsby's maxWidth: 590px setting */
   width: auto;
   max-width: min(590px, 100%);
-  
+
   /* Smooth loading transition */
   transition: opacity 0.3s ease, transform 0.2s ease;
-  
+
   /* Prevent layout shift during loading */
   object-fit: contain;
-  
+
   /* Subtle hover effect for better UX */
   cursor: zoom-in;
 }
@@ -1424,16 +1433,16 @@ pre[class*="language-"] {
 }
 
 /* Loading state and error handling for images */
-.blog-post-content img[src*="/images/"] {
+.blog-post-content img[src*='/images/'] {
   /* Placeholder background for loading state */
   background: #f8f9fa;
   border: 1px solid #e9ecef;
 }
 
 .blog-post-content img:not([src]),
-.blog-post-content img[src=""] {
+.blog-post-content img[src=''] {
   /* Show placeholder when image fails to load */
-  content: "🖼️ 이미지를 불러올 수 없습니다";
+  content: '🖼️ 이미지를 불러올 수 없습니다';
   display: block;
   text-align: center;
   padding: 2rem;
@@ -1450,7 +1459,7 @@ pre[class*="language-"] {
   .blog-post-content img {
     transition: none;
   }
-  
+
   .blog-post-content img:hover {
     transform: none;
   }
@@ -1466,11 +1475,11 @@ pre[class*="language-"] {
 
 /* Dark mode support (future-proofing) */
 @media (prefers-color-scheme: dark) {
-  .blog-post-content img[src*="/images/"] {
+  .blog-post-content img[src*='/images/'] {
     background: #2d3748;
     border: 1px solid #4a5568;
   }
-  
+
   .blog-post-content p img {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
@@ -1524,7 +1533,7 @@ button:focus-visible,
     padding-left: var(--space-md);
     padding-right: var(--space-md);
   }
-  
+
   /* Mobile Touch Targets */
   .toc-button,
   .social-share-item > div {
@@ -1534,67 +1543,67 @@ button:focus-visible,
     align-items: center;
     justify-content: center;
   }
-  
+
   /* Mobile Spacing */
   .social-share-list {
     gap: var(--space-md);
   }
-  
+
   /* Mobile Typography - Medium Style Optimized */
   .blog-post-container > div,
   .blog-post-container .ad {
     padding: 0 16px;
   }
-  
+
   .blog-post {
     padding: 16px;
   }
-  
+
   .blog-post-title {
     font-size: calc(var(--medium-title-size) * 0.8);
     line-height: 1.2;
     letter-spacing: -0.012em;
     margin-bottom: 24px;
   }
-  
+
   .blog-post-content {
     font-size: 18px;
     line-height: 1.65;
   }
-  
+
   .blog-post-content p {
     font-size: 18px;
     line-height: 1.65;
     margin-bottom: 24px;
   }
-  
+
   .blog-post-content h1 {
     font-size: calc(var(--medium-h2-size) * 0.85);
     line-height: 1.25;
     margin-top: 48px;
     margin-bottom: 24px;
   }
-  
+
   .blog-post-content h2 {
     font-size: calc(var(--medium-h2-size) * 0.85);
     line-height: 1.25;
     margin-top: 40px;
     margin-bottom: 20px;
   }
-  
+
   .blog-post-content h3 {
     font-size: calc(var(--medium-h3-size) * 0.9);
     line-height: 1.3;
     margin-top: 32px;
     margin-bottom: 16px;
   }
-  
+
   /* Mobile Grid - Single column layout */
   .grid-cols-medium-3,
   .grid-cols-medium-2 {
     grid-template-columns: 1fr !important;
   }
-  
+
   /* Mobile Header Adjustments */
   #Header {
     height: var(--header-height);
@@ -1609,12 +1618,12 @@ button:focus-visible,
     padding-left: var(--space-lg);
     padding-right: var(--space-lg);
   }
-  
+
   /* Tablet Grid - 2 columns (sidebar + main) */
   .grid-cols-medium-3 {
     grid-template-columns: var(--sidebar-width) 1fr !important;
   }
-  
+
   /* Hide aside on tablet */
   .desktop\\:block {
     display: none !important;
@@ -1629,12 +1638,12 @@ button:focus-visible,
     padding-left: var(--space-lg);
     padding-right: var(--space-lg);
   }
-  
+
   /* Desktop Grid - Full 3 columns */
   .grid-cols-medium-3 {
     grid-template-columns: var(--sidebar-width) var(--main-width) var(--aside-width) !important;
   }
-  
+
   /* Show all columns on desktop */
   .desktop\\:block {
     display: block !important;
@@ -1647,52 +1656,52 @@ button:focus-visible,
     padding-left: var(--space-sm);
     padding-right: var(--space-sm);
   }
-  
+
   .blog-post-container > div,
   .blog-post-container .ad {
     padding: 0 12px;
   }
-  
+
   .blog-post {
     padding: 12px;
   }
-  
+
   .blog-post-title {
     font-size: calc(var(--medium-title-size) * 0.7);
     line-height: 1.25;
     letter-spacing: -0.01em;
     margin-bottom: 20px;
   }
-  
+
   .blog-post-content {
     font-size: 16px;
     line-height: 1.6;
   }
-  
+
   .blog-post-content p {
     font-size: 16px;
     line-height: 1.6;
     margin-bottom: 20px;
   }
-  
+
   .blog-post-content h1 {
     font-size: calc(var(--medium-h2-size) * 0.75);
     margin-top: 40px;
     margin-bottom: 20px;
   }
-  
+
   .blog-post-content h2 {
     font-size: calc(var(--medium-h2-size) * 0.75);
     margin-top: 32px;
     margin-bottom: 16px;
   }
-  
+
   .blog-post-content h3 {
     font-size: calc(var(--medium-h3-size) * 0.8);
     margin-top: 24px;
     margin-bottom: 12px;
   }
-  
+
   /* Better mobile spacing */
   .blog-post {
     padding: var(--space-sm);
@@ -1704,7 +1713,7 @@ button:focus-visible,
   .toc-button {
     border: 2px solid currentColor;
   }
-  
+
   .social-share-item circle {
     stroke: currentColor;
     stroke-width: 1;
@@ -1717,11 +1726,11 @@ button:focus-visible,
   .social-share-item > div {
     transition: none;
   }
-  
+
   .social-share-item > div:hover {
     transform: none;
   }
-  
+
   window {
     scroll-behavior: auto !important;
   }
@@ -1735,13 +1744,13 @@ button:focus-visible,
   .ad {
     display: none !important;
   }
-  
+
   .blog-post {
     padding: 0;
   }
-  
+
   .blog-post-content a::after {
-    content: " (" attr(href) ")";
+    content: ' (' attr(href) ')';
     font-size: 0.8em;
     color: #666;
   }
@@ -1758,7 +1767,7 @@ button:focus-visible,
 }
 
 .blog-post-content img:not([src])::before {
-  content: "🖼️ 이미지를 불러오는 중...";
+  content: '🖼️ 이미지를 불러오는 중...';
   color: #6c757d;
   font-size: 0.9rem;
 }
@@ -1822,20 +1831,20 @@ button:focus-visible,
   .tag-page {
     padding: 1rem 0.5rem;
   }
-  
+
   .tag-header {
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
   }
-  
+
   .tag-title {
     font-size: 2rem;
   }
-  
+
   .tag-symbol {
     font-size: 1.5rem;
   }
-  
+
   .tag-description {
     font-size: 1rem;
   }
@@ -1883,7 +1892,8 @@ button:focus-visible,
   flex-wrap: wrap;
 }
 
-.btn-primary, .btn-secondary {
+.btn-primary,
+.btn-secondary {
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   text-decoration: none;
@@ -1917,11 +1927,11 @@ button:focus-visible,
   .tag-not-found h1 {
     font-size: 2rem;
   }
-  
+
   .tag-not-found p {
     font-size: 1rem;
   }
-  
+
   .tag-not-found-actions {
     flex-direction: column;
     align-items: center;
