@@ -14,13 +14,13 @@ interface PostPageProps {
 export async function generateStaticParams() {
   const posts = await getAllPosts()
   return posts.map((post) => ({
-    slug: encodeURIComponent(post.slug),
+    slug: post.slug,
   }))
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const resolvedParams = await params
-  const post = await getPostBySlug(decodeURIComponent(resolvedParams.slug))
+  const post = await getPostBySlug(resolvedParams.slug)
   
   if (!post) {
     return {
@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
 export default async function PostPage({ params }: PostPageProps) {
   const resolvedParams = await params
-  const post = await getPostBySlug(decodeURIComponent(resolvedParams.slug))
+  const post = await getPostBySlug(resolvedParams.slug)
   
   if (!post) {
     notFound()
@@ -93,7 +93,7 @@ export default async function PostPage({ params }: PostPageProps) {
           category: post.frontMatter.category
         }} 
       />
-      <PostContent post={post} slug={decodeURIComponent(resolvedParams.slug)} />
+      <PostContent post={post} slug={resolvedParams.slug} />
     </>
   )
 }
