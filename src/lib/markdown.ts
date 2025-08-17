@@ -72,7 +72,7 @@ function transformImagePaths(content: string, filePath: string): string {
     // Replace image references with absolute paths  
     return content.replace(
       /!\[([^\]]*)\]\(images\/([^)]+)\)/g, 
-      `![$1](/${category}/${year}/${month}/${day}/images/$2)`
+      `![$1](/images/${category}/${year}/${month}/${day}/images/$2)`
     )
   }
   
@@ -342,7 +342,7 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
       const month = pathParts[2]
       const day = pathParts[3]
       const imageName = frontMatter.featuredImage.replace('images/', '')
-      transformedFeaturedImage = `/${category}/${year}/${month}/${day}/images/${imageName}`
+      transformedFeaturedImage = `/images/${category}/${year}/${month}/${day}/images/${imageName}`
     }
   } else {
     transformedFeaturedImage = frontMatter?.featuredImage
