@@ -21,4 +21,4 @@ const nextConfig = {
   // Note: compress removed - Next.js handles compression automatically
 }
 
-module.exports = nextConfig
+export default nextConfig

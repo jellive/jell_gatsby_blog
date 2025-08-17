@@ -1,6 +1,7 @@
 {
   "name": "jell-nextjs-blog",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "description": "Modern blog built with Next.js 14",
   "author": "Jell",
