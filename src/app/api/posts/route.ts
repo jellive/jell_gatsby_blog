@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getAllPosts } from '@/lib/markdown'
 
+export const dynamic = 'force-static'
+
 export async function GET() {
   try {
     const posts = await getAllPosts()

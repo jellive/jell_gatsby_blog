@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { siteConfig } from '@/lib/config'
 
+export const dynamic = 'force-static'
+
 export async function GET(request: NextRequest) {
   const browserconfig = `<?xml version="1.0" encoding="utf-8"?>
 <browserconfig>

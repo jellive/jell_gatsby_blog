@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getAllPosts, getAllTags } from '@/lib/markdown'
 import { siteConfig } from '@/lib/config'
 
+export const dynamic = 'force-static'
+
 export async function GET(request: NextRequest) {
   const posts = await getAllPosts()
   const tags = await getAllTags()

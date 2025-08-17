@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'export', // Temporarily disabled for dev server
+  output: 'export', // Enable static export for Netlify deployment
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   images: {
-    unoptimized: true,
+    unoptimized: true, // Required for static export
     domains: [],
     formats: ['image/webp', 'image/avif']
   }

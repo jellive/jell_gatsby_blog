@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getAllPosts } from '@/lib/markdown'
 import { siteConfig } from '@/lib/config'
 
+export const dynamic = 'force-static'
+
 function escapeXml(unsafe: string) {
   return unsafe.replace(/[<>&'"]/g, function (c) {
     switch (c) {
