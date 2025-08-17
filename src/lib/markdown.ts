@@ -329,7 +329,7 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
   const isDraft = filePath.includes('_drafts')
   const baseDirectory = isDraft ? draftsDirectory : postsDirectory
   const relativePath = path.relative(baseDirectory, filePath)
-  const slug = relativePath.replace(/\.md$/, '').replace(/\//g, '-')
+  const slug = relativePath.replace(/\.md$/, '')
   
   // Ensure frontMatter has all required properties with defaults
   const safeFrontMatter: PostFrontMatter = {
