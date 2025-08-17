@@ -48,23 +48,12 @@
   [headers.values]
     Content-Type = "application/xml"
 
-# URL rewrite rules for Next.js static export with Korean URL support
-[[redirects]]
-  from = "/posts/*"
-  to = "/posts/:splat/index.html"
-  status = 200
-  conditions = {Role = ["visitor"]}
-
-# Handle trailing slash for posts
-[[redirects]]
-  from = "/posts/*/index.html"
-  to = "/posts/:splat/"
-  status = 301
+# Next.js static export - direct file serving (no rewrites needed)
+# Static files are served directly by Netlify
 
 # SPA fallback for client-side routing (only if file doesn't exist)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  conditions = {Role = ["visitor"]}
   force = false
