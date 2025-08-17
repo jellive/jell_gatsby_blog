@@ -11,11 +11,9 @@
   PYTHON_VERSION = ""
   PIPENV_VENV_IN_PROJECT = ""
 
-# Redirects for Next.js static export (SSG)
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
+# Static site redirects - removed problematic catch-all redirect
+# For Next.js static export, let Netlify handle standard routing
+# Only add specific redirects if needed for legacy URLs
 
 # Headers for security and performance
 [[headers]]
