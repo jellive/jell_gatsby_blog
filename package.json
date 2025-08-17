@@ -7,6 +7,7 @@
   "author": "Jell",
   "license": "MIT",
   "scripts": {
+    "prebuild": "node scripts/copy-images.js",
     "build": "next build",
     "dev": "next dev -p 9000",
     "lint": "next lint",
