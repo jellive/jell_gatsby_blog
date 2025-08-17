@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 
+export const dynamic = 'force-static'
+
 export async function GET() {
   const manifest = {
     "name": "Jell의 세상 사는 이야기",
