@@ -11,7 +11,6 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeStringify from 'rehype-stringify'
 import { glob } from 'glob'
-import GithubSlugger from 'github-slugger'
 
 export interface PostFrontMatter {
   category: string
@@ -107,8 +106,6 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
     console.log('📄 Content after TOC replacement preview:', transformedContent.substring(0, 300))
   }
   
-  // Create shared slugger instance for consistent ID generation
-  const slugger = new GithubSlugger()
 
   // Process markdown to HTML with proper remark → rehype pipeline
   const processedContent = await unified()
