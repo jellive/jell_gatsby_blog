@@ -12,7 +12,7 @@ export default async function Home() {
       <main className="min-h-screen">
         {/* Desktop Layout: Side-by-side Bio and Content */}
         <div className="hidden lg:block">
-          <div className="w-[65vw] mx-auto px-content">
+          <div className="max-w-[75vw] mx-auto px-content">
             <div className="flex gap-8 min-h-screen">
               {/* Bio Sidebar (280px) */}
               <aside className="w-[280px] flex-shrink-0">

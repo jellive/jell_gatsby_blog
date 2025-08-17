@@ -172,7 +172,7 @@ const PostList = (props: PostListProps) => {
   })
 
   return (
-    <div className="w-full" data-testid="post-list">
+    <div className="w-full max-w-4xl" data-testid="post-list">
       <div className="grid gap-6">
         {mapPost}
       </div>

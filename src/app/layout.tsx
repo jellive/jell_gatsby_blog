@@ -87,10 +87,10 @@ export default function RootLayout({
         />
       </head>
       <body 
-        className="min-h-screen bg-background text-foreground font-medium-default antialiased transition-colors duration-300"
-        style={{ 
-          backgroundColor: 'var(--background, #FFFFFF)', 
-          color: 'var(--foreground, #242424)',
+        className="min-h-screen bg-background text-foreground font-sans antialiased transition-colors duration-300"
+        style={{
+          backgroundColor: 'var(--background, #ffffff)',
+          color: 'var(--foreground, #0f172a)',
           fontFamily: 'var(--font-korean, "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, BlinkMacSystemFont, system-ui, sans-serif)'
         }}
       >

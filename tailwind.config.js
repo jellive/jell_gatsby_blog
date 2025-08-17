@@ -79,16 +79,16 @@ export default {
         tag: "6px",     // Modern Tech tags
       },
 
-      // Modern Tech font system
+      // Modern Tech font system with Pretendard
       fontFamily: {
-        'sans': ['SF Pro Display', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
-        'mono': ['SF Mono', 'Monaco', 'Consolas', 'Noto Sans Mono', 'monospace'],
-        'serif': ['SF Pro Display', 'Noto Serif KR', 'Georgia', 'serif'],
+        'sans': ['Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        'mono': ['JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', 'Monaco', 'Consolas', 'Noto Sans Mono', 'monospace'],
+        'serif': ['Noto Serif KR', 'Apple SD Gothic Neo', 'Charter', 'Georgia', 'Times New Roman', 'serif'],
         // Legacy aliases for backward compatibility
-        'system': ['SF Pro Display', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
-        'nanum-gothic': ['SF Pro Display', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
-        'noto-serif-kr': ['SF Pro Display', 'Noto Serif KR', 'Georgia', 'serif'],
-        'raleway': ['SF Pro Display', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
+        'system': ['Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
+        'nanum-gothic': ['Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
+        'noto-serif-kr': ['Noto Serif KR', 'Apple SD Gothic Neo', 'Charter', 'Georgia', 'serif'],
+        'raleway': ['Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
       },
 
       // Modern Tech font sizes
