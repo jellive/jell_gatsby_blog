@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { siteConfig } from '@/lib/config'
 
 export const dynamic = 'force-static'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const robots = `User-agent: *
 Allow: /
 

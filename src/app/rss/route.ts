@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { getAllPosts } from '@/lib/markdown'
 import { siteConfig } from '@/lib/config'
 
@@ -22,7 +22,7 @@ function escapeXml(unsafe: string) {
   })
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const posts = await getAllPosts()
   const latestPosts = posts.slice(0, 10) // Get latest 10 posts
 

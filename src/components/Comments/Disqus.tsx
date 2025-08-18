@@ -49,7 +49,7 @@ export default function Disqus({ url, identifier, title }: DisqusProps) {
       // Load Disqus for the first time
       const script = document.createElement('script')
       script.src = `https://${shortname}.disqus.com/embed.js`
-      script.setAttribute('data-timestamp', String(+new Date()))
+      script.setAttribute('data-timestamp', String(Number(new Date())))
       script.async = true
       document.head.appendChild(script)
     }

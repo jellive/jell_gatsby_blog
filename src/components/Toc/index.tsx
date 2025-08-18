@@ -101,17 +101,17 @@ const Toc = (props: TocProps) => {
 
         // Debug: Log target element search result with more detail
         console.log('🎯 Target Element Search Result:', {
-          foundElement: !!targetElement,
+          foundElement: Boolean(targetElement),
           elementType: targetElement?.tagName,
           elementText: targetElement?.textContent?.trim(),
           elementId: targetElement?.id,
           searchStrategies: {
-            directId: !!document.getElementById(targetId),
-            rawId: !!document.getElementById(rawTargetId),
-            querySelector: !!document.querySelector(`[id="${targetId}"]`),
-            textMatch: !!Array.from(
+            directId: Boolean(document.getElementById(targetId)),
+            rawId: Boolean(document.getElementById(rawTargetId)),
+            querySelector: Boolean(document.querySelector(`[id="${targetId}"]`)),
+            textMatch: Boolean(Array.from(
               document.querySelectorAll('h1, h2, h3, h4, h5, h6')
-            ).find(el => el.textContent?.trim() === targetId),
+            ).find(el => el.textContent?.trim() === targetId)),
           },
         })
 

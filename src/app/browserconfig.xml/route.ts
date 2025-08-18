@@ -1,9 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { siteConfig } from '@/lib/config'
+import { NextResponse } from 'next/server'
 
 export const dynamic = 'force-static'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const browserconfig = `<?xml version="1.0" encoding="utf-8"?>
 <browserconfig>
   <msapplication>

@@ -37,6 +37,13 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  // ESLint configuration for build
+  eslint: {
+    // Only run ESLint on these directories during build
+    dirs: ['src'],
+    // Allow production builds to complete even with ESLint warnings
+    ignoreDuringBuilds: false,
+  },
   // Experimental features for performance
   experimental: {
     optimizePackageImports: ['@fortawesome/react-fontawesome', 'lucide-react'],
