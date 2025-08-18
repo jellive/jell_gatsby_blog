@@ -142,7 +142,7 @@ npm install --save-dev jest-environment-jsdom
 
 #### 테스트 구조 계획
 
-```
+```text
 tests/
 ├── unit/
 │   ├── components/

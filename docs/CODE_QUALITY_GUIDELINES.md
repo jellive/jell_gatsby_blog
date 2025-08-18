@@ -521,7 +521,7 @@ test.describe('Blog Core Functionality', () => {
 
 **파일 및 디렉토리 명명**:
 
-```
+```text
 ✅ 좋은 예시
 components/
 ├── ui/

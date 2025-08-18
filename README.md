@@ -1,4 +1,4 @@
-# Jell 블로그의 소스 코드입니다.
+# Jell 블로그의 소스 코드입니다
 
 [사이트](https://blog.jell.kr)
 

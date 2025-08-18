@@ -213,10 +213,12 @@ const unusedVariable = 'temp'
 
 1. **Check this guide first**
 2. **Run diagnostic commands**:
+
    ```bash
    npm run type-check
    npm run lint
    ```
+
 3. **Review error messages carefully**
 4. **Check recent changes** that might have introduced issues
 

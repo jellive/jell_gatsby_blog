@@ -8,7 +8,7 @@ tags: ['개발', 'iOS', 'Cocoapods', 'XCode']
 집에서 iOS를 공부하기 위해 습관적으로 cocoapods를 업데이트하고 빌드를 하려고 보니
 ![증상 스크린샷](images/screenshot1.png)
 
-```
+```bash
 Undefined symbols for architecture arm64:
   "_OBJC_CLASS_$_RLMNotificationToken", recerenced from:
       objc-class-ref in RxRealm.o
@@ -22,7 +22,7 @@ ld: symbol(s) not found for architecture arm64
 
 우선 Podfile에 설정되어 있는 RealmSwift를 5.4.3버전으로 내립니다.
 
-```
+```ruby
     pod 'RealmSwift', '~> 5.4.3'
 ```
 

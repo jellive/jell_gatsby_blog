@@ -44,7 +44,7 @@ This is a personal blog that has been migrated from Gatsby to Next.js. The proje
 
 Organized by category and date structure: `category/YYYY/MM/DD/post-name.md`
 
-#### Categories:
+#### Categories
 
 - **`bicycle/`** - Cycling and sports-related content
 - **`chat/`** - Personal thoughts, casual posts, life updates

@@ -28,7 +28,7 @@ xhttp.send() // 지정된 XMLHttpRequest를 시작합니다.
 
 readyState는 각각 다음과 같은 상태를 나타냅니다.
 
-```
+```text
   0 (uninitialized) - (request가 초기화되지 않음)
   1 (loading) - (서버와의 연결이 성사됨)
   2 (loaded) - (서버가 request를 받음)

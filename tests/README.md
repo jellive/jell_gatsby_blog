@@ -6,7 +6,7 @@
 
 ### 테스트 파일 구조
 
-```
+```text
 tests/e2e/
 ├── blog-navigation.spec.ts      # 블로그 내비게이션 및 UI 테스트
 ├── url-routing.spec.ts          # URL 라우팅 및 계층 구조 테스트

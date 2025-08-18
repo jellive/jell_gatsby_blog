@@ -10,7 +10,7 @@ tags: ['개발', 'iOS', 'Cocoapods', 'XCode']
 기존 에러는 다음과 같습니다.  
 ![증상 스크린샷](images/screenshot1.png)
 
-```
+```text
 Undefined symbols for architecture arm64:
   "_OBJC_CLASS_$_RLMNotificationToken", recerenced from:
       objc-class-ref in RxRealm.o
