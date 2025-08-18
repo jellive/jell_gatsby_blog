@@ -13,12 +13,16 @@ interface CommandPaletteContextType {
   setAllPosts: (posts: PostData[]) => void
 }
 
-const CommandPaletteContext = createContext<CommandPaletteContextType | undefined>(undefined)
+const CommandPaletteContext = createContext<
+  CommandPaletteContextType | undefined
+>(undefined)
 
 export const useCommandPalette = () => {
   const context = useContext(CommandPaletteContext)
   if (context === undefined) {
-    throw new Error('useCommandPalette must be used within a CommandPaletteProvider')
+    throw new Error(
+      'useCommandPalette must be used within a CommandPaletteProvider'
+    )
   }
   return context
 }
@@ -27,7 +31,9 @@ interface CommandPaletteProviderProps {
   children: React.ReactNode
 }
 
-export function CommandPaletteProvider({ children }: CommandPaletteProviderProps) {
+export function CommandPaletteProvider({
+  children,
+}: CommandPaletteProviderProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [allPosts, setAllPosts] = useState<PostData[]>([])
 
@@ -43,7 +49,7 @@ export function CommandPaletteProvider({ children }: CommandPaletteProviderProps
         event.preventDefault()
         togglePalette()
       }
-      
+
       // ESC to close
       if (event.key === 'Escape' && isOpen) {
         closePalette()
@@ -67,7 +73,7 @@ export function CommandPaletteProvider({ children }: CommandPaletteProviderProps
     <CommandPaletteContext.Provider value={value}>
       {children}
       {/* Global Command Palette */}
-      <CommandPalette 
+      <CommandPalette
         allPosts={allPosts}
         isOpen={isOpen}
         onOpenChange={setIsOpen}

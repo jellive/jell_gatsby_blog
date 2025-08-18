@@ -3,13 +3,13 @@
 import React, { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { 
-  faSearch, 
-  faFilter, 
-  faHashtag, 
-  faFolder, 
+import {
+  faSearch,
+  faFilter,
+  faHashtag,
+  faFolder,
   faFileText,
-  faList
+  faList,
 } from '@fortawesome/free-solid-svg-icons'
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -26,7 +26,9 @@ interface SearchInteractiveProps {
   allPosts: PostData[]
 }
 
-export default function SearchInteractive({ allPosts }: SearchInteractiveProps) {
+export default function SearchInteractive({
+  allPosts,
+}: SearchInteractiveProps) {
   const [value, setValue] = useState('')
   const [isTitleOnly, setIsTitleOnly] = useState(true)
   const [activeTab, setActiveTab] = useState('all')
@@ -38,12 +40,12 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
         posts: allPosts,
         tags: [],
         categories: [],
-        totalCount: allPosts.length
+        totalCount: allPosts.length,
       }
     }
 
     const lowerValue = value.toLowerCase()
-    
+
     // Filter posts
     const filteredPosts = allPosts.filter((post: PostData) => {
       const { frontMatter, content } = post
@@ -57,51 +59,61 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
     })
 
     // Get all unique tags and categories from all posts
-    const allTags = Array.from(new Set(allPosts.flatMap(post => post.frontMatter.tags)))
-    const allCategories = Array.from(new Set(allPosts.map(post => post.frontMatter.category)))
+    const allTags = Array.from(
+      new Set(allPosts.flatMap(post => post.frontMatter.tags))
+    )
+    const allCategories = Array.from(
+      new Set(allPosts.map(post => post.frontMatter.category))
+    )
 
     // Filter tags and categories that match search
-    const matchingTags = allTags.filter(tag => 
-      tag.toLowerCase().includes(lowerValue)
-    ).map(tag => ({
-      name: tag,
-      count: allPosts.filter(post => post.frontMatter.tags.includes(tag)).length,
-      posts: allPosts.filter(post => post.frontMatter.tags.includes(tag))
-    }))
+    const matchingTags = allTags
+      .filter(tag => tag.toLowerCase().includes(lowerValue))
+      .map(tag => ({
+        name: tag,
+        count: allPosts.filter(post => post.frontMatter.tags.includes(tag))
+          .length,
+        posts: allPosts.filter(post => post.frontMatter.tags.includes(tag)),
+      }))
 
-    const matchingCategories = allCategories.filter(category => 
-      category.toLowerCase().includes(lowerValue)
-    ).map(category => ({
-      name: category,
-      count: allPosts.filter(post => post.frontMatter.category === category).length,
-      posts: allPosts.filter(post => post.frontMatter.category === category)
-    }))
+    const matchingCategories = allCategories
+      .filter(category => category.toLowerCase().includes(lowerValue))
+      .map(category => ({
+        name: category,
+        count: allPosts.filter(post => post.frontMatter.category === category)
+          .length,
+        posts: allPosts.filter(post => post.frontMatter.category === category),
+      }))
 
     return {
       posts: filteredPosts,
       tags: matchingTags,
       categories: matchingCategories,
-      totalCount: filteredPosts.length + matchingTags.length + matchingCategories.length
+      totalCount:
+        filteredPosts.length + matchingTags.length + matchingCategories.length,
     }
   }, [value, isTitleOnly, allPosts])
 
   const showingAllPosts = value === ''
 
   return (
-    <div className="search-container w-full max-w-4xl mx-auto px-4 space-y-6">
+    <div className="search-container mx-auto w-full max-w-4xl space-y-6 px-4">
       {/* Search Controls */}
-      <Card className={cn(
-        "border-border/50 bg-card/50 backdrop-blur-sm",
-        "hover:border-border transition-all duration-300"
-      )}>
+      <Card
+        className={cn(
+          'border-border/50 bg-card/50 backdrop-blur-sm',
+          'transition-all duration-300 hover:border-border'
+        )}
+      >
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2">
-            <Fa icon={faSearch} className="text-primary text-lg" />
+            <Fa icon={faSearch} className="text-lg text-primary" />
             <h2 className="text-lg font-semibold text-foreground">
               Search Posts
             </h2>
             <Badge variant="secondary" className="ml-auto text-xs">
-              {searchResults.totalCount} {searchResults.totalCount === 1 ? 'result' : 'results'}
+              {searchResults.totalCount}{' '}
+              {searchResults.totalCount === 1 ? 'result' : 'results'}
             </Badge>
           </div>
         </CardHeader>
@@ -109,8 +121,8 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
         <CardContent className="space-y-4">
           {/* Search Input */}
           <div className="relative">
-            <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-              <Fa icon={faSearch} className="text-muted-foreground text-sm" />
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 transform">
+              <Fa icon={faSearch} className="text-sm text-muted-foreground" />
             </div>
             <Input
               type="search"
@@ -121,10 +133,10 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
               autoComplete="off"
               autoFocus={true}
               className={cn(
-                "pl-10 pr-4 h-12",
-                "border-border/50 focus:border-primary",
-                "bg-background/50 focus:bg-background",
-                "transition-all duration-200"
+                'h-12 pl-10 pr-4',
+                'border-border/50 focus:border-primary',
+                'bg-background/50 focus:bg-background',
+                'transition-all duration-200'
               )}
               data-testid="search-input"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,7 +148,7 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                 variant="ghost"
                 size="sm"
                 onClick={() => setValue('')}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0"
+                className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 transform p-0"
               >
                 ×
               </Button>
@@ -148,12 +160,12 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
           {/* Search Options */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Fa icon={faFilter} className="text-muted-foreground text-sm" />
+              <Fa icon={faFilter} className="text-sm text-muted-foreground" />
               <span className="text-sm font-medium text-muted-foreground">
                 Search in:
               </span>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <Toggle
                 pressed={isTitleOnly}
@@ -161,20 +173,20 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                 variant="outline"
                 size="sm"
                 className={cn(
-                  "data-[state=on]:bg-primary data-[state=on]:text-primary-foreground",
-                  "hover:bg-secondary/80 transition-all duration-200"
+                  'data-[state=on]:bg-primary data-[state=on]:text-primary-foreground',
+                  'hover:bg-secondary/80 transition-all duration-200'
                 )}
               >
                 Title Only
               </Toggle>
               <Toggle
                 pressed={!isTitleOnly}
-                onPressedChange={(pressed) => setIsTitleOnly(!pressed)}
+                onPressedChange={pressed => setIsTitleOnly(!pressed)}
                 variant="outline"
                 size="sm"
                 className={cn(
-                  "data-[state=on]:bg-primary data-[state=on]:text-primary-foreground",
-                  "hover:bg-secondary/80 transition-all duration-200"
+                  'data-[state=on]:bg-primary data-[state=on]:text-primary-foreground',
+                  'hover:bg-secondary/80 transition-all duration-200'
                 )}
               >
                 Title + Content
@@ -184,22 +196,28 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
 
           {/* Search Status */}
           {value && (
-            <div className={cn(
-              "flex items-center justify-between p-3 rounded-md",
-              "bg-secondary/30 border border-border/30"
-            )}>
+            <div
+              className={cn(
+                'flex items-center justify-between rounded-md p-3',
+                'bg-secondary/30 border-border/30 border'
+              )}
+            >
               <div className="flex items-center gap-2">
-                <Badge variant={searchResults.totalCount > 0 ? "default" : "destructive"} className="text-xs">
+                <Badge
+                  variant={
+                    searchResults.totalCount > 0 ? 'default' : 'destructive'
+                  }
+                  className="text-xs"
+                >
                   {searchResults.totalCount > 0 ? 'Found' : 'No results'}
                 </Badge>
                 <span className="text-sm text-muted-foreground">
-                  {searchResults.totalCount > 0 
+                  {searchResults.totalCount > 0
                     ? `${searchResults.totalCount} result${searchResults.totalCount !== 1 ? 's' : ''} found for "${value}"`
-                    : `No results found for "${value}"`
-                  }
+                    : `No results found for "${value}"`}
                 </span>
               </div>
-              
+
               {searchResults.totalCount === 0 && (
                 <Button
                   variant="ghost"
@@ -225,7 +243,11 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
             <PostList posts={allPosts} />
           </div>
         ) : (
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="w-full"
+          >
             <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="all" className="gap-2">
                 <Fa icon={faList} className="text-xs" />
@@ -234,7 +256,7 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                   {searchResults.totalCount}
                 </Badge>
               </TabsTrigger>
-              
+
               <TabsTrigger value="posts" className="gap-2">
                 <Fa icon={faFileText} className="text-xs" />
                 <span>포스트</span>
@@ -242,7 +264,7 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                   {searchResults.posts.length}
                 </Badge>
               </TabsTrigger>
-              
+
               <TabsTrigger value="tags" className="gap-2">
                 <Fa icon={faHashtag} className="text-xs" />
                 <span>태그</span>
@@ -250,7 +272,7 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                   {searchResults.tags.length}
                 </Badge>
               </TabsTrigger>
-              
+
               <TabsTrigger value="categories" className="gap-2">
                 <Fa icon={faFolder} className="text-xs" />
                 <span>카테고리</span>
@@ -266,8 +288,8 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                 {/* Posts Section */}
                 {searchResults.posts.length > 0 && (
                   <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <Fa icon={faFileText} className="text-primary text-sm" />
+                    <div className="mb-4 flex items-center gap-2">
+                      <Fa icon={faFileText} className="text-sm text-primary" />
                       <h3 className="text-lg font-semibold text-foreground">
                         포스트 ({searchResults.posts.length})
                       </h3>
@@ -281,23 +303,33 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                 {/* Tags Section */}
                 {searchResults.tags.length > 0 && (
                   <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <Fa icon={faHashtag} className="text-primary text-sm" />
+                    <div className="mb-4 flex items-center gap-2">
+                      <Fa icon={faHashtag} className="text-sm text-primary" />
                       <h3 className="text-lg font-semibold text-foreground">
                         태그 ({searchResults.tags.length})
                       </h3>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                      {searchResults.tags.map((tag) => (
-                        <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`}>
-                          <Card className={cn(
-                            "p-4 hover:border-primary transition-all duration-200",
-                            "hover:shadow-md cursor-pointer"
-                          )}>
+                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+                      {searchResults.tags.map(tag => (
+                        <Link
+                          key={tag.name}
+                          href={`/tags/${encodeURIComponent(tag.name)}`}
+                        >
+                          <Card
+                            className={cn(
+                              'p-4 transition-all duration-200 hover:border-primary',
+                              'cursor-pointer hover:shadow-md'
+                            )}
+                          >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
-                                <Fa icon={faHashtag} className="text-green-500 text-sm" />
-                                <span className="font-medium text-foreground">#{tag.name}</span>
+                                <Fa
+                                  icon={faHashtag}
+                                  className="text-sm text-green-500"
+                                />
+                                <span className="font-medium text-foreground">
+                                  #{tag.name}
+                                </span>
                               </div>
                               <Badge variant="secondary" className="text-xs">
                                 {tag.count}
@@ -313,23 +345,33 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                 {/* Categories Section */}
                 {searchResults.categories.length > 0 && (
                   <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <Fa icon={faFolder} className="text-primary text-sm" />
+                    <div className="mb-4 flex items-center gap-2">
+                      <Fa icon={faFolder} className="text-sm text-primary" />
                       <h3 className="text-lg font-semibold text-foreground">
                         카테고리 ({searchResults.categories.length})
                       </h3>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                      {searchResults.categories.map((category) => (
-                        <Link key={category.name} href={`/?category=${encodeURIComponent(category.name)}`}>
-                          <Card className={cn(
-                            "p-4 hover:border-primary transition-all duration-200",
-                            "hover:shadow-md cursor-pointer"
-                          )}>
+                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+                      {searchResults.categories.map(category => (
+                        <Link
+                          key={category.name}
+                          href={`/?category=${encodeURIComponent(category.name)}`}
+                        >
+                          <Card
+                            className={cn(
+                              'p-4 transition-all duration-200 hover:border-primary',
+                              'cursor-pointer hover:shadow-md'
+                            )}
+                          >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
-                                <Fa icon={faFolder} className="text-blue-500 text-sm" />
-                                <span className="font-medium text-foreground">{category.name}</span>
+                                <Fa
+                                  icon={faFolder}
+                                  className="text-sm text-blue-500"
+                                />
+                                <span className="font-medium text-foreground">
+                                  {category.name}
+                                </span>
                               </div>
                               <Badge variant="secondary" className="text-xs">
                                 {category.count}
@@ -344,9 +386,15 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
 
                 {/* No Results */}
                 {searchResults.totalCount === 0 && (
-                  <div className="text-center py-12" data-testid="no-search-results">
-                    <Fa icon={faSearch} className="text-4xl text-muted-foreground mb-4" />
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
+                  <div
+                    className="py-12 text-center"
+                    data-testid="no-search-results"
+                  >
+                    <Fa
+                      icon={faSearch}
+                      className="mb-4 text-4xl text-muted-foreground"
+                    />
+                    <h3 className="mb-2 text-lg font-semibold text-foreground">
                       검색 결과가 없습니다
                     </h3>
                     <p className="text-muted-foreground">
@@ -362,9 +410,12 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
               {searchResults.posts.length > 0 ? (
                 <PostList posts={searchResults.posts} />
               ) : (
-                <div className="text-center py-12">
-                  <Fa icon={faFileText} className="text-4xl text-muted-foreground mb-4" />
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                <div className="py-12 text-center">
+                  <Fa
+                    icon={faFileText}
+                    className="mb-4 text-4xl text-muted-foreground"
+                  />
+                  <h3 className="mb-2 text-lg font-semibold text-foreground">
                     포스트 검색 결과가 없습니다
                   </h3>
                   <p className="text-muted-foreground">
@@ -377,21 +428,29 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
             {/* Tags Only Tab */}
             <TabsContent value="tags" className="mt-6">
               {searchResults.tags.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {searchResults.tags.map((tag) => (
-                    <Link key={tag.name} href={`/tags/${encodeURIComponent(tag.name)}`}>
-                      <Card className={cn(
-                        "p-6 hover:border-primary transition-all duration-200",
-                        "hover:shadow-md cursor-pointer"
-                      )}>
-                        <div className="flex items-center justify-between mb-3">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {searchResults.tags.map(tag => (
+                    <Link
+                      key={tag.name}
+                      href={`/tags/${encodeURIComponent(tag.name)}`}
+                    >
+                      <Card
+                        className={cn(
+                          'p-6 transition-all duration-200 hover:border-primary',
+                          'cursor-pointer hover:shadow-md'
+                        )}
+                      >
+                        <div className="mb-3 flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <Fa icon={faHashtag} className="text-green-500 text-lg" />
-                            <span className="font-semibold text-foreground">#{tag.name}</span>
+                            <Fa
+                              icon={faHashtag}
+                              className="text-lg text-green-500"
+                            />
+                            <span className="font-semibold text-foreground">
+                              #{tag.name}
+                            </span>
                           </div>
-                          <Badge variant="secondary">
-                            {tag.count} posts
-                          </Badge>
+                          <Badge variant="secondary">{tag.count} posts</Badge>
                         </div>
                         <p className="text-sm text-muted-foreground">
                           이 태그가 포함된 포스트들을 확인해보세요
@@ -401,9 +460,12 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-12">
-                  <Fa icon={faHashtag} className="text-4xl text-muted-foreground mb-4" />
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                <div className="py-12 text-center">
+                  <Fa
+                    icon={faHashtag}
+                    className="mb-4 text-4xl text-muted-foreground"
+                  />
+                  <h3 className="mb-2 text-lg font-semibold text-foreground">
                     태그 검색 결과가 없습니다
                   </h3>
                   <p className="text-muted-foreground">
@@ -416,17 +478,27 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
             {/* Categories Only Tab */}
             <TabsContent value="categories" className="mt-6">
               {searchResults.categories.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {searchResults.categories.map((category) => (
-                    <Link key={category.name} href={`/?category=${encodeURIComponent(category.name)}`}>
-                      <Card className={cn(
-                        "p-6 hover:border-primary transition-all duration-200",
-                        "hover:shadow-md cursor-pointer"
-                      )}>
-                        <div className="flex items-center justify-between mb-3">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {searchResults.categories.map(category => (
+                    <Link
+                      key={category.name}
+                      href={`/?category=${encodeURIComponent(category.name)}`}
+                    >
+                      <Card
+                        className={cn(
+                          'p-6 transition-all duration-200 hover:border-primary',
+                          'cursor-pointer hover:shadow-md'
+                        )}
+                      >
+                        <div className="mb-3 flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <Fa icon={faFolder} className="text-blue-500 text-lg" />
-                            <span className="font-semibold text-foreground">{category.name}</span>
+                            <Fa
+                              icon={faFolder}
+                              className="text-lg text-blue-500"
+                            />
+                            <span className="font-semibold text-foreground">
+                              {category.name}
+                            </span>
                           </div>
                           <Badge variant="secondary">
                             {category.count} posts
@@ -440,9 +512,12 @@ export default function SearchInteractive({ allPosts }: SearchInteractiveProps) 
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-12">
-                  <Fa icon={faFolder} className="text-4xl text-muted-foreground mb-4" />
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                <div className="py-12 text-center">
+                  <Fa
+                    icon={faFolder}
+                    className="mb-4 text-4xl text-muted-foreground"
+                  />
+                  <h3 className="mb-2 text-lg font-semibold text-foreground">
                     카테고리 검색 결과가 없습니다
                   </h3>
                   <p className="text-muted-foreground">

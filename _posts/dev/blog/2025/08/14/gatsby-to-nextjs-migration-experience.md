@@ -14,6 +14,7 @@ tags: ['Gatsby', 'Next.js', '마이그레이션', '개발', 'React']
 그렇게 시작된 마이그레이션의 여정. 처음에는 막막했지만, 체계적인 접근과 꼼꼼한 준비를 통해 성공적으로 Next.js 14로 마이그레이션을 완료했습니다. draft 시스템과 복잡한 마크다운 처리까지 모두 구현한 완전한 성공 사례를 공유하고자 합니다.
 
 ```toc
+
 ```
 
 ## 왜 마이그레이션을 결심했는가
@@ -35,7 +36,7 @@ plugins: [
   'gatsby-plugin-sass',
   'gatsby-plugin-sharp',
   'gatsby-transformer-sharp',
-  'gatsby-transformer-remark'
+  'gatsby-transformer-remark',
   // ... 14개 더
 ]
 ```
@@ -126,7 +127,10 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
   let transformedContent = transformImagePaths(content, filePath)
 
   // TOC 처리 로직
-  transformedContent = transformedContent.replace(/```toc\s*```/g, '## Table of Contents')
+  transformedContent = transformedContent.replace(
+    /```toc\s*```/g,
+    '## Table of Contents'
+  )
 
   // unified + remark + rehype 파이프라인
   const processedContent = await unified()
@@ -145,7 +149,9 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
 
   // TOC 추출 로직 (30줄 더...)
   let tableOfContents = ''
-  const tocHeadingMatch = htmlContent.match(/<h2[^>]*>Table of Contents<\/h2>([\s\S]*?)(?=<h[1-6]|$)/i)
+  const tocHeadingMatch = htmlContent.match(
+    /<h2[^>]*>Table of Contents<\/h2>([\s\S]*?)(?=<h[1-6]|$)/i
+  )
   // ... 복잡한 정규식과 파싱 로직
 
   return {
@@ -179,7 +185,10 @@ function transformImagePaths(content: string, filePath: string): string {
     const month = pathParts[2]
     const day = pathParts[3]
 
-    return content.replace(/!\[([^\]]*)\]\(images\/([^)]+)\)/g, `![$1](/images/${category}/${year}/${month}/${day}/$2)`)
+    return content.replace(
+      /!\[([^\]]*)\]\(images\/([^)]+)\)/g,
+      `![$1](/images/${category}/${year}/${month}/${day}/$2)`
+    )
   }
   return content
 }
@@ -208,8 +217,8 @@ const nextConfig = {
   output: 'export',
   distDir: 'out',
   images: {
-    unoptimized: true
-  }
+    unoptimized: true,
+  },
   // 정적 배포를 위한 추가 설정들...
 }
 ```

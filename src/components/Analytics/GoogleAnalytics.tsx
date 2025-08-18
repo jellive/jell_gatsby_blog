@@ -5,7 +5,7 @@ import { siteConfig } from '@/lib/config'
 
 export default function GoogleAnalytics() {
   const GA_MEASUREMENT_ID = siteConfig.googleAnalytics
-  
+
   if (!GA_MEASUREMENT_ID || process.env.NODE_ENV === 'development') {
     return null
   }

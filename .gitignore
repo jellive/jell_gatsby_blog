@@ -47,3 +47,6 @@ CLAUDE.md
 
 playwright-report/
 playwright-test-results/
+test-results/
+@detailed_index.md
+@general_index.md

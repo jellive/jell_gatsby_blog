@@ -33,7 +33,7 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
     }
     setLargeCount(large)
   }, [tagGroups])
-  
+
   // Handle hash navigation and redirect to proper URL
   useEffect(() => {
     if (typeof window !== 'undefined' && location.hash) {
@@ -50,17 +50,17 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
   const getBadgeVariant = (totalCount: number) => {
     if (largeCount === 0) return 'outline'
     const ratio = totalCount / largeCount
-    if (ratio >= 0.8) return 'default'  // Largest tags
-    if (ratio >= 0.5) return 'secondary'  // Medium tags
-    return 'outline'  // Smallest tags
+    if (ratio >= 0.8) return 'default' // Largest tags
+    if (ratio >= 0.5) return 'secondary' // Medium tags
+    return 'outline' // Smallest tags
   }
 
   const getBadgeSize = (totalCount: number) => {
     if (largeCount === 0) return 'default'
     const ratio = totalCount / largeCount
-    if (ratio >= 0.8) return 'lg'  // Largest tags
-    if (ratio >= 0.5) return 'default'  // Medium tags
-    return 'sm'  // Smallest tags
+    if (ratio >= 0.8) return 'lg' // Largest tags
+    if (ratio >= 0.5) return 'default' // Medium tags
+    return 'sm' // Smallest tags
   }
 
   const getPostList = () => {
@@ -77,34 +77,36 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
 
   const renderPostListSection = () => {
     const posts = getPostList()
-    
+
     // If no tag is selected or "undefined" tag is selected, show helpful message
     if (targetTag === 'undefined' || posts.length === 0) {
       return (
-        <Card className={cn(
-          "border-border/50 bg-card/50 backdrop-blur-sm",
-          "hover:border-border transition-all duration-300"
-        )}>
+        <Card
+          className={cn(
+            'border-border/50 bg-card/50 backdrop-blur-sm',
+            'transition-all duration-300 hover:border-border'
+          )}
+        >
           <CardHeader className="pb-4">
             <div className="flex items-center gap-2">
-              <Fa icon={faInfo} className="text-primary text-lg" />
+              <Fa icon={faInfo} className="text-lg text-primary" />
               <h2 className="text-lg font-semibold text-foreground">
                 태그로 포스트 찾기
               </h2>
             </div>
           </CardHeader>
           <CardContent className="space-y-3">
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               위의 태그를 클릭하면 해당 태그가 포함된 포스트들을 볼 수 있습니다.
             </p>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               태그 크기는 포스트 개수에 따라 달라집니다.
             </p>
           </CardContent>
         </Card>
       )
     }
-    
+
     return (
       <div data-testid="tag-post-list">
         <PostList posts={posts} />
@@ -114,25 +116,25 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
 
   const validTags = tagGroups.filter(g => g.fieldValue !== 'undefined')
   const undefinedTag = tagGroups.find(g => g.fieldValue === 'undefined')
-  
-  const tagElements = validTags.map((g) => {
+
+  const tagElements = validTags.map(g => {
     const variant = getBadgeVariant(g.totalCount)
     const isSelected = g.fieldValue === targetTag
-    
+
     return (
       <div key={g.fieldValue} data-testid="tag-item">
         <Badge
           variant={isSelected ? 'default' : variant}
           className={cn(
-            "cursor-pointer transition-all duration-200 hover:scale-105",
-            "border-border/50 hover:border-border",
-            "px-3 py-2 text-sm font-medium",
-            isSelected 
-              ? "bg-primary text-primary-foreground border-primary" 
-              : "hover:bg-secondary/80",
+            'cursor-pointer transition-all duration-200 hover:scale-105',
+            'border-border/50 hover:border-border',
+            'px-3 py-2 text-sm font-medium',
+            isSelected
+              ? 'border-primary bg-primary text-primary-foreground'
+              : 'hover:bg-secondary/80',
             // Size-based styling
-            getBadgeSize(g.totalCount) === 'lg' && "text-base px-4 py-2.5",
-            getBadgeSize(g.totalCount) === 'sm' && "text-xs px-2 py-1.5"
+            getBadgeSize(g.totalCount) === 'lg' && 'px-4 py-2.5 text-base',
+            getBadgeSize(g.totalCount) === 'sm' && 'px-2 py-1.5 text-xs'
           )}
           onClick={() => {
             setTargetTag(g.fieldValue)
@@ -141,32 +143,37 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
             }
           }}
         >
-        <Fa icon={faHashtag} className="mr-1 text-xs opacity-70" />
-        {g.fieldValue}
-        <span className={cn(
-          "ml-1.5 text-xs opacity-70",
-          isSelected && "opacity-90"
-        )}>
-          {g.totalCount}
-        </span>
+          <Fa icon={faHashtag} className="mr-1 text-xs opacity-70" />
+          {g.fieldValue}
+          <span
+            className={cn(
+              'ml-1.5 text-xs opacity-70',
+              isSelected && 'opacity-90'
+            )}
+          >
+            {g.totalCount}
+          </span>
         </Badge>
       </div>
     )
   })
 
   return (
-    <div id="tags" className="tags-container w-full max-w-6xl mx-auto px-4 space-y-6">
+    <div
+      id="tags"
+      className="tags-container mx-auto w-full max-w-6xl space-y-6 px-4"
+    >
       {/* Tags Cloud */}
-      <Card className={cn(
-        "border-border/50 bg-card/50 backdrop-blur-sm",
-        "hover:border-border transition-all duration-300"
-      )}>
+      <Card
+        className={cn(
+          'border-border/50 bg-card/50 backdrop-blur-sm',
+          'transition-all duration-300 hover:border-border'
+        )}
+      >
         <CardHeader className="pb-4">
           <div className="flex items-center gap-2">
-            <Fa icon={faTags} className="text-primary text-lg" />
-            <h1 className="text-xl font-bold text-foreground">
-              All Tags
-            </h1>
+            <Fa icon={faTags} className="text-lg text-primary" />
+            <h1 className="text-xl font-bold text-foreground">All Tags</h1>
             <Badge variant="secondary" className="ml-auto text-xs">
               {validTags.length} tags
             </Badge>
@@ -175,35 +182,38 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
 
         <CardContent className="space-y-4">
           {/* Tags Grid */}
-          <div 
+          <div
             className={cn(
-              "flex flex-wrap gap-2 p-4 rounded-md",
-              "bg-secondary/20 border border-border/30"
+              'flex flex-wrap gap-2 rounded-md p-4',
+              'bg-secondary/20 border-border/30 border'
             )}
             data-testid="tag-list"
           >
             {tagElements.length > 0 ? (
               tagElements
             ) : (
-              <div className="text-sm text-muted-foreground italic">
+              <div className="text-sm italic text-muted-foreground">
                 No tags available
               </div>
             )}
           </div>
 
           {/* Tag Stats */}
-          <div className={cn(
-            "flex items-center justify-between p-3 rounded-md text-xs",
-            "bg-secondary/30 border border-border/30 text-muted-foreground"
-          )}>
+          <div
+            className={cn(
+              'flex items-center justify-between rounded-md p-3 text-xs',
+              'bg-secondary/30 border-border/30 border text-muted-foreground'
+            )}
+          >
             <div className="flex items-center gap-4">
               <span>Total posts: {undefinedTag?.totalCount || 0}</span>
               <Separator orientation="vertical" className="h-4" />
-              <span>Tagged posts: {validTags.reduce((sum, tag) => sum + tag.totalCount, 0)}</span>
+              <span>
+                Tagged posts:{' '}
+                {validTags.reduce((sum, tag) => sum + tag.totalCount, 0)}
+              </span>
             </div>
-            <div className="text-xs opacity-70">
-              Click tags to filter posts
-            </div>
+            <div className="text-xs opacity-70">Click tags to filter posts</div>
           </div>
         </CardContent>
       </Card>

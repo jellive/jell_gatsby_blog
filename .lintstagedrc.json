@@ -1,0 +1,9 @@
+{
+  "*.{js,jsx,ts,tsx}": [
+    "eslint --fix",
+    "prettier --write",
+    "jest --bail --findRelatedTests --passWithNoTests"
+  ],
+  "*.{json,css,scss,md}": ["prettier --write"],
+  "*.md": ["markdownlint-cli2 --fix"]
+}

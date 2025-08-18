@@ -7,12 +7,14 @@ A comprehensive design system optimized for developer-focused content, modern ty
 ## Color System
 
 ### Primary Palette
+
 - **Primary**: `#3b82f6` (Blue 500) - Links, CTAs, primary actions
 - **Primary Hover**: `#2563eb` (Blue 600) - Interactive states
 - **Secondary**: `#64748b` (Slate 500) - Secondary text, metadata
 - **Accent**: `#06b6d4` (Cyan 500) - Highlights, notifications
 
 ### Neutral System
+
 - **Background**: `#ffffff` (Light) / `#0f172a` (Dark)
 - **Surface**: `#f8fafc` (Light) / `#1e293b` (Dark)
 - **Border**: `#e2e8f0` (Light) / `#334155` (Dark)
@@ -21,6 +23,7 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Text Muted**: `#94a3b8` (Light/Dark)
 
 ### Semantic Colors
+
 - **Success**: `#10b981` (Emerald 500)
 - **Warning**: `#f59e0b` (Amber 500)
 - **Error**: `#ef4444` (Red 500)
@@ -29,11 +32,13 @@ A comprehensive design system optimized for developer-focused content, modern ty
 ## Typography
 
 ### Font Stack
+
 - **Primary**: `'SF Pro Display', 'Noto Sans KR', system-ui, -apple-system, sans-serif`
 - **Mono**: `'SF Mono', 'Monaco', 'Consolas', 'Noto Sans Mono', monospace`
 - **Serif**: `'SF Pro Display', 'Noto Serif KR', Georgia, serif`
 
 ### Scale System
+
 - **Display**: 48px/52px (3rem/3.25rem) - Hero titles
 - **H1**: 36px/40px (2.25rem/2.5rem) - Page titles
 - **H2**: 30px/36px (1.875rem/2.25rem) - Section headers
@@ -45,6 +50,7 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Caption**: 12px/16px (0.75rem/1rem) - Labels, metadata
 
 ### Font Weights
+
 - **Light**: 300 - Large headings, display text
 - **Regular**: 400 - Body text, default
 - **Medium**: 500 - Emphasis, buttons
@@ -70,6 +76,7 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **24**: 96px (6rem)
 
 ### Component Spacing
+
 - **Content Padding**: 24px (1.5rem)
 - **Section Margin**: 48px (3rem)
 - **Element Gap**: 16px (1rem)
@@ -78,6 +85,7 @@ A comprehensive design system optimized for developer-focused content, modern ty
 ## Layout System
 
 ### Breakpoints
+
 - **sm**: 640px - Mobile landscape
 - **md**: 768px - Tablet portrait
 - **lg**: 1024px - Tablet landscape
@@ -85,12 +93,14 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **2xl**: 1536px - Large desktop
 
 ### Grid System
+
 - **Container Max**: 1200px
 - **Content Max**: 800px (optimal reading width)
 - **Sidebar**: 240px
 - **Navigation**: 64px height
 
 ### Layout Tokens
+
 - **Header Height**: 64px
 - **Footer Height**: auto (min 120px)
 - **Sidebar Width**: 240px
@@ -100,7 +110,9 @@ A comprehensive design system optimized for developer-focused content, modern ty
 ## Component System
 
 ### Buttons
+
 #### Primary Button
+
 - **Background**: Primary color
 - **Text**: White
 - **Padding**: 12px 24px (3 6)
@@ -110,6 +122,7 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Hover**: Primary hover color, slight shadow
 
 #### Secondary Button
+
 - **Background**: Transparent
 - **Border**: 1px solid border color
 - **Text**: Primary text color
@@ -117,13 +130,16 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Hover**: Background surface color
 
 #### Ghost Button
+
 - **Background**: Transparent
 - **Text**: Secondary text color
 - **Padding**: 12px 16px
 - **Hover**: Background surface color
 
 ### Cards
+
 #### Base Card
+
 - **Background**: Surface color
 - **Border**: 1px solid border color
 - **Border Radius**: 12px (3)
@@ -131,6 +147,7 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Shadow**: Subtle (0 1px 3px rgba(0,0,0,0.1))
 
 #### Article Card
+
 - **Hover**: Slight lift (0 4px 12px rgba(0,0,0,0.15))
 - **Transition**: All 200ms ease
 - **Title**: H3 size, semibold weight
@@ -138,7 +155,9 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Excerpt**: Body small size, secondary color
 
 ### Code Blocks
+
 #### Inline Code
+
 - **Background**: Surface color with slight tint
 - **Text**: Mono font, primary color
 - **Padding**: 2px 6px
@@ -146,6 +165,7 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Font Size**: 0.875em relative to parent
 
 #### Code Block
+
 - **Background**: Dark surface (#1e293b)
 - **Text**: Light text (#f8fafc)
 - **Padding**: 24px (6)
@@ -155,7 +175,9 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Overflow**: Auto scroll
 
 ### Navigation
+
 #### Header Navigation
+
 - **Height**: 64px
 - **Background**: Surface with blur backdrop
 - **Border**: Bottom border
@@ -164,13 +186,16 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Active State**: Accent color
 
 #### Breadcrumbs
+
 - **Font Size**: Body small
 - **Color**: Muted text
 - **Separator**: "/" or "›"
 - **Hover**: Primary color
 
 ### Form Elements
+
 #### Input Fields
+
 - **Height**: 44px
 - **Padding**: 12px 16px
 - **Border**: 1px solid border color
@@ -179,6 +204,7 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Focus**: Primary color border, subtle shadow
 
 #### Labels
+
 - **Font Size**: Body small
 - **Font Weight**: Medium
 - **Color**: Primary text
@@ -187,17 +213,20 @@ A comprehensive design system optimized for developer-focused content, modern ty
 ## Interaction Design
 
 ### Hover States
+
 - **Buttons**: Color change, subtle shadow
 - **Cards**: Lift effect, border color change
 - **Links**: Color change, underline
 - **Duration**: 200ms ease
 
 ### Focus States
+
 - **Ring**: 2px solid primary color
 - **Offset**: 2px
 - **Border Radius**: Matches component
 
 ### Loading States
+
 - **Skeleton**: Animated gradient
 - **Spinner**: Primary color, 24px size
 - **Progress**: Primary color bar
@@ -205,16 +234,19 @@ A comprehensive design system optimized for developer-focused content, modern ty
 ## Accessibility
 
 ### Contrast Requirements
+
 - **Normal Text**: 4.5:1 minimum
 - **Large Text**: 3:1 minimum
 - **Non-text**: 3:1 minimum
 
 ### Focus Management
+
 - **Visible Focus**: Always present
 - **Logical Order**: Tab sequence follows visual flow
 - **Skip Links**: Available for main content
 
 ### Screen Reader Support
+
 - **Semantic HTML**: Proper heading hierarchy
 - **ARIA Labels**: Descriptive and complete
 - **Alt Text**: Meaningful for images
@@ -222,7 +254,9 @@ A comprehensive design system optimized for developer-focused content, modern ty
 ## Code Highlighting
 
 ### Syntax Themes
+
 #### Light Theme
+
 - **Background**: `#f8fafc`
 - **Text**: `#334155`
 - **Keywords**: `#0f172a` (Bold)
@@ -232,6 +266,7 @@ A comprehensive design system optimized for developer-focused content, modern ty
 - **Functions**: `#3b82f6`
 
 #### Dark Theme
+
 - **Background**: `#1e293b`
 - **Text**: `#e2e8f0`
 - **Keywords**: `#f8fafc` (Bold)
@@ -243,22 +278,24 @@ A comprehensive design system optimized for developer-focused content, modern ty
 ## Implementation Guidelines
 
 ### CSS Custom Properties Structure
+
 ```css
 :root {
   /* Colors */
   --color-primary: 59 130 246;
   --color-primary-hover: 37 99 235;
   --color-secondary: 100 116 139;
-  
+
   /* Typography */
-  --font-sans: 'SF Pro Display', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  --font-sans:
+    'SF Pro Display', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
   --font-mono: 'SF Mono', 'Monaco', 'Consolas', 'Noto Sans Mono', monospace;
-  
+
   /* Spacing */
   --spacing-unit: 4px;
   --content-padding: 24px;
   --section-margin: 48px;
-  
+
   /* Layout */
   --header-height: 64px;
   --sidebar-width: 240px;
@@ -267,6 +304,7 @@ A comprehensive design system optimized for developer-focused content, modern ty
 ```
 
 ### Tailwind Configuration Extensions
+
 ```javascript
 module.exports = {
   theme: {
@@ -274,23 +312,30 @@ module.exports = {
       colors: {
         primary: {
           DEFAULT: 'rgb(59 130 246)',
-          hover: 'rgb(37 99 235)'
-        }
+          hover: 'rgb(37 99 235)',
+        },
       },
       fontFamily: {
-        sans: ['SF Pro Display', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['SF Mono', 'Monaco', 'Consolas', 'Noto Sans Mono', 'monospace']
+        sans: [
+          'SF Pro Display',
+          'Noto Sans KR',
+          'system-ui',
+          '-apple-system',
+          'sans-serif',
+        ],
+        mono: ['SF Mono', 'Monaco', 'Consolas', 'Noto Sans Mono', 'monospace'],
       },
       spacing: {
-        'content': '24px',
-        'section': '48px'
-      }
-    }
-  }
+        content: '24px',
+        section: '48px',
+      },
+    },
+  },
 }
 ```
 
 ### Component Architecture
+
 - **Atomic Design**: Atoms → Molecules → Organisms → Templates → Pages
 - **Composition**: Prefer composition over inheritance
 - **Props Interface**: TypeScript strict typing
@@ -299,12 +344,14 @@ module.exports = {
 ## Performance Considerations
 
 ### Bundle Optimization
+
 - **Tree Shaking**: Component-level imports
 - **CSS Purging**: Remove unused styles
 - **Image Optimization**: WebP format, responsive sizing
 - **Font Loading**: Preload critical fonts
 
 ### Runtime Performance
+
 - **CSS Variables**: Hardware-accelerated theme switching
 - **Intersection Observer**: Lazy loading implementation
 - **Virtual Scrolling**: For large lists
@@ -313,11 +360,13 @@ module.exports = {
 ## Testing Strategy
 
 ### Visual Regression
+
 - **Component Screenshots**: Automated testing
 - **Cross-browser**: Chrome, Firefox, Safari, Edge
 - **Responsive**: All breakpoint verification
 
 ### Accessibility Testing
+
 - **Screen Reader**: NVDA, JAWS, VoiceOver
 - **Keyboard Navigation**: Tab order verification
 - **Color Contrast**: Automated and manual testing
@@ -325,6 +374,7 @@ module.exports = {
 ## Migration Guidelines
 
 ### From Existing System
+
 1. **Audit Current**: Document existing patterns
 2. **Map Components**: Create compatibility layer
 3. **Gradual Migration**: Page-by-page conversion
@@ -332,6 +382,7 @@ module.exports = {
 5. **Documentation**: Update style guide
 
 ### Breaking Changes
+
 - **Color Tokens**: All hex values to RGB for CSS variables
 - **Spacing Scale**: 4px base unit system
 - **Typography**: New font stack and scale

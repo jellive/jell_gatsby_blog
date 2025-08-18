@@ -3,12 +3,12 @@
 import React from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { 
+import {
   faList,
-  faChevronLeft, 
+  faChevronLeft,
   faChevronRight,
   faBookOpen,
-  faMapMarkerAlt
+  faMapMarkerAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -42,16 +42,17 @@ export function SeriesNavigation({
   currentPostSlug,
   className,
   variant = 'full',
-  showProgress = true
+  showProgress = true,
 }: SeriesNavigationProps) {
   const currentIndex = posts.findIndex(post => post.slug === currentPostSlug)
   const prevPost = currentIndex > 0 ? posts[currentIndex - 1] : null
-  const nextPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null
+  const nextPost =
+    currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null
   const progress = ((currentIndex + 1) / posts.length) * 100
 
   if (variant === 'minimal') {
     return (
-      <div className={cn("flex items-center justify-between gap-4", className)}>
+      <div className={cn('flex items-center justify-between gap-4', className)}>
         {prevPost ? (
           <Link href={`/posts/${prevPost.slug}`}>
             <Button variant="outline" size="sm" className="gap-2">
@@ -62,11 +63,11 @@ export function SeriesNavigation({
         ) : (
           <div />
         )}
-        
+
         <Badge variant="secondary" className="text-xs">
           {currentIndex + 1} / {posts.length}
         </Badge>
-        
+
         {nextPost ? (
           <Link href={`/posts/${nextPost.slug}`}>
             <Button variant="outline" size="sm" className="gap-2">
@@ -83,20 +84,22 @@ export function SeriesNavigation({
 
   if (variant === 'compact') {
     return (
-      <Card className={cn(
-        "border-border/50 bg-card/30 backdrop-blur-sm",
-        className
-      )}>
+      <Card
+        className={cn(
+          'border-border/50 bg-card/30 backdrop-blur-sm',
+          className
+        )}
+      >
         <CardContent className="p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Fa icon={faBookOpen} className="text-primary text-sm" />
-              <span className="font-medium text-sm">{seriesTitle}</span>
+              <Fa icon={faBookOpen} className="text-sm text-primary" />
+              <span className="text-sm font-medium">{seriesTitle}</span>
               <Badge variant="secondary" className="text-xs">
                 {currentIndex + 1}/{posts.length}
               </Badge>
             </div>
-            
+
             <div className="flex items-center gap-2">
               {prevPost && (
                 <Link href={`/posts/${prevPost.slug}`}>
@@ -105,7 +108,7 @@ export function SeriesNavigation({
                   </Button>
                 </Link>
               )}
-              
+
               {nextPost && (
                 <Link href={`/posts/${nextPost.slug}`}>
                   <Button variant="ghost" size="sm" title={nextPost.title}>
@@ -115,12 +118,12 @@ export function SeriesNavigation({
               )}
             </div>
           </div>
-          
+
           {showProgress && (
             <div className="mt-3">
-              <div className="w-full bg-secondary/30 rounded-full h-1.5">
-                <div 
-                  className="bg-primary h-1.5 rounded-full transition-all duration-300"
+              <div className="bg-secondary/30 h-1.5 w-full rounded-full">
+                <div
+                  className="h-1.5 rounded-full bg-primary transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -133,18 +136,20 @@ export function SeriesNavigation({
 
   // Full variant
   return (
-    <Card className={cn(
-      "border-border/50 bg-card/30 backdrop-blur-sm",
-      "hover:border-border transition-all duration-300",
-      className
-    )}>
+    <Card
+      className={cn(
+        'border-border/50 bg-card/30 backdrop-blur-sm',
+        'transition-all duration-300 hover:border-border',
+        className
+      )}
+    >
       <CardHeader className="pb-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-full bg-primary/10">
-            <Fa icon={faBookOpen} className="text-primary text-lg" />
+          <div className="bg-primary/10 rounded-full p-2">
+            <Fa icon={faBookOpen} className="text-lg text-primary" />
           </div>
           <div className="flex-1">
-            <h3 className="font-bold text-lg text-foreground mb-1">
+            <h3 className="mb-1 text-lg font-bold text-foreground">
               {seriesTitle}
             </h3>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -159,62 +164,64 @@ export function SeriesNavigation({
             </div>
           </div>
         </div>
-        
+
         {showProgress && (
           <div className="mt-4">
-            <div className="w-full bg-secondary/30 rounded-full h-2">
-              <div 
-                className="bg-primary h-2 rounded-full transition-all duration-500 ease-out"
+            <div className="bg-secondary/30 h-2 w-full rounded-full">
+              <div
+                className="h-2 rounded-full bg-primary transition-all duration-500 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>
           </div>
         )}
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
         {/* Series Posts List */}
         <div className="space-y-2">
-          <h4 className="font-semibold text-sm text-foreground flex items-center gap-2">
+          <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground">
             <Fa icon={faMapMarkerAlt} className="text-xs text-primary" />
             시리즈 목록
           </h4>
-          
-          <div className="space-y-1 max-h-40 overflow-y-auto">
+
+          <div className="max-h-40 space-y-1 overflow-y-auto">
             {posts.map((post, index) => (
               <div
                 key={post.slug}
                 className={cn(
-                  "flex items-center gap-3 p-2 rounded-md transition-all duration-200",
-                  post.slug === currentPostSlug 
-                    ? "bg-primary/10 border border-primary/20" 
-                    : "hover:bg-secondary/30"
+                  'flex items-center gap-3 rounded-md p-2 transition-all duration-200',
+                  post.slug === currentPostSlug
+                    ? 'bg-primary/10 border-primary/20 border'
+                    : 'hover:bg-secondary/30'
                 )}
               >
-                <div className={cn(
-                  "flex items-center justify-center w-6 h-6 rounded-full text-xs font-medium",
-                  post.slug === currentPostSlug
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-secondary/50 text-muted-foreground"
-                )}>
+                <div
+                  className={cn(
+                    'flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium',
+                    post.slug === currentPostSlug
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-secondary/50 text-muted-foreground'
+                  )}
+                >
                   {index + 1}
                 </div>
-                
+
                 {post.slug === currentPostSlug ? (
-                  <span className="text-sm font-medium text-foreground line-clamp-1">
+                  <span className="line-clamp-1 text-sm font-medium text-foreground">
                     {post.title}
                   </span>
                 ) : (
-                  <Link 
+                  <Link
                     href={`/posts/${post.slug}`}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 line-clamp-1"
+                    className="line-clamp-1 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
                   >
                     {post.title}
                   </Link>
                 )}
-                
+
                 {post.slug === currentPostSlug && (
-                  <Badge variant="secondary" className="text-[10px] ml-auto">
+                  <Badge variant="secondary" className="ml-auto text-[10px]">
                     현재
                   </Badge>
                 )}
@@ -222,31 +229,41 @@ export function SeriesNavigation({
             ))}
           </div>
         </div>
-        
+
         <Separator />
-        
+
         {/* Navigation Buttons */}
         <div className="flex items-center justify-between gap-4">
           {prevPost ? (
             <Link href={`/posts/${prevPost.slug}`} className="flex-1">
-              <Button variant="outline" className="w-full justify-start gap-2 h-auto p-3">
+              <Button
+                variant="outline"
+                className="h-auto w-full justify-start gap-2 p-3"
+              >
                 <Fa icon={faChevronLeft} className="text-sm" />
-                <div className="text-left min-w-0">
+                <div className="min-w-0 text-left">
                   <div className="text-xs text-muted-foreground">이전 글</div>
-                  <div className="text-sm font-medium truncate">{prevPost.title}</div>
+                  <div className="truncate text-sm font-medium">
+                    {prevPost.title}
+                  </div>
                 </div>
               </Button>
             </Link>
           ) : (
             <div className="flex-1" />
           )}
-          
+
           {nextPost ? (
             <Link href={`/posts/${nextPost.slug}`} className="flex-1">
-              <Button variant="outline" className="w-full justify-end gap-2 h-auto p-3">
-                <div className="text-right min-w-0">
+              <Button
+                variant="outline"
+                className="h-auto w-full justify-end gap-2 p-3"
+              >
+                <div className="min-w-0 text-right">
                   <div className="text-xs text-muted-foreground">다음 글</div>
-                  <div className="text-sm font-medium truncate">{nextPost.title}</div>
+                  <div className="truncate text-sm font-medium">
+                    {nextPost.title}
+                  </div>
                 </div>
                 <Fa icon={faChevronRight} className="text-sm" />
               </Button>

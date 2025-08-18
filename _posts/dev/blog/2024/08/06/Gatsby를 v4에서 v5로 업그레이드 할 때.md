@@ -8,4 +8,4 @@ tags: ['Javascript', 'package.json', 'Gatsby']
 # 왜 작성하게 되었는가?
 
 package.json에 있는 resolution과 설치 버전을 맞춰야 한다.  
-https://github.com/gatsbyjs/gatsby/issues/13278  
+https://github.com/gatsbyjs/gatsby/issues/13278

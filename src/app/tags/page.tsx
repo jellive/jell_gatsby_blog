@@ -15,26 +15,26 @@ interface TagGroup {
 
 export default async function TagsPage() {
   const tags = await getAllTags()
-  
+
   // Create tag groups with post counts and posts
   const groups: TagGroup[] = await Promise.all(
-    tags.map(async (tag) => {
+    tags.map(async tag => {
       const posts = await getPostsByTag(tag)
       return {
         fieldValue: tag,
         totalCount: posts.length,
-        posts: posts
+        posts: posts,
       }
     })
   )
-  
+
   // Add undefined tag group if needed (for posts without tags)
   groups.unshift({
     fieldValue: 'undefined',
     totalCount: 0,
-    posts: []
+    posts: [],
   })
-  
+
   // Sort tags alphabetically
   groups.sort((a, b) => {
     const x = a.fieldValue.toLowerCase()
@@ -43,9 +43,9 @@ export default async function TagsPage() {
     if (y < x) return 1
     return 0
   })
-  
+
   // Move undefined to the beginning
-  groups.sort((a) => {
+  groups.sort(a => {
     if (a.fieldValue === 'undefined') return -1
     return 0
   })

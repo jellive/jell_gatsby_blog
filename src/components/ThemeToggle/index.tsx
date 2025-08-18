@@ -19,7 +19,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
   // Initialize theme on mount
   useEffect(() => {
     setMounted(true)
-    
+
     // Get saved theme from localStorage or default to system
     const savedTheme = localStorage.getItem('theme') as Theme
     if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
@@ -34,13 +34,15 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
   // Apply theme to document
   const applyTheme = (newTheme: Theme) => {
     const root = document.documentElement
-    
+
     // Remove existing theme classes
     root.classList.remove('light', 'dark')
-    
+
     if (newTheme === 'system') {
       // Use system preference
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      const systemPrefersDark = window.matchMedia(
+        '(prefers-color-scheme: dark)'
+      ).matches
       root.classList.add(systemPrefersDark ? 'dark' : 'light')
     } else {
       // Use explicit theme
@@ -51,7 +53,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
   // Handle theme change
   const handleThemeChange = () => {
     let newTheme: Theme
-    
+
     if (theme === 'light') {
       newTheme = 'dark'
     } else if (theme === 'dark') {
@@ -59,7 +61,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
     } else {
       newTheme = 'light'
     }
-    
+
     setTheme(newTheme)
     applyTheme(newTheme)
     localStorage.setItem('theme', newTheme)
@@ -68,15 +70,16 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
   // Listen for system theme changes
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    
+
     const handleSystemThemeChange = () => {
       if (theme === 'system') {
         applyTheme('system')
       }
     }
-    
+
     mediaQuery.addEventListener('change', handleSystemThemeChange)
-    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange)
+    return () =>
+      mediaQuery.removeEventListener('change', handleSystemThemeChange)
   }, [theme])
 
   // Don't render until mounted to avoid hydration mismatch
@@ -87,8 +90,8 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
         size="icon"
         disabled
         className={cn(
-          "w-10 h-10 relative opacity-50 cursor-not-allowed",
-          "border border-border/50 rounded-md",
+          'relative h-10 w-10 cursor-not-allowed opacity-50',
+          'border-border/50 rounded-md border',
           className
         )}
       />
@@ -98,28 +101,30 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
   // Determine current effective theme for icon display
   const getEffectiveTheme = (): 'light' | 'dark' => {
     if (theme === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
     }
     return theme
   }
 
   const effectiveTheme = getEffectiveTheme()
-  
+
   return (
     <Button
       variant="ghost"
       size="icon"
       onClick={handleThemeChange}
       className={cn(
-        "w-10 h-10 relative group",
-        "border border-border/30 rounded-md",
-        "hover:border-border/60 hover:scale-105",
-        "active:scale-95",
-        "transition-all duration-200",
-        "bg-transparent hover:bg-accent/10",
+        'group relative h-10 w-10',
+        'border-border/30 rounded-md border',
+        'hover:border-border/60 hover:scale-105',
+        'active:scale-95',
+        'transition-all duration-200',
+        'hover:bg-accent/10 bg-transparent',
         // Responsive sizing
-        "max-md:w-9 max-md:h-9",
-        "max-sm:w-8 max-sm:h-8",
+        'max-md:h-9 max-md:w-9',
+        'max-sm:h-8 max-sm:w-8',
         className
       )}
       aria-label={`현재 테마: ${theme === 'system' ? '시스템' : theme === 'light' ? '라이트' : '다크'}, 클릭하여 변경`}
@@ -127,37 +132,39 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
       data-testid="theme-toggle"
     >
       {/* Icon container */}
-      <div className="relative flex items-center justify-center w-full h-full">
-        <Fa 
-          icon={effectiveTheme === 'dark' ? faMoon : faSun} 
+      <div className="relative flex h-full w-full items-center justify-center">
+        <Fa
+          icon={effectiveTheme === 'dark' ? faMoon : faSun}
           className={cn(
-            "text-base transition-all duration-200",
-            "group-hover:scale-110",
-            "max-md:text-sm max-sm:text-xs",
+            'text-base transition-all duration-200',
+            'group-hover:scale-110',
+            'max-md:text-sm max-sm:text-xs',
             // Light mode sun styling
             effectiveTheme === 'light' && [
-              "text-yellow-500 dark:text-yellow-400",
-              "group-hover:text-yellow-600 dark:group-hover:text-yellow-300",
-              "group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]"
+              'text-yellow-500 dark:text-yellow-400',
+              'group-hover:text-yellow-600 dark:group-hover:text-yellow-300',
+              'group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]',
             ],
             // Dark mode moon styling
             effectiveTheme === 'dark' && [
-              "text-blue-500 dark:text-blue-400",
-              "group-hover:text-blue-600 dark:group-hover:text-blue-300", 
-              "group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.3)]"
+              'text-blue-500 dark:text-blue-400',
+              'group-hover:text-blue-600 dark:group-hover:text-blue-300',
+              'group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.3)]',
             ]
           )}
         />
       </div>
-      
+
       {/* System indicator */}
       {theme === 'system' && (
-        <div className="absolute top-0.5 right-0.5 max-md:top-0 max-md:right-0 max-sm:top-0 max-sm:right-0">
-          <div className={cn(
-            "w-1.5 h-1.5 bg-green-500 rounded-full",
-            "max-sm:w-1 max-sm:h-1",
-            "opacity-80"
-          )} />
+        <div className="absolute right-0.5 top-0.5 max-md:right-0 max-md:top-0 max-sm:right-0 max-sm:top-0">
+          <div
+            className={cn(
+              'h-1.5 w-1.5 rounded-full bg-green-500',
+              'max-sm:h-1 max-sm:w-1',
+              'opacity-80'
+            )}
+          />
         </div>
       )}
     </Button>

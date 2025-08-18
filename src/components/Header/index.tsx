@@ -4,11 +4,17 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { faTags, faSearch, faKeyboard, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
+import {
+  faTags,
+  faSearch,
+  faKeyboard,
+  faBars,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons'
 import { siteConfig } from '@/lib/config'
 import ThemeToggle from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
-import { 
+import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -50,10 +56,11 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
     // Mobile detection (simple version without external library)
     const checkMobile = () => {
       const userAgent = window.navigator.userAgent
-      const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+      const mobileRegex =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
       setIsMobile(mobileRegex.test(userAgent))
     }
-    
+
     checkMobile()
 
     // Handle profile image sizing based on route - Medium style avatars
@@ -61,9 +68,9 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
       // Use Medium avatar sizes: 48px (large), 32px (medium), 20px (small)
       setProfileSize(pathname === '/' ? '48px' : '32px')
     }
-    
+
     updateProfileSize()
-    
+
     // Ensure header is always visible on main page
     if (pathname === '/') {
       setIsHide(false)
@@ -76,8 +83,8 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
         setIsHide(false)
         return
       }
-      
-      setYPos((prevYPos) => {
+
+      setYPos(prevYPos => {
         const currentYPos = window.pageYOffset
         setIsHide(prevYPos < currentYPos)
         return currentYPos
@@ -103,7 +110,10 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
 
   return (
     <TooltipProvider>
-      <header id="Header" className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''} relative`}>
+      <header
+        id="Header"
+        className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''} relative`}
+      >
         <div className="header-title">
           <Link href="/">
             <div className="header-profile-image-wrap">
@@ -128,18 +138,18 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
             size="icon"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={cn(
-              "w-10 h-10 relative group flex items-center justify-center",
-              "border border-border/30 rounded-md",
-              "hover:border-border/60 hover:scale-105",
-              "active:scale-95",
-              "transition-all duration-200",
-              "bg-transparent hover:bg-accent/10"
+              'group relative flex h-10 w-10 items-center justify-center',
+              'border-border/30 rounded-md border',
+              'hover:border-border/60 hover:scale-105',
+              'active:scale-95',
+              'transition-all duration-200',
+              'hover:bg-accent/10 bg-transparent'
             )}
             aria-label="모바일 메뉴 열기"
             data-testid="mobile-menu-toggle"
           >
-            <Fa 
-              icon={mobileMenuOpen ? faTimes : faBars} 
+            <Fa
+              icon={mobileMenuOpen ? faTimes : faBars}
               className="text-base transition-all duration-200"
             />
           </Button>
@@ -157,15 +167,15 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                       size="icon"
                       onClick={() => router.push('/tags')}
                       className={cn(
-                        "w-10 h-10 relative group flex items-center justify-center",
-                        "border border-border/30 rounded-md",
-                        "hover:border-border/60 hover:scale-105",
-                        "active:scale-95",
-                        "transition-all duration-200",
-                        "bg-transparent hover:bg-accent/10",
-                        // Responsive sizing  
-                        "max-md:w-9 max-md:h-9",
-                        "max-sm:w-8 max-sm:h-8"
+                        'group relative flex h-10 w-10 items-center justify-center',
+                        'border-border/30 rounded-md border',
+                        'hover:border-border/60 hover:scale-105',
+                        'active:scale-95',
+                        'transition-all duration-200',
+                        'hover:bg-accent/10 bg-transparent',
+                        // Responsive sizing
+                        'max-md:h-9 max-md:w-9',
+                        'max-sm:h-8 max-sm:w-8'
                       )}
                       onMouseEnter={() => {
                         tagSpanVisibleToggle(true)
@@ -178,12 +188,12 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                       <Fa
                         icon={faTags}
                         className={cn(
-                          "text-base transition-all duration-200",
-                          "group-hover:scale-110",
-                          "max-md:text-sm max-sm:text-xs",
-                          "text-green-500 dark:text-green-400",
-                          "group-hover:text-green-600 dark:group-hover:text-green-300",
-                          "group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]"
+                          'text-base transition-all duration-200',
+                          'group-hover:scale-110',
+                          'max-md:text-sm max-sm:text-xs',
+                          'text-green-500 dark:text-green-400',
+                          'group-hover:text-green-600 dark:group-hover:text-green-300',
+                          'group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]'
                         )}
                       />
                     </Button>
@@ -204,27 +214,27 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                       size="icon"
                       onClick={openPalette}
                       className={cn(
-                        "w-10 h-10 relative group flex items-center justify-center",
-                        "border border-border/30 rounded-md",
-                        "hover:border-border/60 hover:scale-105",
-                        "active:scale-95",
-                        "transition-all duration-200",
-                        "bg-transparent hover:bg-accent/10",
+                        'group relative flex h-10 w-10 items-center justify-center',
+                        'border-border/30 rounded-md border',
+                        'hover:border-border/60 hover:scale-105',
+                        'active:scale-95',
+                        'transition-all duration-200',
+                        'hover:bg-accent/10 bg-transparent',
                         // Responsive sizing
-                        "max-md:w-9 max-md:h-9",
-                        "max-sm:w-8 max-sm:h-8"
+                        'max-md:h-9 max-md:w-9',
+                        'max-sm:h-8 max-sm:w-8'
                       )}
                       aria-label="검색하기 (Cmd+K)"
                     >
-                      <Fa 
-                        icon={faSearch} 
+                      <Fa
+                        icon={faSearch}
                         className={cn(
-                          "text-base transition-all duration-200",
-                          "group-hover:scale-110",
-                          "max-md:text-sm max-sm:text-xs",
-                          "text-purple-500 dark:text-purple-400",
-                          "group-hover:text-purple-600 dark:group-hover:text-purple-300",
-                          "group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]"
+                          'text-base transition-all duration-200',
+                          'group-hover:scale-110',
+                          'max-md:text-sm max-sm:text-xs',
+                          'text-purple-500 dark:text-purple-400',
+                          'group-hover:text-purple-600 dark:group-hover:text-purple-300',
+                          'group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]'
                         )}
                       />
                     </Button>
@@ -260,15 +270,15 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div 
+          <div
             className={cn(
-              "md:hidden absolute top-full left-0 right-0 z-50",
-              "bg-background/95 backdrop-blur-sm border-b border-border",
-              "shadow-lg"
+              'absolute left-0 right-0 top-full z-50 md:hidden',
+              'bg-background/95 border-b border-border backdrop-blur-sm',
+              'shadow-lg'
             )}
             data-testid="mobile-menu"
           >
-            <div className="p-4 space-y-4">
+            <div className="space-y-4 p-4">
               <Button
                 variant="ghost"
                 onClick={() => {
@@ -280,7 +290,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                 <Fa icon={faTags} className="text-green-500" />
                 <span>Tags</span>
               </Button>
-              
+
               <Button
                 variant="ghost"
                 onClick={() => {
@@ -292,7 +302,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                 <Fa icon={faSearch} className="text-purple-500" />
                 <span>Search</span>
               </Button>
-              
+
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Theme</span>
                 <ThemeToggle />

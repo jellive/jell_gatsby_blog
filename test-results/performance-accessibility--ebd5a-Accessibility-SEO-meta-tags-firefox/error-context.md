@@ -1,615 +1,615 @@
 # Page snapshot
 
-```yaml
+````yaml
 - banner:
-  - link "title profile picture":
-    - /url: /
-    - img "title profile picture"
-  - link "Jell의 세상 사는 이야기":
-    - /url: /
-    - heading "Jell의 세상 사는 이야기" [level=1]
-  - navigation:
-    - list:
-      - listitem:
-        - button "태그 페이지로 이동"
-      - listitem:
-        - button "검색하기 (Cmd+K)"
-      - listitem:
-        - 'button "현재 테마: 시스템, 클릭하여 변경"'
+    - link "title profile picture":
+        - /url: /
+        - img "title profile picture"
+    - link "Jell의 세상 사는 이야기":
+        - /url: /
+        - heading "Jell의 세상 사는 이야기" [level=1]
+    - navigation:
+        - list:
+            - listitem:
+                - button "태그 페이지로 이동"
+            - listitem:
+                - button "검색하기 (Cmd+K)"
+            - listitem:
+                - 'button "현재 테마: 시스템, 클릭하여 변경"'
 - main:
-  - main:
-    - complementary:
-      - paragraph: 아직 갈 길이 멀다.
-      - text: Jell Seoul, Korea
-      - link "jellive7@gmail.com":
-        - /url: mailto:jellive7@gmail.com
-      - link "https://blog.jell.kr":
-        - /url: https://blog.jell.kr
-      - link "RSS 피드 구독":
-        - /url: https://blog.jell.kr/rss
-      - link "GitHub 프로필":
-        - /url: https://github.com/jellive
-      - link "LinkedIn 프로필":
-        - /url: https://www.linkedin.com/in/%ED%95%9C%EA%B5%B0-%EC%9C%A0-429980113/
-    - article:
-      - 'link "Gatsby에서 Next.js로 마이그레이션하며 배운 것들 - 성공한 이야기와 그 과정에서의 깨달음 서론: 더 나은 기술을 향한 도전 개발자라면 누구나 한 번쯤은 경험하는 순간이 있습니다. \"저 기술이 더 좋아 보이는데?\" 하는 생각. 저 역시 그런 순간을 맞이했습니다. 2년간 안정적으로 운영되던 Gatsby 기반 블로그를 보며 문득 생각했습니다. \"Next.js가 요즘 주목받고 Aug 14, 2025 · #Gatsby #Next.js #마이그레이션 #개발 #React"':
-        - /url: /posts/dev/blog/2025/08/14/gatsby-to-nextjs-migration-experience
-        - heading "Gatsby에서 Next.js로 마이그레이션하며 배운 것들 - 성공한 이야기와 그 과정에서의 깨달음" [level=2]
-        - paragraph: "서론: 더 나은 기술을 향한 도전 개발자라면 누구나 한 번쯤은 경험하는 순간이 있습니다. \"저 기술이 더 좋아 보이는데?\" 하는 생각. 저 역시 그런 순간을 맞이했습니다. 2년간 안정적으로 운영되던 Gatsby 기반 블로그를 보며 문득 생각했습니다. \"Next.js가 요즘 주목받고"
-        - time: Aug 14, 2025
-        - text: "· #Gatsby #Next.js #마이그레이션 #개발 #React"
-        - img
-    - article:
-      - 'link "yarn을 npm으로 전역설치 했을 때 업데이트 하는 방법 왜 작성하게 되었는가? ![이전버전](images/previous-version.png) ![최신버전](images/current-version.png) npm update -g yarn 만약 업그레이드 후 에러가 나온다면, package.json의 ''packageManager''를 Aug 06, 2024 · #npm #Yarn #package.json"':
-        - /url: /posts/dev/js/tip/2024/08/06/yarn을 npm으로 전역설치 했을 때 업데이트 하는 방법
-        - heading "yarn을 npm으로 전역설치 했을 때 업데이트 하는 방법" [level=2]
-        - paragraph: 왜 작성하게 되었는가? ![이전버전](images/previous-version.png) ![최신버전](images/current-version.png) npm update -g yarn 만약 업그레이드 후 에러가 나온다면, package.json의 'packageManager'를
-        - time: Aug 06, 2024
-        - text: "· #npm #Yarn #package.json"
-        - img
-    - article:
-      - 'link "Gatsby를 v5로 업그레이드 할 때 나타나는 에러 왜 작성하게 되었는가? package.json에 있는 resolution과 설치 버전을 맞춰야 한다. https://github.com/gatsbyjs/gatsby/issues/13278 Aug 06, 2024 · #Javascript #package.json #Gatsby"':
-        - /url: /posts/dev/blog/2024/08/06/Gatsby를 v4에서 v5로 업그레이드 할 때
-        - heading "Gatsby를 v5로 업그레이드 할 때 나타나는 에러" [level=2]
-        - paragraph: 왜 작성하게 되었는가? package.json에 있는 resolution과 설치 버전을 맞춰야 한다. https://github.com/gatsbyjs/gatsby/issues/13278
-        - time: Aug 06, 2024
-        - text: "· #Javascript #package.json #Gatsby"
-        - img
-    - article:
-      - 'link "UIViewController를 SwiftUI preview로 보여주기 왜 작성하게 되었는가? 그동안 현업으로만 Swift를 써오면서 몰랐던 키워드를 공부해보기 위해 여러 강의를 보고 있습니다. 그 중에 SwiftUI의 제일 큰 특징 중 하나인 preview를 UIKit으로 만든 UIViewController에서도 보여줄 수 있다는 걸 알게 되어 코 Jan 10, 2024 · #iOS #UIKit #SwiftUI"':
-        - /url: /posts/dev/ios/2024/01/11/UIViewController를 SwiftUI preview로 보여주기
-        - heading "UIViewController를 SwiftUI preview로 보여주기" [level=2]
-        - paragraph: 왜 작성하게 되었는가? 그동안 현업으로만 Swift를 써오면서 몰랐던 키워드를 공부해보기 위해 여러 강의를 보고 있습니다. 그 중에 SwiftUI의 제일 큰 특징 중 하나인 preview를 UIKit으로 만든 UIViewController에서도 보여줄 수 있다는 걸 알게 되어 코
-        - time: Jan 10, 2024
-        - text: "· #iOS #UIKit #SwiftUI"
-        - img
-    - article:
-      - 'link "Docker-compose로 mariadb 설치하기 왜 쓰는가? 하드디스크를 교체하고 ([#](https://blog.jell.kr/dev/linux/2023/02/27/%EC%9A%B0%EB%B6%84%ED%88%AC%2022.04%EB%A1%9C%20%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C Mar 30, 2023 · #Ubuntu #linux #docker #docker-compose #Jell"':
-        - /url: /posts/dev/docker/2023/03/30/docker-compose로 mariadb 설치기
-        - heading "Docker-compose로 mariadb 설치하기" [level=2]
-        - paragraph: 왜 쓰는가? 하드디스크를 교체하고 ([#](https://blog.jell.kr/dev/linux/2023/02/27/%EC%9A%B0%EB%B6%84%ED%88%AC%2022.04%EB%A1%9C%20%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C
-        - time: Mar 30, 2023
-        - text: "· #Ubuntu #linux #docker #docker-compose #Jell"
-        - img
-    - article:
-      - 'link "우분투 22.04로 업그레이드 하던 중 발생한 이슈 왜 쓰는가? 개인적으로 사용한지 약 7년 된 HGST의 8테라 하드가 슬슬 긁는 소리가 나서 급하게 껐다가 대체품을 구매해서 옮기려고 보니 우분투 22.04 LTS로 업그레이드를 권유하길래 진행하다 멈춰서 리셋을 하고 보니 ![You are in emergency mode] Feb 27, 2023 · #Ubuntu #linux #Jell #22.04"':
-        - /url: /posts/dev/linux/2023/02/27/우분투 22.04로 업그레이드 하던 중 발생한 이슈
-        - heading "우분투 22.04로 업그레이드 하던 중 발생한 이슈" [level=2]
-        - paragraph: 왜 쓰는가? 개인적으로 사용한지 약 7년 된 HGST의 8테라 하드가 슬슬 긁는 소리가 나서 급하게 껐다가 대체품을 구매해서 옮기려고 보니 우분투 22.04 LTS로 업그레이드를 권유하길래 진행하다 멈춰서 리셋을 하고 보니 ![You are in emergency mode]
-        - time: Feb 27, 2023
-        - text: "· #Ubuntu #linux #Jell #22.04"
-        - img
-    - article:
-      - 'link "Gatsby 업데이트 중지 몇 달 동안 업로드가 없었죠? 죄송합니다(__) 일도 있었고, 제가 업로드 할 당시의 Gatsby V3와 React 16, node 14에서 지금은 Gatsby V5, React 18, node 18이 나왔더라구요? 원작자분도 업데이트를 그만 두신 듯 하고.. 업데이 Nov 09, 2022 · #공지"':
-        - /url: /posts/notice/2022/11/09/Gatsby 업데이트 중지
-        - heading "Gatsby 업데이트 중지" [level=2]
-        - paragraph: 몇 달 동안 업로드가 없었죠? 죄송합니다(__) 일도 있었고, 제가 업로드 할 당시의 Gatsby V3와 React 16, node 14에서 지금은 Gatsby V5, React 18, node 18이 나왔더라구요? 원작자분도 업데이트를 그만 두신 듯 하고.. 업데이
-        - time: Nov 09, 2022
-        - text: "· #공지"
-        - img
-    - article:
-      - 'link "ios 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고 Mar 29, 2022 · #Ubuntu #linux #Jell #Shell"':
-        - /url: /posts/linux/2020/10/11/ios
-        - heading "ios" [level=2]
-        - paragraph: 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고
-        - time: Mar 29, 2022
-        - text: "· #Ubuntu #linux #Jell #Shell"
-        - img
-    - article:
-      - 'link "2022년 새해 복 많이 받으세요! 2021년은 코로나가 끝날 줄 알았는데 아직도 마스크를 쓰는 게 어색하네요. 올 한 해는 코로나도 끝나고 하시는 일도 모두 다 잘 되시길 빕니다. Jan 03, 2022 · #Chat"':
-        - /url: /posts/chat/2022/01/02/2022년 새해 복 많이 받으세요
-        - heading "2022년 새해 복 많이 받으세요!" [level=2]
-        - paragraph: 2021년은 코로나가 끝날 줄 알았는데 아직도 마스크를 쓰는 게 어색하네요. 올 한 해는 코로나도 끝나고 하시는 일도 모두 다 잘 되시길 빕니다.
-        - time: Jan 03, 2022
-        - text: "· #Chat"
-        - img
-    - article:
-      - 'link "Cocoapods 1.9.4 이후 RxRealm의 에러 해결방법 [이전 글](/dev/ios/2020/10/03/Cocoapods%201.9.4%EC%97%90%20%ED%98%84%EC%9E%AC%20%EB%B2%84%EA%B7%B8%EA%B0%80%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4/)에서 나타났던 에러의 해결 May 15, 2021 · #개발 #iOS #Cocoapods #XCode"':
-        - /url: /posts/dev/ios/2021/05/14/Cocoapods 1.9.4 이후 RxRealm의 에러 해결방법
-        - heading "Cocoapods 1.9.4 이후 RxRealm의 에러 해결방법" [level=2]
-        - paragraph: "[이전 글](/dev/ios/2020/10/03/Cocoapods%201.9.4%EC%97%90%20%ED%98%84%EC%9E%AC%20%EB%B2%84%EA%B7%B8%EA%B0%80%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4/)에서 나타났던 에러의 해결"
-        - time: May 15, 2021
-        - text: "· #개발 #iOS #Cocoapods #XCode"
-        - img
-    - article:
-      - 'link "Gatsby V3으로 업그레이드 했습니다. 회사 일이 바쁘다는 핑계로 블로그 관리를 소홀히 했네요. 그동안 독립이니 집 컴퓨터 교체니 회사 일이니 이런 저런 일이 많았습니다. V1에서 V2로 옮겨갈 때보다 훨씬 쉬워서 좋네요. 앞으로도 종종 글을 써보겠습니다. May 13, 2021 · #공지"':
-        - /url: /posts/notice/2021/05/13/Gatsby V3으로 업그레이드 했습니다
-        - heading "Gatsby V3으로 업그레이드 했습니다." [level=2]
-        - paragraph: 회사 일이 바쁘다는 핑계로 블로그 관리를 소홀히 했네요. 그동안 독립이니 집 컴퓨터 교체니 회사 일이니 이런 저런 일이 많았습니다. V1에서 V2로 옮겨갈 때보다 훨씬 쉬워서 좋네요. 앞으로도 종종 글을 써보겠습니다.
-        - time: May 13, 2021
-        - text: "· #공지"
-        - img
-    - article:
-      - 'link "외부에서 접속하기 위한 ssh 설치 가이드 왜 쓰는가? 우분투를 메인으로 쓰시는 분이 많이 늘었다고는 하지만, 여전히 서브로 쓰시는 분들이 많습니다. 그렇다고 우분투를 쓰기 위해 키보드 마우스를 계속 옮기는 일도 번거로운 일이죠. 제일 크게 다가오는 이유는 역시 서버를 여러군데 두는 일일 것입니다. SSH는 우분투 Oct 22, 2020 · #Ubuntu #linux #Jell #Shell"':
-        - /url: /posts/dev/linux/2020/10/22/외부에서 우분투로 접속하기 위한 SSH 설정
-        - heading "외부에서 접속하기 위한 ssh 설치 가이드" [level=2]
-        - paragraph: 왜 쓰는가? 우분투를 메인으로 쓰시는 분이 많이 늘었다고는 하지만, 여전히 서브로 쓰시는 분들이 많습니다. 그렇다고 우분투를 쓰기 위해 키보드 마우스를 계속 옮기는 일도 번거로운 일이죠. 제일 크게 다가오는 이유는 역시 서버를 여러군데 두는 일일 것입니다. SSH는 우분투
-        - time: Oct 22, 2020
-        - text: "· #Ubuntu #linux #Jell #Shell"
-        - img
-    - article:
-      - 'link "개인적으로 쓰는 우분투 노트북 설치 가이드 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고 Oct 11, 2020 · #Ubuntu #linux #Jell #Shell"':
-        - /url: /posts/dev/linux/2020/10/11/개인적으로 쓰는 우분투 노트북 설치 가이드
-        - heading "개인적으로 쓰는 우분투 노트북 설치 가이드" [level=2]
-        - paragraph: 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고
-        - time: Oct 11, 2020
-        - text: "· #Ubuntu #linux #Jell #Shell"
-        - img
-    - article:
-      - 'link "개인적으로 쓰는 우분투 노트북 설치 가이드 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고 Oct 11, 2020 · #Ubuntu #linux #Jell #Shell"':
-        - /url: /posts/linux/2020/10/11/개인적으로 쓰는 우분투 노트북 설치 가이드
-        - heading "개인적으로 쓰는 우분투 노트북 설치 가이드" [level=2]
-        - paragraph: 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고
-        - time: Oct 11, 2020
-        - text: "· #Ubuntu #linux #Jell #Shell"
-        - img
-    - article:
-      - 'link "Cocoapods 1.9.4에 버그가 있습니다(Cocoapods 다운그레이드 방법) 집에서 iOS를 공부하기 위해 습관적으로 cocoapods를 업데이트하고 빌드를 하려고 보니 ![증상 스크린샷](images/screenshot1.png) ``` Undefined symbols for architecture arm64: \"_OBJC_CLASS_$_RLMNotif Oct 04, 2020 · #개발 #iOS #Cocoapods #XCode"':
-        - /url: /posts/dev/ios/2020/10/03/Cocoapods 1.9.4에 현재 버그가 있습니다
-        - heading "Cocoapods 1.9.4에 버그가 있습니다(Cocoapods 다운그레이드 방법)" [level=2]
-        - paragraph: "집에서 iOS를 공부하기 위해 습관적으로 cocoapods를 업데이트하고 빌드를 하려고 보니 ![증상 스크린샷](images/screenshot1.png) ``` Undefined symbols for architecture arm64: \"_OBJC_CLASS_$_RLMNotif"
-        - time: Oct 04, 2020
-        - text: "· #개발 #iOS #Cocoapods #XCode"
-        - img
-    - article:
-      - 'link "Codility No.2-1 (CyclicRotation) 코딜리티라는 웹사이트가 있습니다. 알고리즘을 만드는 실력을 기르는 사이트인데요. 저도 틈틈히 하고 있습니다. 오늘은 그 중 두번째 중 하나인 CyclibRotation에 대해 알아봅시다. 먼저 문제입니다. 답은 정해져있지 않으며, 여기에 적은 답은 예시 중 하나일 뿐입 Sep 28, 2020 · #개발 #알고리즘"':
-        - /url: /posts/dev/algorithm/2020/09/27/코딜리티2-1
-        - heading "Codility No.2-1 (CyclicRotation)" [level=2]
-        - paragraph: 코딜리티라는 웹사이트가 있습니다. 알고리즘을 만드는 실력을 기르는 사이트인데요. 저도 틈틈히 하고 있습니다. 오늘은 그 중 두번째 중 하나인 CyclibRotation에 대해 알아봅시다. 먼저 문제입니다. 답은 정해져있지 않으며, 여기에 적은 답은 예시 중 하나일 뿐입
-        - time: Sep 28, 2020
-        - text: "· #개발 #알고리즘"
-        - img
-    - article:
-      - 'link "React native iOS의 .jsbundle에러 해결법 개요 오랜만에 React native 프로젝트를 다시 열 일이 있어서 초기화한 맥에 설치를 하고 앱을 실행해 봤습니다. 그런데.. ![증상 스크린샷](images/screenshot1.png) 에러가 뜨면서 실행이 안되는 겁니다. 그래서 인생의 동반자~~스승~~인 구글신 Sep 28, 2020 · #개발 #Javascript #Typescript #React Native"':
-        - /url: /posts/dev/js/tip/2020/09/27/jsbundle에러
-        - heading "React native iOS의 .jsbundle에러 해결법" [level=2]
-        - paragraph: 개요 오랜만에 React native 프로젝트를 다시 열 일이 있어서 초기화한 맥에 설치를 하고 앱을 실행해 봤습니다. 그런데.. ![증상 스크린샷](images/screenshot1.png) 에러가 뜨면서 실행이 안되는 겁니다. 그래서 인생의 동반자~~스승~~인 구글신
-        - time: Sep 28, 2020
-        - text: "· #개발 #Javascript #Typescript #React Native"
-        - img
-    - article:
-      - 'link "2020년 9월 그란폰도 ![2020년 9월 18일 그란폰도](images/granfondo.png) [toc] 그란폰도란 위키피디아에 있는 그란폰도(Granfondo)의 뜻은 다음과 같습니다. ```kr 그란폰도(granfondo)는 이탈리아어로 ''long distance or great en Sep 19, 2020 · #자전거"':
-        - /url: /posts/bicycle/2020/09/18/9월의 그란폰도
-        - heading "2020년 9월 그란폰도" [level=2]
-        - paragraph: "![2020년 9월 18일 그란폰도](images/granfondo.png) [toc] 그란폰도란 위키피디아에 있는 그란폰도(Granfondo)의 뜻은 다음과 같습니다. ```kr 그란폰도(granfondo)는 이탈리아어로 'long distance or great en"
-        - time: Sep 19, 2020
-        - text: "· #자전거"
-        - img
-    - article:
-      - 'link "5년차가 된 기념 자그마한 고민 개발 5년차가 되었습니다. 조금은 어색하기도 합니다. 벌써 5년? 이라 생각이 들기도 하고, 이제야 5년? 이라 생각이 들기도 하고. 지금까지 저는 여러분야를 다 잘 할 수 있는 사람이 되겠다! 라고 생각을 하고 있었는데, 다들 한결같이 ```kr 어느 한 분야를 깊게 Aug 26, 2020 · #개발 #Jell #넋두리"':
-        - /url: /posts/dev/jell/2020/08/26/5년차가_된_기념_자그마한_고민
-        - heading "5년차가 된 기념 자그마한 고민" [level=2]
-        - paragraph: "개발 5년차가 되었습니다. 조금은 어색하기도 합니다. 벌써 5년? 이라 생각이 들기도 하고, 이제야 5년? 이라 생각이 들기도 하고. 지금까지 저는 여러분야를 다 잘 할 수 있는 사람이 되겠다! 라고 생각을 하고 있었는데, 다들 한결같이 ```kr 어느 한 분야를 깊게"
-        - time: Aug 26, 2020
-        - text: "· #개발 #Jell #넋두리"
-        - img
-    - article:
-      - 'link "Let''s encrypt 인증서 갱신하기 제 블로그는 Let''s Encrypt로 SSL을 구성하고 있습니다. Let''s Encrypt는 무료이기 떄문에 많은 분들이 이용하고 있지만, 무분별한 인증서 남용을 막기 위해 3개월로 기간을 제한하고 있습니다. 저도 다음주에 만기가 되어서 슬슬 알아보다가, 대부분 이용하는 ce Aug 01, 2020 · #개발 #네트워크"':
-        - /url: /posts/dev/network/2020/08/01/Letsencrypt 인증서 갱신
-        - heading "Let's encrypt 인증서 갱신하기" [level=2]
-        - paragraph: 제 블로그는 Let's Encrypt로 SSL을 구성하고 있습니다. Let's Encrypt는 무료이기 떄문에 많은 분들이 이용하고 있지만, 무분별한 인증서 남용을 막기 위해 3개월로 기간을 제한하고 있습니다. 저도 다음주에 만기가 되어서 슬슬 알아보다가, 대부분 이용하는 ce
-        - time: Aug 01, 2020
-        - text: "· #개발 #네트워크"
-        - img
-    - article:
-      - 'link "Corsair Void Pro 헤드셋에 연결되지 않을 때 ```toc ``` 잡담 맥북에 macOS Big sur 개발자 베타를 잘 쓰다가 생각보다 안되는 게 많더군요. 당분간은 그냥 Catalina로 쓰는 게 좋을 듯 싶습니다. (스팀이라던가, 스팀 게임이라던가...) 덕분에 윈도우로 오랜만에 컴퓨터를 하고 있는데, 오래 연결 Jun 28, 2020 · #Chat"':
-        - /url: /posts/chat/2020/06/27/Corsair void pro 연결 안 될 때
-        - heading "Corsair Void Pro 헤드셋에 연결되지 않을 때" [level=2]
-        - paragraph: "```toc ``` 잡담 맥북에 macOS Big sur 개발자 베타를 잘 쓰다가 생각보다 안되는 게 많더군요. 당분간은 그냥 Catalina로 쓰는 게 좋을 듯 싶습니다. (스팀이라던가, 스팀 게임이라던가...) 덕분에 윈도우로 오랜만에 컴퓨터를 하고 있는데, 오래 연결"
-        - time: Jun 28, 2020
-        - text: "· #Chat"
-        - img
-    - article:
-      - 'link "맥북 프로 16인치를 샀습니다.. ![오픈 전](images/1.png) ![오픈 후](images/2.png) 저는 맥북 유저입니다. 이번에 16인치 신형이 나오면 지르려고 했는데, 한국시각으로 23일 wwdc 2020이 열렸습니다. ARM 아키텍쳐를 사용한 맥이 발표되었는데요. 어차피 인텔 맥을 성능 Jun 24, 2020 · #Chat"':
-        - /url: /posts/chat/2020/06/24/맥북을 샀습니다
-        - heading "맥북 프로 16인치를 샀습니다.." [level=2]
-        - paragraph: "![오픈 전](images/1.png) ![오픈 후](images/2.png) 저는 맥북 유저입니다. 이번에 16인치 신형이 나오면 지르려고 했는데, 한국시각으로 23일 wwdc 2020이 열렸습니다. ARM 아키텍쳐를 사용한 맥이 발표되었는데요. 어차피 인텔 맥을 성능"
-        - time: Jun 24, 2020
-        - text: "· #Chat"
-        - img
-    - article:
-      - 'link "모두 코로나 조심하세요 작년 12월부터 발견된 코로나19. 저는 금방 끝날 줄 알았는데, 사그라들 기미는 커녕 오히려 확진자 및 사망자가 늘고 있네요. 전 지금 회사에서 체온 측정 당번으로 대기 중입니다. 모두 코로나 조심하시고, 건강한 하루가 되셨으면 합니다. Apr 03, 2020 · #건강"':
-        - /url: /posts/notice/2020/04/03/모두 코로나 조심하세요
-        - heading "모두 코로나 조심하세요" [level=2]
-        - paragraph: 작년 12월부터 발견된 코로나19. 저는 금방 끝날 줄 알았는데, 사그라들 기미는 커녕 오히려 확진자 및 사망자가 늘고 있네요. 전 지금 회사에서 체온 측정 당번으로 대기 중입니다. 모두 코로나 조심하시고, 건강한 하루가 되셨으면 합니다.
-        - time: Apr 03, 2020
-        - text: "· #건강"
-        - img
-    - article:
-      - 'link "File-sorter ![File-sorter](images/file-sorter.png) 회사에서 진행하고 있는 거대한 일이 하나 끝나서, 간단한 파일 관리 앱을 만들어보고 있습니다. 예전부터 Electron Application을 만들어보고 싶었는데, 이번에 자그맣게나마 한 단계를 끊을 수 있 Mar 07, 2020 · #개발 #Jell"':
-        - /url: /posts/dev/jell/2018/08/21/File-sorter
-        - heading "File-sorter" [level=2]
-        - paragraph: "![File-sorter](images/file-sorter.png) 회사에서 진행하고 있는 거대한 일이 하나 끝나서, 간단한 파일 관리 앱을 만들어보고 있습니다. 예전부터 Electron Application을 만들어보고 싶었는데, 이번에 자그맣게나마 한 단계를 끊을 수 있"
-        - time: Mar 07, 2020
-        - text: "· #개발 #Jell"
-        - img
-    - article:
-      - 'link "크런치 모드에 걸렸습니다. 어째 이번 달은 어떻게 흘러갔는지도 모르겠습니다. 개인적으로도 일이 있었고, 공적으로도 일이 있는 달인 듯 싶네요. 다음 달에는 좀 쉴 수 있을까요? 주말 출근만 하지 않기를... Feb 24, 2020 · #Chat"':
-        - /url: /posts/chat/2020/02/23/크런치 모드
-        - heading "크런치 모드에 걸렸습니다." [level=2]
-        - paragraph: 어째 이번 달은 어떻게 흘러갔는지도 모르겠습니다. 개인적으로도 일이 있었고, 공적으로도 일이 있는 달인 듯 싶네요. 다음 달에는 좀 쉴 수 있을까요? 주말 출근만 하지 않기를...
-        - time: Feb 24, 2020
-        - text: "· #Chat"
-        - img
-    - article:
-      - 'link "설날에는 드래곤볼이죠! ![드래곤볼 Z 카카로트 타이틀 이미지](images/dragonballzkakarot.jfif) 이번 설은 처음으로 시골에 내려가지 않는 명절이었습니다. 갑자기 시간이 붕 떠서 게임을 하나 깼습니다. 드래곤볼을 보며 큰 세대로써, 이만한 드래곤볼 게임은 없다 생각합니다. Jan 25, 2020 · #게임"':
-        - /url: /posts/game/2020/01/25/설날에는_드래곤볼이죠
-        - heading "설날에는 드래곤볼이죠!" [level=2]
-        - paragraph: "![드래곤볼 Z 카카로트 타이틀 이미지](images/dragonballzkakarot.jfif) 이번 설은 처음으로 시골에 내려가지 않는 명절이었습니다. 갑자기 시간이 붕 떠서 게임을 하나 깼습니다. 드래곤볼을 보며 큰 세대로써, 이만한 드래곤볼 게임은 없다 생각합니다."
-        - time: Jan 25, 2020
-        - text: "· #게임"
-        - img
-    - article:
-      - 'link "내일 워크샵 갑니다. 내일과 모레, 워크샵 일정이 잡혀있습니다. 스키장으로 가는데요, 재밌게 충전하고 조금 더 웃는 시간이 되었으면 좋겠습니다. 모레 만나요! Jan 16, 2020 · #Chat"':
-        - /url: /posts/chat/2020/01/15/워크샵 갑니다
-        - heading "내일 워크샵 갑니다." [level=2]
-        - paragraph: 내일과 모레, 워크샵 일정이 잡혀있습니다. 스키장으로 가는데요, 재밌게 충전하고 조금 더 웃는 시간이 되었으면 좋겠습니다. 모레 만나요!
-        - time: Jan 16, 2020
-        - text: "· #Chat"
-        - img
-    - article:
-      - 'link "잠을 내쫒아봅시다. 요 며칠 개발만 쭉 해오다보니 살짝 지치네요. 한숨 돌립니다. 좋아하는 개발이나 자전거, 게임도 많이 못 하고 있네요. 집안에 우환도 겹쳐서.. 며칠동안 피곤하고 웃을 일이 많이 없었는데 다시 정신차리고 해봐야겠습니다! Jan 15, 2020 · #Chat"':
-        - /url: /posts/chat/2020/01/14/잠을 내쫓아봅시다
-        - heading "잠을 내쫒아봅시다." [level=2]
-        - paragraph: 요 며칠 개발만 쭉 해오다보니 살짝 지치네요. 한숨 돌립니다. 좋아하는 개발이나 자전거, 게임도 많이 못 하고 있네요. 집안에 우환도 겹쳐서.. 며칠동안 피곤하고 웃을 일이 많이 없었는데 다시 정신차리고 해봐야겠습니다!
-        - time: Jan 15, 2020
-        - text: "· #Chat"
-        - img
-    - article:
-      - 'link "Javascript에만 있는 === 연산자 ```toc ``` 개요 보통 개발할 때 서로 다른 두 변수를 비교하기 위해서는 ''=='' 연산자를 사용합니다. ```javascript const a = 2020 const b = 2020 console.log(a == b) // true ``` Javascript에서도 ''== Jan 12, 2020 · #개발 #Javascript #Typescript"':
-        - /url: /posts/dev/js/tip/2020/01/11/===연산자
-        - heading "Javascript에만 있는 === 연산자" [level=2]
-        - paragraph: "```toc ``` 개요 보통 개발할 때 서로 다른 두 변수를 비교하기 위해서는 '==' 연산자를 사용합니다. ```javascript const a = 2020 const b = 2020 console.log(a == b) // true ``` Javascript에서도 '=="
-        - time: Jan 12, 2020
-        - text: "· #개발 #Javascript #Typescript"
-        - img
-    - article:
-      - 'link "for-of를 사용해보자. ```toc ``` 개요 모든 언어가 그렇지만, 반복문은 주로 for문을 사용합니다. 아~~~~주 가끔 while문을 쓰는 정도이고요. Javascript에는 for문 말고도 map, forEach 등등 지원해주는 함수가 많이 있습니다. 오늘은 그 중 for~of문을 소 Jan 09, 2020 · #개발 #Javascript #Typescript"':
-        - /url: /posts/dev/js/tip/2020/01/09/for-of
-        - heading "for-of를 사용해보자." [level=2]
-        - paragraph: "```toc ``` 개요 모든 언어가 그렇지만, 반복문은 주로 for문을 사용합니다. 아~~~~주 가끔 while문을 쓰는 정도이고요. Javascript에는 for문 말고도 map, forEach 등등 지원해주는 함수가 많이 있습니다. 오늘은 그 중 for~of문을 소"
-        - time: Jan 09, 2020
-        - text: "· #개발 #Javascript #Typescript"
-        - img
-    - article:
-      - 'link "Axios 설정 시 헤더를 넣는 법 ```toc ``` 개요 Javascript 개발 시 (특히 node.js 개발 시) 반드시라고 해도 좋을 정도로 유용한 라이브러리가 있습니다. 바로 ''axios''인데요, http(s)를 통해 다른 서버와 통신할 때의 코드를 줄여주는 매크로 모음 라이브러리입니다. get은 바 Jan 08, 2020 · #개발 #Javascript #Typescript"':
-        - /url: /posts/dev/js/tip/2020/01/07/Axios 설정 시 헤더를 넣는 법
-        - heading "Axios 설정 시 헤더를 넣는 법" [level=2]
-        - paragraph: "```toc ``` 개요 Javascript 개발 시 (특히 node.js 개발 시) 반드시라고 해도 좋을 정도로 유용한 라이브러리가 있습니다. 바로 'axios'인데요, http(s)를 통해 다른 서버와 통신할 때의 코드를 줄여주는 매크로 모음 라이브러리입니다. get은 바"
-        - time: Jan 08, 2020
-        - text: "· #개발 #Javascript #Typescript"
-        - img
-    - article:
-      - 'link "2019 자전거 결산 ![Strava 2019 결산](images/strava_2019.png) Strava에서는 매년 결산을 통해 선수가 얼마나 달렸는지를 보여줍니다. 기존에는 동영상으로 보여줬는데, 올해는 사이트로 보여주네요. 2019년에 자전거(및 약간의 걷기, 하이킹) 총 합이 5800 Jan 06, 2020 · #자전거"':
-        - /url: /posts/bicycle/2020/01/05/Strava 2019 결산
-        - heading "2019 자전거 결산" [level=2]
-        - paragraph: "![Strava 2019 결산](images/strava_2019.png) Strava에서는 매년 결산을 통해 선수가 얼마나 달렸는지를 보여줍니다. 기존에는 동영상으로 보여줬는데, 올해는 사이트로 보여주네요. 2019년에 자전거(및 약간의 걷기, 하이킹) 총 합이 5800"
-        - time: Jan 06, 2020
-        - text: "· #자전거"
-        - img
-    - article:
-      - 'link "블로그 새 단장 안녕하세요, Jell입니다. 새로 처음부터 블로그를 만드려다가, 생각보다 처음부터하면 적용해야 할 게 많더라구요. 그래서 [사이트](https://github.com/junhobaik)에서 참조하여 단장했습니다. 검색, 태그 등등 제가 원하는 모든 기능이 들어있어 놀라기도 Jan 04, 2020 · #삽질 #홈페이지"':
-        - /url: /posts/notice/2020/01/04/블로그 새 단장
-        - heading "블로그 새 단장" [level=2]
-        - paragraph: 안녕하세요, Jell입니다. 새로 처음부터 블로그를 만드려다가, 생각보다 처음부터하면 적용해야 할 게 많더라구요. 그래서 [사이트](https://github.com/junhobaik)에서 참조하여 단장했습니다. 검색, 태그 등등 제가 원하는 모든 기능이 들어있어 놀라기도
-        - time: Jan 04, 2020
-        - text: "· #삽질 #홈페이지"
-        - img
-    - article:
-      - 'link "삼항연산자 ```toc ``` 개요 우리가 개발하면서 제일 많이 쓰는 조건문은 if ~ else가 있을 것입니다. ~~~js const a = true if (a === true) { console.log(''a is true'') } else { console.log(''a is f Jan 03, 2020 · #개발 #알고리즘"':
-        - /url: /posts/dev/algorithm/2020/01/03/삼항연산자
-        - heading "삼항연산자" [level=2]
-        - paragraph: "```toc ``` 개요 우리가 개발하면서 제일 많이 쓰는 조건문은 if ~ else가 있을 것입니다. ~~~js const a = true if (a === true) { console.log('a is true') } else { console.log('a is f"
-        - time: Jan 03, 2020
-        - text: "· #개발 #알고리즘"
-        - img
-    - article:
-      - 'link "2020년이 밝았습니다! 새해 복 많이 받으세요! --- 원더키디가 활동하는 2020년이 밝았습니다. KBS 유튜브에서도 원더키디를 전편 재방송 해주는 걸로 아는데, 어릴 적에 봤던 기억이 나네요. 새해에는 부디 몸짱되고 연애하는 한 해가 되셨으면 합니다. 저도요... Jan 02, 2020 · #Chat"':
-        - /url: /posts/chat/2020/01/02/2020년이 밝았습니다
-        - heading "2020년이 밝았습니다!" [level=2]
-        - paragraph: 새해 복 많이 받으세요! --- 원더키디가 활동하는 2020년이 밝았습니다. KBS 유튜브에서도 원더키디를 전편 재방송 해주는 걸로 아는데, 어릴 적에 봤던 기억이 나네요. 새해에는 부디 몸짱되고 연애하는 한 해가 되셨으면 합니다. 저도요...
-        - time: Jan 02, 2020
-        - text: "· #Chat"
-        - img
-    - article:
-      - 'link "숫자의 소숫점 처리 하기. ```toc ``` 개요 Javascript는 숫자를 number형으로 단일 관리합니다. 이는 기존 언어의 Int와 Float(Double)의 경계가 없다는 것을 의미합니다. 이번에 해볼 작업은 JS의 number, 그 중에서도 소숫점을 처리하는 방법에 대해 알아보겠습니다. Jan 01, 2020 · #개발 #Javascript #Typescript"':
-        - /url: /posts/dev/js/tip/2019/12/31/숫자의 소숫점 처리
-        - heading "숫자의 소숫점 처리 하기." [level=2]
-        - paragraph: "```toc ``` 개요 Javascript는 숫자를 number형으로 단일 관리합니다. 이는 기존 언어의 Int와 Float(Double)의 경계가 없다는 것을 의미합니다. 이번에 해볼 작업은 JS의 number, 그 중에서도 소숫점을 처리하는 방법에 대해 알아보겠습니다."
-        - time: Jan 01, 2020
-        - text: "· #개발 #Javascript #Typescript"
-        - img
-    - article:
-      - 'link "2019년을 보내며 안녕하세요, Jell입니다. 일을 하고나서 블로그를 제대로 볼 시간이 없었다는 핑계부터 시작해봅니다. 내년인 2020년부터는 꾸준히 쓰고자 합니다. 급 반성문 모드긴 한데.. 생각하고 있는건 다음과 같습니다. * 최소 이틀에 한번은 블로그에 포스팅(메모라도) 할 수 있도록 하겠습니 Dec 30, 2019 · #삽질 #홈페이지"':
-        - /url: /posts/notice/2019/12/30/jell_1주년_계획
-        - heading "2019년을 보내며" [level=2]
-        - paragraph: 안녕하세요, Jell입니다. 일을 하고나서 블로그를 제대로 볼 시간이 없었다는 핑계부터 시작해봅니다. 내년인 2020년부터는 꾸준히 쓰고자 합니다. 급 반성문 모드긴 한데.. 생각하고 있는건 다음과 같습니다. * 최소 이틀에 한번은 블로그에 포스팅(메모라도) 할 수 있도록 하겠습니
-        - time: Dec 30, 2019
-        - text: "· #삽질 #홈페이지"
-        - img
-    - article:
-      - link "테스트 Hi! 마크다운으로 작성한 게시글 입니다. Dec 27, 2019":
-        - /url: /posts/notice/2019/12/27/test
-        - heading "테스트" [level=2]
-        - paragraph: Hi! 마크다운으로 작성한 게시글 입니다.
-        - time: Dec 27, 2019
-        - img
-    - article:
-      - 'link "벌써 반 년이 지났네요. 회사에 익숙해려 노력하다보니 벌써 반 년의 시간이 흘렀습니다. 직전 글을 보니 무안해지네요 (__) 조금이라도 더 쓸 수 있도록 노력하겠습니다. Jul 29, 2019 · #Chat"':
-        - /url: /posts/chat/2019/07/29/벌써 반년
-        - heading "벌써 반 년이 지났네요." [level=2]
-        - paragraph: 회사에 익숙해려 노력하다보니 벌써 반 년의 시간이 흘렀습니다. 직전 글을 보니 무안해지네요 (__) 조금이라도 더 쓸 수 있도록 노력하겠습니다.
-        - time: Jul 29, 2019
-        - text: "· #Chat"
-        - img
-    - article:
-      - 'link "2019년 새해 복 많이 받으세요! 간만에 작성 하는 글이 새해 인사가 될 줄은 몰랐습니다. (__) 새해 복 많이 받으세요. 새해에는 블로그도 꾸준히 할 수 있는 Jell이 되도록 노력하겠습니다. 아시는 분은 아시지만, 블로그 이외에도 유튜브를 운영하고 있습니다. 운영한 지는 몇 년 되었는데, 썸네일이나 인트로 무비 Feb 04, 2019 · #Chat"':
-        - /url: /posts/chat/2019/02/03/2019 한 해 새해 복 많이 받으세요
-        - heading "2019년 새해 복 많이 받으세요!" [level=2]
-        - paragraph: 간만에 작성 하는 글이 새해 인사가 될 줄은 몰랐습니다. (__) 새해 복 많이 받으세요. 새해에는 블로그도 꾸준히 할 수 있는 Jell이 되도록 노력하겠습니다. 아시는 분은 아시지만, 블로그 이외에도 유튜브를 운영하고 있습니다. 운영한 지는 몇 년 되었는데, 썸네일이나 인트로 무비
-        - time: Feb 04, 2019
-        - text: "· #Chat"
-        - img
-    - article:
-      - 'link "18년 10월 7일 근황 글을 쓰기 전에.. --- 최근 이런저런 일이 있었습니다. 다리가 좀 아프고, 치과도 가고, 뻘짓도 하고? 몇 가지 적어볼까 합니다. --- - 치과에 다녀왔습니다. 치과는 재작년에 크게 앓은 후로 많이 적응이 됐는데, 역시 그 특유의 분위기는 익숙해지질 않네요. Oct 08, 2018 · #Chat"':
-        - /url: /posts/chat/2018/10/07/181007 근황
-        - heading "18년 10월 7일 근황" [level=2]
-        - paragraph: 글을 쓰기 전에.. --- 최근 이런저런 일이 있었습니다. 다리가 좀 아프고, 치과도 가고, 뻘짓도 하고? 몇 가지 적어볼까 합니다. --- - 치과에 다녀왔습니다. 치과는 재작년에 크게 앓은 후로 많이 적응이 됐는데, 역시 그 특유의 분위기는 익숙해지질 않네요.
-        - time: Oct 08, 2018
-        - text: "· #Chat"
-        - img
-    - article:
-      - 'link "콜백 함수 사용 시 try catch 문 사용 방법 콜백 함수는 아무리 해도 적응이 안됩니다. 타 언어(C, Java, Swift 등..)에서 당연하다 생각되었던 방법들이 하필 Javascript/Typescript에서만 안되면 곤혹스러운데요. 그 중 하나를 소개해드리고자 합니다. 바로 try~catch문입니다. 다음은 일 Oct 01, 2018 · #개발 #Javascript #Typescript"':
-        - /url: /posts/dev/js/tip/2018/09/30/콜백 함수 사용 시 try catch 문 사용 방법
-        - heading "콜백 함수 사용 시 try catch 문 사용 방법" [level=2]
-        - paragraph: 콜백 함수는 아무리 해도 적응이 안됩니다. 타 언어(C, Java, Swift 등..)에서 당연하다 생각되었던 방법들이 하필 Javascript/Typescript에서만 안되면 곤혹스러운데요. 그 중 하나를 소개해드리고자 합니다. 바로 try~catch문입니다. 다음은 일
-        - time: Oct 01, 2018
-        - text: "· #개발 #Javascript #Typescript"
-        - img
-    - article:
-      - 'link "자전거 바테잎을 교체했습니다. 이번주 수요일, 친한 동생과 팔당에 초계국수를 먹으러 가다가 처음으로 낙차를 했습니다. 인도에 있던 아이가 갑자기 자전거 도로에 나와서 미처 속도를 줄일 거리를 확보를 못해서 낙차하게 되었는데요. 자전거도, 저도, 친한 동생도 크게 다치진 않아서 다행이라고 생각하고 있습니다. Oct 01, 2018 · #자전거"':
-        - /url: /posts/bicycle/2018/09/30/바테잎_교체
-        - heading "자전거 바테잎을 교체했습니다." [level=2]
-        - paragraph: 이번주 수요일, 친한 동생과 팔당에 초계국수를 먹으러 가다가 처음으로 낙차를 했습니다. 인도에 있던 아이가 갑자기 자전거 도로에 나와서 미처 속도를 줄일 거리를 확보를 못해서 낙차하게 되었는데요. 자전거도, 저도, 친한 동생도 크게 다치진 않아서 다행이라고 생각하고 있습니다.
-        - time: Oct 01, 2018
-        - text: "· #자전거"
-        - img
-    - article:
-      - 'link "콜백 함수를 강제로 Promise로 변환하기. Node.js는 Javascript를 html에서 어플리케이션용 언어로 쓸 수 있게 해주는 언어입니다. 다만 Node.js의 특성 상, 싱글 스레드이기 때문에 효율적인 처리를 위해 외부 프로세스를 생성하여 비동기 처리하고 있습니다. 이를 받아들일 때는 콜백 함수(Callback Sep 24, 2018 · #개발 #Javascript #Typescript"':
-        - /url: /posts/dev/js/tip/2018/09/23/콜백 함수를 강제로 Promise함수로 변환하기.
-        - heading "콜백 함수를 강제로 Promise로 변환하기." [level=2]
-        - paragraph: Node.js는 Javascript를 html에서 어플리케이션용 언어로 쓸 수 있게 해주는 언어입니다. 다만 Node.js의 특성 상, 싱글 스레드이기 때문에 효율적인 처리를 위해 외부 프로세스를 생성하여 비동기 처리하고 있습니다. 이를 받아들일 때는 콜백 함수(Callback
-        - time: Sep 24, 2018
-        - text: "· #개발 #Javascript #Typescript"
-        - img
-    - article:
-      - 'link "즐거운 추석 보내세요! 저는 친가가 논산에 있습니다. 아까 새벽 5시 30분에 집에서 출발했는데, 이번 추석은 생각보다 빠르게 8시 40분 (아침식사 포함) 도착했습니다! 이렇게 빨리 온 건 처음인거 같아요! (평년 명절에는 빨라도 5시간? 정도 걸렸습니다.) 모두모두 즐거운 한가위 되시고, 연휴동 Sep 23, 2018 · #잡담"':
-        - /url: /posts/chat/2018/09/23/즐거운_추석_보내세요_2018
-        - heading "즐거운 추석 보내세요!" [level=2]
-        - paragraph: 저는 친가가 논산에 있습니다. 아까 새벽 5시 30분에 집에서 출발했는데, 이번 추석은 생각보다 빠르게 8시 40분 (아침식사 포함) 도착했습니다! 이렇게 빨리 온 건 처음인거 같아요! (평년 명절에는 빨라도 5시간? 정도 걸렸습니다.) 모두모두 즐거운 한가위 되시고, 연휴동
-        - time: Sep 23, 2018
-        - text: "· #잡담"
-        - img
-    - article:
-      - 'link "맥 초기화 했습니다! ![맥 초기화중](images/formatted.png) 맥 초기화 완료했습니다! 실은 이틀전에 초기화했는데, 이제서야 글을 쓰네요. 근데 막상 초기화하고 이틀 지난 오늘 또 비슷한 증상이 나타나네요😭 모하비의 문제인건가 이거! Sep 03, 2018 · #잡담"':
-        - /url: /posts/chat/2018/09/03/맥_초기화_했습니다
-        - heading "맥 초기화 했습니다!" [level=2]
-        - paragraph: "![맥 초기화중](images/formatted.png) 맥 초기화 완료했습니다! 실은 이틀전에 초기화했는데, 이제서야 글을 쓰네요. 근데 막상 초기화하고 이틀 지난 오늘 또 비슷한 증상이 나타나네요😭 모하비의 문제인건가 이거!"
-        - time: Sep 03, 2018
-        - text: "· #잡담"
-        - img
-    - article:
-      - 'link "맥 초기화 해야할 듯.. ![맥 초기화중](images/backup.png) 맥의 장점은 역시 안정성이죠. 저도 처음 사놓고 3년정도 포맷없이 잘 쓰고 있었는데, 갑자기 잠자기 모드에서 깨우면 외장 키보드가 인식을 안한다던가, 매직 트랙패드가 안먹는다던가 하는 문제가 있네요. 더불어 리셋하면 전원이 나간 Aug 30, 2018 · #잡담 #개발"':
-        - /url: /posts/chat/2018/08/30/맥_초기화_해야할듯
-        - heading "맥 초기화 해야할 듯.." [level=2]
-        - paragraph: "![맥 초기화중](images/backup.png) 맥의 장점은 역시 안정성이죠. 저도 처음 사놓고 3년정도 포맷없이 잘 쓰고 있었는데, 갑자기 잠자기 모드에서 깨우면 외장 키보드가 인식을 안한다던가, 매직 트랙패드가 안먹는다던가 하는 문제가 있네요. 더불어 리셋하면 전원이 나간"
-        - time: Aug 30, 2018
-        - text: "· #잡담 #개발"
-        - img
-    - article:
-      - 'link "Codility No.1 (BinaryGap) 코딜리티라는 웹사이트가 있습니다. 알고리즘을 만드는 실력을 기르는 사이트인데요. 저도 틈틈히 하고 있습니다. 오늘은 그 중 첫번째인 BinaryGap에 대해 알아봅시다. 먼저 문제입니다. 답은 정해져있지 않으며, 여기에 적은 답은 예시 중 하나일 뿐입니다. 문제 -- Aug 28, 2018 · #개발 #알고리즘"':
-        - /url: /posts/dev/algorithm/2018/08/27/코딜리티1
-        - heading "Codility No.1 (BinaryGap)" [level=2]
-        - paragraph: 코딜리티라는 웹사이트가 있습니다. 알고리즘을 만드는 실력을 기르는 사이트인데요. 저도 틈틈히 하고 있습니다. 오늘은 그 중 첫번째인 BinaryGap에 대해 알아봅시다. 먼저 문제입니다. 답은 정해져있지 않으며, 여기에 적은 답은 예시 중 하나일 뿐입니다. 문제 --
-        - time: Aug 28, 2018
-        - text: "· #개발 #알고리즘"
-        - img
-    - article:
-      - 'link "(2018-08-15) 제주도 3일차 3일차이자 마지막 날입니다! ![숙소 앞](images/20180815_103951.png) 이 날에도 10시즈음 출발한 듯 싶습니다. ![성산일출봉 인증센터](images/20180815_104414.png) 바로 앞에 있는 성산일출봉 인증센터에서 셀카도 찍어주고! Aug 26, 2018 · #여행 #운동 #자전거"':
-        - /url: /posts/bicycle/2018/08/26/제주도_3일차
-        - heading "(2018-08-15) 제주도 3일차" [level=2]
-        - paragraph: 3일차이자 마지막 날입니다! ![숙소 앞](images/20180815_103951.png) 이 날에도 10시즈음 출발한 듯 싶습니다. ![성산일출봉 인증센터](images/20180815_104414.png) 바로 앞에 있는 성산일출봉 인증센터에서 셀카도 찍어주고!
-        - time: Aug 26, 2018
-        - text: "· #여행 #운동 #자전거"
-        - img
-    - article:
-      - 'link "(2018-08-14) 제주도 2일차 ![숙소에서 아침](images/20180814_083852.png) 아침이 밝았습니다! 10시 즈음에 출발한거 같네요! ![숙소 앞 셀카](images/20180814_101516.png) 요렇게 셀카도 하나 찍어주고! ![숙소 앞](images/20180814_1015 Aug 26, 2018 · #여행 #운동 #자전거"':
-        - /url: /posts/bicycle/2018/08/26/제주도_2일차
-        - heading "(2018-08-14) 제주도 2일차" [level=2]
-        - paragraph: "![숙소에서 아침](images/20180814_083852.png) 아침이 밝았습니다! 10시 즈음에 출발한거 같네요! ![숙소 앞 셀카](images/20180814_101516.png) 요렇게 셀카도 하나 찍어주고! ![숙소 앞](images/20180814_1015"
-        - time: Aug 26, 2018
-        - text: "· #여행 #운동 #자전거"
-        - img
-    - article:
-      - 'link "(2018-08-13) 제주도 1일차 오랜 숙원이었던 자전거 라이딩을 끝마치고, 곧 쓰겠다고 했는데 생각보다 늦어졌네요 ㅠㅠ 친구와 함께 다녀왔습니다. 친구는 자전거를 대여해서 진행했고, 저는 제 자전거를 직접 가져가기로 했습니다. ![자전거 포장 완료](images/20180813_095244.png) 요렇 Aug 24, 2018 · #여행 #운동 #자전거"':
-        - /url: /posts/bicycle/2018/08/24/제주도_1일차
-        - heading "(2018-08-13) 제주도 1일차" [level=2]
-        - paragraph: 오랜 숙원이었던 자전거 라이딩을 끝마치고, 곧 쓰겠다고 했는데 생각보다 늦어졌네요 ㅠㅠ 친구와 함께 다녀왔습니다. 친구는 자전거를 대여해서 진행했고, 저는 제 자전거를 직접 가져가기로 했습니다. ![자전거 포장 완료](images/20180813_095244.png) 요렇
-        - time: Aug 24, 2018
-        - text: "· #여행 #운동 #자전거"
-        - img
-    - article:
-      - 'link "카테고리 페이지 연결 미뤄두고 있던 카테고리 페이지를 연결 작업을 진행했습니다! 좀 야매로 진행한 듯 싶은데... 아직 GraphQL이 익숙치 않아 진행했으니, 공부한 다음에 확실히 해결해 놓도록 하겠습니다 ㅜㅜ Aug 21, 2018 · #삽질 #홈페이지"':
-        - /url: /posts/notice/2018/08/21/카테고리 페이지 연결
-        - heading "카테고리 페이지 연결" [level=2]
-        - paragraph: 미뤄두고 있던 카테고리 페이지를 연결 작업을 진행했습니다! 좀 야매로 진행한 듯 싶은데... 아직 GraphQL이 익숙치 않아 진행했으니, 공부한 다음에 확실히 해결해 놓도록 하겠습니다 ㅜㅜ
-        - time: Aug 21, 2018
-        - text: "· #삽질 #홈페이지"
-        - img
-    - article:
-      - 'link "SSH 접속 포트 바꾸기 SSH의 기본 포트는 ''22''입니다. 하지만 워낙 유명한 포트이기도 하고 일단 접속해서 로그인만 되면 해당 컴퓨터의 운용이 가능해지는 단점이 있기 때문에, 많은 개발자분들이 SSH 접속 포트를 변경해서 사용하고 있습니다. 이번에 우리도 한 번 바꿔봅시다! 리눅스 기준입니다! Aug 21, 2018 · #개발 #네트워크"':
-        - /url: /posts/dev/network/2018/08/21/SSH 포트 바꾸기
-        - heading "SSH 접속 포트 바꾸기" [level=2]
-        - paragraph: SSH의 기본 포트는 '22'입니다. 하지만 워낙 유명한 포트이기도 하고 일단 접속해서 로그인만 되면 해당 컴퓨터의 운용이 가능해지는 단점이 있기 때문에, 많은 개발자분들이 SSH 접속 포트를 변경해서 사용하고 있습니다. 이번에 우리도 한 번 바꿔봅시다! 리눅스 기준입니다!
-        - time: Aug 21, 2018
-        - text: "· #개발 #네트워크"
-        - img
-    - article:
-      - 'link "제주도 다녀왔습니다. ![자전거 정비 후](images/20180816_202904.png) 이번 주 월요일 (8월 13일)부터 시작한 제주도 라이딩을 마치고 돌아왔습니다! 자세한 이야기는 곧 올리기로 하겠습니다. Aug 16, 2018 · #여행 #운동 #자전거"':
-        - /url: /posts/bicycle/2018/08/13/제주도_복귀
-        - heading "제주도 다녀왔습니다." [level=2]
-        - paragraph: "![자전거 정비 후](images/20180816_202904.png) 이번 주 월요일 (8월 13일)부터 시작한 제주도 라이딩을 마치고 돌아왔습니다! 자세한 이야기는 곧 올리기로 하겠습니다."
-        - time: Aug 16, 2018
-        - text: "· #여행 #운동 #자전거"
-        - img
-    - article:
-      - 'link "2018 08 11 제주도 가기 전 자전거 ![팔당역 가면서](images/20180811_152937.png) ![팔당대교](images/20180811_154525.png) ![팔당역 앞](images/20180811_154939.png) 뜬금 없지만 다음주 월요일에 제주도에 가게 되었습니다. 총 거리는 2 Aug 11, 2018 · #운동 #자전거"':
-        - /url: /posts/bicycle/2018/08/11/제주도_출발_전_라이딩
-        - heading "2018 08 11 제주도 가기 전 자전거" [level=2]
-        - paragraph: "![팔당역 가면서](images/20180811_152937.png) ![팔당대교](images/20180811_154525.png) ![팔당역 앞](images/20180811_154939.png) 뜬금 없지만 다음주 월요일에 제주도에 가게 되었습니다. 총 거리는 2"
-        - time: Aug 11, 2018
-        - text: "· #운동 #자전거"
-        - img
-    - article:
-      - 'link "용과 같이 3을 구매했습니다. ![용과 같이 3](images/ryu_ga_kotoku_3.png) 용과 같이 3이 오늘 발매됐네요! 부리나케 사왔습니다. Aug 09, 2018 · #게임"':
-        - /url: /posts/game/2018/08/09/용과_같이_구매
-        - heading "용과 같이 3을 구매했습니다." [level=2]
-        - paragraph: "![용과 같이 3](images/ryu_ga_kotoku_3.png) 용과 같이 3이 오늘 발매됐네요! 부리나케 사왔습니다."
-        - time: Aug 09, 2018
-        - text: "· #게임"
-        - img
-    - article:
-      - 'link "생애 첫 야구 직관을 갔습니다. ![잠실야구장](images/jamsil1.png) ![잠실야구장](images/jamsil2.png) ![잠실야구장](images/jamsil3.png) 저는 한화 이글스의 팬입니다. 본격적으로 팬이 된 건 2015년인데요, 그 동안은 집에서 TV로만 보다가 이번에 친한 동생 Aug 08, 2018 · #일상 #야구"':
-        - /url: /posts/chat/2018/08/08/생애_첫_야구_직관
-        - heading "생애 첫 야구 직관을 갔습니다." [level=2]
-        - paragraph: "![잠실야구장](images/jamsil1.png) ![잠실야구장](images/jamsil2.png) ![잠실야구장](images/jamsil3.png) 저는 한화 이글스의 팬입니다. 본격적으로 팬이 된 건 2015년인데요, 그 동안은 집에서 TV로만 보다가 이번에 친한 동생"
-        - time: Aug 08, 2018
-        - text: "· #일상 #야구"
-        - img
-    - article:
-      - 'link "XMLHttpMethod - 서버와 상호작용하기 XMLHttpRequest(XHR)은 서버와 상호작용을 가능하게 해주는 객체입니다. Ajax에 주로 쓰이며, 마찬가지로 전체 데이터를 새로 불러오지 않고도 일부분만을 업데이트 할 수 있습니다. 저는 이를 [블로그 서버의 online상태를 확인](https://blog.jell.k Aug 07, 2018 · #개발 #Javascript"':
-        - /url: /posts/dev/js/tip/2018/08/07/XmlHttpRequest - 서버와 상호작용하기
-        - heading "XMLHttpMethod - 서버와 상호작용하기" [level=2]
-        - paragraph: XMLHttpRequest(XHR)은 서버와 상호작용을 가능하게 해주는 객체입니다. Ajax에 주로 쓰이며, 마찬가지로 전체 데이터를 새로 불러오지 않고도 일부분만을 업데이트 할 수 있습니다. 저는 이를 [블로그 서버의 online상태를 확인](https://blog.jell.k
-        - time: Aug 07, 2018
-        - text: "· #개발 #Javascript"
-        - img
-    - article:
-      - 'link "Jell 블로그는 살아있는가 ![is Jell Blog Alive?](images/isblogalive.png) 새로운 걸 찾아봐야겠다고 생각하고 Electron을 사용해서 간단히 핑만 확인하는 프로그램을 만들어 봤습니다. Electron재밌네요! 확실히 Client, Server만 사용하다보니 눈에 확 와닿 Aug 07, 2018 · #개발 #삽질"':
-        - /url: /posts/chat/2018/08/07/내_블로그는_살아있는가
-        - heading "Jell 블로그는 살아있는가" [level=2]
-        - paragraph: "![is Jell Blog Alive?](images/isblogalive.png) 새로운 걸 찾아봐야겠다고 생각하고 Electron을 사용해서 간단히 핑만 확인하는 프로그램을 만들어 봤습니다. Electron재밌네요! 확실히 Client, Server만 사용하다보니 눈에 확 와닿"
-        - time: Aug 07, 2018
-        - text: "· #개발 #삽질"
-        - img
-    - article:
-      - 'link "2018 08 07 Zwift ![운동 결과](images/zwift.png) Zwift에서 5주 프로그램을 시작해 이제 4주차 둘째 날입니다. 매주 첫째 날에는 Micro Burst라고 해서 순간적으로 엄청난 힘으로 굴린 다음 잠깐 쉬고 다시 엄청난 힘으로 굴리고..의 반복입니다. 이게 그 주의 제일 Aug 07, 2018 · #운동 #자전거"':
-        - /url: /posts/bicycle/2018/08/07/2018_08_07_Zwift
-        - heading "2018 08 07 Zwift" [level=2]
-        - paragraph: "![운동 결과](images/zwift.png) Zwift에서 5주 프로그램을 시작해 이제 4주차 둘째 날입니다. 매주 첫째 날에는 Micro Burst라고 해서 순간적으로 엄청난 힘으로 굴린 다음 잠깐 쉬고 다시 엄청난 힘으로 굴리고..의 반복입니다. 이게 그 주의 제일"
-        - time: Aug 07, 2018
-        - text: "· #운동 #자전거"
-        - img
-    - article:
-      - 'link "2018 08 06 Zwift ![운동 결과](images/zwift.png) 오늘은 실내 자전거를 탔습니다 :) 자세한 이야기는 추후 써내려가기로 하고, 지금 하고 있는 프로그램이 월요일이 제일 힘든 코스여서 타는 데 죽는 줄 알았습니다 ㅜㅜ Aug 06, 2018 · #운동 #자전거"':
-        - /url: /posts/bicycle/2018/08/06/2018_08_06_Zwift
-        - heading "2018 08 06 Zwift" [level=2]
-        - paragraph: "![운동 결과](images/zwift.png) 오늘은 실내 자전거를 탔습니다 :) 자세한 이야기는 추후 써내려가기로 하고, 지금 하고 있는 프로그램이 월요일이 제일 힘든 코스여서 타는 데 죽는 줄 알았습니다 ㅜㅜ"
-        - time: Aug 06, 2018
-        - text: "· #운동 #자전거"
-        - img
-    - article:
-      - 'link "리스트에 내용 추가 내용 추가하는 건 간단한데, 아직 자르는 걸 좀 생각해봐야할 듯 싶습니다. Aug 05, 2018 · #삽질 #홈페이지"':
-        - /url: /posts/notice/2018/08/04/리스트에_내용_추가
-        - heading "리스트에 내용 추가" [level=2]
-        - paragraph: 내용 추가하는 건 간단한데, 아직 자르는 걸 좀 생각해봐야할 듯 싶습니다.
-        - time: Aug 05, 2018
-        - text: "· #삽질 #홈페이지"
-        - img
-    - article:
-      - 'link "새로운 걸 만들어볼까 만들다보니 느낀 건데, 뭔가 확실한 로드맵이 나올 때까지 아예 새로운 걸 만들어보는 것도 좋겠다 싶습니다. 하나만 가지고 고민때리는 것 보다는 최대한 이것저것 많이 해보고 싶어요. Aug 05, 2018 · #개발 #잡담"':
-        - /url: /posts/chat/2018/08/05/새로운_걸_만들어볼까
-        - heading "새로운 걸 만들어볼까" [level=2]
-        - paragraph: 만들다보니 느낀 건데, 뭔가 확실한 로드맵이 나올 때까지 아예 새로운 걸 만들어보는 것도 좋겠다 싶습니다. 하나만 가지고 고민때리는 것 보다는 최대한 이것저것 많이 해보고 싶어요.
-        - time: Aug 05, 2018
-        - text: "· #개발 #잡담"
-        - img
-    - article:
-      - 'link "태그 추가 글을 쓰다보니 카테고리 기능 추가에 앞서 태그 기능이 우선시 되어야겠다 생각했습니다. 이제 미리보기를 시작해볼까 합니다. Aug 04, 2018 · #삽질 #홈페이지"':
-        - /url: /posts/notice/2018/08/04/태그_기능_추가
-        - heading "태그 추가" [level=2]
-        - paragraph: 글을 쓰다보니 카테고리 기능 추가에 앞서 태그 기능이 우선시 되어야겠다 생각했습니다. 이제 미리보기를 시작해볼까 합니다.
-        - time: Aug 04, 2018
-        - text: "· #삽질 #홈페이지"
-        - img
-    - article:
-      - 'link "폰트 변경 처음 만들 때, 따로 폰트에 대한 생각을 하고 있지 않아서 기본 폰트로 진행했습니다. 이제 Roboto, Helvetica, Arial, sans-serif를 적용해서 다른 기기에서 봐도 동일한 폰트가 나오게 됩니다. 맥에는 거의 궁서체로 나와서 슬펐는데 다행이네요! Aug 03, 2018 · #삽질 #홈페이지"':
-        - /url: /posts/notice/2018/08/03/폰트_변경
-        - heading "폰트 변경" [level=2]
-        - paragraph: 처음 만들 때, 따로 폰트에 대한 생각을 하고 있지 않아서 기본 폰트로 진행했습니다. 이제 Roboto, Helvetica, Arial, sans-serif를 적용해서 다른 기기에서 봐도 동일한 폰트가 나오게 됩니다. 맥에는 거의 궁서체로 나와서 슬펐는데 다행이네요!
-        - time: Aug 03, 2018
-        - text: "· #삽질 #홈페이지"
-        - img
-    - article:
-      - 'link "Mac 타임머신 시작 ![타임머신](images/timemachine.png) Mac에는 타임머신이라는 기능이 있습니다. 일종의 백업 툴인데요, Mac 안에 있는 정보를 Git처럼 변동사항 위주로 저장해놨다가 문제가 생겼을 때 꺼낼 수 있는 기능입니다. 그 전까지는 ''아 이런 기능이 있구나~''하고 Aug 02, 2018 · #삽질"':
-        - /url: /posts/chat/2018/08/02/Mac_타임머신_시작
-        - heading "Mac 타임머신 시작" [level=2]
-        - paragraph: "![타임머신](images/timemachine.png) Mac에는 타임머신이라는 기능이 있습니다. 일종의 백업 툴인데요, Mac 안에 있는 정보를 Git처럼 변동사항 위주로 저장해놨다가 문제가 생겼을 때 꺼낼 수 있는 기능입니다. 그 전까지는 '아 이런 기능이 있구나~'하고"
-        - time: Aug 02, 2018
-        - text: "· #삽질"
-        - img
-    - article:
-      - 'link "서울 역대 최고 기온 (39도) ![서울 39도](images/seoul_39.png) 결국 역대 최고 기온을 넘어섰네요. Aug 01, 2018 · #주저리"':
-        - /url: /posts/chat/2018/08/01/서울_역대_최고_기온_39도
-        - heading "서울 역대 최고 기온 (39도)" [level=2]
-        - paragraph: "![서울 39도](images/seoul_39.png) 결국 역대 최고 기온을 넘어섰네요."
-        - time: Aug 01, 2018
-        - text: "· #주저리"
-        - img
-    - article:
-      - 'link "덥습니다 정말 덥네요. 에어컨 좀 틀고 싶다. Jul 26, 2018 · #주저리"':
-        - /url: /posts/chat/2018/07/26/덥습니다
-        - heading "덥습니다" [level=2]
-        - paragraph: 정말 덥네요. 에어컨 좀 틀고 싶다.
-        - time: Jul 26, 2018
-        - text: "· #주저리"
-        - img
-    - article:
-      - 'link "밀린 일들 처리 중 못 해봤던 것들 거의 대부분 하고 있다. 못 꺴던 젤다 야숨도 다 깼고, 제주도 일주도 순조롭게 나아가고 있다. 이제야 조금 실감이 난다. Jul 20, 2018 · #일상"':
-        - /url: /posts/notice/2018/07/20/밀린_일들_처리_중
-        - heading "밀린 일들 처리 중" [level=2]
-        - paragraph: 못 해봤던 것들 거의 대부분 하고 있다. 못 꺴던 젤다 야숨도 다 깼고, 제주도 일주도 순조롭게 나아가고 있다. 이제야 조금 실감이 난다.
-        - time: Jul 20, 2018
-        - text: "· #일상"
-        - img
-    - article:
-      - 'link "마크다운 적용 완료 이제 disqus 적용 들어갑니다. Jul 01, 2018 · #삽질 #홈페이지"':
-        - /url: /posts/notice/2018/07/01/마크다운_적용_완료
-        - heading "마크다운 적용 완료" [level=2]
-        - paragraph: 이제 disqus 적용 들어갑니다.
-        - time: Jul 01, 2018
-        - text: "· #삽질 #홈페이지"
-        - img
-    - article:
-      - 'link "Disqus 적용 완료 남아 있는 것 : Paging, 디자인 우선 해야 하는 것 : !!!ㅇㄴㄹ!!! Jul 01, 2018 · #삽질 #홈페이지"':
-        - /url: /posts/notice/2018/07/01/Disqus_적용_완료
-        - heading "Disqus 적용 완료" [level=2]
-        - paragraph: "남아 있는 것 : Paging, 디자인 우선 해야 하는 것 : !!!ㅇㄴㄹ!!!"
-        - time: Jul 01, 2018
-        - text: "· #삽질 #홈페이지"
-        - img
-    - article:
-      - 'link "마크다운 테스트입니다. 잘 나오고 있나요? Jun 24, 2018 · #삽질 #홈페이지"':
-        - /url: /posts/notice/2018/06/24/마크다운_테스트
-        - heading "마크다운 테스트입니다." [level=2]
-        - paragraph: 잘 나오고 있나요?
-        - time: Jun 24, 2018
-        - text: "· #삽질 #홈페이지"
-        - img
+    - main:
+        - complementary:
+            - paragraph: 아직 갈 길이 멀다.
+            - text: Jell Seoul, Korea
+            - link "jellive7@gmail.com":
+                - /url: mailto:jellive7@gmail.com
+            - link "https://blog.jell.kr":
+                - /url: https://blog.jell.kr
+            - link "RSS 피드 구독":
+                - /url: https://blog.jell.kr/rss
+            - link "GitHub 프로필":
+                - /url: https://github.com/jellive
+            - link "LinkedIn 프로필":
+                - /url: https://www.linkedin.com/in/%ED%95%9C%EA%B5%B0-%EC%9C%A0-429980113/
+        - article:
+            - 'link "Gatsby에서 Next.js로 마이그레이션하며 배운 것들 - 성공한 이야기와 그 과정에서의 깨달음 서론: 더 나은 기술을 향한 도전 개발자라면 누구나 한 번쯤은 경험하는 순간이 있습니다. \"저 기술이 더 좋아 보이는데?\" 하는 생각. 저 역시 그런 순간을 맞이했습니다. 2년간 안정적으로 운영되던 Gatsby 기반 블로그를 보며 문득 생각했습니다. \"Next.js가 요즘 주목받고 Aug 14, 2025 · #Gatsby #Next.js #마이그레이션 #개발 #React"':
+                - /url: /posts/dev/blog/2025/08/14/gatsby-to-nextjs-migration-experience
+                - heading "Gatsby에서 Next.js로 마이그레이션하며 배운 것들 - 성공한 이야기와 그 과정에서의 깨달음" [level=2]
+                - paragraph: '서론: 더 나은 기술을 향한 도전 개발자라면 누구나 한 번쯤은 경험하는 순간이 있습니다. "저 기술이 더 좋아 보이는데?" 하는 생각. 저 역시 그런 순간을 맞이했습니다. 2년간 안정적으로 운영되던 Gatsby 기반 블로그를 보며 문득 생각했습니다. "Next.js가 요즘 주목받고'
+                - time: Aug 14, 2025
+                - text: '· #Gatsby #Next.js #마이그레이션 #개발 #React'
+                - img
+        - article:
+            - 'link "yarn을 npm으로 전역설치 했을 때 업데이트 하는 방법 왜 작성하게 되었는가? ![이전버전](images/previous-version.png) ![최신버전](images/current-version.png) npm update -g yarn 만약 업그레이드 후 에러가 나온다면, package.json의 ''packageManager''를 Aug 06, 2024 · #npm #Yarn #package.json"':
+                - /url: /posts/dev/js/tip/2024/08/06/yarn을 npm으로 전역설치 했을 때 업데이트 하는 방법
+                - heading "yarn을 npm으로 전역설치 했을 때 업데이트 하는 방법" [level=2]
+                - paragraph: 왜 작성하게 되었는가? ![이전버전](images/previous-version.png) ![최신버전](images/current-version.png) npm update -g yarn 만약 업그레이드 후 에러가 나온다면, package.json의 'packageManager'를
+                - time: Aug 06, 2024
+                - text: '· #npm #Yarn #package.json'
+                - img
+        - article:
+            - 'link "Gatsby를 v5로 업그레이드 할 때 나타나는 에러 왜 작성하게 되었는가? package.json에 있는 resolution과 설치 버전을 맞춰야 한다. https://github.com/gatsbyjs/gatsby/issues/13278 Aug 06, 2024 · #Javascript #package.json #Gatsby"':
+                - /url: /posts/dev/blog/2024/08/06/Gatsby를 v4에서 v5로 업그레이드 할 때
+                - heading "Gatsby를 v5로 업그레이드 할 때 나타나는 에러" [level=2]
+                - paragraph: 왜 작성하게 되었는가? package.json에 있는 resolution과 설치 버전을 맞춰야 한다. https://github.com/gatsbyjs/gatsby/issues/13278
+                - time: Aug 06, 2024
+                - text: '· #Javascript #package.json #Gatsby'
+                - img
+        - article:
+            - 'link "UIViewController를 SwiftUI preview로 보여주기 왜 작성하게 되었는가? 그동안 현업으로만 Swift를 써오면서 몰랐던 키워드를 공부해보기 위해 여러 강의를 보고 있습니다. 그 중에 SwiftUI의 제일 큰 특징 중 하나인 preview를 UIKit으로 만든 UIViewController에서도 보여줄 수 있다는 걸 알게 되어 코 Jan 10, 2024 · #iOS #UIKit #SwiftUI"':
+                - /url: /posts/dev/ios/2024/01/11/UIViewController를 SwiftUI preview로 보여주기
+                - heading "UIViewController를 SwiftUI preview로 보여주기" [level=2]
+                - paragraph: 왜 작성하게 되었는가? 그동안 현업으로만 Swift를 써오면서 몰랐던 키워드를 공부해보기 위해 여러 강의를 보고 있습니다. 그 중에 SwiftUI의 제일 큰 특징 중 하나인 preview를 UIKit으로 만든 UIViewController에서도 보여줄 수 있다는 걸 알게 되어 코
+                - time: Jan 10, 2024
+                - text: '· #iOS #UIKit #SwiftUI'
+                - img
+        - article:
+            - 'link "Docker-compose로 mariadb 설치하기 왜 쓰는가? 하드디스크를 교체하고 ([#](https://blog.jell.kr/dev/linux/2023/02/27/%EC%9A%B0%EB%B6%84%ED%88%AC%2022.04%EB%A1%9C%20%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C Mar 30, 2023 · #Ubuntu #linux #docker #docker-compose #Jell"':
+                - /url: /posts/dev/docker/2023/03/30/docker-compose로 mariadb 설치기
+                - heading "Docker-compose로 mariadb 설치하기" [level=2]
+                - paragraph: 왜 쓰는가? 하드디스크를 교체하고 ([#](https://blog.jell.kr/dev/linux/2023/02/27/%EC%9A%B0%EB%B6%84%ED%88%AC%2022.04%EB%A1%9C%20%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C
+                - time: Mar 30, 2023
+                - text: '· #Ubuntu #linux #docker #docker-compose #Jell'
+                - img
+        - article:
+            - 'link "우분투 22.04로 업그레이드 하던 중 발생한 이슈 왜 쓰는가? 개인적으로 사용한지 약 7년 된 HGST의 8테라 하드가 슬슬 긁는 소리가 나서 급하게 껐다가 대체품을 구매해서 옮기려고 보니 우분투 22.04 LTS로 업그레이드를 권유하길래 진행하다 멈춰서 리셋을 하고 보니 ![You are in emergency mode] Feb 27, 2023 · #Ubuntu #linux #Jell #22.04"':
+                - /url: /posts/dev/linux/2023/02/27/우분투 22.04로 업그레이드 하던 중 발생한 이슈
+                - heading "우분투 22.04로 업그레이드 하던 중 발생한 이슈" [level=2]
+                - paragraph: 왜 쓰는가? 개인적으로 사용한지 약 7년 된 HGST의 8테라 하드가 슬슬 긁는 소리가 나서 급하게 껐다가 대체품을 구매해서 옮기려고 보니 우분투 22.04 LTS로 업그레이드를 권유하길래 진행하다 멈춰서 리셋을 하고 보니 ![You are in emergency mode]
+                - time: Feb 27, 2023
+                - text: '· #Ubuntu #linux #Jell #22.04'
+                - img
+        - article:
+            - 'link "Gatsby 업데이트 중지 몇 달 동안 업로드가 없었죠? 죄송합니다(__) 일도 있었고, 제가 업로드 할 당시의 Gatsby V3와 React 16, node 14에서 지금은 Gatsby V5, React 18, node 18이 나왔더라구요? 원작자분도 업데이트를 그만 두신 듯 하고.. 업데이 Nov 09, 2022 · #공지"':
+                - /url: /posts/notice/2022/11/09/Gatsby 업데이트 중지
+                - heading "Gatsby 업데이트 중지" [level=2]
+                - paragraph: 몇 달 동안 업로드가 없었죠? 죄송합니다(__) 일도 있었고, 제가 업로드 할 당시의 Gatsby V3와 React 16, node 14에서 지금은 Gatsby V5, React 18, node 18이 나왔더라구요? 원작자분도 업데이트를 그만 두신 듯 하고.. 업데이
+                - time: Nov 09, 2022
+                - text: '· #공지'
+                - img
+        - article:
+            - 'link "ios 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고 Mar 29, 2022 · #Ubuntu #linux #Jell #Shell"':
+                - /url: /posts/linux/2020/10/11/ios
+                - heading "ios" [level=2]
+                - paragraph: 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고
+                - time: Mar 29, 2022
+                - text: '· #Ubuntu #linux #Jell #Shell'
+                - img
+        - article:
+            - 'link "2022년 새해 복 많이 받으세요! 2021년은 코로나가 끝날 줄 알았는데 아직도 마스크를 쓰는 게 어색하네요. 올 한 해는 코로나도 끝나고 하시는 일도 모두 다 잘 되시길 빕니다. Jan 03, 2022 · #Chat"':
+                - /url: /posts/chat/2022/01/02/2022년 새해 복 많이 받으세요
+                - heading "2022년 새해 복 많이 받으세요!" [level=2]
+                - paragraph: 2021년은 코로나가 끝날 줄 알았는데 아직도 마스크를 쓰는 게 어색하네요. 올 한 해는 코로나도 끝나고 하시는 일도 모두 다 잘 되시길 빕니다.
+                - time: Jan 03, 2022
+                - text: '· #Chat'
+                - img
+        - article:
+            - 'link "Cocoapods 1.9.4 이후 RxRealm의 에러 해결방법 [이전 글](/dev/ios/2020/10/03/Cocoapods%201.9.4%EC%97%90%20%ED%98%84%EC%9E%AC%20%EB%B2%84%EA%B7%B8%EA%B0%80%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4/)에서 나타났던 에러의 해결 May 15, 2021 · #개발 #iOS #Cocoapods #XCode"':
+                - /url: /posts/dev/ios/2021/05/14/Cocoapods 1.9.4 이후 RxRealm의 에러 해결방법
+                - heading "Cocoapods 1.9.4 이후 RxRealm의 에러 해결방법" [level=2]
+                - paragraph: '[이전 글](/dev/ios/2020/10/03/Cocoapods%201.9.4%EC%97%90%20%ED%98%84%EC%9E%AC%20%EB%B2%84%EA%B7%B8%EA%B0%80%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4/)에서 나타났던 에러의 해결'
+                - time: May 15, 2021
+                - text: '· #개발 #iOS #Cocoapods #XCode'
+                - img
+        - article:
+            - 'link "Gatsby V3으로 업그레이드 했습니다. 회사 일이 바쁘다는 핑계로 블로그 관리를 소홀히 했네요. 그동안 독립이니 집 컴퓨터 교체니 회사 일이니 이런 저런 일이 많았습니다. V1에서 V2로 옮겨갈 때보다 훨씬 쉬워서 좋네요. 앞으로도 종종 글을 써보겠습니다. May 13, 2021 · #공지"':
+                - /url: /posts/notice/2021/05/13/Gatsby V3으로 업그레이드 했습니다
+                - heading "Gatsby V3으로 업그레이드 했습니다." [level=2]
+                - paragraph: 회사 일이 바쁘다는 핑계로 블로그 관리를 소홀히 했네요. 그동안 독립이니 집 컴퓨터 교체니 회사 일이니 이런 저런 일이 많았습니다. V1에서 V2로 옮겨갈 때보다 훨씬 쉬워서 좋네요. 앞으로도 종종 글을 써보겠습니다.
+                - time: May 13, 2021
+                - text: '· #공지'
+                - img
+        - article:
+            - 'link "외부에서 접속하기 위한 ssh 설치 가이드 왜 쓰는가? 우분투를 메인으로 쓰시는 분이 많이 늘었다고는 하지만, 여전히 서브로 쓰시는 분들이 많습니다. 그렇다고 우분투를 쓰기 위해 키보드 마우스를 계속 옮기는 일도 번거로운 일이죠. 제일 크게 다가오는 이유는 역시 서버를 여러군데 두는 일일 것입니다. SSH는 우분투 Oct 22, 2020 · #Ubuntu #linux #Jell #Shell"':
+                - /url: /posts/dev/linux/2020/10/22/외부에서 우분투로 접속하기 위한 SSH 설정
+                - heading "외부에서 접속하기 위한 ssh 설치 가이드" [level=2]
+                - paragraph: 왜 쓰는가? 우분투를 메인으로 쓰시는 분이 많이 늘었다고는 하지만, 여전히 서브로 쓰시는 분들이 많습니다. 그렇다고 우분투를 쓰기 위해 키보드 마우스를 계속 옮기는 일도 번거로운 일이죠. 제일 크게 다가오는 이유는 역시 서버를 여러군데 두는 일일 것입니다. SSH는 우분투
+                - time: Oct 22, 2020
+                - text: '· #Ubuntu #linux #Jell #Shell'
+                - img
+        - article:
+            - 'link "개인적으로 쓰는 우분투 노트북 설치 가이드 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고 Oct 11, 2020 · #Ubuntu #linux #Jell #Shell"':
+                - /url: /posts/dev/linux/2020/10/11/개인적으로 쓰는 우분투 노트북 설치 가이드
+                - heading "개인적으로 쓰는 우분투 노트북 설치 가이드" [level=2]
+                - paragraph: 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고
+                - time: Oct 11, 2020
+                - text: '· #Ubuntu #linux #Jell #Shell'
+                - img
+        - article:
+            - 'link "개인적으로 쓰는 우분투 노트북 설치 가이드 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고 Oct 11, 2020 · #Ubuntu #linux #Jell #Shell"':
+                - /url: /posts/linux/2020/10/11/개인적으로 쓰는 우분투 노트북 설치 가이드
+                - heading "개인적으로 쓰는 우분투 노트북 설치 가이드" [level=2]
+                - paragraph: 왜 쓰는가? 저녁에 조금 일찍 잠들어서 자정즈음에 깼습니다. 그냥 멍때리면서 개발하고 있다가, 문득 제가 쓰는 노트북~~나스 대용~~의 우분투 버전이 18.04 LTS라는 걸 떠올리면서 ~~왜 그랬는지는 모르겠지만~~ 20.04.1 LTS로 이 참에 업그레이드나 해야겠다...하고
+                - time: Oct 11, 2020
+                - text: '· #Ubuntu #linux #Jell #Shell'
+                - img
+        - article:
+            - 'link "Cocoapods 1.9.4에 버그가 있습니다(Cocoapods 다운그레이드 방법) 집에서 iOS를 공부하기 위해 습관적으로 cocoapods를 업데이트하고 빌드를 하려고 보니 ![증상 스크린샷](images/screenshot1.png) ``` Undefined symbols for architecture arm64: \"_OBJC_CLASS_$_RLMNotif Oct 04, 2020 · #개발 #iOS #Cocoapods #XCode"':
+                - /url: /posts/dev/ios/2020/10/03/Cocoapods 1.9.4에 현재 버그가 있습니다
+                - heading "Cocoapods 1.9.4에 버그가 있습니다(Cocoapods 다운그레이드 방법)" [level=2]
+                - paragraph: '집에서 iOS를 공부하기 위해 습관적으로 cocoapods를 업데이트하고 빌드를 하려고 보니 ![증상 스크린샷](images/screenshot1.png) ``` Undefined symbols for architecture arm64: "_OBJC_CLASS_$_RLMNotif'
+                - time: Oct 04, 2020
+                - text: '· #개발 #iOS #Cocoapods #XCode'
+                - img
+        - article:
+            - 'link "Codility No.2-1 (CyclicRotation) 코딜리티라는 웹사이트가 있습니다. 알고리즘을 만드는 실력을 기르는 사이트인데요. 저도 틈틈히 하고 있습니다. 오늘은 그 중 두번째 중 하나인 CyclibRotation에 대해 알아봅시다. 먼저 문제입니다. 답은 정해져있지 않으며, 여기에 적은 답은 예시 중 하나일 뿐입 Sep 28, 2020 · #개발 #알고리즘"':
+                - /url: /posts/dev/algorithm/2020/09/27/코딜리티2-1
+                - heading "Codility No.2-1 (CyclicRotation)" [level=2]
+                - paragraph: 코딜리티라는 웹사이트가 있습니다. 알고리즘을 만드는 실력을 기르는 사이트인데요. 저도 틈틈히 하고 있습니다. 오늘은 그 중 두번째 중 하나인 CyclibRotation에 대해 알아봅시다. 먼저 문제입니다. 답은 정해져있지 않으며, 여기에 적은 답은 예시 중 하나일 뿐입
+                - time: Sep 28, 2020
+                - text: '· #개발 #알고리즘'
+                - img
+        - article:
+            - 'link "React native iOS의 .jsbundle에러 해결법 개요 오랜만에 React native 프로젝트를 다시 열 일이 있어서 초기화한 맥에 설치를 하고 앱을 실행해 봤습니다. 그런데.. ![증상 스크린샷](images/screenshot1.png) 에러가 뜨면서 실행이 안되는 겁니다. 그래서 인생의 동반자~~스승~~인 구글신 Sep 28, 2020 · #개발 #Javascript #Typescript #React Native"':
+                - /url: /posts/dev/js/tip/2020/09/27/jsbundle에러
+                - heading "React native iOS의 .jsbundle에러 해결법" [level=2]
+                - paragraph: 개요 오랜만에 React native 프로젝트를 다시 열 일이 있어서 초기화한 맥에 설치를 하고 앱을 실행해 봤습니다. 그런데.. ![증상 스크린샷](images/screenshot1.png) 에러가 뜨면서 실행이 안되는 겁니다. 그래서 인생의 동반자~~스승~~인 구글신
+                - time: Sep 28, 2020
+                - text: '· #개발 #Javascript #Typescript #React Native'
+                - img
+        - article:
+            - 'link "2020년 9월 그란폰도 ![2020년 9월 18일 그란폰도](images/granfondo.png) [toc] 그란폰도란 위키피디아에 있는 그란폰도(Granfondo)의 뜻은 다음과 같습니다. ```kr 그란폰도(granfondo)는 이탈리아어로 ''long distance or great en Sep 19, 2020 · #자전거"':
+                - /url: /posts/bicycle/2020/09/18/9월의 그란폰도
+                - heading "2020년 9월 그란폰도" [level=2]
+                - paragraph: "![2020년 9월 18일 그란폰도](images/granfondo.png) [toc] 그란폰도란 위키피디아에 있는 그란폰도(Granfondo)의 뜻은 다음과 같습니다. ```kr 그란폰도(granfondo)는 이탈리아어로 'long distance or great en"
+                - time: Sep 19, 2020
+                - text: '· #자전거'
+                - img
+        - article:
+            - 'link "5년차가 된 기념 자그마한 고민 개발 5년차가 되었습니다. 조금은 어색하기도 합니다. 벌써 5년? 이라 생각이 들기도 하고, 이제야 5년? 이라 생각이 들기도 하고. 지금까지 저는 여러분야를 다 잘 할 수 있는 사람이 되겠다! 라고 생각을 하고 있었는데, 다들 한결같이 ```kr 어느 한 분야를 깊게 Aug 26, 2020 · #개발 #Jell #넋두리"':
+                - /url: /posts/dev/jell/2020/08/26/5년차가_된_기념_자그마한_고민
+                - heading "5년차가 된 기념 자그마한 고민" [level=2]
+                - paragraph: '개발 5년차가 되었습니다. 조금은 어색하기도 합니다. 벌써 5년? 이라 생각이 들기도 하고, 이제야 5년? 이라 생각이 들기도 하고. 지금까지 저는 여러분야를 다 잘 할 수 있는 사람이 되겠다! 라고 생각을 하고 있었는데, 다들 한결같이 ```kr 어느 한 분야를 깊게'
+                - time: Aug 26, 2020
+                - text: '· #개발 #Jell #넋두리'
+                - img
+        - article:
+            - 'link "Let''s encrypt 인증서 갱신하기 제 블로그는 Let''s Encrypt로 SSL을 구성하고 있습니다. Let''s Encrypt는 무료이기 떄문에 많은 분들이 이용하고 있지만, 무분별한 인증서 남용을 막기 위해 3개월로 기간을 제한하고 있습니다. 저도 다음주에 만기가 되어서 슬슬 알아보다가, 대부분 이용하는 ce Aug 01, 2020 · #개발 #네트워크"':
+                - /url: /posts/dev/network/2020/08/01/Letsencrypt 인증서 갱신
+                - heading "Let's encrypt 인증서 갱신하기" [level=2]
+                - paragraph: 제 블로그는 Let's Encrypt로 SSL을 구성하고 있습니다. Let's Encrypt는 무료이기 떄문에 많은 분들이 이용하고 있지만, 무분별한 인증서 남용을 막기 위해 3개월로 기간을 제한하고 있습니다. 저도 다음주에 만기가 되어서 슬슬 알아보다가, 대부분 이용하는 ce
+                - time: Aug 01, 2020
+                - text: '· #개발 #네트워크'
+                - img
+        - article:
+            - 'link "Corsair Void Pro 헤드셋에 연결되지 않을 때 ```toc ``` 잡담 맥북에 macOS Big sur 개발자 베타를 잘 쓰다가 생각보다 안되는 게 많더군요. 당분간은 그냥 Catalina로 쓰는 게 좋을 듯 싶습니다. (스팀이라던가, 스팀 게임이라던가...) 덕분에 윈도우로 오랜만에 컴퓨터를 하고 있는데, 오래 연결 Jun 28, 2020 · #Chat"':
+                - /url: /posts/chat/2020/06/27/Corsair void pro 연결 안 될 때
+                - heading "Corsair Void Pro 헤드셋에 연결되지 않을 때" [level=2]
+                - paragraph: '```toc ``` 잡담 맥북에 macOS Big sur 개발자 베타를 잘 쓰다가 생각보다 안되는 게 많더군요. 당분간은 그냥 Catalina로 쓰는 게 좋을 듯 싶습니다. (스팀이라던가, 스팀 게임이라던가...) 덕분에 윈도우로 오랜만에 컴퓨터를 하고 있는데, 오래 연결'
+                - time: Jun 28, 2020
+                - text: '· #Chat'
+                - img
+        - article:
+            - 'link "맥북 프로 16인치를 샀습니다.. ![오픈 전](images/1.png) ![오픈 후](images/2.png) 저는 맥북 유저입니다. 이번에 16인치 신형이 나오면 지르려고 했는데, 한국시각으로 23일 wwdc 2020이 열렸습니다. ARM 아키텍쳐를 사용한 맥이 발표되었는데요. 어차피 인텔 맥을 성능 Jun 24, 2020 · #Chat"':
+                - /url: /posts/chat/2020/06/24/맥북을 샀습니다
+                - heading "맥북 프로 16인치를 샀습니다.." [level=2]
+                - paragraph: '![오픈 전](images/1.png) ![오픈 후](images/2.png) 저는 맥북 유저입니다. 이번에 16인치 신형이 나오면 지르려고 했는데, 한국시각으로 23일 wwdc 2020이 열렸습니다. ARM 아키텍쳐를 사용한 맥이 발표되었는데요. 어차피 인텔 맥을 성능'
+                - time: Jun 24, 2020
+                - text: '· #Chat'
+                - img
+        - article:
+            - 'link "모두 코로나 조심하세요 작년 12월부터 발견된 코로나19. 저는 금방 끝날 줄 알았는데, 사그라들 기미는 커녕 오히려 확진자 및 사망자가 늘고 있네요. 전 지금 회사에서 체온 측정 당번으로 대기 중입니다. 모두 코로나 조심하시고, 건강한 하루가 되셨으면 합니다. Apr 03, 2020 · #건강"':
+                - /url: /posts/notice/2020/04/03/모두 코로나 조심하세요
+                - heading "모두 코로나 조심하세요" [level=2]
+                - paragraph: 작년 12월부터 발견된 코로나19. 저는 금방 끝날 줄 알았는데, 사그라들 기미는 커녕 오히려 확진자 및 사망자가 늘고 있네요. 전 지금 회사에서 체온 측정 당번으로 대기 중입니다. 모두 코로나 조심하시고, 건강한 하루가 되셨으면 합니다.
+                - time: Apr 03, 2020
+                - text: '· #건강'
+                - img
+        - article:
+            - 'link "File-sorter ![File-sorter](images/file-sorter.png) 회사에서 진행하고 있는 거대한 일이 하나 끝나서, 간단한 파일 관리 앱을 만들어보고 있습니다. 예전부터 Electron Application을 만들어보고 싶었는데, 이번에 자그맣게나마 한 단계를 끊을 수 있 Mar 07, 2020 · #개발 #Jell"':
+                - /url: /posts/dev/jell/2018/08/21/File-sorter
+                - heading "File-sorter" [level=2]
+                - paragraph: '![File-sorter](images/file-sorter.png) 회사에서 진행하고 있는 거대한 일이 하나 끝나서, 간단한 파일 관리 앱을 만들어보고 있습니다. 예전부터 Electron Application을 만들어보고 싶었는데, 이번에 자그맣게나마 한 단계를 끊을 수 있'
+                - time: Mar 07, 2020
+                - text: '· #개발 #Jell'
+                - img
+        - article:
+            - 'link "크런치 모드에 걸렸습니다. 어째 이번 달은 어떻게 흘러갔는지도 모르겠습니다. 개인적으로도 일이 있었고, 공적으로도 일이 있는 달인 듯 싶네요. 다음 달에는 좀 쉴 수 있을까요? 주말 출근만 하지 않기를... Feb 24, 2020 · #Chat"':
+                - /url: /posts/chat/2020/02/23/크런치 모드
+                - heading "크런치 모드에 걸렸습니다." [level=2]
+                - paragraph: 어째 이번 달은 어떻게 흘러갔는지도 모르겠습니다. 개인적으로도 일이 있었고, 공적으로도 일이 있는 달인 듯 싶네요. 다음 달에는 좀 쉴 수 있을까요? 주말 출근만 하지 않기를...
+                - time: Feb 24, 2020
+                - text: '· #Chat'
+                - img
+        - article:
+            - 'link "설날에는 드래곤볼이죠! ![드래곤볼 Z 카카로트 타이틀 이미지](images/dragonballzkakarot.jfif) 이번 설은 처음으로 시골에 내려가지 않는 명절이었습니다. 갑자기 시간이 붕 떠서 게임을 하나 깼습니다. 드래곤볼을 보며 큰 세대로써, 이만한 드래곤볼 게임은 없다 생각합니다. Jan 25, 2020 · #게임"':
+                - /url: /posts/game/2020/01/25/설날에는_드래곤볼이죠
+                - heading "설날에는 드래곤볼이죠!" [level=2]
+                - paragraph: '![드래곤볼 Z 카카로트 타이틀 이미지](images/dragonballzkakarot.jfif) 이번 설은 처음으로 시골에 내려가지 않는 명절이었습니다. 갑자기 시간이 붕 떠서 게임을 하나 깼습니다. 드래곤볼을 보며 큰 세대로써, 이만한 드래곤볼 게임은 없다 생각합니다.'
+                - time: Jan 25, 2020
+                - text: '· #게임'
+                - img
+        - article:
+            - 'link "내일 워크샵 갑니다. 내일과 모레, 워크샵 일정이 잡혀있습니다. 스키장으로 가는데요, 재밌게 충전하고 조금 더 웃는 시간이 되었으면 좋겠습니다. 모레 만나요! Jan 16, 2020 · #Chat"':
+                - /url: /posts/chat/2020/01/15/워크샵 갑니다
+                - heading "내일 워크샵 갑니다." [level=2]
+                - paragraph: 내일과 모레, 워크샵 일정이 잡혀있습니다. 스키장으로 가는데요, 재밌게 충전하고 조금 더 웃는 시간이 되었으면 좋겠습니다. 모레 만나요!
+                - time: Jan 16, 2020
+                - text: '· #Chat'
+                - img
+        - article:
+            - 'link "잠을 내쫒아봅시다. 요 며칠 개발만 쭉 해오다보니 살짝 지치네요. 한숨 돌립니다. 좋아하는 개발이나 자전거, 게임도 많이 못 하고 있네요. 집안에 우환도 겹쳐서.. 며칠동안 피곤하고 웃을 일이 많이 없었는데 다시 정신차리고 해봐야겠습니다! Jan 15, 2020 · #Chat"':
+                - /url: /posts/chat/2020/01/14/잠을 내쫓아봅시다
+                - heading "잠을 내쫒아봅시다." [level=2]
+                - paragraph: 요 며칠 개발만 쭉 해오다보니 살짝 지치네요. 한숨 돌립니다. 좋아하는 개발이나 자전거, 게임도 많이 못 하고 있네요. 집안에 우환도 겹쳐서.. 며칠동안 피곤하고 웃을 일이 많이 없었는데 다시 정신차리고 해봐야겠습니다!
+                - time: Jan 15, 2020
+                - text: '· #Chat'
+                - img
+        - article:
+            - 'link "Javascript에만 있는 === 연산자 ```toc ``` 개요 보통 개발할 때 서로 다른 두 변수를 비교하기 위해서는 ''=='' 연산자를 사용합니다. ```javascript const a = 2020 const b = 2020 console.log(a == b) // true ``` Javascript에서도 ''== Jan 12, 2020 · #개발 #Javascript #Typescript"':
+                - /url: /posts/dev/js/tip/2020/01/11/===연산자
+                - heading "Javascript에만 있는 === 연산자" [level=2]
+                - paragraph: "```toc ``` 개요 보통 개발할 때 서로 다른 두 변수를 비교하기 위해서는 '==' 연산자를 사용합니다. ```javascript const a = 2020 const b = 2020 console.log(a == b) // true ``` Javascript에서도 '=="
+                - time: Jan 12, 2020
+                - text: '· #개발 #Javascript #Typescript'
+                - img
+        - article:
+            - 'link "for-of를 사용해보자. ```toc ``` 개요 모든 언어가 그렇지만, 반복문은 주로 for문을 사용합니다. 아~~~~주 가끔 while문을 쓰는 정도이고요. Javascript에는 for문 말고도 map, forEach 등등 지원해주는 함수가 많이 있습니다. 오늘은 그 중 for~of문을 소 Jan 09, 2020 · #개발 #Javascript #Typescript"':
+                - /url: /posts/dev/js/tip/2020/01/09/for-of
+                - heading "for-of를 사용해보자." [level=2]
+                - paragraph: '```toc ``` 개요 모든 언어가 그렇지만, 반복문은 주로 for문을 사용합니다. 아~~~~주 가끔 while문을 쓰는 정도이고요. Javascript에는 for문 말고도 map, forEach 등등 지원해주는 함수가 많이 있습니다. 오늘은 그 중 for~of문을 소'
+                - time: Jan 09, 2020
+                - text: '· #개발 #Javascript #Typescript'
+                - img
+        - article:
+            - 'link "Axios 설정 시 헤더를 넣는 법 ```toc ``` 개요 Javascript 개발 시 (특히 node.js 개발 시) 반드시라고 해도 좋을 정도로 유용한 라이브러리가 있습니다. 바로 ''axios''인데요, http(s)를 통해 다른 서버와 통신할 때의 코드를 줄여주는 매크로 모음 라이브러리입니다. get은 바 Jan 08, 2020 · #개발 #Javascript #Typescript"':
+                - /url: /posts/dev/js/tip/2020/01/07/Axios 설정 시 헤더를 넣는 법
+                - heading "Axios 설정 시 헤더를 넣는 법" [level=2]
+                - paragraph: "```toc ``` 개요 Javascript 개발 시 (특히 node.js 개발 시) 반드시라고 해도 좋을 정도로 유용한 라이브러리가 있습니다. 바로 'axios'인데요, http(s)를 통해 다른 서버와 통신할 때의 코드를 줄여주는 매크로 모음 라이브러리입니다. get은 바"
+                - time: Jan 08, 2020
+                - text: '· #개발 #Javascript #Typescript'
+                - img
+        - article:
+            - 'link "2019 자전거 결산 ![Strava 2019 결산](images/strava_2019.png) Strava에서는 매년 결산을 통해 선수가 얼마나 달렸는지를 보여줍니다. 기존에는 동영상으로 보여줬는데, 올해는 사이트로 보여주네요. 2019년에 자전거(및 약간의 걷기, 하이킹) 총 합이 5800 Jan 06, 2020 · #자전거"':
+                - /url: /posts/bicycle/2020/01/05/Strava 2019 결산
+                - heading "2019 자전거 결산" [level=2]
+                - paragraph: '![Strava 2019 결산](images/strava_2019.png) Strava에서는 매년 결산을 통해 선수가 얼마나 달렸는지를 보여줍니다. 기존에는 동영상으로 보여줬는데, 올해는 사이트로 보여주네요. 2019년에 자전거(및 약간의 걷기, 하이킹) 총 합이 5800'
+                - time: Jan 06, 2020
+                - text: '· #자전거'
+                - img
+        - article:
+            - 'link "블로그 새 단장 안녕하세요, Jell입니다. 새로 처음부터 블로그를 만드려다가, 생각보다 처음부터하면 적용해야 할 게 많더라구요. 그래서 [사이트](https://github.com/junhobaik)에서 참조하여 단장했습니다. 검색, 태그 등등 제가 원하는 모든 기능이 들어있어 놀라기도 Jan 04, 2020 · #삽질 #홈페이지"':
+                - /url: /posts/notice/2020/01/04/블로그 새 단장
+                - heading "블로그 새 단장" [level=2]
+                - paragraph: 안녕하세요, Jell입니다. 새로 처음부터 블로그를 만드려다가, 생각보다 처음부터하면 적용해야 할 게 많더라구요. 그래서 [사이트](https://github.com/junhobaik)에서 참조하여 단장했습니다. 검색, 태그 등등 제가 원하는 모든 기능이 들어있어 놀라기도
+                - time: Jan 04, 2020
+                - text: '· #삽질 #홈페이지'
+                - img
+        - article:
+            - 'link "삼항연산자 ```toc ``` 개요 우리가 개발하면서 제일 많이 쓰는 조건문은 if ~ else가 있을 것입니다. ~~~js const a = true if (a === true) { console.log(''a is true'') } else { console.log(''a is f Jan 03, 2020 · #개발 #알고리즘"':
+                - /url: /posts/dev/algorithm/2020/01/03/삼항연산자
+                - heading "삼항연산자" [level=2]
+                - paragraph: "```toc ``` 개요 우리가 개발하면서 제일 많이 쓰는 조건문은 if ~ else가 있을 것입니다. ~~~js const a = true if (a === true) { console.log('a is true') } else { console.log('a is f"
+                - time: Jan 03, 2020
+                - text: '· #개발 #알고리즘'
+                - img
+        - article:
+            - 'link "2020년이 밝았습니다! 새해 복 많이 받으세요! --- 원더키디가 활동하는 2020년이 밝았습니다. KBS 유튜브에서도 원더키디를 전편 재방송 해주는 걸로 아는데, 어릴 적에 봤던 기억이 나네요. 새해에는 부디 몸짱되고 연애하는 한 해가 되셨으면 합니다. 저도요... Jan 02, 2020 · #Chat"':
+                - /url: /posts/chat/2020/01/02/2020년이 밝았습니다
+                - heading "2020년이 밝았습니다!" [level=2]
+                - paragraph: 새해 복 많이 받으세요! --- 원더키디가 활동하는 2020년이 밝았습니다. KBS 유튜브에서도 원더키디를 전편 재방송 해주는 걸로 아는데, 어릴 적에 봤던 기억이 나네요. 새해에는 부디 몸짱되고 연애하는 한 해가 되셨으면 합니다. 저도요...
+                - time: Jan 02, 2020
+                - text: '· #Chat'
+                - img
+        - article:
+            - 'link "숫자의 소숫점 처리 하기. ```toc ``` 개요 Javascript는 숫자를 number형으로 단일 관리합니다. 이는 기존 언어의 Int와 Float(Double)의 경계가 없다는 것을 의미합니다. 이번에 해볼 작업은 JS의 number, 그 중에서도 소숫점을 처리하는 방법에 대해 알아보겠습니다. Jan 01, 2020 · #개발 #Javascript #Typescript"':
+                - /url: /posts/dev/js/tip/2019/12/31/숫자의 소숫점 처리
+                - heading "숫자의 소숫점 처리 하기." [level=2]
+                - paragraph: '```toc ``` 개요 Javascript는 숫자를 number형으로 단일 관리합니다. 이는 기존 언어의 Int와 Float(Double)의 경계가 없다는 것을 의미합니다. 이번에 해볼 작업은 JS의 number, 그 중에서도 소숫점을 처리하는 방법에 대해 알아보겠습니다.'
+                - time: Jan 01, 2020
+                - text: '· #개발 #Javascript #Typescript'
+                - img
+        - article:
+            - 'link "2019년을 보내며 안녕하세요, Jell입니다. 일을 하고나서 블로그를 제대로 볼 시간이 없었다는 핑계부터 시작해봅니다. 내년인 2020년부터는 꾸준히 쓰고자 합니다. 급 반성문 모드긴 한데.. 생각하고 있는건 다음과 같습니다. * 최소 이틀에 한번은 블로그에 포스팅(메모라도) 할 수 있도록 하겠습니 Dec 30, 2019 · #삽질 #홈페이지"':
+                - /url: /posts/notice/2019/12/30/jell_1주년_계획
+                - heading "2019년을 보내며" [level=2]
+                - paragraph: 안녕하세요, Jell입니다. 일을 하고나서 블로그를 제대로 볼 시간이 없었다는 핑계부터 시작해봅니다. 내년인 2020년부터는 꾸준히 쓰고자 합니다. 급 반성문 모드긴 한데.. 생각하고 있는건 다음과 같습니다. * 최소 이틀에 한번은 블로그에 포스팅(메모라도) 할 수 있도록 하겠습니
+                - time: Dec 30, 2019
+                - text: '· #삽질 #홈페이지'
+                - img
+        - article:
+            - link "테스트 Hi! 마크다운으로 작성한 게시글 입니다. Dec 27, 2019":
+                - /url: /posts/notice/2019/12/27/test
+                - heading "테스트" [level=2]
+                - paragraph: Hi! 마크다운으로 작성한 게시글 입니다.
+                - time: Dec 27, 2019
+                - img
+        - article:
+            - 'link "벌써 반 년이 지났네요. 회사에 익숙해려 노력하다보니 벌써 반 년의 시간이 흘렀습니다. 직전 글을 보니 무안해지네요 (__) 조금이라도 더 쓸 수 있도록 노력하겠습니다. Jul 29, 2019 · #Chat"':
+                - /url: /posts/chat/2019/07/29/벌써 반년
+                - heading "벌써 반 년이 지났네요." [level=2]
+                - paragraph: 회사에 익숙해려 노력하다보니 벌써 반 년의 시간이 흘렀습니다. 직전 글을 보니 무안해지네요 (__) 조금이라도 더 쓸 수 있도록 노력하겠습니다.
+                - time: Jul 29, 2019
+                - text: '· #Chat'
+                - img
+        - article:
+            - 'link "2019년 새해 복 많이 받으세요! 간만에 작성 하는 글이 새해 인사가 될 줄은 몰랐습니다. (__) 새해 복 많이 받으세요. 새해에는 블로그도 꾸준히 할 수 있는 Jell이 되도록 노력하겠습니다. 아시는 분은 아시지만, 블로그 이외에도 유튜브를 운영하고 있습니다. 운영한 지는 몇 년 되었는데, 썸네일이나 인트로 무비 Feb 04, 2019 · #Chat"':
+                - /url: /posts/chat/2019/02/03/2019 한 해 새해 복 많이 받으세요
+                - heading "2019년 새해 복 많이 받으세요!" [level=2]
+                - paragraph: 간만에 작성 하는 글이 새해 인사가 될 줄은 몰랐습니다. (__) 새해 복 많이 받으세요. 새해에는 블로그도 꾸준히 할 수 있는 Jell이 되도록 노력하겠습니다. 아시는 분은 아시지만, 블로그 이외에도 유튜브를 운영하고 있습니다. 운영한 지는 몇 년 되었는데, 썸네일이나 인트로 무비
+                - time: Feb 04, 2019
+                - text: '· #Chat'
+                - img
+        - article:
+            - 'link "18년 10월 7일 근황 글을 쓰기 전에.. --- 최근 이런저런 일이 있었습니다. 다리가 좀 아프고, 치과도 가고, 뻘짓도 하고? 몇 가지 적어볼까 합니다. --- - 치과에 다녀왔습니다. 치과는 재작년에 크게 앓은 후로 많이 적응이 됐는데, 역시 그 특유의 분위기는 익숙해지질 않네요. Oct 08, 2018 · #Chat"':
+                - /url: /posts/chat/2018/10/07/181007 근황
+                - heading "18년 10월 7일 근황" [level=2]
+                - paragraph: 글을 쓰기 전에.. --- 최근 이런저런 일이 있었습니다. 다리가 좀 아프고, 치과도 가고, 뻘짓도 하고? 몇 가지 적어볼까 합니다. --- - 치과에 다녀왔습니다. 치과는 재작년에 크게 앓은 후로 많이 적응이 됐는데, 역시 그 특유의 분위기는 익숙해지질 않네요.
+                - time: Oct 08, 2018
+                - text: '· #Chat'
+                - img
+        - article:
+            - 'link "콜백 함수 사용 시 try catch 문 사용 방법 콜백 함수는 아무리 해도 적응이 안됩니다. 타 언어(C, Java, Swift 등..)에서 당연하다 생각되었던 방법들이 하필 Javascript/Typescript에서만 안되면 곤혹스러운데요. 그 중 하나를 소개해드리고자 합니다. 바로 try~catch문입니다. 다음은 일 Oct 01, 2018 · #개발 #Javascript #Typescript"':
+                - /url: /posts/dev/js/tip/2018/09/30/콜백 함수 사용 시 try catch 문 사용 방법
+                - heading "콜백 함수 사용 시 try catch 문 사용 방법" [level=2]
+                - paragraph: 콜백 함수는 아무리 해도 적응이 안됩니다. 타 언어(C, Java, Swift 등..)에서 당연하다 생각되었던 방법들이 하필 Javascript/Typescript에서만 안되면 곤혹스러운데요. 그 중 하나를 소개해드리고자 합니다. 바로 try~catch문입니다. 다음은 일
+                - time: Oct 01, 2018
+                - text: '· #개발 #Javascript #Typescript'
+                - img
+        - article:
+            - 'link "자전거 바테잎을 교체했습니다. 이번주 수요일, 친한 동생과 팔당에 초계국수를 먹으러 가다가 처음으로 낙차를 했습니다. 인도에 있던 아이가 갑자기 자전거 도로에 나와서 미처 속도를 줄일 거리를 확보를 못해서 낙차하게 되었는데요. 자전거도, 저도, 친한 동생도 크게 다치진 않아서 다행이라고 생각하고 있습니다. Oct 01, 2018 · #자전거"':
+                - /url: /posts/bicycle/2018/09/30/바테잎_교체
+                - heading "자전거 바테잎을 교체했습니다." [level=2]
+                - paragraph: 이번주 수요일, 친한 동생과 팔당에 초계국수를 먹으러 가다가 처음으로 낙차를 했습니다. 인도에 있던 아이가 갑자기 자전거 도로에 나와서 미처 속도를 줄일 거리를 확보를 못해서 낙차하게 되었는데요. 자전거도, 저도, 친한 동생도 크게 다치진 않아서 다행이라고 생각하고 있습니다.
+                - time: Oct 01, 2018
+                - text: '· #자전거'
+                - img
+        - article:
+            - 'link "콜백 함수를 강제로 Promise로 변환하기. Node.js는 Javascript를 html에서 어플리케이션용 언어로 쓸 수 있게 해주는 언어입니다. 다만 Node.js의 특성 상, 싱글 스레드이기 때문에 효율적인 처리를 위해 외부 프로세스를 생성하여 비동기 처리하고 있습니다. 이를 받아들일 때는 콜백 함수(Callback Sep 24, 2018 · #개발 #Javascript #Typescript"':
+                - /url: /posts/dev/js/tip/2018/09/23/콜백 함수를 강제로 Promise함수로 변환하기.
+                - heading "콜백 함수를 강제로 Promise로 변환하기." [level=2]
+                - paragraph: Node.js는 Javascript를 html에서 어플리케이션용 언어로 쓸 수 있게 해주는 언어입니다. 다만 Node.js의 특성 상, 싱글 스레드이기 때문에 효율적인 처리를 위해 외부 프로세스를 생성하여 비동기 처리하고 있습니다. 이를 받아들일 때는 콜백 함수(Callback
+                - time: Sep 24, 2018
+                - text: '· #개발 #Javascript #Typescript'
+                - img
+        - article:
+            - 'link "즐거운 추석 보내세요! 저는 친가가 논산에 있습니다. 아까 새벽 5시 30분에 집에서 출발했는데, 이번 추석은 생각보다 빠르게 8시 40분 (아침식사 포함) 도착했습니다! 이렇게 빨리 온 건 처음인거 같아요! (평년 명절에는 빨라도 5시간? 정도 걸렸습니다.) 모두모두 즐거운 한가위 되시고, 연휴동 Sep 23, 2018 · #잡담"':
+                - /url: /posts/chat/2018/09/23/즐거운_추석_보내세요_2018
+                - heading "즐거운 추석 보내세요!" [level=2]
+                - paragraph: 저는 친가가 논산에 있습니다. 아까 새벽 5시 30분에 집에서 출발했는데, 이번 추석은 생각보다 빠르게 8시 40분 (아침식사 포함) 도착했습니다! 이렇게 빨리 온 건 처음인거 같아요! (평년 명절에는 빨라도 5시간? 정도 걸렸습니다.) 모두모두 즐거운 한가위 되시고, 연휴동
+                - time: Sep 23, 2018
+                - text: '· #잡담'
+                - img
+        - article:
+            - 'link "맥 초기화 했습니다! ![맥 초기화중](images/formatted.png) 맥 초기화 완료했습니다! 실은 이틀전에 초기화했는데, 이제서야 글을 쓰네요. 근데 막상 초기화하고 이틀 지난 오늘 또 비슷한 증상이 나타나네요😭 모하비의 문제인건가 이거! Sep 03, 2018 · #잡담"':
+                - /url: /posts/chat/2018/09/03/맥_초기화_했습니다
+                - heading "맥 초기화 했습니다!" [level=2]
+                - paragraph: '![맥 초기화중](images/formatted.png) 맥 초기화 완료했습니다! 실은 이틀전에 초기화했는데, 이제서야 글을 쓰네요. 근데 막상 초기화하고 이틀 지난 오늘 또 비슷한 증상이 나타나네요😭 모하비의 문제인건가 이거!'
+                - time: Sep 03, 2018
+                - text: '· #잡담'
+                - img
+        - article:
+            - 'link "맥 초기화 해야할 듯.. ![맥 초기화중](images/backup.png) 맥의 장점은 역시 안정성이죠. 저도 처음 사놓고 3년정도 포맷없이 잘 쓰고 있었는데, 갑자기 잠자기 모드에서 깨우면 외장 키보드가 인식을 안한다던가, 매직 트랙패드가 안먹는다던가 하는 문제가 있네요. 더불어 리셋하면 전원이 나간 Aug 30, 2018 · #잡담 #개발"':
+                - /url: /posts/chat/2018/08/30/맥_초기화_해야할듯
+                - heading "맥 초기화 해야할 듯.." [level=2]
+                - paragraph: '![맥 초기화중](images/backup.png) 맥의 장점은 역시 안정성이죠. 저도 처음 사놓고 3년정도 포맷없이 잘 쓰고 있었는데, 갑자기 잠자기 모드에서 깨우면 외장 키보드가 인식을 안한다던가, 매직 트랙패드가 안먹는다던가 하는 문제가 있네요. 더불어 리셋하면 전원이 나간'
+                - time: Aug 30, 2018
+                - text: '· #잡담 #개발'
+                - img
+        - article:
+            - 'link "Codility No.1 (BinaryGap) 코딜리티라는 웹사이트가 있습니다. 알고리즘을 만드는 실력을 기르는 사이트인데요. 저도 틈틈히 하고 있습니다. 오늘은 그 중 첫번째인 BinaryGap에 대해 알아봅시다. 먼저 문제입니다. 답은 정해져있지 않으며, 여기에 적은 답은 예시 중 하나일 뿐입니다. 문제 -- Aug 28, 2018 · #개발 #알고리즘"':
+                - /url: /posts/dev/algorithm/2018/08/27/코딜리티1
+                - heading "Codility No.1 (BinaryGap)" [level=2]
+                - paragraph: 코딜리티라는 웹사이트가 있습니다. 알고리즘을 만드는 실력을 기르는 사이트인데요. 저도 틈틈히 하고 있습니다. 오늘은 그 중 첫번째인 BinaryGap에 대해 알아봅시다. 먼저 문제입니다. 답은 정해져있지 않으며, 여기에 적은 답은 예시 중 하나일 뿐입니다. 문제 --
+                - time: Aug 28, 2018
+                - text: '· #개발 #알고리즘'
+                - img
+        - article:
+            - 'link "(2018-08-15) 제주도 3일차 3일차이자 마지막 날입니다! ![숙소 앞](images/20180815_103951.png) 이 날에도 10시즈음 출발한 듯 싶습니다. ![성산일출봉 인증센터](images/20180815_104414.png) 바로 앞에 있는 성산일출봉 인증센터에서 셀카도 찍어주고! Aug 26, 2018 · #여행 #운동 #자전거"':
+                - /url: /posts/bicycle/2018/08/26/제주도_3일차
+                - heading "(2018-08-15) 제주도 3일차" [level=2]
+                - paragraph: 3일차이자 마지막 날입니다! ![숙소 앞](images/20180815_103951.png) 이 날에도 10시즈음 출발한 듯 싶습니다. ![성산일출봉 인증센터](images/20180815_104414.png) 바로 앞에 있는 성산일출봉 인증센터에서 셀카도 찍어주고!
+                - time: Aug 26, 2018
+                - text: '· #여행 #운동 #자전거'
+                - img
+        - article:
+            - 'link "(2018-08-14) 제주도 2일차 ![숙소에서 아침](images/20180814_083852.png) 아침이 밝았습니다! 10시 즈음에 출발한거 같네요! ![숙소 앞 셀카](images/20180814_101516.png) 요렇게 셀카도 하나 찍어주고! ![숙소 앞](images/20180814_1015 Aug 26, 2018 · #여행 #운동 #자전거"':
+                - /url: /posts/bicycle/2018/08/26/제주도_2일차
+                - heading "(2018-08-14) 제주도 2일차" [level=2]
+                - paragraph: '![숙소에서 아침](images/20180814_083852.png) 아침이 밝았습니다! 10시 즈음에 출발한거 같네요! ![숙소 앞 셀카](images/20180814_101516.png) 요렇게 셀카도 하나 찍어주고! ![숙소 앞](images/20180814_1015'
+                - time: Aug 26, 2018
+                - text: '· #여행 #운동 #자전거'
+                - img
+        - article:
+            - 'link "(2018-08-13) 제주도 1일차 오랜 숙원이었던 자전거 라이딩을 끝마치고, 곧 쓰겠다고 했는데 생각보다 늦어졌네요 ㅠㅠ 친구와 함께 다녀왔습니다. 친구는 자전거를 대여해서 진행했고, 저는 제 자전거를 직접 가져가기로 했습니다. ![자전거 포장 완료](images/20180813_095244.png) 요렇 Aug 24, 2018 · #여행 #운동 #자전거"':
+                - /url: /posts/bicycle/2018/08/24/제주도_1일차
+                - heading "(2018-08-13) 제주도 1일차" [level=2]
+                - paragraph: 오랜 숙원이었던 자전거 라이딩을 끝마치고, 곧 쓰겠다고 했는데 생각보다 늦어졌네요 ㅠㅠ 친구와 함께 다녀왔습니다. 친구는 자전거를 대여해서 진행했고, 저는 제 자전거를 직접 가져가기로 했습니다. ![자전거 포장 완료](images/20180813_095244.png) 요렇
+                - time: Aug 24, 2018
+                - text: '· #여행 #운동 #자전거'
+                - img
+        - article:
+            - 'link "카테고리 페이지 연결 미뤄두고 있던 카테고리 페이지를 연결 작업을 진행했습니다! 좀 야매로 진행한 듯 싶은데... 아직 GraphQL이 익숙치 않아 진행했으니, 공부한 다음에 확실히 해결해 놓도록 하겠습니다 ㅜㅜ Aug 21, 2018 · #삽질 #홈페이지"':
+                - /url: /posts/notice/2018/08/21/카테고리 페이지 연결
+                - heading "카테고리 페이지 연결" [level=2]
+                - paragraph: 미뤄두고 있던 카테고리 페이지를 연결 작업을 진행했습니다! 좀 야매로 진행한 듯 싶은데... 아직 GraphQL이 익숙치 않아 진행했으니, 공부한 다음에 확실히 해결해 놓도록 하겠습니다 ㅜㅜ
+                - time: Aug 21, 2018
+                - text: '· #삽질 #홈페이지'
+                - img
+        - article:
+            - 'link "SSH 접속 포트 바꾸기 SSH의 기본 포트는 ''22''입니다. 하지만 워낙 유명한 포트이기도 하고 일단 접속해서 로그인만 되면 해당 컴퓨터의 운용이 가능해지는 단점이 있기 때문에, 많은 개발자분들이 SSH 접속 포트를 변경해서 사용하고 있습니다. 이번에 우리도 한 번 바꿔봅시다! 리눅스 기준입니다! Aug 21, 2018 · #개발 #네트워크"':
+                - /url: /posts/dev/network/2018/08/21/SSH 포트 바꾸기
+                - heading "SSH 접속 포트 바꾸기" [level=2]
+                - paragraph: SSH의 기본 포트는 '22'입니다. 하지만 워낙 유명한 포트이기도 하고 일단 접속해서 로그인만 되면 해당 컴퓨터의 운용이 가능해지는 단점이 있기 때문에, 많은 개발자분들이 SSH 접속 포트를 변경해서 사용하고 있습니다. 이번에 우리도 한 번 바꿔봅시다! 리눅스 기준입니다!
+                - time: Aug 21, 2018
+                - text: '· #개발 #네트워크'
+                - img
+        - article:
+            - 'link "제주도 다녀왔습니다. ![자전거 정비 후](images/20180816_202904.png) 이번 주 월요일 (8월 13일)부터 시작한 제주도 라이딩을 마치고 돌아왔습니다! 자세한 이야기는 곧 올리기로 하겠습니다. Aug 16, 2018 · #여행 #운동 #자전거"':
+                - /url: /posts/bicycle/2018/08/13/제주도_복귀
+                - heading "제주도 다녀왔습니다." [level=2]
+                - paragraph: '![자전거 정비 후](images/20180816_202904.png) 이번 주 월요일 (8월 13일)부터 시작한 제주도 라이딩을 마치고 돌아왔습니다! 자세한 이야기는 곧 올리기로 하겠습니다.'
+                - time: Aug 16, 2018
+                - text: '· #여행 #운동 #자전거'
+                - img
+        - article:
+            - 'link "2018 08 11 제주도 가기 전 자전거 ![팔당역 가면서](images/20180811_152937.png) ![팔당대교](images/20180811_154525.png) ![팔당역 앞](images/20180811_154939.png) 뜬금 없지만 다음주 월요일에 제주도에 가게 되었습니다. 총 거리는 2 Aug 11, 2018 · #운동 #자전거"':
+                - /url: /posts/bicycle/2018/08/11/제주도_출발_전_라이딩
+                - heading "2018 08 11 제주도 가기 전 자전거" [level=2]
+                - paragraph: '![팔당역 가면서](images/20180811_152937.png) ![팔당대교](images/20180811_154525.png) ![팔당역 앞](images/20180811_154939.png) 뜬금 없지만 다음주 월요일에 제주도에 가게 되었습니다. 총 거리는 2'
+                - time: Aug 11, 2018
+                - text: '· #운동 #자전거'
+                - img
+        - article:
+            - 'link "용과 같이 3을 구매했습니다. ![용과 같이 3](images/ryu_ga_kotoku_3.png) 용과 같이 3이 오늘 발매됐네요! 부리나케 사왔습니다. Aug 09, 2018 · #게임"':
+                - /url: /posts/game/2018/08/09/용과_같이_구매
+                - heading "용과 같이 3을 구매했습니다." [level=2]
+                - paragraph: '![용과 같이 3](images/ryu_ga_kotoku_3.png) 용과 같이 3이 오늘 발매됐네요! 부리나케 사왔습니다.'
+                - time: Aug 09, 2018
+                - text: '· #게임'
+                - img
+        - article:
+            - 'link "생애 첫 야구 직관을 갔습니다. ![잠실야구장](images/jamsil1.png) ![잠실야구장](images/jamsil2.png) ![잠실야구장](images/jamsil3.png) 저는 한화 이글스의 팬입니다. 본격적으로 팬이 된 건 2015년인데요, 그 동안은 집에서 TV로만 보다가 이번에 친한 동생 Aug 08, 2018 · #일상 #야구"':
+                - /url: /posts/chat/2018/08/08/생애_첫_야구_직관
+                - heading "생애 첫 야구 직관을 갔습니다." [level=2]
+                - paragraph: '![잠실야구장](images/jamsil1.png) ![잠실야구장](images/jamsil2.png) ![잠실야구장](images/jamsil3.png) 저는 한화 이글스의 팬입니다. 본격적으로 팬이 된 건 2015년인데요, 그 동안은 집에서 TV로만 보다가 이번에 친한 동생'
+                - time: Aug 08, 2018
+                - text: '· #일상 #야구'
+                - img
+        - article:
+            - 'link "XMLHttpMethod - 서버와 상호작용하기 XMLHttpRequest(XHR)은 서버와 상호작용을 가능하게 해주는 객체입니다. Ajax에 주로 쓰이며, 마찬가지로 전체 데이터를 새로 불러오지 않고도 일부분만을 업데이트 할 수 있습니다. 저는 이를 [블로그 서버의 online상태를 확인](https://blog.jell.k Aug 07, 2018 · #개발 #Javascript"':
+                - /url: /posts/dev/js/tip/2018/08/07/XmlHttpRequest - 서버와 상호작용하기
+                - heading "XMLHttpMethod - 서버와 상호작용하기" [level=2]
+                - paragraph: XMLHttpRequest(XHR)은 서버와 상호작용을 가능하게 해주는 객체입니다. Ajax에 주로 쓰이며, 마찬가지로 전체 데이터를 새로 불러오지 않고도 일부분만을 업데이트 할 수 있습니다. 저는 이를 [블로그 서버의 online상태를 확인](https://blog.jell.k
+                - time: Aug 07, 2018
+                - text: '· #개발 #Javascript'
+                - img
+        - article:
+            - 'link "Jell 블로그는 살아있는가 ![is Jell Blog Alive?](images/isblogalive.png) 새로운 걸 찾아봐야겠다고 생각하고 Electron을 사용해서 간단히 핑만 확인하는 프로그램을 만들어 봤습니다. Electron재밌네요! 확실히 Client, Server만 사용하다보니 눈에 확 와닿 Aug 07, 2018 · #개발 #삽질"':
+                - /url: /posts/chat/2018/08/07/내_블로그는_살아있는가
+                - heading "Jell 블로그는 살아있는가" [level=2]
+                - paragraph: '![is Jell Blog Alive?](images/isblogalive.png) 새로운 걸 찾아봐야겠다고 생각하고 Electron을 사용해서 간단히 핑만 확인하는 프로그램을 만들어 봤습니다. Electron재밌네요! 확실히 Client, Server만 사용하다보니 눈에 확 와닿'
+                - time: Aug 07, 2018
+                - text: '· #개발 #삽질'
+                - img
+        - article:
+            - 'link "2018 08 07 Zwift ![운동 결과](images/zwift.png) Zwift에서 5주 프로그램을 시작해 이제 4주차 둘째 날입니다. 매주 첫째 날에는 Micro Burst라고 해서 순간적으로 엄청난 힘으로 굴린 다음 잠깐 쉬고 다시 엄청난 힘으로 굴리고..의 반복입니다. 이게 그 주의 제일 Aug 07, 2018 · #운동 #자전거"':
+                - /url: /posts/bicycle/2018/08/07/2018_08_07_Zwift
+                - heading "2018 08 07 Zwift" [level=2]
+                - paragraph: '![운동 결과](images/zwift.png) Zwift에서 5주 프로그램을 시작해 이제 4주차 둘째 날입니다. 매주 첫째 날에는 Micro Burst라고 해서 순간적으로 엄청난 힘으로 굴린 다음 잠깐 쉬고 다시 엄청난 힘으로 굴리고..의 반복입니다. 이게 그 주의 제일'
+                - time: Aug 07, 2018
+                - text: '· #운동 #자전거'
+                - img
+        - article:
+            - 'link "2018 08 06 Zwift ![운동 결과](images/zwift.png) 오늘은 실내 자전거를 탔습니다 :) 자세한 이야기는 추후 써내려가기로 하고, 지금 하고 있는 프로그램이 월요일이 제일 힘든 코스여서 타는 데 죽는 줄 알았습니다 ㅜㅜ Aug 06, 2018 · #운동 #자전거"':
+                - /url: /posts/bicycle/2018/08/06/2018_08_06_Zwift
+                - heading "2018 08 06 Zwift" [level=2]
+                - paragraph: '![운동 결과](images/zwift.png) 오늘은 실내 자전거를 탔습니다 :) 자세한 이야기는 추후 써내려가기로 하고, 지금 하고 있는 프로그램이 월요일이 제일 힘든 코스여서 타는 데 죽는 줄 알았습니다 ㅜㅜ'
+                - time: Aug 06, 2018
+                - text: '· #운동 #자전거'
+                - img
+        - article:
+            - 'link "리스트에 내용 추가 내용 추가하는 건 간단한데, 아직 자르는 걸 좀 생각해봐야할 듯 싶습니다. Aug 05, 2018 · #삽질 #홈페이지"':
+                - /url: /posts/notice/2018/08/04/리스트에_내용_추가
+                - heading "리스트에 내용 추가" [level=2]
+                - paragraph: 내용 추가하는 건 간단한데, 아직 자르는 걸 좀 생각해봐야할 듯 싶습니다.
+                - time: Aug 05, 2018
+                - text: '· #삽질 #홈페이지'
+                - img
+        - article:
+            - 'link "새로운 걸 만들어볼까 만들다보니 느낀 건데, 뭔가 확실한 로드맵이 나올 때까지 아예 새로운 걸 만들어보는 것도 좋겠다 싶습니다. 하나만 가지고 고민때리는 것 보다는 최대한 이것저것 많이 해보고 싶어요. Aug 05, 2018 · #개발 #잡담"':
+                - /url: /posts/chat/2018/08/05/새로운_걸_만들어볼까
+                - heading "새로운 걸 만들어볼까" [level=2]
+                - paragraph: 만들다보니 느낀 건데, 뭔가 확실한 로드맵이 나올 때까지 아예 새로운 걸 만들어보는 것도 좋겠다 싶습니다. 하나만 가지고 고민때리는 것 보다는 최대한 이것저것 많이 해보고 싶어요.
+                - time: Aug 05, 2018
+                - text: '· #개발 #잡담'
+                - img
+        - article:
+            - 'link "태그 추가 글을 쓰다보니 카테고리 기능 추가에 앞서 태그 기능이 우선시 되어야겠다 생각했습니다. 이제 미리보기를 시작해볼까 합니다. Aug 04, 2018 · #삽질 #홈페이지"':
+                - /url: /posts/notice/2018/08/04/태그_기능_추가
+                - heading "태그 추가" [level=2]
+                - paragraph: 글을 쓰다보니 카테고리 기능 추가에 앞서 태그 기능이 우선시 되어야겠다 생각했습니다. 이제 미리보기를 시작해볼까 합니다.
+                - time: Aug 04, 2018
+                - text: '· #삽질 #홈페이지'
+                - img
+        - article:
+            - 'link "폰트 변경 처음 만들 때, 따로 폰트에 대한 생각을 하고 있지 않아서 기본 폰트로 진행했습니다. 이제 Roboto, Helvetica, Arial, sans-serif를 적용해서 다른 기기에서 봐도 동일한 폰트가 나오게 됩니다. 맥에는 거의 궁서체로 나와서 슬펐는데 다행이네요! Aug 03, 2018 · #삽질 #홈페이지"':
+                - /url: /posts/notice/2018/08/03/폰트_변경
+                - heading "폰트 변경" [level=2]
+                - paragraph: 처음 만들 때, 따로 폰트에 대한 생각을 하고 있지 않아서 기본 폰트로 진행했습니다. 이제 Roboto, Helvetica, Arial, sans-serif를 적용해서 다른 기기에서 봐도 동일한 폰트가 나오게 됩니다. 맥에는 거의 궁서체로 나와서 슬펐는데 다행이네요!
+                - time: Aug 03, 2018
+                - text: '· #삽질 #홈페이지'
+                - img
+        - article:
+            - 'link "Mac 타임머신 시작 ![타임머신](images/timemachine.png) Mac에는 타임머신이라는 기능이 있습니다. 일종의 백업 툴인데요, Mac 안에 있는 정보를 Git처럼 변동사항 위주로 저장해놨다가 문제가 생겼을 때 꺼낼 수 있는 기능입니다. 그 전까지는 ''아 이런 기능이 있구나~''하고 Aug 02, 2018 · #삽질"':
+                - /url: /posts/chat/2018/08/02/Mac_타임머신_시작
+                - heading "Mac 타임머신 시작" [level=2]
+                - paragraph: "![타임머신](images/timemachine.png) Mac에는 타임머신이라는 기능이 있습니다. 일종의 백업 툴인데요, Mac 안에 있는 정보를 Git처럼 변동사항 위주로 저장해놨다가 문제가 생겼을 때 꺼낼 수 있는 기능입니다. 그 전까지는 '아 이런 기능이 있구나~'하고"
+                - time: Aug 02, 2018
+                - text: '· #삽질'
+                - img
+        - article:
+            - 'link "서울 역대 최고 기온 (39도) ![서울 39도](images/seoul_39.png) 결국 역대 최고 기온을 넘어섰네요. Aug 01, 2018 · #주저리"':
+                - /url: /posts/chat/2018/08/01/서울_역대_최고_기온_39도
+                - heading "서울 역대 최고 기온 (39도)" [level=2]
+                - paragraph: '![서울 39도](images/seoul_39.png) 결국 역대 최고 기온을 넘어섰네요.'
+                - time: Aug 01, 2018
+                - text: '· #주저리'
+                - img
+        - article:
+            - 'link "덥습니다 정말 덥네요. 에어컨 좀 틀고 싶다. Jul 26, 2018 · #주저리"':
+                - /url: /posts/chat/2018/07/26/덥습니다
+                - heading "덥습니다" [level=2]
+                - paragraph: 정말 덥네요. 에어컨 좀 틀고 싶다.
+                - time: Jul 26, 2018
+                - text: '· #주저리'
+                - img
+        - article:
+            - 'link "밀린 일들 처리 중 못 해봤던 것들 거의 대부분 하고 있다. 못 꺴던 젤다 야숨도 다 깼고, 제주도 일주도 순조롭게 나아가고 있다. 이제야 조금 실감이 난다. Jul 20, 2018 · #일상"':
+                - /url: /posts/notice/2018/07/20/밀린_일들_처리_중
+                - heading "밀린 일들 처리 중" [level=2]
+                - paragraph: 못 해봤던 것들 거의 대부분 하고 있다. 못 꺴던 젤다 야숨도 다 깼고, 제주도 일주도 순조롭게 나아가고 있다. 이제야 조금 실감이 난다.
+                - time: Jul 20, 2018
+                - text: '· #일상'
+                - img
+        - article:
+            - 'link "마크다운 적용 완료 이제 disqus 적용 들어갑니다. Jul 01, 2018 · #삽질 #홈페이지"':
+                - /url: /posts/notice/2018/07/01/마크다운_적용_완료
+                - heading "마크다운 적용 완료" [level=2]
+                - paragraph: 이제 disqus 적용 들어갑니다.
+                - time: Jul 01, 2018
+                - text: '· #삽질 #홈페이지'
+                - img
+        - article:
+            - 'link "Disqus 적용 완료 남아 있는 것 : Paging, 디자인 우선 해야 하는 것 : !!!ㅇㄴㄹ!!! Jul 01, 2018 · #삽질 #홈페이지"':
+                - /url: /posts/notice/2018/07/01/Disqus_적용_완료
+                - heading "Disqus 적용 완료" [level=2]
+                - paragraph: '남아 있는 것 : Paging, 디자인 우선 해야 하는 것 : !!!ㅇㄴㄹ!!!'
+                - time: Jul 01, 2018
+                - text: '· #삽질 #홈페이지'
+                - img
+        - article:
+            - 'link "마크다운 테스트입니다. 잘 나오고 있나요? Jun 24, 2018 · #삽질 #홈페이지"':
+                - /url: /posts/notice/2018/06/24/마크다운_테스트
+                - heading "마크다운 테스트입니다." [level=2]
+                - paragraph: 잘 나오고 있나요?
+                - time: Jun 24, 2018
+                - text: '· #삽질 #홈페이지'
+                - img
 - contentinfo:
-  - text: © 2025 Jell, Built with
-  - link "Next.js":
-    - /url: https://nextjs.org
+    - text: © 2025 Jell, Built with
+    - link "Next.js":
+        - /url: https://nextjs.org
 - button "맨 위로 이동"
 - alert
-```
+````

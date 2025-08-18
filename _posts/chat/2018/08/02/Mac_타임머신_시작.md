@@ -1,9 +1,9 @@
 ---
-category: "Chat"
-date: "2018-08-02"
-title: "Mac 타임머신 시작"
-tags: ["삽질"]
-featuredImage: "images/timemachine.jpg"
+category: 'Chat'
+date: '2018-08-02'
+title: 'Mac 타임머신 시작'
+tags: ['삽질']
+featuredImage: 'images/timemachine.jpg'
 ---
 
 ![타임머신](images/timemachine.png)

@@ -7,20 +7,25 @@ export const dynamic = 'force-static'
 function escapeXml(unsafe: string) {
   return unsafe.replace(/[<>&'"]/g, function (c) {
     switch (c) {
-      case '<': return '&lt;';
-      case '>': return '&gt;';
-      case '&': return '&amp;';
-      case '\'': return '&apos;';
-      case '"': return '&quot;';
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '&':
+        return '&amp;'
+      case "'":
+        return '&apos;'
+      case '"':
+        return '&quot;'
     }
-    return c;
-  });
+    return c
+  })
 }
 
 export async function GET(request: NextRequest) {
   const posts = await getAllPosts()
   const latestPosts = posts.slice(0, 10) // Get latest 10 posts
-  
+
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -35,10 +40,10 @@ export async function GET(request: NextRequest) {
     <pubDate>${latestPosts[0]?.frontMatter.date ? new Date(latestPosts[0].frontMatter.date).toUTCString() : new Date().toUTCString()}</pubDate>
     <ttl>1440</ttl>
     ${latestPosts
-      .map((post) => {
+      .map(post => {
         const postUrl = `${siteConfig.siteUrl}/posts/${post.slug}`
         const pubDate = new Date(post.frontMatter.date).toUTCString()
-        
+
         return `    <item>
       <title>${escapeXml(post.frontMatter.title)}</title>
       <description><![CDATA[${post.content.substring(0, 200)}...]]></description>
