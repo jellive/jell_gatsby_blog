@@ -5,7 +5,8 @@ title: 'Cocoapods 1.9.4 이후 RxRealm의 에러 해결방법'
 tags: ['개발', 'iOS', 'Cocoapods', 'XCode']
 ---
 
-[이전 글](/dev/ios/2020/10/03/Cocoapods%201.9.4%EC%97%90%20%ED%98%84%EC%9E%AC%20%EB%B2%84%EA%B7%B8%EA%B0%80%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4/)에서 나타났던 에러의 해결방법입니다.
+[이전 글](/dev/ios/2020/10/03/Cocoapods%201.9.4%EC%97%90%20%ED%98%84%EC%9E%AC%20%EB%B2%84%EA%B7%B8%EA%B0%80%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4/)에서
+나타났던 에러의 해결방법입니다.
 
 기존 에러는 다음과 같습니다.  
 ![증상 스크린샷](images/screenshot1.png)

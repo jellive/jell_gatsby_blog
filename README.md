@@ -2,4 +2,5 @@
 
 [사이트](https://blog.jell.kr)
 
-origin by ["Borderless" Theme](<https://github.com/junhobaik/junhobaik.github.io/wiki/Document-(Borderless)>), Built with Gatsby origin, now powered by next.js.
+origin by ["Borderless" Theme](<https://github.com/junhobaik/junhobaik.github.io/wiki/Document-(Borderless)>),
+Built with Gatsby origin, now powered by next.js.

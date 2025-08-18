@@ -8,7 +8,9 @@ featuredImage: 'images/zwift.png'
 
 ## 왜 쓰는가
 
-하드디스크를 교체하고 ([#](https://blog.jell.kr/dev/linux/2023/02/27/%EC%9A%B0%EB%B6%84%ED%88%AC%2022.04%EB%A1%9C%20%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%20%ED%95%98%EB%8D%98%20%EC%A4%91%20%EB%B0%9C%EC%83%9D%ED%95%9C%20%EC%9D%B4%EC%8A%88/)) 꺼져있던 컴퓨터를 오랜만에 계속 켜면서 Docker를 본격적으로 공부해봐야겠다는 생각을 했습니다.
+하드디스크를 교체하고
+([#](https://blog.jell.kr/dev/linux/2023/02/27/%EC%9A%B0%EB%B6%84%ED%88%AC%2022.04%EB%A1%9C%20%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%20%ED%95%98%EB%8D%98%20%EC%A4%91%20%EB%B0%9C%EC%83%9D%ED%95%9C%20%EC%9D%B4%EC%8A%88/))
+꺼져있던 컴퓨터를 오랜만에 계속 켜면서 Docker를 본격적으로 공부해봐야겠다는 생각을 했습니다.
 그 첫번째로, mariaDB를 docker-compose에 설치하는 시간을 가져봅시다.
 
 ## 왜 mariaDB지

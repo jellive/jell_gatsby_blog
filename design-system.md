@@ -2,7 +2,8 @@
 
 ## Overview
 
-A comprehensive design system optimized for developer-focused content, modern typography, and technical documentation. This system prioritizes readability, code highlighting, and developer experience.
+A comprehensive design system optimized for developer-focused content, modern typography, and technical
+documentation. This system prioritizes readability, code highlighting, and developer experience.
 
 ## Color System
 
@@ -388,4 +389,5 @@ module.exports = {
 - **Typography**: New font stack and scale
 - **Component API**: Updated prop interfaces
 
-This design system provides a solid foundation for modern, accessible, and performant web applications with a focus on developer experience and technical content presentation.
+This design system provides a solid foundation for modern, accessible, and performant web applications
+with a focus on developer experience and technical content presentation.
