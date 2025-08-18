@@ -20,6 +20,9 @@ export default function CacheChecker() {
 
       return () => clearTimeout(timer)
     }
+    
+    // Return undefined for non-production environments
+    return undefined
   }, [])
 
   // This component doesn't render anything

@@ -29,6 +29,8 @@
     "format:check": "prettier --check .",
     "lint:md": "markdownlint-cli2 '**/*.md' '!node_modules' '!.next'",
     "analyze": "ANALYZE=true npm run build",
+    "verify:ts": "node scripts/verify-typescript.js",
+    "quality:check": "npm run verify:ts",
     "prepare": "husky"
   },
   "dependencies": {
@@ -88,6 +90,8 @@
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",
     "@types/jest": "^29.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.40.0",
+    "@typescript-eslint/parser": "^8.40.0",
     "concurrently": "^9.2.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
@@ -100,7 +104,12 @@
     "prettier-plugin-tailwindcss": "^0.6.0"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
+    "*.{ts,tsx}": [
+      "eslint --fix --max-warnings 0",
+      "prettier --write",
+      "tsc --noEmit --project tsconfig.json"
+    ],
+    "*.{js,jsx}": [
       "eslint --fix",
       "prettier --write"
     ],
