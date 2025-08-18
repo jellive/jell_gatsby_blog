@@ -11,6 +11,7 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeStringify from 'rehype-stringify'
 import { glob } from 'glob'
+import { safeExtractHeadingText, sanitizeId } from './security-utils'
 
 export interface PostFrontMatter {
   category: string
@@ -174,16 +175,16 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
   }> = []
   allHeadingMatches.forEach((heading, index) => {
     const idMatch = heading.match(/id="([^"]*)"/)
-    const textMatch =
-      heading.match(/<h[1-6][^>]*>([^<]*)</)?.[1] ||
-      heading.match(/>([^<]+)</)?.[1] ||
-      heading.replace(/<[^>]*>/g, '').trim()
+    
+    // ✅ SECURITY FIX: Use safe text extraction instead of vulnerable regex
+    const safeText = safeExtractHeadingText(heading)
+    const safeIdValue = sanitizeId(idMatch?.[1])
 
     headingIDMatches.push({
       index,
-      hasId: !!idMatch,
-      id: idMatch?.[1] || 'NO_ID',
-      text: textMatch?.trim().substring(0, 40) || 'NO_TEXT',
+      hasId: Boolean(idMatch),
+      id: safeIdValue,
+      text: safeText,
       fullHeading: heading.substring(0, 100) + '...',
     })
   })
@@ -250,7 +251,7 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
     /<h2[^>]*>Table of Contents<\/h2>([\s\S]*?)(?=<h[1-6]|$)/i
   )
 
-  console.log('🎯 TOC Heading Match Found:', !!tocHeadingMatch)
+  console.log('🎯 TOC Heading Match Found:', Boolean(tocHeadingMatch))
 
   if (tocHeadingMatch) {
     // Use balanced parsing to extract complete nested UL
@@ -258,7 +259,7 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
 
     console.log(
       '📋 Complete UL Extracted:',
-      !!completeUL,
+      Boolean(completeUL),
       'Length:',
       completeUL?.length || 0
     )
