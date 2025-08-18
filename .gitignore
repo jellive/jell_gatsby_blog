@@ -47,6 +47,8 @@ CLAUDE.md
 
 playwright-report/
 playwright-test-results/
+# Claude Code 생성 파일들
+docs/
 test-results/
 @detailed_index.md
 @general_index.md
