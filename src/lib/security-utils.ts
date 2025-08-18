@@ -55,7 +55,6 @@ export function safeExtractText(htmlString: string, maxLength: number = 40): str
       : text
 
   } catch (error) {
-    console.error('Error in safeExtractText:', error)
     return 'NO_TEXT'
   }
 }
@@ -93,7 +92,6 @@ export function safeExtractHeadingText(headingHtml: string): string {
     return safeExtractText(headingHtml)
 
   } catch (error) {
-    console.error('Error in safeExtractHeadingText:', error)
     return 'NO_TEXT'
   }
 }
@@ -130,7 +128,6 @@ export function sanitizeId(id: string | undefined | null): string {
     return validId || 'NO_ID'
 
   } catch (error) {
-    console.error('Error in sanitizeId:', error)
     return 'NO_ID'
   }
 }
@@ -215,7 +212,10 @@ export function runSecurityTests(): boolean {
     }
   ]
 
-  console.log('🛡️ Running security tests...')
+  // Only log in development
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🛡️ Running security tests...')
+  }
   
   let passed = 0
   for (const test of tests) {
@@ -225,19 +225,27 @@ export function runSecurityTests(): boolean {
       
       if (success) {
         passed++
-        console.log(`✅ ${test.description}: PASS`)
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`✅ ${test.description}: PASS`)
+        }
       } else {
-        console.error(`❌ ${test.description}: FAIL`)
-        console.error(`   Expected: ${test.expected}`)
-        console.error(`   Got: ${result}`)
+        if (process.env.NODE_ENV === 'development') {
+          console.error(`❌ ${test.description}: FAIL`)
+          console.error(`   Expected: ${test.expected}`)
+          console.error(`   Got: ${result}`)
+        }
       }
     } catch (error) {
-      console.error(`💥 ${test.description}: ERROR - ${error}`)
+      if (process.env.NODE_ENV === 'development') {
+        console.error(`💥 ${test.description}: ERROR - ${error}`)
+      }
     }
   }
 
   const success = passed === tests.length
-  console.log(`🛡️ Security tests: ${passed}/${tests.length} passed`)
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`🛡️ Security tests: ${passed}/${tests.length} passed`)
+  }
   
   return success
 }
