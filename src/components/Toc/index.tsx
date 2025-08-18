@@ -108,10 +108,14 @@ const Toc = (props: TocProps) => {
           searchStrategies: {
             directId: Boolean(document.getElementById(targetId)),
             rawId: Boolean(document.getElementById(rawTargetId)),
-            querySelector: Boolean(document.querySelector(`[id="${targetId}"]`)),
-            textMatch: Boolean(Array.from(
-              document.querySelectorAll('h1, h2, h3, h4, h5, h6')
-            ).find(el => el.textContent?.trim() === targetId)),
+            querySelector: Boolean(
+              document.querySelector(`[id="${targetId}"]`)
+            ),
+            textMatch: Boolean(
+              Array.from(
+                document.querySelectorAll('h1, h2, h3, h4, h5, h6')
+              ).find(el => el.textContent?.trim() === targetId)
+            ),
           },
         })
 

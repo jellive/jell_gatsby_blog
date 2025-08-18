@@ -24,7 +24,9 @@ function sendToGoogleAnalytics(metric: Metric) {
   if (typeof window !== 'undefined' && (window as any).gtag) {
     ;(window as any).gtag('event', metric.name, {
       event_category: 'Web Vitals',
-      value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+      value: Math.round(
+        metric.name === 'CLS' ? metric.value * 1000 : metric.value
+      ),
       event_label: metric.id,
       non_interaction: true,
     })

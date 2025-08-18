@@ -2,7 +2,7 @@
 
 /**
  * TypeScript Compliance Verification Script
- * 
+ *
  * This script runs comprehensive TypeScript and ESLint checks
  * to identify and report issues across the entire codebase.
  */
@@ -16,7 +16,7 @@ const colors = {
   green: '\x1b[32m',
   yellow: '\x1b[33m',
   blue: '\x1b[34m',
-  reset: '\x1b[0m'
+  reset: '\x1b[0m',
 }
 
 function log(color, message) {
@@ -26,9 +26,9 @@ function log(color, message) {
 function runCommand(command, description) {
   log('blue', `\n🔍 ${description}...`)
   try {
-    const result = execSync(command, { 
-      encoding: 'utf8', 
-      stdio: 'pipe' 
+    const result = execSync(command, {
+      encoding: 'utf8',
+      stdio: 'pipe',
     })
     log('green', `✅ ${description} passed`)
     return { success: true, output: result }
@@ -46,56 +46,59 @@ function runCommand(command, description) {
 
 function main() {
   log('blue', '🚀 Starting TypeScript Compliance Verification\n')
-  
+
   // Check if we're in the right directory
   if (!existsSync('package.json')) {
-    log('red', '❌ package.json not found. Run this script from the project root.')
+    log(
+      'red',
+      '❌ package.json not found. Run this script from the project root.'
+    )
     process.exit(1)
   }
-  
+
   const checks = [
     {
       command: 'npm run type-check',
-      description: 'TypeScript type checking'
+      description: 'TypeScript type checking',
     },
     {
       command: 'npm run lint',
-      description: 'ESLint code quality check'
+      description: 'ESLint code quality check',
     },
     {
       command: 'npm run format:check',
-      description: 'Prettier formatting check'
+      description: 'Prettier formatting check',
     },
     {
       command: 'npm run build',
-      description: 'Build verification'
-    }
+      description: 'Build verification',
+    },
   ]
-  
+
   const results = []
-  
+
   for (const check of checks) {
     const result = runCommand(check.command, check.description)
     results.push({
       ...check,
-      ...result
+      ...result,
     })
   }
-  
+
   // Summary
   log('blue', '\n📊 Summary Report:')
   log('blue', '==================')
-  
+
   const passed = results.filter(r => r.success).length
   const total = results.length
-  
+
   results.forEach(result => {
     const status = result.success ? '✅ PASS' : '❌ FAIL'
     console.log(`${status} ${result.description}`)
   })
-  
+
   log('blue', `\nResults: ${passed}/${total} checks passed`)
-  
+
   if (passed === total) {
     log('green', '\n🎉 All TypeScript compliance checks passed!')
     log('green', '✨ Your code is ready for production!')
@@ -110,12 +113,12 @@ function main() {
 }
 
 // Error handling
-process.on('uncaughtException', (error) => {
+process.on('uncaughtException', error => {
   log('red', `💥 Uncaught Exception: ${error.message}`)
   process.exit(1)
 })
 
-process.on('unhandledRejection', (error) => {
+process.on('unhandledRejection', error => {
   log('red', `💥 Unhandled Rejection: ${error.message}`)
   process.exit(1)
 })

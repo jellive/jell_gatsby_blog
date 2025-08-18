@@ -175,7 +175,7 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
   }> = []
   allHeadingMatches.forEach((heading, index) => {
     const idMatch = heading.match(/id="([^"]*)"/)
-    
+
     // ✅ SECURITY FIX: Use safe text extraction instead of vulnerable regex
     const safeText = safeExtractHeadingText(heading)
     const safeIdValue = sanitizeId(idMatch?.[1])

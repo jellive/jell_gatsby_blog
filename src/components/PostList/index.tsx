@@ -119,9 +119,9 @@ const PostList = (props: PostListProps) => {
         className={cn(
           'text-xs transition-all duration-200',
           // 터치 친화적: 최소 터치 영역 확보와 적절한 패딩
-          'cursor-pointer hover:scale-105 min-h-[32px] py-1 px-2',
+          'min-h-[32px] cursor-pointer px-2 py-1 hover:scale-105',
           // 모바일에서 더 큰 터치 영역
-          'md:min-h-[28px] md:py-0.5 md:px-1.5'
+          'md:min-h-[28px] md:px-1.5 md:py-0.5'
         )}
         onClick={e => handleTagClick(e, tag)}
       >
@@ -158,7 +158,7 @@ const PostList = (props: PostListProps) => {
                   'md:text-lg md:leading-h3',
                   'text-foreground group-hover:text-primary group-hover:underline',
                   // 모바일에서 3줄까지 허용, 태블릿 이상에서 2줄
-                  'line-clamp-3 md:line-clamp-2 transition-all duration-200'
+                  'line-clamp-3 transition-all duration-200 md:line-clamp-2'
                 )}
               >
                 {title}
@@ -180,7 +180,7 @@ const PostList = (props: PostListProps) => {
               )}
 
               {/* Metadata */}
-              <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-muted-foreground md:gap-3">
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground sm:gap-2 md:gap-3">
                 <time data-testid="post-date">{formattedDate}</time>
                 {validTags.length > 0 && (
                   <>
@@ -200,7 +200,7 @@ const PostList = (props: PostListProps) => {
             <div
               className={cn(
                 // 모바일에서는 64px, 태블릿에서는 80px, 데스크탑에서는 120px
-                'h-16 w-16 sm:h-20 sm:w-20 flex-shrink-0',
+                'h-16 w-16 flex-shrink-0 sm:h-20 sm:w-20',
                 'md:h-article-image md:w-article-image',
                 'bg-accent/20 rounded-md border border-border',
                 'flex items-center justify-center',

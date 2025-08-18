@@ -2,7 +2,16 @@
 title: '웹 개발자를 위한 Electron 데스크톱 앱 개발 실무 가이드'
 date: '2025-08-18'
 category: 'Dev'
-tags: ['electron', 'javascript', 'typescript', 'react', 'desktop', 'app-development', 'cross-platform']
+tags:
+  [
+    'electron',
+    'javascript',
+    'typescript',
+    'react',
+    'desktop',
+    'app-development',
+    'cross-platform',
+  ]
 ---
 
 # 웹 개발자를 위한 Electron 데스크톱 앱 개발 실무 가이드
@@ -75,10 +84,7 @@ npm install electron-is-dev
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src",
-    "electron"
-  ]
+  "include": ["src", "electron"]
 }
 ```
 
@@ -127,8 +133,8 @@ electron-file-manager/
 `webpack.config.js`를 생성하여 React 앱을 빌드할 설정을 구성합니다:
 
 ```javascript
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   entry: './src/index.tsx',
@@ -163,7 +169,7 @@ module.exports = {
     hot: true,
   },
   target: 'electron-renderer',
-};
+}
 ```
 
 ## 3. 기본 앱 구조 이해 - Main Process vs Renderer Process
@@ -175,36 +181,36 @@ Electron의 핵심은 두 가지 프로세스를 이해하는 것입니다. 이 
 `electron/main.ts` 파일을 생성합니다:
 
 ```typescript
-import { app, BrowserWindow, Menu, ipcMain } from 'electron';
-import * as path from 'path';
-import * as isDev from 'electron-is-dev';
-import { promises as fs } from 'fs';
+import { app, BrowserWindow, Menu, ipcMain } from 'electron'
+import * as path from 'path'
+import * as isDev from 'electron-is-dev'
+import { promises as fs } from 'fs'
 
 class ElectronApp {
-  private mainWindow: BrowserWindow | null = null;
+  private mainWindow: BrowserWindow | null = null
 
   constructor() {
-    this.initializeApp();
+    this.initializeApp()
   }
 
   private initializeApp(): void {
     app.whenReady().then(() => {
-      this.createMainWindow();
-      this.setupIpcHandlers();
-      this.setupMenu();
+      this.createMainWindow()
+      this.setupIpcHandlers()
+      this.setupMenu()
 
       app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
-          this.createMainWindow();
+          this.createMainWindow()
         }
-      });
-    });
+      })
+    })
 
     app.on('window-all-closed', () => {
       if (process.platform !== 'darwin') {
-        app.quit();
+        app.quit()
       }
-    });
+    })
   }
 
   private createMainWindow(): void {
@@ -218,23 +224,23 @@ class ElectronApp {
       },
       titleBarStyle: 'hiddenInset', // macOS용 스타일
       show: false, // 초기 로드 완료까지 숨김
-    });
+    })
 
     // 로드 완료 후 창 표시
     this.mainWindow.once('ready-to-show', () => {
-      this.mainWindow?.show();
-    });
+      this.mainWindow?.show()
+    })
 
     // 개발/프로덕션 환경에 따른 URL 로드
-    const startUrl = isDev 
-      ? 'http://localhost:3000' 
-      : `file://${path.join(__dirname, '../build/index.html')}`;
-    
-    this.mainWindow.loadURL(startUrl);
+    const startUrl = isDev
+      ? 'http://localhost:3000'
+      : `file://${path.join(__dirname, '../build/index.html')}`
+
+    this.mainWindow.loadURL(startUrl)
 
     // 개발 환경에서만 DevTools 자동 열기
     if (isDev) {
-      this.mainWindow.webContents.openDevTools();
+      this.mainWindow.webContents.openDevTools()
     }
   }
 
@@ -242,34 +248,37 @@ class ElectronApp {
     // 파일 시스템 관련 IPC 핸들러
     ipcMain.handle('read-directory', async (event, dirPath: string) => {
       try {
-        const items = await fs.readdir(dirPath, { withFileTypes: true });
+        const items = await fs.readdir(dirPath, { withFileTypes: true })
         return items.map(item => ({
           name: item.name,
           isDirectory: item.isDirectory(),
-          path: path.join(dirPath, item.name)
-        }));
+          path: path.join(dirPath, item.name),
+        }))
       } catch (error) {
-        throw new Error(`디렉토리를 읽을 수 없습니다: ${error.message}`);
+        throw new Error(`디렉토리를 읽을 수 없습니다: ${error.message}`)
       }
-    });
+    })
 
     ipcMain.handle('read-file', async (event, filePath: string) => {
       try {
-        const content = await fs.readFile(filePath, 'utf-8');
-        return content;
+        const content = await fs.readFile(filePath, 'utf-8')
+        return content
       } catch (error) {
-        throw new Error(`파일을 읽을 수 없습니다: ${error.message}`);
+        throw new Error(`파일을 읽을 수 없습니다: ${error.message}`)
       }
-    });
+    })
 
-    ipcMain.handle('write-file', async (event, filePath: string, content: string) => {
-      try {
-        await fs.writeFile(filePath, content, 'utf-8');
-        return true;
-      } catch (error) {
-        throw new Error(`파일을 저장할 수 없습니다: ${error.message}`);
+    ipcMain.handle(
+      'write-file',
+      async (event, filePath: string, content: string) => {
+        try {
+          await fs.writeFile(filePath, content, 'utf-8')
+          return true
+        } catch (error) {
+          throw new Error(`파일을 저장할 수 없습니다: ${error.message}`)
+        }
       }
-    });
+    )
   }
 
   private setupMenu(): void {
@@ -281,25 +290,25 @@ class ElectronApp {
             label: '새 파일',
             accelerator: 'CmdOrCtrl+N',
             click: () => {
-              this.mainWindow?.webContents.send('menu-new-file');
-            }
+              this.mainWindow?.webContents.send('menu-new-file')
+            },
           },
           {
             label: '열기',
             accelerator: 'CmdOrCtrl+O',
             click: () => {
-              this.mainWindow?.webContents.send('menu-open-file');
-            }
+              this.mainWindow?.webContents.send('menu-open-file')
+            },
           },
           { type: 'separator' },
           {
             label: '종료',
             accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Ctrl+Q',
             click: () => {
-              app.quit();
-            }
-          }
-        ]
+              app.quit()
+            },
+          },
+        ],
       },
       {
         label: '보기',
@@ -308,27 +317,27 @@ class ElectronApp {
             label: '새로고침',
             accelerator: 'CmdOrCtrl+R',
             click: () => {
-              this.mainWindow?.reload();
-            }
+              this.mainWindow?.reload()
+            },
           },
           {
             label: '개발자 도구',
             accelerator: 'F12',
             click: () => {
-              this.mainWindow?.webContents.toggleDevTools();
-            }
-          }
-        ]
-      }
-    ];
+              this.mainWindow?.webContents.toggleDevTools()
+            },
+          },
+        ],
+      },
+    ]
 
-    const menu = Menu.buildFromTemplate(template as any);
-    Menu.setApplicationMenu(menu);
+    const menu = Menu.buildFromTemplate(template as any)
+    Menu.setApplicationMenu(menu)
   }
 }
 
 // 앱 인스턴스 생성
-new ElectronApp();
+new ElectronApp()
 ```
 
 ### Preload Script 구현
@@ -338,46 +347,49 @@ new ElectronApp();
 `electron/preload.ts`:
 
 ```typescript
-import { contextBridge, ipcRenderer } from 'electron';
+import { contextBridge, ipcRenderer } from 'electron'
 
 // Renderer Process에서 사용할 API 정의
 export interface ElectronAPI {
   // 파일 시스템 API
-  readDirectory: (path: string) => Promise<Array<{
-    name: string;
-    isDirectory: boolean;
-    path: string;
-  }>>;
-  readFile: (path: string) => Promise<string>;
-  writeFile: (path: string, content: string) => Promise<boolean>;
-  
+  readDirectory: (path: string) => Promise<
+    Array<{
+      name: string
+      isDirectory: boolean
+      path: string
+    }>
+  >
+  readFile: (path: string) => Promise<string>
+  writeFile: (path: string, content: string) => Promise<boolean>
+
   // 메뉴 이벤트 리스너
-  onMenuAction: (callback: (action: string) => void) => void;
-  removeMenuActionListener: (callback: (action: string) => void) => void;
+  onMenuAction: (callback: (action: string) => void) => void
+  removeMenuActionListener: (callback: (action: string) => void) => void
 }
 
 // 안전한 API를 window 객체에 노출
 contextBridge.exposeInMainWorld('electronAPI', {
   readDirectory: (path: string) => ipcRenderer.invoke('read-directory', path),
   readFile: (path: string) => ipcRenderer.invoke('read-file', path),
-  writeFile: (path: string, content: string) => ipcRenderer.invoke('write-file', path, content),
-  
+  writeFile: (path: string, content: string) =>
+    ipcRenderer.invoke('write-file', path, content),
+
   onMenuAction: (callback: (action: string) => void) => {
-    const handler = (event: any, action: string) => callback(action);
-    ipcRenderer.on('menu-new-file', handler);
-    ipcRenderer.on('menu-open-file', handler);
+    const handler = (event: any, action: string) => callback(action)
+    ipcRenderer.on('menu-new-file', handler)
+    ipcRenderer.on('menu-open-file', handler)
   },
-  
+
   removeMenuActionListener: (callback: (action: string) => void) => {
-    ipcRenderer.removeListener('menu-new-file', callback);
-    ipcRenderer.removeListener('menu-open-file', callback);
-  }
-});
+    ipcRenderer.removeListener('menu-new-file', callback)
+    ipcRenderer.removeListener('menu-open-file', callback)
+  },
+})
 
 // TypeScript를 위한 전역 타입 정의
 declare global {
   interface Window {
-    electronAPI: ElectronAPI;
+    electronAPI: ElectronAPI
   }
 }
 ```
@@ -440,7 +452,7 @@ const App: React.FC = () => {
 
   const handleFileSave = async (content: string) => {
     if (!selectedFile) return;
-    
+
     try {
       await window.electronAPI.writeFile(selectedFile, content);
       console.log('파일이 저장되었습니다.');
@@ -452,14 +464,14 @@ const App: React.FC = () => {
   return (
     <div className="app">
       <div className="app-sidebar">
-        <FileExplorer 
+        <FileExplorer
           currentPath={currentPath}
           onFileSelect={handleFileSelect}
           onPathChange={setCurrentPath}
         />
       </div>
       <div className="app-content">
-        <FileEditor 
+        <FileEditor
           content={fileContent}
           onContentChange={setFileContent}
           onSave={handleFileSave}
@@ -482,65 +494,74 @@ IPC(Inter-Process Communication)는 Electron의 핵심 개념입니다. Main Pro
 `src/hooks/useElectronAPI.ts`:
 
 ```typescript
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react'
 
 interface FileItem {
-  name: string;
-  isDirectory: boolean;
-  path: string;
+  name: string
+  isDirectory: boolean
+  path: string
 }
 
 export const useElectronAPI = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const readDirectory = useCallback(async (path: string): Promise<FileItem[]> => {
-    setIsLoading(true);
-    setError(null);
-    
-    try {
-      const items = await window.electronAPI.readDirectory(path);
-      return items;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.';
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const readDirectory = useCallback(
+    async (path: string): Promise<FileItem[]> => {
+      setIsLoading(true)
+      setError(null)
+
+      try {
+        const items = await window.electronAPI.readDirectory(path)
+        return items
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.'
+        setError(errorMessage)
+        throw err
+      } finally {
+        setIsLoading(false)
+      }
+    },
+    []
+  )
 
   const readFile = useCallback(async (path: string): Promise<string> => {
-    setIsLoading(true);
-    setError(null);
-    
-    try {
-      const content = await window.electronAPI.readFile(path);
-      return content;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : '파일을 읽을 수 없습니다.';
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+    setIsLoading(true)
+    setError(null)
 
-  const writeFile = useCallback(async (path: string, content: string): Promise<boolean> => {
-    setIsLoading(true);
-    setError(null);
-    
     try {
-      const result = await window.electronAPI.writeFile(path, content);
-      return result;
+      const content = await window.electronAPI.readFile(path)
+      return content
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : '파일을 저장할 수 없습니다.';
-      setError(errorMessage);
-      throw err;
+      const errorMessage =
+        err instanceof Error ? err.message : '파일을 읽을 수 없습니다.'
+      setError(errorMessage)
+      throw err
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  }, []);
+  }, [])
+
+  const writeFile = useCallback(
+    async (path: string, content: string): Promise<boolean> => {
+      setIsLoading(true)
+      setError(null)
+
+      try {
+        const result = await window.electronAPI.writeFile(path, content)
+        return result
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : '파일을 저장할 수 없습니다.'
+        setError(errorMessage)
+        throw err
+      } finally {
+        setIsLoading(false)
+      }
+    },
+    []
+  )
 
   return {
     readDirectory,
@@ -548,9 +569,9 @@ export const useElectronAPI = () => {
     writeFile,
     isLoading,
     error,
-    clearError: () => setError(null)
-  };
-};
+    clearError: () => setError(null),
+  }
+}
 ```
 
 ### 파일 탐색기 컴포넌트
@@ -588,14 +609,14 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
   const loadDirectory = async (path: string) => {
     try {
       const dirItems = await readDirectory(path);
-      
+
       // 디렉토리를 먼저, 파일을 나중에 정렬
       const sortedItems = dirItems.sort((a, b) => {
         if (a.isDirectory && !b.isDirectory) return -1;
         if (!a.isDirectory && b.isDirectory) return 1;
         return a.name.localeCompare(b.name);
       });
-      
+
       setItems(sortedItems);
     } catch (err) {
       console.error('디렉토리 로드 실패:', err);
@@ -632,7 +653,7 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
         </button>
         <span className="current-path">{currentPath}</span>
       </div>
-      
+
       <div className="file-list">
         {items.map((item) => (
           <div
@@ -709,7 +730,7 @@ const FileEditor: React.FC<FileEditorProps> = ({
 
   const handleSave = useCallback(() => {
     if (!fileName) return;
-    
+
     onSave(content);
     setHasUnsavedChanges(false);
   }, [content, fileName, onSave]);
@@ -728,15 +749,15 @@ const FileEditor: React.FC<FileEditorProps> = ({
         <h3>{fileName.split('/').pop()}</h3>
         <div className="editor-actions">
           {hasUnsavedChanges && <span className="unsaved-indicator">●</span>}
-          <button 
-            onClick={handleSave} 
+          <button
+            onClick={handleSave}
             disabled={isLoading || !hasUnsavedChanges}
           >
             저장 (Ctrl+S)
           </button>
         </div>
       </div>
-      
+
       <textarea
         className="editor-textarea"
         value={content}
@@ -744,7 +765,7 @@ const FileEditor: React.FC<FileEditorProps> = ({
         placeholder="파일 내용을 입력하세요..."
         disabled={isLoading}
       />
-      
+
       <div className="editor-footer">
         <span>줄: {content.split('\n').length}</span>
         <span>글자: {content.length}</span>
@@ -765,76 +786,76 @@ Electron의 진정한 장점은 웹 기술로 네이티브 기능을 구현할 �
 `electron/main.ts`에 트레이 기능을 추가합니다:
 
 ```typescript
-import { app, BrowserWindow, Menu, Tray, nativeImage } from 'electron';
-import * as path from 'path';
+import { app, BrowserWindow, Menu, Tray, nativeImage } from 'electron'
+import * as path from 'path'
 
 class ElectronApp {
-  private mainWindow: BrowserWindow | null = null;
-  private tray: Tray | null = null;
+  private mainWindow: BrowserWindow | null = null
+  private tray: Tray | null = null
 
   private createTray(): void {
     // 트레이 아이콘 생성 (16x16 픽셀 권장)
     const trayIcon = nativeImage.createFromPath(
       path.join(__dirname, '../assets/tray-icon.png')
-    );
-    
-    this.tray = new Tray(trayIcon);
-    
+    )
+
+    this.tray = new Tray(trayIcon)
+
     const contextMenu = Menu.buildFromTemplate([
       {
         label: '파일 관리자 열기',
         click: () => {
-          this.showMainWindow();
-        }
+          this.showMainWindow()
+        },
       },
       {
         label: '새 파일',
         click: () => {
-          this.mainWindow?.webContents.send('menu-new-file');
-        }
+          this.mainWindow?.webContents.send('menu-new-file')
+        },
       },
       { type: 'separator' },
       {
         label: '환경설정',
         click: () => {
-          this.openPreferences();
-        }
+          this.openPreferences()
+        },
       },
       { type: 'separator' },
       {
         label: '종료',
         click: () => {
-          app.quit();
-        }
-      }
-    ]);
+          app.quit()
+        },
+      },
+    ])
 
-    this.tray.setContextMenu(contextMenu);
-    this.tray.setToolTip('파일 관리자');
-    
+    this.tray.setContextMenu(contextMenu)
+    this.tray.setToolTip('파일 관리자')
+
     // 트레이 아이콘 클릭 이벤트
     this.tray.on('click', () => {
-      this.toggleMainWindow();
-    });
+      this.toggleMainWindow()
+    })
   }
 
   private showMainWindow(): void {
     if (this.mainWindow) {
       if (this.mainWindow.isMinimized()) {
-        this.mainWindow.restore();
+        this.mainWindow.restore()
       }
-      this.mainWindow.show();
-      this.mainWindow.focus();
+      this.mainWindow.show()
+      this.mainWindow.focus()
     } else {
-      this.createMainWindow();
+      this.createMainWindow()
     }
   }
 
   private toggleMainWindow(): void {
     if (this.mainWindow?.isVisible()) {
-      this.mainWindow.hide();
+      this.mainWindow.hide()
     } else {
-      this.showMainWindow();
+      this.showMainWindow()
     }
   }
 
@@ -849,10 +870,12 @@ class ElectronApp {
         nodeIntegration: false,
         contextIsolation: true,
         preload: path.join(__dirname, 'preload.js'),
-      }
-    });
+      },
+    })
 
-    preferencesWindow.loadFile(path.join(__dirname, '../build/preferences.html'));
+    preferencesWindow.loadFile(
+      path.join(__dirname, '../build/preferences.html')
+    )
   }
 }
 ```
@@ -860,36 +883,36 @@ class ElectronApp {
 ### 글로벌 단축키 구현
 
 ```typescript
-import { globalShortcut } from 'electron';
+import { globalShortcut } from 'electron'
 
 class ElectronApp {
   private registerGlobalShortcuts(): void {
     // 전역 단축키 등록
     globalShortcut.register('CommandOrControl+Shift+F', () => {
-      this.showMainWindow();
-    });
+      this.showMainWindow()
+    })
 
     globalShortcut.register('CommandOrControl+Shift+N', () => {
-      this.mainWindow?.webContents.send('menu-new-file');
-    });
+      this.mainWindow?.webContents.send('menu-new-file')
+    })
 
     globalShortcut.register('CommandOrControl+Shift+S', () => {
-      this.mainWindow?.webContents.send('quick-save');
-    });
+      this.mainWindow?.webContents.send('quick-save')
+    })
   }
 
   private initializeApp(): void {
     app.whenReady().then(() => {
-      this.createMainWindow();
-      this.createTray();
-      this.registerGlobalShortcuts();
-      this.setupIpcHandlers();
-    });
+      this.createMainWindow()
+      this.createTray()
+      this.registerGlobalShortcuts()
+      this.setupIpcHandlers()
+    })
 
     app.on('will-quit', () => {
       // 앱 종료 시 전역 단축키 해제
-      globalShortcut.unregisterAll();
-    });
+      globalShortcut.unregisterAll()
+    })
   }
 }
 ```
@@ -943,34 +966,34 @@ Preload Script와 컴포넌트에서 알림 기능을 사용할 수 있도록 AP
 contextBridge.exposeInMainWorld('electronAPI', {
   // 기존 API들...
   showNotification: (options: {
-    title: string;
-    body: string;
-    urgency?: 'normal' | 'critical' | 'low';
+    title: string
+    body: string
+    urgency?: 'normal' | 'critical' | 'low'
   }) => ipcRenderer.invoke('show-notification', options),
-});
+})
 
 // React 컴포넌트에서 사용
 const handleFileSave = async (content: string) => {
-  if (!selectedFile) return;
-  
+  if (!selectedFile) return
+
   try {
-    await window.electronAPI.writeFile(selectedFile, content);
-    
+    await window.electronAPI.writeFile(selectedFile, content)
+
     // 저장 완료 알림
     await window.electronAPI.showNotification({
       title: '파일 저장 완료',
       body: `${selectedFile.split('/').pop()}이 저장되었습니다.`,
-      urgency: 'normal'
-    });
+      urgency: 'normal',
+    })
   } catch (error) {
     // 오류 알림
     await window.electronAPI.showNotification({
       title: '저장 실패',
       body: '파일을 저장하는 중 오류가 발생했습니다.',
-      urgency: 'critical'
-    });
+      urgency: 'critical',
+    })
   }
-};
+}
 ```
 
 ### 다크모드 토글 구현
@@ -1208,34 +1231,37 @@ npm install electron-updater
 `electron/main.ts`에 자동 업데이트 로직을 추가합니다:
 
 ```typescript
-import { autoUpdater } from 'electron-updater';
+import { autoUpdater } from 'electron-updater'
 
 class ElectronApp {
   private initializeApp(): void {
     app.whenReady().then(() => {
-      this.createMainWindow();
-      this.setupAutoUpdater();
-    });
+      this.createMainWindow()
+      this.setupAutoUpdater()
+    })
   }
 
   private setupAutoUpdater(): void {
     // 개발 환경에서는 자동 업데이트 비활성화
-    if (isDev) return;
+    if (isDev) return
 
-    autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.checkForUpdatesAndNotify()
 
     autoUpdater.on('update-available', () => {
-      this.mainWindow?.webContents.send('update-available');
-    });
+      this.mainWindow?.webContents.send('update-available')
+    })
 
     autoUpdater.on('update-downloaded', () => {
-      this.mainWindow?.webContents.send('update-downloaded');
-    });
+      this.mainWindow?.webContents.send('update-downloaded')
+    })
 
     // 주기적으로 업데이트 확인 (1시간마다)
-    setInterval(() => {
-      autoUpdater.checkForUpdatesAndNotify();
-    }, 60 * 60 * 1000);
+    setInterval(
+      () => {
+        autoUpdater.checkForUpdatesAndNotify()
+      },
+      60 * 60 * 1000
+    )
   }
 }
 ```
@@ -1257,27 +1283,27 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    
+
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build application
         run: npm run build:all
-      
+
       - name: Build Electron app (macOS)
         if: matrix.os == 'macos-latest'
         run: npm run dist:mac
@@ -1286,18 +1312,18 @@ jobs:
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
-      
+
       - name: Build Electron app (Windows)
         if: matrix.os == 'windows-latest'
         run: npm run dist:win
         env:
           CSC_LINK: ${{ secrets.CSC_LINK }}
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-      
+
       - name: Build Electron app (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: npm run dist:linux
-      
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -1316,12 +1342,12 @@ Electron 앱의 보안은 매우 중요합니다. 웹 콘텐츠가 시스템에 
 ```typescript
 const mainWindow = new BrowserWindow({
   webPreferences: {
-    nodeIntegration: false,        // Node.js 통합 비활성화
-    contextIsolation: true,        // 컨텍스트 격리 활성화
-    enableRemoteModule: false,     // Remote 모듈 비활성화
+    nodeIntegration: false, // Node.js 통합 비활성화
+    contextIsolation: true, // 컨텍스트 격리 활성화
+    enableRemoteModule: false, // Remote 모듈 비활성화
     preload: path.join(__dirname, 'preload.js'),
   },
-});
+})
 ```
 
 #### 2. 안전한 Preload Script 작성
@@ -1331,8 +1357,8 @@ const mainWindow = new BrowserWindow({
 contextBridge.exposeInMainWorld('electronAPI', {
   // 절대 하지 말 것!
   nodeRequire: require,
-  executeCommand: (cmd: string) => require('child_process').exec(cmd)
-});
+  executeCommand: (cmd: string) => require('child_process').exec(cmd),
+})
 
 // 안전한 예시 - 권장 패턴
 contextBridge.exposeInMainWorld('electronAPI', {
@@ -1340,20 +1366,20 @@ contextBridge.exposeInMainWorld('electronAPI', {
   readFile: (path: string) => {
     // 경로 검증
     if (!path || typeof path !== 'string') {
-      throw new Error('Invalid file path');
+      throw new Error('Invalid file path')
     }
-    
+
     // 허용된 확장자만 허용
-    const allowedExtensions = ['.txt', '.md', '.json', '.js', '.ts'];
-    const extension = path.substring(path.lastIndexOf('.'));
-    
+    const allowedExtensions = ['.txt', '.md', '.json', '.js', '.ts']
+    const extension = path.substring(path.lastIndexOf('.'))
+
     if (!allowedExtensions.includes(extension)) {
-      throw new Error('File type not allowed');
+      throw new Error('File type not allowed')
     }
-    
-    return ipcRenderer.invoke('read-file', path);
-  }
-});
+
+    return ipcRenderer.invoke('read-file', path)
+  },
+})
 ```
 
 #### 3. 입력 검증 및 파일 경로 보안
@@ -1374,7 +1400,7 @@ private setupIpcHandlers(): void {
 
       // 경로 정규화 및 보안 검사
       const normalizedPath = path.normalize(filePath);
-      
+
       // 상위 디렉토리 접근 방지 (../ 공격 방지)
       if (normalizedPath.includes('..')) {
         throw new Error('Access to parent directories is not allowed');
@@ -1422,21 +1448,24 @@ HTML 파일에 엄격한 CSP를 설정합니다:
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
     default-src 'self';
     script-src 'self' 'unsafe-inline';
     style-src 'self' 'unsafe-inline';
     img-src 'self' data: https:;
     connect-src 'self';
     font-src 'self';
-  ">
-  <title>File Manager</title>
-</head>
-<body>
-  <div id="root"></div>
-</body>
+  "
+    />
+    <title>File Manager</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
 ```
 
@@ -1459,11 +1488,11 @@ private createMainWindow(): void {
   this.mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     // 허용된 도메인만 새 창으로 열기 허용
     const allowedDomains = ['https://your-domain.com'];
-    
+
     if (allowedDomains.some(domain => url.startsWith(domain))) {
       return { action: 'allow' };
     }
-    
+
     return { action: 'deny' };
   });
 
@@ -1483,11 +1512,14 @@ private createMainWindow(): void {
 ```typescript
 // 권한 관리자 클래스
 class PermissionManager {
-  private grantedPermissions: Set<string> = new Set();
+  private grantedPermissions: Set<string> = new Set()
 
-  async requestPermission(permission: string, description: string): Promise<boolean> {
+  async requestPermission(
+    permission: string,
+    description: string
+  ): Promise<boolean> {
     if (this.grantedPermissions.has(permission)) {
-      return true;
+      return true
     }
 
     const result = await dialog.showMessageBox({
@@ -1496,41 +1528,41 @@ class PermissionManager {
       defaultId: 1,
       title: '권한 요청',
       message: `다음 권한이 필요합니다: ${permission}`,
-      detail: description
-    });
+      detail: description,
+    })
 
     if (result.response === 0) {
-      this.grantedPermissions.add(permission);
-      return true;
+      this.grantedPermissions.add(permission)
+      return true
     }
 
-    return false;
+    return false
   }
 
   revokePermission(permission: string): void {
-    this.grantedPermissions.delete(permission);
+    this.grantedPermissions.delete(permission)
   }
 
   hasPermission(permission: string): boolean {
-    return this.grantedPermissions.has(permission);
+    return this.grantedPermissions.has(permission)
   }
 }
 
-const permissionManager = new PermissionManager();
+const permissionManager = new PermissionManager()
 
 // 파일 삭제와 같은 민감한 작업에 권한 확인 적용
 ipcMain.handle('delete-file', async (event, filePath: string) => {
   const hasPermission = await permissionManager.requestPermission(
     'file-delete',
     '파일을 삭제하려고 합니다. 이 작업은 되돌릴 수 없습니다.'
-  );
+  )
 
   if (!hasPermission) {
-    throw new Error('Permission denied');
+    throw new Error('Permission denied')
   }
 
   // 파일 삭제 로직...
-});
+})
 ```
 
 ## 8. 성능 최적화 - 메모리 관리와 앱 성능 개선
@@ -1591,9 +1623,9 @@ private setupIpcHandlers(): void {
     const chunks: string[] = [];
 
     try {
-      const stream = createReadStream(filePath, { 
+      const stream = createReadStream(filePath, {
         encoding: 'utf-8',
-        highWaterMark: CHUNK_SIZE 
+        highWaterMark: CHUNK_SIZE
       });
 
       stream.on('data', (chunk) => {
@@ -1634,7 +1666,7 @@ const VirtualizedFileList: React.FC<VirtualizedFileListProps> = ({
 }) => {
   const [scrollTop, setScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(400);
-  
+
   const ITEM_HEIGHT = 40;
   const BUFFER_SIZE = 5; // 버퍼 아이템 수
 
@@ -1727,7 +1759,7 @@ const iconCache = new Map<string, string>();
 
 const getFileIcon = (fileName: string): string => {
   const extension = fileName.toLowerCase().split('.').pop() || '';
-  
+
   if (iconCache.has(extension)) {
     return iconCache.get(extension)!;
   }
@@ -1764,7 +1796,7 @@ const useDebounce = <T extends (...args: any[]) => any>(
 
 const SearchInput: React.FC<{ onSearch: (query: string) => void }> = ({ onSearch }) => {
   const [query, setQuery] = useState('');
-  
+
   const debouncedSearch = useDebounce((searchQuery: string) => {
     onSearch(searchQuery);
   }, 300);
@@ -1854,65 +1886,65 @@ private createMainWindow(): void {
 
 ```typescript
 class PerformanceMonitor {
-  private metrics: Map<string, number[]> = new Map();
+  private metrics: Map<string, number[]> = new Map()
 
   startTimer(label: string): () => void {
-    const start = performance.now();
-    
+    const start = performance.now()
+
     return () => {
-      const duration = performance.now() - start;
-      this.recordMetric(label, duration);
-    };
+      const duration = performance.now() - start
+      this.recordMetric(label, duration)
+    }
   }
 
   recordMetric(label: string, value: number): void {
     if (!this.metrics.has(label)) {
-      this.metrics.set(label, []);
+      this.metrics.set(label, [])
     }
-    
-    const values = this.metrics.get(label)!;
-    values.push(value);
-    
+
+    const values = this.metrics.get(label)!
+    values.push(value)
+
     // 최근 100개 값만 유지
     if (values.length > 100) {
-      values.shift();
+      values.shift()
     }
   }
 
   getAverageMetric(label: string): number {
-    const values = this.metrics.get(label);
-    if (!values || values.length === 0) return 0;
-    
-    return values.reduce((sum, value) => sum + value, 0) / values.length;
+    const values = this.metrics.get(label)
+    if (!values || values.length === 0) return 0
+
+    return values.reduce((sum, value) => sum + value, 0) / values.length
   }
 
   logPerformanceReport(): void {
-    console.log('성능 리포트:');
+    console.log('성능 리포트:')
     for (const [label, values] of this.metrics) {
-      const avg = this.getAverageMetric(label);
-      console.log(`${label}: 평균 ${avg.toFixed(2)}ms`);
+      const avg = this.getAverageMetric(label)
+      console.log(`${label}: 평균 ${avg.toFixed(2)}ms`)
     }
   }
 }
 
 // 사용 예시
-const monitor = new PerformanceMonitor();
+const monitor = new PerformanceMonitor()
 
 const handleFileRead = async (filePath: string) => {
-  const endTimer = monitor.startTimer('file-read');
-  
+  const endTimer = monitor.startTimer('file-read')
+
   try {
-    const content = await window.electronAPI.readFile(filePath);
-    return content;
+    const content = await window.electronAPI.readFile(filePath)
+    return content
   } finally {
-    endTimer();
+    endTimer()
   }
-};
+}
 
 // 주기적 성능 리포트
 setInterval(() => {
-  monitor.logPerformanceReport();
-}, 60000); // 1분마다
+  monitor.logPerformanceReport()
+}, 60000) // 1분마다
 ```
 
 ## 마무리

@@ -85,6 +85,7 @@ npx eslint src/components/MyComponent.tsx --fix
 ### TypeScript Configuration
 
 Our `tsconfig.json` includes strict checking:
+
 - `strict: true`
 - `noImplicitReturns: true`
 - `strictNullChecks: true`
@@ -93,6 +94,7 @@ Our `tsconfig.json` includes strict checking:
 ### ESLint Rules
 
 Key rules that prevent runtime errors:
+
 - `consistent-return`: Ensure consistent return patterns
 - `@typescript-eslint/no-unused-vars`: Catch unused variables
 - `no-implicit-coercion`: Prevent implicit type conversions
@@ -106,13 +108,13 @@ Key rules that prevent runtime errors:
 // ✅ GOOD: Well-structured component
 export default function MyComponent(): JSX.Element {
   const [state, setState] = useState<string>('')
-  
+
   useEffect(() => {
     // All side effects properly typed
     const cleanup = setupEffect()
     return cleanup
   }, [])
-  
+
   return <div>{state}</div>
 }
 ```
@@ -172,6 +174,7 @@ function processUser(user: UserData) { ... }
 ### Common Scenarios
 
 1. **Commit Blocked by TypeScript Errors**:
+
    ```bash
    npm run type-check
    # Fix reported errors
@@ -180,6 +183,7 @@ function processUser(user: UserData) { ... }
    ```
 
 2. **ESLint Warnings**:
+
    ```bash
    npm run lint -- --fix
    # Review remaining warnings
@@ -219,6 +223,7 @@ const unusedVariable = 'temp'
 ## Updates & Maintenance
 
 This document should be updated when:
+
 - New TypeScript/ESLint rules are added
 - Development workflow changes
 - Common patterns evolve

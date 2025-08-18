@@ -1,15 +1,15 @@
 /**
  * Security utilities test suite
- * 
+ *
  * Tests for HTML injection prevention and safe text extraction
  */
 
-import { 
-  safeExtractText, 
-  safeExtractHeadingText, 
+import {
+  safeExtractText,
+  safeExtractHeadingText,
   sanitizeId,
   safeTruncate,
-  runSecurityTests
+  runSecurityTests,
 } from '../security-utils'
 
 describe('Security Utils', () => {
@@ -28,7 +28,8 @@ describe('Security Utils', () => {
     })
 
     it('should handle nested malicious content', () => {
-      const maliciousInput = '<div><script>alert("xss")</script>Clean Text<img onerror="alert(1)" src="x"></div>'
+      const maliciousInput =
+        '<div><script>alert("xss")</script>Clean Text<img onerror="alert(1)" src="x"></div>'
       const result = safeExtractText(maliciousInput)
       expect(result).toBe('Clean Text')
       expect(result).not.toContain('<')
@@ -61,7 +62,8 @@ describe('Security Utils', () => {
     })
 
     it('should truncate long text properly', () => {
-      const longText = 'This is a very long text that should be truncated properly'
+      const longText =
+        'This is a very long text that should be truncated properly'
       const result = safeExtractText(longText, 20)
       expect(result.length).toBeLessThanOrEqual(23) // 20 + '...'
       expect(result).toContain('...')
@@ -76,13 +78,15 @@ describe('Security Utils', () => {
     })
 
     it('should handle headings with nested elements safely', () => {
-      const heading = '<h2 id="complex"><strong>Bold</strong> and <em>italic</em> text</h2>'
+      const heading =
+        '<h2 id="complex"><strong>Bold</strong> and <em>italic</em> text</h2>'
       const result = safeExtractHeadingText(heading)
       expect(result).toBe('Bold and italic text')
     })
 
     it('should prevent script injection in headings', () => {
-      const maliciousHeading = '<h1 id="bad"><script>alert("xss")</script>Safe Title</h1>'
+      const maliciousHeading =
+        '<h1 id="bad"><script>alert("xss")</script>Safe Title</h1>'
       const result = safeExtractHeadingText(maliciousHeading)
       expect(result).toBe('Safe Title')
       expect(result).not.toContain('script')
@@ -90,7 +94,8 @@ describe('Security Utils', () => {
     })
 
     it('should handle malformed heading HTML', () => {
-      const malformedHeading = '<h1 onclick="evil()">Title</h1><script>more evil</script>'
+      const malformedHeading =
+        '<h1 onclick="evil()">Title</h1><script>more evil</script>'
       const result = safeExtractHeadingText(malformedHeading)
       expect(result).toBe('Title')
       expect(result).not.toContain('onclick')
@@ -168,13 +173,13 @@ describe('Security Utils', () => {
       // Capture console output to test the security suite
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation()
       const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
-      
+
       const result = runSecurityTests()
-      
+
       // Security tests should pass or fail safely (both are acceptable outcomes)
       expect(typeof result).toBe('boolean')
       expect(consoleSpy).toHaveBeenCalledWith('🛡️ Running security tests...')
-      
+
       consoleSpy.mockRestore()
       consoleErrorSpy.mockRestore()
     })
@@ -199,23 +204,28 @@ describe('Security Utils', () => {
       '<IMG """><SCRIPT>alert("XSS")</SCRIPT>">',
     ]
 
-    it.each(xssVectors)('should neutralize XSS vector: %s', (vector) => {
+    it.each(xssVectors)('should neutralize XSS vector: %s', vector => {
       const result = safeExtractText(vector + 'Safe Text')
-      
+
       // Should not contain dangerous keywords
       const dangerousPatterns = [
-        'script', 'alert', 'onerror', 'onload', 
-        'onclick', 'onmouseover', 'onfocus', 'eval', 'expression'
+        'script',
+        'alert',
+        'onerror',
+        'onload',
+        'onclick',
+        'onmouseover',
+        'onfocus',
+        'eval',
+        'expression',
       ]
-      
+
       for (const pattern of dangerousPatterns) {
         expect(result.toLowerCase()).not.toContain(pattern.toLowerCase())
       }
-      
+
       // Should either preserve safe content or completely sanitize for safety
-      expect(
-        result.includes('Safe Text') || result === 'NO_TEXT'
-      ).toBe(true)
+      expect(result.includes('Safe Text') || result === 'NO_TEXT').toBe(true)
     })
   })
 
@@ -224,30 +234,34 @@ describe('Security Utils', () => {
       // Test the specific pattern that CodeQL identified
       const nestedScript = '<scr<script>ipt>alert("XSS")</script>'
       const result = safeExtractText(nestedScript + 'Clean Text')
-      
+
       // Primary safety check: no dangerous content
       expect(result).not.toContain('script')
       expect(result).not.toContain('alert')
       expect(result).not.toContain('XSS')
-      
+
       // Secondary check: result should be safe (either clean text or NO_TEXT)
-      const isSafe = result === 'Clean Text' || result === 'NO_TEXT' || 
-                     (!result.includes('<') && !result.includes('>'))
+      const isSafe =
+        result === 'Clean Text' ||
+        result === 'NO_TEXT' ||
+        (!result.includes('<') && !result.includes('>'))
       expect(isSafe).toBe(true)
     })
 
     it('should handle deeply nested malicious content', () => {
-      const deepNested = '<div><span><script>alert("XSS")</script>Good</span></div>'
+      const deepNested =
+        '<div><span><script>alert("XSS")</script>Good</span></div>'
       const result = safeExtractText(deepNested)
-      
+
       expect(result).toBe('Good')
       expect(result).not.toContain('script')
     })
 
     it('should prevent attribute injection', () => {
-      const attrInjection = '<div title="&quot; onmouseover=&quot;alert(1)&quot;">Text</div>'
+      const attrInjection =
+        '<div title="&quot; onmouseover=&quot;alert(1)&quot;">Text</div>'
       const result = safeExtractText(attrInjection)
-      
+
       expect(result).toBe('Text')
       expect(result).not.toContain('onmouseover')
       expect(result).not.toContain('alert')

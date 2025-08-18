@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Cache Busting Script for Next.js Deployment
- * 
+ *
  * This script adds versioning to critical files and ensures fresh content
  * delivery on each deployment by implementing multiple cache-busting strategies.
  */
@@ -20,7 +20,7 @@ console.log(`📦 Build ID: ${BUILD_ID}`)
  */
 function updateIndexHtml() {
   const indexPath = resolve('out/index.html')
-  
+
   if (!existsSync(indexPath)) {
     console.warn('⚠️ index.html not found, skipping HTML cache busting')
     return
@@ -28,7 +28,7 @@ function updateIndexHtml() {
 
   try {
     let htmlContent = readFileSync(indexPath, 'utf8')
-    
+
     // Add cache-busting meta tags
     const metaTags = `
     <meta name="build-id" content="${BUILD_ID}">
@@ -37,10 +37,10 @@ function updateIndexHtml() {
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">`
-    
+
     // Insert meta tags before closing head tag
     htmlContent = htmlContent.replace('</head>', `${metaTags}\n</head>`)
-    
+
     writeFileSync(indexPath, htmlContent, 'utf8')
     console.log('✅ Updated index.html with cache-busting meta tags')
   } catch (error) {
@@ -58,7 +58,7 @@ function createCacheManifest() {
     version: CACHE_BUST_VERSION,
     deploymentId: process.env.NETLIFY_DEPLOY_ID || 'local',
     commit: process.env.COMMIT_REF || 'unknown',
-    cacheStrategy: 'aggressive-invalidation'
+    cacheStrategy: 'aggressive-invalidation',
   }
 
   try {
@@ -78,7 +78,7 @@ function createCacheManifest() {
  */
 function addVersionToAssets() {
   const indexPath = resolve('out/index.html')
-  
+
   if (!existsSync(indexPath)) {
     console.warn('⚠️ index.html not found for asset versioning')
     return
@@ -86,13 +86,13 @@ function addVersionToAssets() {
 
   try {
     let htmlContent = readFileSync(indexPath, 'utf8')
-    
+
     // Add version parameter to CSS and JS files
     htmlContent = htmlContent.replace(
       /(href|src)="([^"]*\.(css|js))"/g,
       `$1="$2?v=${CACHE_BUST_VERSION}"`
     )
-    
+
     writeFileSync(indexPath, htmlContent, 'utf8')
     console.log('✅ Added version parameters to assets')
   } catch (error) {
@@ -162,7 +162,7 @@ function createDeploymentInfo() {
     commitRef: process.env.COMMIT_REF || null,
     branch: process.env.BRANCH || 'unknown',
     deployUrl: process.env.DEPLOY_URL || null,
-    cacheStatus: 'invalidated'
+    cacheStatus: 'invalidated',
   }
 
   try {

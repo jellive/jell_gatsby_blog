@@ -23,22 +23,22 @@ export async function checkForNewDeployment(): Promise<boolean> {
       cache: 'no-cache',
       headers: {
         'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache'
-      }
+        Pragma: 'no-cache',
+      },
     })
-    
+
     if (!response.ok) {
       return false
     }
-    
+
     const deploymentInfo: DeploymentInfo = await response.json()
     const lastKnownVersion = localStorage.getItem('deploymentVersion')
-    
+
     if (!lastKnownVersion || lastKnownVersion !== deploymentInfo.buildId) {
       localStorage.setItem('deploymentVersion', deploymentInfo.buildId)
       return lastKnownVersion !== null // Don't trigger on first visit
     }
-    
+
     return false
   } catch (error) {
     console.warn('Failed to check deployment info:', error)
@@ -58,7 +58,7 @@ export function forcePageRefresh(): void {
       })
     })
   }
-  
+
   // Force reload with cache bypass
   window.location.reload()
 }
@@ -70,19 +70,19 @@ export async function clearApplicationCaches(): Promise<void> {
   // Clear localStorage except essential data
   const essentialKeys = ['theme', 'language', 'deploymentVersion']
   const keysToRemove: string[] = []
-  
+
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i)
     if (key && !essentialKeys.includes(key)) {
       keysToRemove.push(key)
     }
   }
-  
+
   keysToRemove.forEach(key => localStorage.removeItem(key))
-  
+
   // Clear sessionStorage
   sessionStorage.clear()
-  
+
   // Clear browser caches if available
   if ('serviceWorker' in navigator && 'caches' in window) {
     const cacheNames = await caches.keys()
@@ -96,7 +96,7 @@ export async function clearApplicationCaches(): Promise<void> {
 export function showUpdateNotification(): void {
   // This would integrate with your notification system
   console.log('🔄 New version available! The page will refresh automatically.')
-  
+
   // Auto-refresh after 3 seconds
   setTimeout(() => {
     forcePageRefresh()
@@ -109,20 +109,20 @@ export function showUpdateNotification(): void {
 export function initializeDeploymentCheck(): void {
   // Check for updates every 5 minutes
   const checkInterval = 5 * 60 * 1000 // 5 minutes
-  
+
   const checkForUpdates = async () => {
     const hasUpdate = await checkForNewDeployment()
     if (hasUpdate) {
       showUpdateNotification()
     }
   }
-  
+
   // Check immediately
   checkForUpdates()
-  
+
   // Set up periodic checks
   setInterval(checkForUpdates, checkInterval)
-  
+
   // Check when page regains focus
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {

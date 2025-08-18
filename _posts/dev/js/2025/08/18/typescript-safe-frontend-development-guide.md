@@ -12,19 +12,19 @@ tags: ['TypeScript', 'Frontend', 'Type Safety', 'React', 'API', 'Testing']
 ```typescript
 // 이런 코드가 과연 안전할까요?
 interface User {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 
 function getUser(data: any): User {
-  return data; // 런타임에서 어떤 일이 일어날지 모릅니다
+  return data // 런타임에서 어떤 일이 일어날지 모릅니다
 }
 ```
 
 실제 프로덕션 환경에서는 다음과 같은 문제들이 빈번하게 발생합니다:
 
 - **런타임 타입 불일치**: API에서 받은 데이터가 예상한 타입과 다른 경우
-- **Union 타입 구별 실패**: 여러 타입 중 정확한 타입을 판별하지 못하는 경우  
+- **Union 타입 구별 실패**: 여러 타입 중 정확한 타입을 판별하지 못하는 경우
 - **제네릭 타입 오남용**: 타입 안전성을 보장하지 못하는 과도한 제네릭 사용
 - **컴포넌트 Props 타입 누락**: React 컴포넌트에서 잘못된 Props 전달
 
@@ -38,15 +38,15 @@ function getUser(data: any): User {
 
 ```typescript
 interface User {
-  id: number;
-  name: string;
-  email: string;
+  id: number
+  name: string
+  email: string
 }
 
 interface Admin {
-  id: number;
-  name: string;
-  permissions: string[];
+  id: number
+  name: string
+  permissions: string[]
 }
 
 // 기본적인 타입 가드
@@ -58,7 +58,7 @@ function isUser(obj: unknown): obj is User {
     typeof (obj as User).name === 'string' &&
     typeof (obj as User).email === 'string' &&
     !(obj as Admin).permissions
-  );
+  )
 }
 
 function isAdmin(obj: unknown): obj is Admin {
@@ -68,19 +68,19 @@ function isAdmin(obj: unknown): obj is Admin {
     typeof (obj as Admin).id === 'number' &&
     typeof (obj as Admin).name === 'string' &&
     Array.isArray((obj as Admin).permissions)
-  );
+  )
 }
 
 // 사용 예시
 function handleUserData(data: unknown) {
   if (isUser(data)) {
     // 이제 data는 확실히 User 타입입니다
-    console.log(`사용자 이메일: ${data.email}`);
+    console.log(`사용자 이메일: ${data.email}`)
   } else if (isAdmin(data)) {
     // 이제 data는 확실히 Admin 타입입니다
-    console.log(`관리자 권한: ${data.permissions.join(', ')}`);
+    console.log(`관리자 권한: ${data.permissions.join(', ')}`)
   } else {
-    throw new Error('알 수 없는 사용자 타입입니다');
+    throw new Error('알 수 없는 사용자 타입입니다')
   }
 }
 ```
@@ -92,57 +92,60 @@ function handleUserData(data: unknown) {
 ```typescript
 // 배열 타입 가드
 function isStringArray(arr: unknown[]): arr is string[] {
-  return arr.every(item => typeof item === 'string');
+  return arr.every(item => typeof item === 'string')
 }
 
 // 중첩 객체 타입 가드
 interface UserProfile {
-  user: User;
+  user: User
   settings: {
-    theme: 'light' | 'dark';
-    notifications: boolean;
-  };
+    theme: 'light' | 'dark'
+    notifications: boolean
+  }
 }
 
 function isUserProfile(obj: unknown): obj is UserProfile {
-  if (typeof obj !== 'object' || obj === null) return false;
-  
-  const profile = obj as UserProfile;
-  
+  if (typeof obj !== 'object' || obj === null) return false
+
+  const profile = obj as UserProfile
+
   return (
     isUser(profile.user) &&
     typeof profile.settings === 'object' &&
     profile.settings !== null &&
     (profile.settings.theme === 'light' || profile.settings.theme === 'dark') &&
     typeof profile.settings.notifications === 'boolean'
-  );
+  )
 }
 
 // 조건부 타입 가드
-type ApiResponse<T> = {
-  success: true;
-  data: T;
-} | {
-  success: false;
-  error: string;
-};
+type ApiResponse<T> =
+  | {
+      success: true
+      data: T
+    }
+  | {
+      success: false
+      error: string
+    }
 
 function isSuccessResponse<T>(
   response: ApiResponse<T>
 ): response is { success: true; data: T } {
-  return response.success === true;
+  return response.success === true
 }
 
 // 사용 예시
 async function fetchUserProfile(): Promise<UserProfile | null> {
-  const response: ApiResponse<unknown> = await fetch('/api/profile')
-    .then(res => res.json());
-  
+  const response: ApiResponse<unknown> = await fetch('/api/profile').then(res =>
+    res.json()
+  )
+
   if (isSuccessResponse(response) && isUserProfile(response.data)) {
-    return response.data;
+    return response.data
   }
-  
-  return null;
+
+  return null
 }
 ```
 
@@ -152,44 +155,50 @@ Union 타입에서 특정 타입을 구별하는 것은 매우 중요합니다. 
 
 ```typescript
 // Action 패턴에서의 Discriminated Union
-type UserAction = 
+type UserAction =
   | { type: 'FETCH_USER'; userId: number }
   | { type: 'UPDATE_USER'; userId: number; data: Partial<User> }
-  | { type: 'DELETE_USER'; userId: number };
+  | { type: 'DELETE_USER'; userId: number }
 
 function isUserAction(action: unknown): action is UserAction {
-  if (typeof action !== 'object' || action === null) return false;
-  
-  const act = action as UserAction;
-  
+  if (typeof action !== 'object' || action === null) return false
+
+  const act = action as UserAction
+
   switch (act.type) {
     case 'FETCH_USER':
-      return typeof act.userId === 'number';
+      return typeof act.userId === 'number'
     case 'UPDATE_USER':
-      return typeof act.userId === 'number' && typeof act.data === 'object';
+      return typeof act.userId === 'number' && typeof act.data === 'object'
     case 'DELETE_USER':
-      return typeof act.userId === 'number';
+      return typeof act.userId === 'number'
     default:
-      return false;
+      return false
   }
 }
 
 // 리듀서에서의 타입 안전한 사용
 function userReducer(state: UserState, action: unknown): UserState {
   if (!isUserAction(action)) {
-    throw new Error('잘못된 액션 타입입니다');
+    throw new Error('잘못된 액션 타입입니다')
   }
-  
+
   switch (action.type) {
     case 'FETCH_USER':
       // action.userId는 확실히 number 타입
-      return { ...state, loading: true };
+      return { ...state, loading: true }
     case 'UPDATE_USER':
       // action.userId와 action.data 모두 타입 안전
-      return { ...state, users: updateUser(state.users, action.userId, action.data) };
+      return {
+        ...state,
+        users: updateUser(state.users, action.userId, action.data),
+      }
     case 'DELETE_USER':
       // action.userId는 확실히 number 타입
-      return { ...state, users: state.users.filter(user => user.id !== action.userId) };
+      return {
+        ...state,
+        users: state.users.filter(user => user.id !== action.userId),
+      }
   }
 }
 ```
@@ -203,50 +212,50 @@ function userReducer(state: UserState, action: unknown): UserState {
 ```typescript
 // 기본적인 제네릭 제약
 interface HasId {
-  id: string | number;
+  id: string | number
 }
 
 function findById<T extends HasId>(items: T[], id: T['id']): T | undefined {
-  return items.find(item => item.id === id);
+  return items.find(item => item.id === id)
 }
 
 // keyof 연산자를 활용한 제약
 function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
-  return obj[key];
+  return obj[key]
 }
 
 // 조건부 타입과 결합한 고급 제네릭
-type NonNullable<T> = T extends null | undefined ? never : T;
+type NonNullable<T> = T extends null | undefined ? never : T
 
 function assertNonNull<T>(value: T): NonNullable<T> {
   if (value === null || value === undefined) {
-    throw new Error('값이 null 또는 undefined입니다');
+    throw new Error('값이 null 또는 undefined입니다')
   }
-  return value as NonNullable<T>;
+  return value as NonNullable<T>
 }
 
 // 함수 시그니처 제약을 통한 타입 안전성
-type AsyncFunction<T extends any[], R> = (...args: T) => Promise<R>;
+type AsyncFunction<T extends any[], R> = (...args: T) => Promise<R>
 
 function withRetry<T extends any[], R>(
   fn: AsyncFunction<T, R>,
   maxRetries: number = 3
 ): AsyncFunction<T, R> {
   return async (...args: T): Promise<R> => {
-    let lastError: Error;
-    
+    let lastError: Error
+
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       try {
-        return await fn(...args);
+        return await fn(...args)
       } catch (error) {
-        lastError = error as Error;
-        if (attempt === maxRetries) break;
-        await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+        lastError = error as Error
+        if (attempt === maxRetries) break
+        await new Promise(resolve => setTimeout(resolve, 1000 * attempt))
       }
     }
-    
-    throw lastError!;
-  };
+
+    throw lastError!
+  }
 }
 ```
 
@@ -256,40 +265,42 @@ TypeScript에서 제공하는 유틸리티 타입들을 효과적으로 활용�
 
 ```typescript
 interface User {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  createdAt: Date;
-  updatedAt: Date;
+  id: number
+  name: string
+  email: string
+  password: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 // 사용자 생성 시에는 id와 날짜 필드 제외
-type CreateUserRequest = Omit<User, 'id' | 'createdAt' | 'updatedAt'>;
+type CreateUserRequest = Omit<User, 'id' | 'createdAt' | 'updatedAt'>
 
 // 사용자 업데이트 시에는 모든 필드가 선택적
-type UpdateUserRequest = Partial<Omit<User, 'id' | 'createdAt' | 'updatedAt'>>;
+type UpdateUserRequest = Partial<Omit<User, 'id' | 'createdAt' | 'updatedAt'>>
 
 // 공개 사용자 정보 (비밀번호 제외)
-type PublicUser = Omit<User, 'password'>;
+type PublicUser = Omit<User, 'password'>
 
 // 특정 필드만 선택
-type UserSummary = Pick<User, 'id' | 'name' | 'email'>;
+type UserSummary = Pick<User, 'id' | 'name' | 'email'>
 
 // 커스텀 유틸리티 타입 생성
-type RequiredKeys<T, K extends keyof T> = T & Required<Pick<T, K>>;
+type RequiredKeys<T, K extends keyof T> = T & Required<Pick<T, K>>
 
 // 사용자 업데이트 시 name은 반드시 필요
-type UpdateUserWithName = RequiredKeys<UpdateUserRequest, 'name'>;
+type UpdateUserWithName = RequiredKeys<UpdateUserRequest, 'name'>
 
 // 조건부 타입을 활용한 고급 유틸리티
 type ApiEndpoint<T> = {
-  [K in keyof T as `get${Capitalize<string & K>}`]: () => Promise<T[K]>;
+  [K in keyof T as `get${Capitalize<string & K>}`]: () => Promise<T[K]>
 } & {
-  [K in keyof T as `set${Capitalize<string & K>}`]: (value: T[K]) => Promise<void>;
-};
+  [K in keyof T as `set${Capitalize<string & K>}`]: (
+    value: T[K]
+  ) => Promise<void>
+}
 
-type UserApi = ApiEndpoint<PublicUser>;
+type UserApi = ApiEndpoint<PublicUser>
 // 결과: { getName: () => Promise<string>, setName: (value: string) => Promise<void>, ... }
 ```
 
@@ -300,11 +311,11 @@ type UserApi = ApiEndpoint<PublicUser>;
 ```typescript
 // 함수 오버로딩과 제네릭을 결합한 패턴
 interface Repository<T extends HasId> {
-  findById(id: T['id']): Promise<T | null>;
-  findMany(filter?: Partial<T>): Promise<T[]>;
-  create(data: Omit<T, 'id'>): Promise<T>;
-  update(id: T['id'], data: Partial<T>): Promise<T>;
-  delete(id: T['id']): Promise<void>;
+  findById(id: T['id']): Promise<T | null>
+  findMany(filter?: Partial<T>): Promise<T[]>
+  create(data: Omit<T, 'id'>): Promise<T>
+  update(id: T['id'], data: Partial<T>): Promise<T>
+  delete(id: T['id']): Promise<void>
 }
 
 // 제네릭 팩토리 패턴
@@ -314,53 +325,53 @@ function createRepository<T extends HasId>(
 ): Repository<T> {
   return {
     async findById(id: T['id']): Promise<T | null> {
-      const response = await fetch(`/api/${entityName}/${id}`);
-      const data = await response.json();
-      return validator(data) ? data : null;
+      const response = await fetch(`/api/${entityName}/${id}`)
+      const data = await response.json()
+      return validator(data) ? data : null
     },
-    
+
     async findMany(filter?: Partial<T>): Promise<T[]> {
-      const queryParams = filter ? `?${new URLSearchParams(filter as any)}` : '';
-      const response = await fetch(`/api/${entityName}${queryParams}`);
-      const data = await response.json();
-      return Array.isArray(data) ? data.filter(validator) : [];
+      const queryParams = filter ? `?${new URLSearchParams(filter as any)}` : ''
+      const response = await fetch(`/api/${entityName}${queryParams}`)
+      const data = await response.json()
+      return Array.isArray(data) ? data.filter(validator) : []
     },
-    
+
     async create(data: Omit<T, 'id'>): Promise<T> {
       const response = await fetch(`/api/${entityName}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const result = await response.json();
+        body: JSON.stringify(data),
+      })
+      const result = await response.json()
       if (!validator(result)) {
-        throw new Error('서버에서 잘못된 응답을 받았습니다');
+        throw new Error('서버에서 잘못된 응답을 받았습니다')
       }
-      return result;
+      return result
     },
-    
+
     async update(id: T['id'], data: Partial<T>): Promise<T> {
       const response = await fetch(`/api/${entityName}/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const result = await response.json();
+        body: JSON.stringify(data),
+      })
+      const result = await response.json()
       if (!validator(result)) {
-        throw new Error('서버에서 잘못된 응답을 받았습니다');
+        throw new Error('서버에서 잘못된 응답을 받았습니다')
       }
-      return result;
+      return result
     },
-    
+
     async delete(id: T['id']): Promise<void> {
-      await fetch(`/api/${entityName}/${id}`, { method: 'DELETE' });
-    }
-  };
+      await fetch(`/api/${entityName}/${id}`, { method: 'DELETE' })
+    },
+  }
 }
 
 // 사용 예시
-const userRepository = createRepository<User>('users', isUser);
-const adminRepository = createRepository<Admin>('admins', isAdmin);
+const userRepository = createRepository<User>('users', isUser)
+const adminRepository = createRepository<Admin>('admins', isAdmin)
 ```
 
 ## API 응답 타입 안전성: 백엔드 연동에서의 타입 보장
@@ -372,50 +383,50 @@ const adminRepository = createRepository<Admin>('admins', isAdmin);
 ```typescript
 // 기본 API 응답 타입
 interface ApiResponse<T = unknown> {
-  success: boolean;
-  data?: T;
-  error?: string;
-  message?: string;
-  timestamp: string;
+  success: boolean
+  data?: T
+  error?: string
+  message?: string
+  timestamp: string
 }
 
 // 페이지네이션이 포함된 응답
 interface PaginatedResponse<T> extends ApiResponse<T[]> {
   pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-  };
+    page: number
+    limit: number
+    total: number
+    totalPages: number
+  }
 }
 
 // 에러 응답 전용 타입
 interface ApiError {
-  success: false;
-  error: string;
-  details?: Record<string, string[]>; // 필드별 에러 메시지
-  code?: string;
-  timestamp: string;
+  success: false
+  error: string
+  details?: Record<string, string[]> // 필드별 에러 메시지
+  code?: string
+  timestamp: string
 }
 
 // API 클라이언트 타입 정의
-type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
 interface RequestConfig {
-  method: HttpMethod;
-  headers?: Record<string, string>;
-  body?: unknown;
-  timeout?: number;
+  method: HttpMethod
+  headers?: Record<string, string>
+  body?: unknown
+  timeout?: number
 }
 
 // 타입 안전한 API 클라이언트
 class TypeSafeApiClient {
-  private baseUrl: string;
-  private defaultHeaders: Record<string, string>;
+  private baseUrl: string
+  private defaultHeaders: Record<string, string>
 
   constructor(baseUrl: string, defaultHeaders: Record<string, string> = {}) {
-    this.baseUrl = baseUrl;
-    this.defaultHeaders = defaultHeaders;
+    this.baseUrl = baseUrl
+    this.defaultHeaders = defaultHeaders
   }
 
   async request<T>(
@@ -428,24 +439,24 @@ class TypeSafeApiClient {
       headers: {
         'Content-Type': 'application/json',
         ...this.defaultHeaders,
-        ...config.headers
+        ...config.headers,
       },
       body: config.body ? JSON.stringify(config.body) : undefined,
-      signal: config.timeout ? AbortSignal.timeout(config.timeout) : undefined
-    });
+      signal: config.timeout ? AbortSignal.timeout(config.timeout) : undefined,
+    })
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new ApiClientError(`HTTP ${response.status}`, errorData);
+      const errorData = await response.json()
+      throw new ApiClientError(`HTTP ${response.status}`, errorData)
     }
 
-    const data = await response.json();
-    
+    const data = await response.json()
+
     if (!validator(data)) {
-      throw new ApiClientError('응답 데이터 검증 실패', data);
+      throw new ApiClientError('응답 데이터 검증 실패', data)
     }
 
-    return data;
+    return data
   }
 
   // GET 요청 전용 메서드
@@ -454,7 +465,7 @@ class TypeSafeApiClient {
     validator: (data: unknown) => data is T,
     headers?: Record<string, string>
   ): Promise<T> {
-    return this.request(endpoint, { method: 'GET', headers }, validator);
+    return this.request(endpoint, { method: 'GET', headers }, validator)
   }
 
   // POST 요청 전용 메서드
@@ -464,15 +475,22 @@ class TypeSafeApiClient {
     validator: (data: unknown) => data is TResponse,
     headers?: Record<string, string>
   ): Promise<TResponse> {
-    return this.request(endpoint, { method: 'POST', body: data, headers }, validator);
+    return this.request(
+      endpoint,
+      { method: 'POST', body: data, headers },
+      validator
+    )
   }
 }
 
 // 커스텀 에러 클래스
 class ApiClientError extends Error {
-  constructor(message: string, public readonly response?: unknown) {
-    super(message);
-    this.name = 'ApiClientError';
+  constructor(
+    message: string,
+    public readonly response?: unknown
+  ) {
+    super(message)
+    this.name = 'ApiClientError'
   }
 }
 ```
@@ -484,59 +502,59 @@ API 응답을 검증하는 강력한 라이브러리를 직접 구현해보겠�
 ```typescript
 // 스키마 정의 타입
 type Schema = {
-  type: 'string' | 'number' | 'boolean' | 'object' | 'array';
-  required?: boolean;
-  properties?: Record<string, Schema>;
-  items?: Schema;
-  enum?: unknown[];
-};
+  type: 'string' | 'number' | 'boolean' | 'object' | 'array'
+  required?: boolean
+  properties?: Record<string, Schema>
+  items?: Schema
+  enum?: unknown[]
+}
 
 // 검증 함수 생성기
 function createValidator<T>(schema: Schema): (data: unknown) => data is T {
   return function validate(data: unknown): data is T {
-    return validateValue(data, schema);
-  };
+    return validateValue(data, schema)
+  }
 }
 
 function validateValue(value: unknown, schema: Schema): boolean {
   if (!schema.required && (value === undefined || value === null)) {
-    return true;
+    return true
   }
 
   switch (schema.type) {
     case 'string':
-      return typeof value === 'string';
-    
+      return typeof value === 'string'
+
     case 'number':
-      return typeof value === 'number' && !isNaN(value);
-    
+      return typeof value === 'number' && !isNaN(value)
+
     case 'boolean':
-      return typeof value === 'boolean';
-    
+      return typeof value === 'boolean'
+
     case 'object':
       if (typeof value !== 'object' || value === null || Array.isArray(value)) {
-        return false;
+        return false
       }
-      
+
       if (schema.properties) {
         for (const [key, propertySchema] of Object.entries(schema.properties)) {
           if (!validateValue((value as any)[key], propertySchema)) {
-            return false;
+            return false
           }
         }
       }
-      return true;
-    
+      return true
+
     case 'array':
-      if (!Array.isArray(value)) return false;
-      
+      if (!Array.isArray(value)) return false
+
       if (schema.items) {
-        return value.every(item => validateValue(item, schema.items!));
+        return value.every(item => validateValue(item, schema.items!))
       }
-      return true;
-    
+      return true
+
     default:
-      return false;
+      return false
   }
 }
 
@@ -548,42 +566,42 @@ const userSchema: Schema = {
     id: { type: 'number', required: true },
     name: { type: 'string', required: true },
     email: { type: 'string', required: true },
-    age: { type: 'number', required: false }
-  }
-};
+    age: { type: 'number', required: false },
+  },
+}
 
 const userListSchema: Schema = {
   type: 'array',
   required: true,
-  items: userSchema
-};
+  items: userSchema,
+}
 
 // API 응답 검증기 생성
-const isUser = createValidator<User>(userSchema);
-const isUserList = createValidator<User[]>(userListSchema);
+const isUser = createValidator<User>(userSchema)
+const isUserList = createValidator<User[]>(userListSchema)
 
 // API 서비스 클래스
 class UserService {
-  private apiClient: TypeSafeApiClient;
+  private apiClient: TypeSafeApiClient
 
   constructor(apiClient: TypeSafeApiClient) {
-    this.apiClient = apiClient;
+    this.apiClient = apiClient
   }
 
   async getUser(id: number): Promise<User> {
-    return this.apiClient.get(`/users/${id}`, isUser);
+    return this.apiClient.get(`/users/${id}`, isUser)
   }
 
   async getUsers(): Promise<User[]> {
-    return this.apiClient.get('/users', isUserList);
+    return this.apiClient.get('/users', isUserList)
   }
 
   async createUser(userData: CreateUserRequest): Promise<User> {
-    return this.apiClient.post('/users', userData, isUser);
+    return this.apiClient.post('/users', userData, isUser)
   }
 
   async updateUser(id: number, userData: UpdateUserRequest): Promise<User> {
-    return this.apiClient.post(`/users/${id}`, userData, isUser);
+    return this.apiClient.post(`/users/${id}`, userData, isUser)
   }
 }
 ```
@@ -594,91 +612,91 @@ API 에러 처리도 타입 안전하게 구현할 수 있습니다:
 
 ```typescript
 // 에러 타입 정의
-type ApiErrorType = 'NETWORK_ERROR' | 'VALIDATION_ERROR' | 'AUTHENTICATION_ERROR' | 'UNKNOWN_ERROR';
+type ApiErrorType =
+  | 'NETWORK_ERROR'
+  | 'VALIDATION_ERROR'
+  | 'AUTHENTICATION_ERROR'
+  | 'UNKNOWN_ERROR'
 
 interface TypedApiError {
-  type: ApiErrorType;
-  message: string;
-  details?: Record<string, unknown>;
-  statusCode?: number;
+  type: ApiErrorType
+  message: string
+  details?: Record<string, unknown>
+  statusCode?: number
 }
 
 // 에러 팩토리 함수
-function createApiError(
-  response: Response,
-  data: unknown
-): TypedApiError {
-  const statusCode = response.status;
-  
+function createApiError(response: Response, data: unknown): TypedApiError {
+  const statusCode = response.status
+
   switch (statusCode) {
     case 400:
       return {
         type: 'VALIDATION_ERROR',
         message: '요청 데이터가 올바르지 않습니다',
-        details: typeof data === 'object' ? data as Record<string, unknown> : {},
-        statusCode
-      };
-    
+        details:
+          typeof data === 'object' ? (data as Record<string, unknown>) : {},
+        statusCode,
+      }
+
     case 401:
     case 403:
       return {
         type: 'AUTHENTICATION_ERROR',
         message: '인증이 필요합니다',
-        statusCode
-      };
-    
+        statusCode,
+      }
+
     default:
       return {
         type: 'UNKNOWN_ERROR',
         message: '서버 오류가 발생했습니다',
-        statusCode
-      };
+        statusCode,
+      }
   }
 }
 
 // Result 타입을 활용한 에러 처리
-type Result<T, E = TypedApiError> = 
+type Result<T, E = TypedApiError> =
   | { success: true; data: T }
-  | { success: false; error: E };
+  | { success: false; error: E }
 
-async function safeApiCall<T>(
-  apiCall: () => Promise<T>
-): Promise<Result<T>> {
+async function safeApiCall<T>(apiCall: () => Promise<T>): Promise<Result<T>> {
   try {
-    const data = await apiCall();
-    return { success: true, data };
+    const data = await apiCall()
+    return { success: true, data }
   } catch (error) {
     if (error instanceof ApiClientError) {
-      return { success: false, error: error.response as TypedApiError };
+      return { success: false, error: error.response as TypedApiError }
     }
-    
+
     return {
       success: false,
       error: {
         type: 'NETWORK_ERROR',
-        message: '네트워크 오류가 발생했습니다'
-      }
-    };
+        message: '네트워크 오류가 발생했습니다',
+      },
+    }
   }
 }
 
 // 사용 예시
 async function handleUserFetch(id: number): Promise<void> {
-  const result = await safeApiCall(() => userService.getUser(id));
-  
+  const result = await safeApiCall(() => userService.getUser(id))
+
   if (result.success) {
-    console.log('사용자 정보:', result.data);
+    console.log('사용자 정보:', result.data)
   } else {
     switch (result.error.type) {
       case 'VALIDATION_ERROR':
-        console.error('입력 데이터 오류:', result.error.details);
-        break;
+        console.error('입력 데이터 오류:', result.error.details)
+        break
       case 'AUTHENTICATION_ERROR':
         // 로그인 페이지로 리다이렉트
-        window.location.href = '/login';
-        break;
+        window.location.href = '/login'
+        break
       default:
-        console.error('오류 발생:', result.error.message);
+        console.error('오류 발생:', result.error.message)
     }
   }
 }
@@ -775,7 +793,7 @@ function Form<T extends Record<string, unknown>>({
 
   const handleFieldChange = React.useCallback((name: keyof T, value: T[keyof T]) => {
     setValues(prev => ({ ...prev, [name]: value }));
-    
+
     // 필드별 검증
     if (validationSchema?.[name]) {
       const error = validationSchema[name]!(value);
@@ -785,7 +803,7 @@ function Form<T extends Record<string, unknown>>({
 
   const handleSubmit = React.useCallback(async (event: React.FormEvent) => {
     event.preventDefault();
-    
+
     // 전체 검증
     if (validationSchema) {
       const newErrors: Partial<Record<keyof T, string>> = {};
@@ -793,7 +811,7 @@ function Form<T extends Record<string, unknown>>({
         const error = validator(values[field as keyof T]);
         if (error) newErrors[field as keyof T] = error;
       }
-      
+
       setErrors(newErrors);
       if (Object.keys(newErrors).length > 0) return;
     }
@@ -865,11 +883,11 @@ interface WithLoadingProps {
 const withLoading: HOC<WithLoadingProps> = (Component) => {
   return function WithLoadingComponent(props) {
     const { isLoading, loadingComponent: LoadingComponent = DefaultLoader, ...restProps } = props;
-    
+
     if (isLoading) {
       return <LoadingComponent />;
     }
-    
+
     return <Component {...restProps as any} isLoading={isLoading} />;
   };
 };
@@ -891,7 +909,7 @@ function withAuth<P extends WithAuthProps>(
   return (Component) => {
     return function WithAuthComponent(props) {
       const { user, isAuthenticated } = useAuth(); // 커스텀 훅
-      
+
       if (!isAuthenticated) {
         // 리다이렉트 로직
         React.useEffect(() => {
@@ -899,17 +917,17 @@ function withAuth<P extends WithAuthProps>(
         }, []);
         return null;
       }
-      
+
       if (options.requiredRoles && user) {
-        const hasRequiredRole = options.requiredRoles.some(role => 
+        const hasRequiredRole = options.requiredRoles.some(role =>
           user.roles?.includes(role)
         );
-        
+
         if (!hasRequiredRole) {
           return <div>접근 권한이 없습니다</div>;
         }
       }
-      
+
       return <Component {...props as any} user={user} isAuthenticated={isAuthenticated} />;
     };
   };
@@ -922,7 +940,7 @@ interface UserProfileProps extends WithAuthProps, WithLoadingProps {
 
 const UserProfile: React.FC<UserProfileProps> = ({ user, isLoading, onSave }) => {
   if (!user) return null;
-  
+
   return (
     <div>
       <h1>{user.name}님의 프로필</h1>
@@ -947,129 +965,139 @@ const EnhancedUserProfile = withAuth({ requiredRoles: ['user'] })(
 ```typescript
 // 제네릭 커스텀 훅
 interface UseApiOptions<T> {
-  immediate?: boolean;
-  onSuccess?: (data: T) => void;
-  onError?: (error: TypedApiError) => void;
+  immediate?: boolean
+  onSuccess?: (data: T) => void
+  onError?: (error: TypedApiError) => void
 }
 
 interface UseApiReturn<T> {
-  data: T | null;
-  loading: boolean;
-  error: TypedApiError | null;
-  execute: () => Promise<void>;
-  reset: () => void;
+  data: T | null
+  loading: boolean
+  error: TypedApiError | null
+  execute: () => Promise<void>
+  reset: () => void
 }
 
 function useApi<T>(
   apiCall: () => Promise<T>,
   options: UseApiOptions<T> = {}
 ): UseApiReturn<T> {
-  const [data, setData] = React.useState<T | null>(null);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<TypedApiError | null>(null);
+  const [data, setData] = React.useState<T | null>(null)
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState<TypedApiError | null>(null)
 
   const execute = React.useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    
+    setLoading(true)
+    setError(null)
+
     try {
-      const result = await apiCall();
-      setData(result);
-      options.onSuccess?.(result);
+      const result = await apiCall()
+      setData(result)
+      options.onSuccess?.(result)
     } catch (err) {
-      const apiError = err as TypedApiError;
-      setError(apiError);
-      options.onError?.(apiError);
+      const apiError = err as TypedApiError
+      setError(apiError)
+      options.onError?.(apiError)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [apiCall, options]);
+  }, [apiCall, options])
 
   const reset = React.useCallback(() => {
-    setData(null);
-    setError(null);
-    setLoading(false);
-  }, []);
+    setData(null)
+    setError(null)
+    setLoading(false)
+  }, [])
 
   React.useEffect(() => {
     if (options.immediate) {
-      execute();
+      execute()
     }
-  }, [execute, options.immediate]);
+  }, [execute, options.immediate])
 
-  return { data, loading, error, execute, reset };
+  return { data, loading, error, execute, reset }
 }
 
 // 특화된 훅 생성
 function useUsers() {
-  return useApi(() => userService.getUsers(), { immediate: true });
+  return useApi(() => userService.getUsers(), { immediate: true })
 }
 
 function useUser(id: number) {
-  return useApi(() => userService.getUser(id), { immediate: true });
+  return useApi(() => userService.getUser(id), { immediate: true })
 }
 
 // 폼 전용 커스텀 훅
 interface UseFormOptions<T> {
-  validationSchema?: Partial<Record<keyof T, (value: T[keyof T]) => string | undefined>>;
-  onSubmit: (values: T) => void | Promise<void>;
+  validationSchema?: Partial<
+    Record<keyof T, (value: T[keyof T]) => string | undefined>
+  >
+  onSubmit: (values: T) => void | Promise<void>
 }
 
 interface UseFormReturn<T> {
-  values: T;
-  errors: Partial<Record<keyof T, string>>;
-  isSubmitting: boolean;
-  isValid: boolean;
-  setValue: (name: keyof T, value: T[keyof T]) => void;
-  setError: (name: keyof T, error: string) => void;
-  handleSubmit: (event: React.FormEvent) => void;
-  reset: () => void;
+  values: T
+  errors: Partial<Record<keyof T, string>>
+  isSubmitting: boolean
+  isValid: boolean
+  setValue: (name: keyof T, value: T[keyof T]) => void
+  setError: (name: keyof T, error: string) => void
+  handleSubmit: (event: React.FormEvent) => void
+  reset: () => void
 }
 
 function useForm<T extends Record<string, unknown>>(
   initialValues: T,
   options: UseFormOptions<T>
 ): UseFormReturn<T> {
-  const [values, setValues] = React.useState<T>(initialValues);
-  const [errors, setErrors] = React.useState<Partial<Record<keyof T, string>>>({});
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [values, setValues] = React.useState<T>(initialValues)
+  const [errors, setErrors] = React.useState<Partial<Record<keyof T, string>>>(
+    {}
+  )
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
 
-  const setValue = React.useCallback((name: keyof T, value: T[keyof T]) => {
-    setValues(prev => ({ ...prev, [name]: value }));
-    
-    // 실시간 검증
-    if (options.validationSchema?.[name]) {
-      const error = options.validationSchema[name]!(value);
-      setErrors(prev => ({ ...prev, [name]: error }));
-    }
-  }, [options.validationSchema]);
+  const setValue = React.useCallback(
+    (name: keyof T, value: T[keyof T]) => {
+      setValues(prev => ({ ...prev, [name]: value }))
+
+      // 실시간 검증
+      if (options.validationSchema?.[name]) {
+        const error = options.validationSchema[name]!(value)
+        setErrors(prev => ({ ...prev, [name]: error }))
+      }
+    },
+    [options.validationSchema]
+  )
 
   const setError = React.useCallback((name: keyof T, error: string) => {
-    setErrors(prev => ({ ...prev, [name]: error }));
-  }, []);
+    setErrors(prev => ({ ...prev, [name]: error }))
+  }, [])
 
   const isValid = React.useMemo(() => {
-    return Object.values(errors).every(error => !error);
-  }, [errors]);
+    return Object.values(errors).every(error => !error)
+  }, [errors])
 
-  const handleSubmit = React.useCallback(async (event: React.FormEvent) => {
-    event.preventDefault();
-    
-    if (!isValid) return;
+  const handleSubmit = React.useCallback(
+    async (event: React.FormEvent) => {
+      event.preventDefault()
 
-    setIsSubmitting(true);
-    try {
-      await options.onSubmit(values);
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [values, isValid, options]);
+      if (!isValid) return
+
+      setIsSubmitting(true)
+      try {
+        await options.onSubmit(values)
+      } finally {
+        setIsSubmitting(false)
+      }
+    },
+    [values, isValid, options]
+  )
 
   const reset = React.useCallback(() => {
-    setValues(initialValues);
-    setErrors({});
-    setIsSubmitting(false);
-  }, [initialValues]);
+    setValues(initialValues)
+    setErrors({})
+    setIsSubmitting(false)
+  }, [initialValues])
 
   return {
     values,
@@ -1079,8 +1107,8 @@ function useForm<T extends Record<string, unknown>>(
     setValue,
     setError,
     handleSubmit,
-    reset
-  };
+    reset,
+  }
 }
 ```
 
@@ -1203,7 +1231,7 @@ describe('Button 컴포넌트', () => {
 
   it('loading 상태일 때 disabled 되어야 합니다', () => {
     const handleClick = jest.fn();
-    
+
     render(
       <Button variant="primary" size="medium" loading onClick={handleClick}>
         클릭하세요
@@ -1254,9 +1282,9 @@ describe('useForm 훅', () => {
     };
 
     const { result } = renderHook(() =>
-      useForm(initialValues, { 
+      useForm(initialValues, {
         onSubmit: mockOnSubmit,
-        validationSchema 
+        validationSchema
       })
     );
 
@@ -1276,52 +1304,52 @@ TypeScript의 타입 자체를 테스트하는 방법도 있습니다:
 
 ```typescript
 // 타입 레벨 테스트 유틸리티
-type Expect<T extends true> = T;
-type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
-  ? true
-  : false;
+type Expect<T extends true> = T
+type Equal<X, Y> =
+  (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
+    ? true
+    : false
 
 // 타입 테스트 예시
-type test_isUser_return_type = Expect<Equal<
-  ReturnType<typeof isUser>,
-  boolean
->>;
+type test_isUser_return_type = Expect<Equal<ReturnType<typeof isUser>, boolean>>
 
-type test_findById_constraint = Expect<Equal<
-  Parameters<typeof findById>[0],
-  HasId[]
->>;
+type test_findById_constraint = Expect<
+  Equal<Parameters<typeof findById>[0], HasId[]>
+>
 
-type test_api_response_type = Expect<Equal<
-  ApiResponse<User>,
-  {
-    success: boolean;
-    data?: User;
-    error?: string;
-    message?: string;
-    timestamp: string;
-  }
->>;
+type test_api_response_type = Expect<
+  Equal<
+    ApiResponse<User>,
+    {
+      success: boolean
+      data?: User
+      error?: string
+      message?: string
+      timestamp: string
+    }
+  >
+>
 
 // 조건부 타입 테스트
-type test_result_success = Expect<Equal<
-  Result<string, never>,
-  { success: true; data: string } | { success: false; error: never }
->>;
+type test_result_success = Expect<
+  Equal<
+    Result<string, never>,
+    { success: true; data: string } | { success: false; error: never }
+  >
+>
 
-type test_utility_types = Expect<Equal<
-  CreateUserRequest,
-  Omit<User, 'id' | 'createdAt' | 'updatedAt'>
->>;
+type test_utility_types = Expect<
+  Equal<CreateUserRequest, Omit<User, 'id' | 'createdAt' | 'updatedAt'>>
+>
 
 // 제네릭 제약 테스트
-declare function testGenericConstraint<T extends HasId>(item: T): T['id'];
+declare function testGenericConstraint<T extends HasId>(item: T): T['id']
 
 // 이는 컴파일 에러를 발생시켜야 합니다
 // testGenericConstraint({ name: 'test' }); // Error: Property 'id' is missing
 
 // 이는 정상적으로 작동해야 합니다
-testGenericConstraint({ id: 1, name: 'test' }); // OK
+testGenericConstraint({ id: 1, name: 'test' }) // OK
 ```
 
 ### 통합 테스트 전략
@@ -1331,65 +1359,65 @@ testGenericConstraint({ id: 1, name: 'test' }); // OK
 ```typescript
 // 통합 테스트 환경 설정
 interface TestEnvironment {
-  apiClient: TypeSafeApiClient;
-  userService: UserService;
-  mockServer: MockServer;
+  apiClient: TypeSafeApiClient
+  userService: UserService
+  mockServer: MockServer
 }
 
 class MockServer {
-  private handlers: Map<string, (req: any) => any> = new Map();
+  private handlers: Map<string, (req: any) => any> = new Map()
 
   setup(endpoint: string, handler: (req: any) => any) {
-    this.handlers.set(endpoint, handler);
+    this.handlers.set(endpoint, handler)
   }
 
   async handle(endpoint: string, request: any): Promise<any> {
-    const handler = this.handlers.get(endpoint);
+    const handler = this.handlers.get(endpoint)
     if (!handler) {
-      throw new Error(`No handler for ${endpoint}`);
+      throw new Error(`No handler for ${endpoint}`)
     }
-    return handler(request);
+    return handler(request)
   }
 }
 
 function createTestEnvironment(): TestEnvironment {
-  const mockServer = new MockServer();
-  const apiClient = new TypeSafeApiClient('http://test-api');
-  const userService = new UserService(apiClient);
+  const mockServer = new MockServer()
+  const apiClient = new TypeSafeApiClient('http://test-api')
+  const userService = new UserService(apiClient)
 
-  return { apiClient, userService, mockServer };
+  return { apiClient, userService, mockServer }
 }
 
 // E2E 타입 안전성 테스트
 describe('사용자 관리 E2E 테스트', () => {
-  let env: TestEnvironment;
+  let env: TestEnvironment
 
   beforeEach(() => {
-    env = createTestEnvironment();
-  });
+    env = createTestEnvironment()
+  })
 
   it('사용자 생성부터 조회까지 전체 플로우가 타입 안전해야 합니다', async () => {
     // 사용자 생성 데이터 준비 (타입 안전)
     const createUserData: CreateUserRequest = {
       name: 'John Doe',
       email: 'john@example.com',
-      password: 'securePassword123'
-    };
+      password: 'securePassword123',
+    }
 
     // Mock 서버 설정
-    env.mockServer.setup('POST /users', (req) => {
-      const userData = req.body;
+    env.mockServer.setup('POST /users', req => {
+      const userData = req.body
       if (!isCreateUserRequest(userData)) {
-        throw new Error('잘못된 사용자 생성 데이터');
+        throw new Error('잘못된 사용자 생성 데이터')
       }
-      
+
       return {
         id: 1,
         ...userData,
         createdAt: new Date(),
-        updatedAt: new Date()
-      };
-    });
+        updatedAt: new Date(),
+      }
+    })
 
     env.mockServer.setup('GET /users/1', () => ({
       id: 1,
@@ -1397,20 +1425,20 @@ describe('사용자 관리 E2E 테스트', () => {
       email: 'john@example.com',
       password: 'hashedPassword',
       createdAt: new Date(),
-      updatedAt: new Date()
-    }));
+      updatedAt: new Date(),
+    }))
 
     // 사용자 생성 (타입 안전한 API 호출)
-    const createdUser = await env.userService.createUser(createUserData);
-    expect(createdUser.id).toBeDefined();
-    expect(createdUser.name).toBe(createUserData.name);
+    const createdUser = await env.userService.createUser(createUserData)
+    expect(createdUser.id).toBeDefined()
+    expect(createdUser.name).toBe(createUserData.name)
 
     // 생성된 사용자 조회 (타입 안전한 API 호출)
-    const fetchedUser = await env.userService.getUser(createdUser.id);
-    expect(fetchedUser.id).toBe(createdUser.id);
-    expect(fetchedUser.email).toBe(createUserData.email);
-  });
-});
+    const fetchedUser = await env.userService.getUser(createdUser.id)
+    expect(fetchedUser.id).toBe(createdUser.id)
+    expect(fetchedUser.email).toBe(createUserData.email)
+  })
+})
 
 // 타입 가드 함수 검증
 function isCreateUserRequest(obj: unknown): obj is CreateUserRequest {
@@ -1420,7 +1448,7 @@ function isCreateUserRequest(obj: unknown): obj is CreateUserRequest {
     typeof (obj as CreateUserRequest).name === 'string' &&
     typeof (obj as CreateUserRequest).email === 'string' &&
     typeof (obj as CreateUserRequest).password === 'string'
-  );
+  )
 }
 ```
 
@@ -1436,35 +1464,35 @@ function processUsers(users: User[]): UserSummary[] {
   return users.map(user => ({
     id: user.id,
     name: user.name,
-    email: user.email
-  }));
+    email: user.email,
+  }))
 }
 
 // 2. 제네릭 기본값 활용
 interface ApiConfig<T = Record<string, unknown>> {
-  baseUrl: string;
-  headers?: Record<string, string>;
-  transformer?: (data: unknown) => T;
+  baseUrl: string
+  headers?: Record<string, string>
+  transformer?: (data: unknown) => T
 }
 
 // 3. 조건부 타입으로 복잡한 추론 단순화
-type InferArrayType<T> = T extends (infer U)[] ? U : never;
-type InferPromiseType<T> = T extends Promise<infer U> ? U : never;
+type InferArrayType<T> = T extends (infer U)[] ? U : never
+type InferPromiseType<T> = T extends Promise<infer U> ? U : never
 
 // 사용 예시
-type UserArrayType = InferArrayType<User[]>; // User
-type UserPromiseType = InferPromiseType<Promise<User>>; // User
+type UserArrayType = InferArrayType<User[]> // User
+type UserPromiseType = InferPromiseType<Promise<User>> // User
 
 // 4. 리터럴 타입 최적화
-const themes = ['light', 'dark', 'auto'] as const;
-type Theme = typeof themes[number]; // 'light' | 'dark' | 'auto'
+const themes = ['light', 'dark', 'auto'] as const
+type Theme = (typeof themes)[number] // 'light' | 'dark' | 'auto'
 
 // 5. 맵드 타입 최적화
 type OptionalKeys<T> = {
-  [K in keyof T]?: T[K];
-};
+  [K in keyof T]?: T[K]
+}
 
-type RequiredKeys<T, K extends keyof T> = T & Required<Pick<T, K>>;
+type RequiredKeys<T, K extends keyof T> = T & Required<Pick<T, K>>
 ```
 
 ### 실제 프로덕션 함정들과 해결책
@@ -1477,8 +1505,8 @@ type RequiredKeys<T, K extends keyof T> = T & Required<Pick<T, K>>;
 function processApiResponse(response: any) {
   return response.data.map((item: any) => ({
     id: item.id,
-    name: item.name
-  }));
+    name: item.name,
+  }))
 }
 
 // ✅ 좋은 예시
@@ -1487,128 +1515,133 @@ function processApiResponse<T>(
   validator: (item: unknown) => item is T
 ): T[] {
   if (!Array.isArray(response.data)) {
-    throw new Error('응답 데이터가 배열이 아닙니다');
+    throw new Error('응답 데이터가 배열이 아닙니다')
   }
-  
-  return response.data.filter(validator);
+
+  return response.data.filter(validator)
 }
 
 // 함정 2: 과도한 타입 단언
 // ❌ 나쁜 예시
-const user = apiResponse as User;
-const users = apiResponse as User[];
+const user = apiResponse as User
+const users = apiResponse as User[]
 
 // ✅ 좋은 예시
 function assertUser(data: unknown): User {
   if (!isUser(data)) {
-    throw new Error('유효하지 않은 사용자 데이터입니다');
+    throw new Error('유효하지 않은 사용자 데이터입니다')
   }
-  return data;
+  return data
 }
 
-const user = assertUser(apiResponse);
+const user = assertUser(apiResponse)
 
 // 함정 3: 순환 의존성 타입
 // ❌ 문제가 있는 예시
 interface Department {
-  id: number;
-  name: string;
-  employees: Employee[];
+  id: number
+  name: string
+  employees: Employee[]
 }
 
 interface Employee {
-  id: number;
-  name: string;
-  department: Department;
+  id: number
+  name: string
+  department: Department
 }
 
 // ✅ 해결책: 참조 타입 분리
 interface DepartmentReference {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 
 interface EmployeeReference {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 
 interface Department extends DepartmentReference {
-  employees: EmployeeReference[];
+  employees: EmployeeReference[]
 }
 
 interface Employee extends EmployeeReference {
-  department: DepartmentReference;
+  department: DepartmentReference
 }
 
 // 함정 4: 깊은 중첩 타입의 성능 문제
 // ❌ 성능 문제를 일으킬 수 있는 예시
 type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
-};
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P]
+}
 
 // ✅ 성능 최적화된 해결책
 type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends Record<string, unknown> 
-    ? DeepPartial<T[P]> 
-    : T[P];
-};
+  [P in keyof T]?: T[P] extends Record<string, unknown>
+    ? DeepPartial<T[P]>
+    : T[P]
+}
 
 // 재귀 깊이 제한
-type DeepPartialLimited<T, Depth extends ReadonlyArray<number> = []> = 
-  Depth['length'] extends 10 
-    ? T 
-    : {
-        [P in keyof T]?: T[P] extends Record<string, unknown>
-          ? DeepPartialLimited<T[P], [...Depth, 1]>
-          : T[P];
-      };
+type DeepPartialLimited<
+  T,
+  Depth extends ReadonlyArray<number> = [],
+> = Depth['length'] extends 10
+  ? T
+  : {
+      [P in keyof T]?: T[P] extends Record<string, unknown>
+        ? DeepPartialLimited<T[P], [...Depth, 1]>
+        : T[P]
+    }
 ```
 
 ### 팀 개발에서의 타입 시스템 관리
 
 팀 단위로 타입 시스템을 관리하는 전략들을 살펴보겠습니다:
 
-```typescript
+````typescript
 // 1. 공통 타입 정의 모듈화
 // types/api.ts
 export interface BaseApiResponse<T = unknown> {
-  success: boolean;
-  data?: T;
-  error?: string;
-  timestamp: string;
+  success: boolean
+  data?: T
+  error?: string
+  timestamp: string
 }
 
 export interface PaginatedApiResponse<T> extends BaseApiResponse<T[]> {
   pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-  };
+    page: number
+    limit: number
+    total: number
+    totalPages: number
+  }
 }
 
 // types/user.ts
 export interface User {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  roles: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  id: number
+  name: string
+  email: string
+  password: string
+  roles: string[]
+  createdAt: Date
+  updatedAt: Date
 }
 
-export type CreateUserRequest = Omit<User, 'id' | 'createdAt' | 'updatedAt'>;
-export type UpdateUserRequest = Partial<CreateUserRequest>;
-export type PublicUser = Omit<User, 'password'>;
+export type CreateUserRequest = Omit<User, 'id' | 'createdAt' | 'updatedAt'>
+export type UpdateUserRequest = Partial<CreateUserRequest>
+export type PublicUser = Omit<User, 'password'>
 
 // 2. 타입 검증 라이브러리 구축
 // utils/validators.ts
 export class ValidationError extends Error {
-  constructor(message: string, public readonly field: string) {
-    super(message);
-    this.name = 'ValidationError';
+  constructor(
+    message: string,
+    public readonly field: string
+  ) {
+    super(message)
+    this.name = 'ValidationError'
   }
 }
 
@@ -1616,29 +1649,32 @@ export function createValidationLibrary() {
   const validators = {
     isString: (value: unknown, field: string): value is string => {
       if (typeof value !== 'string') {
-        throw new ValidationError(`${field}는 문자열이어야 합니다`, field);
+        throw new ValidationError(`${field}는 문자열이어야 합니다`, field)
       }
-      return true;
+      return true
     },
-    
+
     isNumber: (value: unknown, field: string): value is number => {
       if (typeof value !== 'number' || isNaN(value)) {
-        throw new ValidationError(`${field}는 유효한 숫자여야 합니다`, field);
+        throw new ValidationError(`${field}는 유효한 숫자여야 합니다`, field)
       }
-      return true;
+      return true
     },
-    
+
     isEmail: (value: unknown, field: string): value is string => {
-      validators.isString(value, field);
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      validators.isString(value, field)
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       if (!emailRegex.test(value)) {
-        throw new ValidationError(`${field}는 유효한 이메일 형식이어야 합니다`, field);
+        throw new ValidationError(
+          `${field}는 유효한 이메일 형식이어야 합니다`,
+          field
+        )
       }
-      return true;
-    }
-  };
-  
-  return validators;
+      return true
+    },
+  }
+
+  return validators
 }
 
 // 3. 점진적 타입 도입 전략
@@ -1655,28 +1691,28 @@ export function createValidationLibrary() {
  * @returns {Promise<User>}
  */
 function getUserLegacy(id) {
-  return fetch(`/api/users/${id}`).then(res => res.json());
+  return fetch(`/api/users/${id}`).then(res => res.json())
 }
 
 // services/user-service.ts (TypeScript로 마이그레이션)
-import { User } from '../types/user';
-import { isUser } from '../utils/type-guards';
+import { User } from '../types/user'
+import { isUser } from '../utils/type-guards'
 
 export async function getUser(id: number): Promise<User> {
-  const response = await fetch(`/api/users/${id}`);
-  const data = await response.json();
-  
+  const response = await fetch(`/api/users/${id}`)
+  const data = await response.json()
+
   if (!isUser(data)) {
-    throw new Error('서버에서 잘못된 사용자 데이터를 받았습니다');
+    throw new Error('서버에서 잘못된 사용자 데이터를 받았습니다')
   }
-  
-  return data;
+
+  return data
 }
 
 // 4. 타입 문서화 전략
 /**
  * 사용자 관리 API 클라이언트
- * 
+ *
  * @example
  * ```typescript
  * const userService = new UserService(apiClient);
@@ -1689,11 +1725,11 @@ export class UserService {
 
   /**
    * 사용자 ID로 사용자 정보를 조회합니다
-   * 
+   *
    * @param id - 조회할 사용자의 ID
    * @returns Promise<User> - 사용자 정보
    * @throws {ApiClientError} 사용자를 찾을 수 없거나 네트워크 오류 시
-   * 
+   *
    * @example
    * ```typescript
    * try {
@@ -1707,10 +1743,10 @@ export class UserService {
    * ```
    */
   async getUser(id: number): Promise<User> {
-    return this.apiClient.get(`/users/${id}`, isUser);
+    return this.apiClient.get(`/users/${id}`, isUser)
   }
 }
-```
+````
 
 ### 성능 모니터링과 최적화
 
@@ -1752,7 +1788,7 @@ type OptimizedUnion = SmallUnion | LargeUnion;
 // 런타임 성능 모니터링
 class TypeSystemMetrics {
   private static validationTimes: Map<string, number[]> = new Map();
-  
+
   static measureValidation<T>(
     name: string,
     validator: (data: unknown) => data is T,
@@ -1761,25 +1797,25 @@ class TypeSystemMetrics {
     const start = performance.now();
     const result = validator(data);
     const end = performance.now();
-    
+
     const times = this.validationTimes.get(name) || [];
     times.push(end - start);
     this.validationTimes.set(name, times);
-    
+
     return result;
   }
-  
+
   static getValidationStats(name: string) {
     const times = this.validationTimes.get(name) || [];
     if (times.length === 0) return null;
-    
+
     const avg = times.reduce((a, b) => a + b, 0) / times.length;
     const max = Math.max(...times);
     const min = Math.min(...times);
-    
+
     return { avg, max, min, count: times.length };
   }
-  
+
   static reportPerformance() {
     console.table(
       Array.from(this.validationTimes.keys()).map(name => ({
@@ -1803,31 +1839,37 @@ TypeScript의 고급 타입 시스템을 제대로 활용하면 런타임 에러
 핵심 포인트들을 다시 정리하면 다음과 같습니다:
 
 ### 1. 타입 가드로 런타임 안전성 확보
+
 - `is` 키워드를 활용한 사용자 정의 타입 가드 구현
 - Discriminated Union 패턴으로 명확한 타입 구별
 - API 응답 검증과 런타임 타입 체크 필수
 
 ### 2. 제네릭과 유틸리티 타입으로 재사용성 향상
+
 - 제네릭 제약 조건으로 더 안전한 함수 작성
 - 유틸리티 타입 조합으로 중복 코드 제거
 - 조건부 타입과 맵드 타입 활용
 
 ### 3. API 연동에서의 타입 안전성
+
 - 런타임 검증이 포함된 API 클라이언트 구현
 - Result 타입을 활용한 에러 처리
 - 타입 안전한 에러 분류 및 처리
 
 ### 4. React 컴포넌트 타입 설계
+
 - Props 타입 정의와 제네릭 컴포넌트 활용
 - HOC와 커스텀 훅에서의 타입 안전성
 - Context API와 타입 시스템 통합
 
 ### 5. 테스트와 타입의 이중 안전망
+
 - Jest와 TypeScript 통합 테스트
 - 타입 레벨 테스트로 컴파일 타임 검증
 - 통합 테스트에서의 타입 안전성
 
 ### 6. 실무 적용 전략
+
 - 팀 단위 타입 시스템 관리
 - 점진적 TypeScript 도입 방법
 - 성능 최적화와 모니터링

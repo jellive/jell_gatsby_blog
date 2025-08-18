@@ -10,7 +10,7 @@ config.autoAddCss = false
 /**
  * FontAwesome initialization component for Next.js App Router
  * This component should be imported in the root layout to properly initialize FontAwesome
- * 
+ *
  * Key configurations:
  * - autoAddCss: false - Prevents FontAwesome from adding CSS automatically to avoid conflicts
  * - CSS is imported manually above to ensure it's available during SSR
