@@ -22,9 +22,6 @@ export class SafeNavigation {
 
     // Strategy 1: Primary navigation with extended timeout for heavy pages
     try {
-      if (isHeavyPage) {
-        console.log(`🚀 Navigating to heavy page ${url} (${timeout}ms timeout)`)
-      }
       await this.page.goto(url, {
         waitUntil: waitUntil as any,
         timeout,
@@ -32,38 +29,30 @@ export class SafeNavigation {
 
       // Wait for essential elements to be ready
       await this.page.waitForLoadState('domcontentloaded', { timeout: 10000 })
-      if (isHeavyPage) {
-        console.log(`✅ Heavy page ${url} loaded successfully`)
-      }
       return
     } catch (error) {
+      // Only log on heavy pages and actual failures
       if (isHeavyPage) {
-        console.warn(`❌ Primary navigation failed for ${url}:`, error)
+        console.warn(`❌ Primary navigation failed for ${url}`)
       }
     }
 
     // Strategy 2: Fallback with 'load' event and longer timeout
     try {
-      if (isHeavyPage) {
-        console.log(`🔄 Fallback navigation for ${url}`)
-      }
       await this.page.goto(url, {
         waitUntil: 'load',
         timeout: Math.max(30000, timeout * 0.8),
       })
-      if (isHeavyPage) {
-        console.log(`✅ Fallback navigation succeeded`)
-      }
       return
     } catch (fallbackError) {
+      // Only log heavy page fallback failures
       if (isHeavyPage) {
-        console.warn(`❌ Fallback navigation failed for ${url}:`, fallbackError)
+        console.warn(`❌ Fallback navigation failed for ${url}`)
       }
     }
 
     // Strategy 3: Minimal navigation without wait conditions
     try {
-      console.warn(`🆘 Last resort navigation to ${url}`)
       await this.page.goto(url, {
         timeout: 20000,
       })
@@ -84,19 +73,14 @@ export class SafeNavigation {
             )
           }
         } catch (contentWaitError) {
-          console.warn(
-            `⚠️ Content wait failed, but proceeding: ${contentWaitError}`
-          )
+          // Silent failure for content wait - not critical
         }
       }
 
-      console.log(`✅ Last resort navigation succeeded`)
       return
     } catch (lastResortError) {
-      console.error(
-        `💥 All navigation strategies failed for ${url}:`,
-        lastResortError
-      )
+      // Only log actual failures
+      console.error(`💥 All navigation strategies failed for ${url}`)
       const errorMessage =
         lastResortError instanceof Error
           ? lastResortError.message

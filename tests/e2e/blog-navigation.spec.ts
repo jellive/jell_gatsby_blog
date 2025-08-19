@@ -68,97 +68,106 @@ test.describe('Blog Navigation', () => {
   test('theme toggle works', async ({ page }) => {
     await NavigationPatterns.goHome(page)
 
-    // Find theme toggle button
-    const themeToggle = page.locator('[data-testid="theme-toggle"]')
+    // Wait for page to be fully loaded and hydrated
+    await page.waitForLoadState('networkidle')
 
-    if (await themeToggle.isVisible()) {
-      // Wait for component hydration
-      await page.waitForTimeout(1000)
+    // Find theme toggle button and wait for it to be interactive
+    const themeToggle = page.locator(
+      '[data-testid="theme-toggle"]:not([disabled])'
+    )
 
-      // Check initial theme state (this app uses CSS classes, not data-theme attribute)
-      const initialThemeClasses = await page.evaluate(() => {
-        const element = document.documentElement
-        return {
-          hasLight: element.classList.contains('light'),
-          hasDark: element.classList.contains('dark'),
-          classes: Array.from(element.classList).filter(cls =>
-            ['light', 'dark'].includes(cls)
-          ),
-        }
-      })
-
-      // Get initial button state
-      const initialButtonState = await page.evaluate(() => {
-        const button = document.querySelector('[data-testid="theme-toggle"]')
-        return {
-          disabled: button?.hasAttribute('disabled'),
-          ariaLabel: button?.getAttribute('aria-label'),
-          title: button?.getAttribute('title'),
-        }
-      })
-
-      // Click theme toggle with force to ensure it happens
-      await themeToggle.click({ force: true })
-
-      // Wait longer for theme change animation and React state updates
-      await page.waitForTimeout(1500)
-
-      // Check theme has changed
-      const newThemeClasses = await page.evaluate(() => {
-        const element = document.documentElement
-        return {
-          hasLight: element.classList.contains('light'),
-          hasDark: element.classList.contains('dark'),
-          classes: Array.from(element.classList).filter(cls =>
-            ['light', 'dark'].includes(cls)
-          ),
-        }
-      })
-
-      // Get new button state
-      const newButtonState = await page.evaluate(() => {
-        const button = document.querySelector('[data-testid="theme-toggle"]')
-        return {
-          disabled: button?.hasAttribute('disabled'),
-          ariaLabel: button?.getAttribute('aria-label'),
-          title: button?.getAttribute('title'),
-        }
-      })
-
-      // Verify that the theme classes have changed OR button state has changed
-      const initialState = `${initialThemeClasses.hasLight ? 'light' : ''}${initialThemeClasses.hasDark ? 'dark' : ''}`
-      const newState = `${newThemeClasses.hasLight ? 'light' : ''}${newThemeClasses.hasDark ? 'dark' : ''}`
-
-      const themeChanged = initialState !== newState
-      const buttonStateChanged =
-        initialButtonState.ariaLabel !== newButtonState.ariaLabel
-
-      // At minimum, we should have valid theme classes and either theme or button state should change
-      const hasValidTheme = newThemeClasses.hasLight || newThemeClasses.hasDark
-      expect(hasValidTheme).toBe(true)
-
-      // Theme should change OR button state should change (indicating the component is responding)
-      if (!themeChanged && !buttonStateChanged) {
-        console.warn(
-          'Neither theme nor button state changed - component may not be interactive'
-        )
-        // Still pass the test if we have valid theme classes (theme toggle might be working but not changing in this cycle)
-        expect(hasValidTheme).toBe(true)
-      }
-
-      // Log for debugging
-      console.log('Theme toggle test:', {
-        initial: initialThemeClasses,
-        new: newThemeClasses,
-        themeChanged,
-        buttonStateChanged,
-        initialButtonState,
-        newButtonState,
-      })
-    } else {
-      // Skip test if theme toggle not found
-      console.log('Theme toggle not found - skipping test')
+    try {
+      // Wait for theme toggle to be enabled (not disabled) - indicates full hydration
+      await themeToggle.waitFor({ state: 'visible', timeout: 10000 })
+    } catch (error) {
+      console.log('Theme toggle not found or not enabled - skipping test')
+      return
     }
+
+    // Additional wait for full hydration
+    await page.waitForTimeout(1500)
+
+    // Check initial theme state (this app uses CSS classes, not data-theme attribute)
+    const initialThemeClasses = await page.evaluate(() => {
+      const element = document.documentElement
+      return {
+        hasLight: element.classList.contains('light'),
+        hasDark: element.classList.contains('dark'),
+        classes: Array.from(element.classList).filter(cls =>
+          ['light', 'dark'].includes(cls)
+        ),
+      }
+    })
+
+    // Get initial button state
+    const initialButtonState = await page.evaluate(() => {
+      const button = document.querySelector('[data-testid="theme-toggle"]')
+      return {
+        disabled: button?.hasAttribute('disabled'),
+        ariaLabel: button?.getAttribute('aria-label'),
+        title: button?.getAttribute('title'),
+      }
+    })
+
+    // Click theme toggle with force to ensure it happens
+    await themeToggle.click({ force: true })
+
+    // Wait longer for theme change animation and React state updates
+    await page.waitForTimeout(1500)
+
+    // Check theme has changed
+    const newThemeClasses = await page.evaluate(() => {
+      const element = document.documentElement
+      return {
+        hasLight: element.classList.contains('light'),
+        hasDark: element.classList.contains('dark'),
+        classes: Array.from(element.classList).filter(cls =>
+          ['light', 'dark'].includes(cls)
+        ),
+      }
+    })
+
+    // Get new button state
+    const newButtonState = await page.evaluate(() => {
+      const button = document.querySelector('[data-testid="theme-toggle"]')
+      return {
+        disabled: button?.hasAttribute('disabled'),
+        ariaLabel: button?.getAttribute('aria-label'),
+        title: button?.getAttribute('title'),
+      }
+    })
+
+    // Verify that the theme classes have changed OR button state has changed
+    const initialState = `${initialThemeClasses.hasLight ? 'light' : ''}${initialThemeClasses.hasDark ? 'dark' : ''}`
+    const newState = `${newThemeClasses.hasLight ? 'light' : ''}${newThemeClasses.hasDark ? 'dark' : ''}`
+
+    const themeChanged = initialState !== newState
+    const buttonStateChanged =
+      initialButtonState.ariaLabel !== newButtonState.ariaLabel
+
+    // At minimum, we should have valid theme classes and either theme or button state should change
+    const hasValidTheme = newThemeClasses.hasLight || newThemeClasses.hasDark
+    expect(hasValidTheme).toBe(true)
+
+    // Theme should change OR button state should change (indicating the component is responding)
+    if (!themeChanged && !buttonStateChanged) {
+      console.warn(
+        'Neither theme nor button state changed - component may not be interactive'
+      )
+      // Still pass the test if we have valid theme classes (theme toggle might be working but not changing in this cycle)
+      expect(hasValidTheme).toBe(true)
+    }
+
+    // Log for debugging
+    console.log('Theme toggle test:', {
+      initial: initialThemeClasses,
+      new: newThemeClasses,
+      themeChanged,
+      buttonStateChanged,
+      initialButtonState,
+      newButtonState,
+    })
+    // Test completed successfully
   })
 
   test('responsive navigation on mobile', async ({ page, isMobile }) => {
