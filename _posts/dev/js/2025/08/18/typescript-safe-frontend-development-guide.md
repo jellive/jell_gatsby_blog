@@ -5,6 +5,10 @@ category: 'Javascript'
 tags: ['TypeScript', 'Frontend', 'Type Safety', 'React', 'API', 'Testing']
 ---
 
+## 목차
+
+`toc`
+
 ## 서론: 왜 TypeScript만으로는 부족한가?
 
 많은 개발자들이 TypeScript를 도입하면서 "이제 타입 안전성을 확보했다"고 생각합니다.
