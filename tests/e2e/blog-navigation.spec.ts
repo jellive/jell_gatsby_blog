@@ -45,7 +45,10 @@ test.describe('Blog Navigation', () => {
     if (await searchLink.isVisible()) {
       await searchLink.click()
       await expect(page).toHaveURL('/search')
-      await expect(page.locator('h1')).toContainText('Search')
+      // Use specific selector to avoid header h1 vs content h1 conflict
+      await expect(
+        page.locator('main h1, [data-testid="page-content"] h1').first()
+      ).toContainText('Search')
 
       // Go back for next test
       await NavigationPatterns.goHome(page)
@@ -55,7 +58,10 @@ test.describe('Blog Navigation', () => {
     if (await tagsLink.isVisible()) {
       await tagsLink.click()
       await expect(page).toHaveURL('/tags')
-      await expect(page.locator('h1')).toContainText('Tags')
+      // Use specific selector to avoid header h1 vs content h1 conflict
+      await expect(
+        page.locator('main h1, [data-testid="page-content"] h1').first()
+      ).toContainText('Tags')
     }
   })
 

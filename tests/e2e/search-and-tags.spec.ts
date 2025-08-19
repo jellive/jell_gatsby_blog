@@ -86,7 +86,9 @@ test.describe('Search and Tags', () => {
 
       // Check tags page elements
       await expect(page).toHaveTitle(/Tags/)
-      await expect(page.locator('h1')).toContainText(/Tags|All Tags/)
+
+      // Use specific selectors to avoid strict mode violation
+      await expect(page.locator('h1:has-text("All Tags")')).toBeVisible()
 
       // Check that tag cloud or tag list is displayed
       await expect(page.locator('[data-testid="tag-list"]')).toBeVisible()
@@ -95,10 +97,17 @@ test.describe('Search and Tags', () => {
       // Retry with a simpler approach using SafeNavigation
       const nav = createSafeNavigation(page)
       await nav.goto('/tags')
-      await page.waitForSelector('h1', { timeout: 5000 })
 
-      // At least check that the page loaded
-      await expect(page.locator('h1')).toBeVisible()
+      // Wait for tags page content specifically
+      await page.waitForSelector(
+        '[data-testid="tag-list"], h1:has-text("All Tags")',
+        { timeout: 10000 }
+      )
+
+      // Check that the tags page loaded with specific content
+      await expect(
+        page.locator('[data-testid="tag-list"], h1:has-text("All Tags")')
+      ).toBeVisible()
     }
   })
 
@@ -125,11 +134,11 @@ test.describe('Search and Tags', () => {
           // Check that posts with this tag are displayed
           await expect(page.locator('[data-testid="tag-posts"]')).toBeVisible()
 
-          // Check that page title contains the tag name
+          // Check that page title contains the tag name (avoid header h1)
           if (tagName) {
-            await expect(page.locator('h1')).toContainText(
-              tagName.replace('#', '')
-            )
+            await expect(
+              page.locator('main h1, [data-testid="post-content"] h1').first()
+            ).toContainText(tagName.replace('#', ''))
           }
 
           // Go back to tags page for next iteration

@@ -22,9 +22,9 @@ export class SafeNavigation {
 
     // Strategy 1: Primary navigation with extended timeout for heavy pages
     try {
-      console.log(
-        `🚀 Attempting primary navigation to ${url} with timeout ${timeout}ms`
-      )
+      if (isHeavyPage) {
+        console.log(`🚀 Navigating to heavy page ${url} (${timeout}ms timeout)`)
+      }
       await this.page.goto(url, {
         waitUntil: waitUntil as any,
         timeout,
@@ -32,28 +32,38 @@ export class SafeNavigation {
 
       // Wait for essential elements to be ready
       await this.page.waitForLoadState('domcontentloaded', { timeout: 10000 })
-      console.log(`✅ Primary navigation to ${url} succeeded`)
+      if (isHeavyPage) {
+        console.log(`✅ Heavy page ${url} loaded successfully`)
+      }
       return
     } catch (error) {
-      console.warn(`❌ Primary navigation failed for ${url}:`, error)
+      if (isHeavyPage) {
+        console.warn(`❌ Primary navigation failed for ${url}:`, error)
+      }
     }
 
     // Strategy 2: Fallback with 'load' event and longer timeout
     try {
-      console.log(`🔄 Attempting fallback navigation to ${url}`)
+      if (isHeavyPage) {
+        console.log(`🔄 Fallback navigation for ${url}`)
+      }
       await this.page.goto(url, {
         waitUntil: 'load',
         timeout: Math.max(30000, timeout * 0.8),
       })
-      console.log(`✅ Fallback navigation to ${url} succeeded`)
+      if (isHeavyPage) {
+        console.log(`✅ Fallback navigation succeeded`)
+      }
       return
     } catch (fallbackError) {
-      console.warn(`❌ Fallback navigation failed for ${url}:`, fallbackError)
+      if (isHeavyPage) {
+        console.warn(`❌ Fallback navigation failed for ${url}:`, fallbackError)
+      }
     }
 
     // Strategy 3: Minimal navigation without wait conditions
     try {
-      console.log(`🆘 Attempting last resort navigation to ${url}`)
+      console.warn(`🆘 Last resort navigation to ${url}`)
       await this.page.goto(url, {
         timeout: 20000,
       })
@@ -63,7 +73,6 @@ export class SafeNavigation {
 
       // For heavy pages, wait a bit longer for content to load
       if (isHeavyPage) {
-        console.log(`⏳ Heavy page detected, waiting for content...`)
         await this.page.waitForTimeout(3000)
 
         // Try to wait for specific content indicators
@@ -81,7 +90,7 @@ export class SafeNavigation {
         }
       }
 
-      console.log(`✅ Last resort navigation to ${url} succeeded`)
+      console.log(`✅ Last resort navigation succeeded`)
       return
     } catch (lastResortError) {
       console.error(

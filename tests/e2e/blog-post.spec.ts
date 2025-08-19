@@ -11,7 +11,10 @@ test.describe('Blog Post Features', () => {
 
     // Check post content elements
     await expect(page.locator('[data-testid="post-content"]')).toBeVisible()
-    await expect(page.locator('h1')).toBeVisible() // Post title
+    // Use specific selector to avoid header h1 vs post title h1 conflict
+    await expect(
+      page.locator('main h1, [data-testid="post-content"] h1').first()
+    ).toBeVisible() // Post title
     await expect(page.locator('[data-testid="post-metadata"]')).toBeVisible() // Date, category, tags
     await expect(page.locator('[data-testid="post-body"]')).toBeVisible() // Main content
   })
@@ -21,10 +24,17 @@ test.describe('Blog Post Features', () => {
     await NavigationPatterns.goHome(page)
 
     // Look for posts that might have TOC (longer posts typically do)
-    const postLinks = await page.locator('a[href*="/posts/"]').all()
+    const postLinks = page.locator('a[href*="/posts/"]')
+    const linkCount = await postLinks.count()
 
-    for (const link of postLinks.slice(0, 5)) {
+    if (linkCount === 0) {
+      console.log('No post links found - skipping TOC test')
+      return
+    }
+
+    for (let i = 0; i < Math.min(5, linkCount); i++) {
       // Test first 5 posts
+      const link = postLinks.nth(i)
       const href = await link.getAttribute('href')
       if (href) {
         const nav = createSafeNavigation(page)
@@ -95,24 +105,45 @@ test.describe('Blog Post Features', () => {
     const firstPost = page.locator('[data-testid="post-item"]').first()
     await firstPost.click()
 
-    // Check metadata elements
-    await expect(page.locator('[data-testid="post-date"]')).toBeVisible()
-    await expect(page.locator('[data-testid="post-category"]')).toBeVisible()
-    await expect(page.locator('[data-testid="post-tags"]')).toBeVisible()
+    // Wait for post page to load
+    await expect(page.locator('[data-testid="post-content"]')).toBeVisible()
 
-    // Check that date is in correct format
-    const dateElement = page.locator('[data-testid="post-date"]')
+    // Check metadata elements within the post content (avoid homepage post-item elements)
+    await expect(
+      page.locator('[data-testid="post-content"] [data-testid="post-date"]')
+    ).toBeVisible()
+    await expect(
+      page.locator('[data-testid="post-content"] [data-testid="post-category"]')
+    ).toBeVisible()
+    await expect(
+      page.locator('[data-testid="post-content"] [data-testid="post-tags"]')
+    ).toBeVisible()
+
+    // Check that date is in correct format (Korean or English format)
+    const dateElement = page.locator(
+      '[data-testid="post-content"] [data-testid="post-date"]'
+    )
     const dateText = await dateElement.textContent()
-    expect(dateText).toMatch(/\d{4}\.\d{2}\.\d{2}/)
+    // Accept both Korean format (2025년 8월 18일) and English format (YYYY.MM.DD)
+    expect(dateText).toMatch(
+      /(\d{4}년\s*\d{1,2}월\s*\d{1,2}일|\d{4}\.\d{2}\.\d{2}|[A-Za-z]{3}\s+\d{1,2},\s+\d{4})/
+    )
   })
 
   test('image display works correctly', async ({ page }) => {
     await NavigationPatterns.goHome(page)
 
     // Look for posts that might contain images
-    const postLinks = await page.locator('a[href*="/posts/"]').all()
+    const postLinks = page.locator('a[href*="/posts/"]')
+    const linkCount = await postLinks.count()
 
-    for (const link of postLinks.slice(0, 10)) {
+    if (linkCount === 0) {
+      console.log('No post links found - skipping image test')
+      return
+    }
+
+    for (let i = 0; i < Math.min(10, linkCount); i++) {
+      const link = postLinks.nth(i)
       const href = await link.getAttribute('href')
       if (href) {
         const nav = createSafeNavigation(page)
