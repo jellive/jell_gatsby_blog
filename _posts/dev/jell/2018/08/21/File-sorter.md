@@ -1,11 +1,11 @@
 ---
-category: "Dev"
-date: "2020-03-07"
-title: "File-sorter"
-tags: ["개발", "Jell"]
+category: 'Dev'
+date: '2020-03-07'
+title: 'File-sorter'
+tags: ['개발', 'Jell']
 ---
 
-![File-sorter](images/file-sorter.png)  
+![File-sorter](images/file-sorter.png)
 
 회사에서 진행하고 있는 거대한 일이 하나 끝나서, 간단한 파일 관리 앱을 만들어보고 있습니다.  
 예전부터 Electron Application을 만들어보고 싶었는데, 이번에 자그맣게나마 한 단계를 끊을 수 있어서 참 좋네요.  

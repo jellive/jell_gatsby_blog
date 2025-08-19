@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { 
-  faExpand, 
-  faCompress, 
-  faDownload, 
+import {
+  faExpand,
+  faCompress,
+  faDownload,
   faShare,
   faChevronLeft,
   faChevronRight,
   faInfo,
-  faEye
+  faEye,
 } from '@fortawesome/free-solid-svg-icons'
 import {
   Dialog,
@@ -40,12 +40,12 @@ interface ImageModalProps {
   onIndexChange: (index: number) => void
 }
 
-export default function ImageModal({ 
-  isOpen, 
-  onOpenChange, 
-  images, 
-  currentIndex, 
-  onIndexChange 
+export default function ImageModal({
+  isOpen,
+  onOpenChange,
+  images,
+  currentIndex,
+  onIndexChange,
 }: ImageModalProps) {
   const [isZoomed, setIsZoomed] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -95,7 +95,14 @@ export default function ImageModal({
 
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, currentIndex, hasMultipleImages, images.length, onIndexChange, onOpenChange])
+  }, [
+    isOpen,
+    currentIndex,
+    hasMultipleImages,
+    images.length,
+    onIndexChange,
+    onOpenChange,
+  ])
 
   const handlePrevious = () => {
     if (currentIndex > 0) {
@@ -127,7 +134,7 @@ export default function ImageModal({
         await navigator.share({
           title: currentImage.alt || 'Image',
           text: currentImage.caption || currentImage.alt || 'Shared image',
-          url: currentImage.src
+          url: currentImage.src,
         })
       } catch (error) {
         // Fallback to copy to clipboard
@@ -143,11 +150,11 @@ export default function ImageModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent 
+      <DialogContent
         className={cn(
-          "max-w-[95vw] max-h-[95vh] w-auto h-auto p-0",
-          "border-border/50 bg-background/95 backdrop-blur-md",
-          "focus:outline-none"
+          'h-auto max-h-[95vh] w-auto max-w-[95vw] p-0',
+          'border-border/50 bg-background/95 backdrop-blur-md',
+          'focus:outline-none'
         )}
         aria-describedby={undefined}
       >
@@ -167,10 +174,10 @@ export default function ImageModal({
               onClick={handlePrevious}
               disabled={currentIndex === 0}
               className={cn(
-                "absolute left-4 top-1/2 -translate-y-1/2 z-50",
-                "w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm",
-                "hover:bg-background border border-border/50",
-                "disabled:opacity-30 disabled:cursor-not-allowed"
+                'absolute left-4 top-1/2 z-50 -translate-y-1/2',
+                'bg-background/80 h-10 w-10 rounded-full backdrop-blur-sm',
+                'border-border/50 border hover:bg-background',
+                'disabled:cursor-not-allowed disabled:opacity-30'
               )}
               aria-label="이전 이미지"
             >
@@ -183,10 +190,10 @@ export default function ImageModal({
               onClick={handleNext}
               disabled={currentIndex === images.length - 1}
               className={cn(
-                "absolute right-4 top-1/2 -translate-y-1/2 z-50",
-                "w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm",
-                "hover:bg-background border border-border/50",
-                "disabled:opacity-30 disabled:cursor-not-allowed"
+                'absolute right-4 top-1/2 z-50 -translate-y-1/2',
+                'bg-background/80 h-10 w-10 rounded-full backdrop-blur-sm',
+                'border-border/50 border hover:bg-background',
+                'disabled:cursor-not-allowed disabled:opacity-30'
               )}
               aria-label="다음 이미지"
             >
@@ -196,19 +203,24 @@ export default function ImageModal({
         )}
 
         {/* Toolbar */}
-        <div className={cn(
-          "absolute top-4 left-4 right-4 z-50",
-          "flex items-center justify-between gap-2"
-        )}>
+        <div
+          className={cn(
+            'absolute left-4 right-4 top-4 z-50',
+            'flex items-center justify-between gap-2'
+          )}
+        >
           {/* Image Counter */}
           {hasMultipleImages && (
-            <Badge variant="secondary" className="bg-background/80 backdrop-blur-sm border border-border/50">
+            <Badge
+              variant="secondary"
+              className="bg-background/80 border-border/50 border backdrop-blur-sm"
+            >
               {currentIndex + 1} / {images.length}
             </Badge>
           )}
-          
+
           <div className="flex-1" />
-          
+
           {/* Action Buttons */}
           <div className="flex items-center gap-2">
             <Button
@@ -216,9 +228,9 @@ export default function ImageModal({
               size="icon"
               onClick={() => setShowInfo(prev => !prev)}
               className={cn(
-                "w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm",
-                "hover:bg-background border border-border/50",
-                showInfo && "bg-primary text-primary-foreground"
+                'bg-background/80 h-9 w-9 rounded-full backdrop-blur-sm',
+                'border-border/50 border hover:bg-background',
+                showInfo && 'bg-primary text-primary-foreground'
               )}
               aria-label="이미지 정보 표시"
               title="이미지 정보 (I)"
@@ -231,11 +243,11 @@ export default function ImageModal({
               size="icon"
               onClick={() => setIsZoomed(prev => !prev)}
               className={cn(
-                "w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm",
-                "hover:bg-background border border-border/50"
+                'bg-background/80 h-9 w-9 rounded-full backdrop-blur-sm',
+                'border-border/50 border hover:bg-background'
               )}
-              aria-label={isZoomed ? "축소" : "확대"}
-              title={isZoomed ? "축소 (Z)" : "확대 (Z)"}
+              aria-label={isZoomed ? '축소' : '확대'}
+              title={isZoomed ? '축소 (Z)' : '확대 (Z)'}
             >
               <Fa icon={isZoomed ? faCompress : faExpand} className="text-xs" />
             </Button>
@@ -245,8 +257,8 @@ export default function ImageModal({
               size="icon"
               onClick={handleShare}
               className={cn(
-                "w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm",
-                "hover:bg-background border border-border/50"
+                'bg-background/80 h-9 w-9 rounded-full backdrop-blur-sm',
+                'border-border/50 border hover:bg-background'
               )}
               aria-label="이미지 공유"
               title="이미지 공유"
@@ -259,8 +271,8 @@ export default function ImageModal({
               size="icon"
               onClick={handleDownload}
               className={cn(
-                "w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm",
-                "hover:bg-background border border-border/50"
+                'bg-background/80 h-9 w-9 rounded-full backdrop-blur-sm',
+                'border-border/50 border hover:bg-background'
               )}
               aria-label="이미지 다운로드"
               title="이미지 다운로드"
@@ -271,14 +283,16 @@ export default function ImageModal({
         </div>
 
         {/* Image Container */}
-        <div className={cn(
-          "relative flex items-center justify-center",
-          "min-h-[200px] max-h-[90vh] overflow-hidden",
-          "bg-black/20"
-        )}>
+        <div
+          className={cn(
+            'relative flex items-center justify-center',
+            'max-h-[90vh] min-h-[200px] overflow-hidden',
+            'bg-black/20'
+          )}
+        >
           {!imageLoaded && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+              <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
             </div>
           )}
 
@@ -287,49 +301,51 @@ export default function ImageModal({
             alt={currentImage.alt}
             onLoad={() => setImageLoaded(true)}
             className={cn(
-              "max-w-full max-h-full object-contain transition-all duration-300",
-              isZoomed ? "scale-150 cursor-zoom-out" : "cursor-zoom-in",
-              !imageLoaded && "opacity-0"
+              'max-h-full max-w-full object-contain transition-all duration-300',
+              isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in',
+              !imageLoaded && 'opacity-0'
             )}
             onClick={() => setIsZoomed(prev => !prev)}
             style={{
               maxWidth: isZoomed ? 'none' : '100%',
-              maxHeight: isZoomed ? 'none' : '90vh'
+              maxHeight: isZoomed ? 'none' : '90vh',
             }}
           />
         </div>
 
         {/* Image Info Panel */}
         {showInfo && (currentImage.alt || currentImage.caption) && (
-          <div className={cn(
-            "absolute bottom-4 left-4 right-4 z-50",
-            "bg-background/90 backdrop-blur-md border border-border/50 rounded-lg p-4"
-          )}>
+          <div
+            className={cn(
+              'absolute bottom-4 left-4 right-4 z-50',
+              'bg-background/90 border-border/50 rounded-lg border p-4 backdrop-blur-md'
+            )}
+          >
             {currentImage.alt && (
-              <h3 className="font-medium text-foreground mb-2">
+              <h3 className="mb-2 font-medium text-foreground">
                 {currentImage.alt}
               </h3>
             )}
-            
-            {currentImage.caption && currentImage.caption !== currentImage.alt && (
-              <>
-                <Separator className="my-2" />
-                <p className="text-sm text-muted-foreground">
-                  {currentImage.caption}
-                </p>
-              </>
-            )}
-            
+
+            {currentImage.caption &&
+              currentImage.caption !== currentImage.alt && (
+                <>
+                  <Separator className="my-2" />
+                  <p className="text-sm text-muted-foreground">
+                    {currentImage.caption}
+                  </p>
+                </>
+              )}
+
             {(currentImage.width || currentImage.height) && (
               <>
                 <Separator className="my-2" />
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <Fa icon={faEye} className="text-[10px]" />
                   <span>
-                    {currentImage.width && currentImage.height 
+                    {currentImage.width && currentImage.height
                       ? `${currentImage.width} × ${currentImage.height}px`
-                      : '원본 크기'
-                    }
+                      : '원본 크기'}
                   </span>
                 </div>
               </>
@@ -338,12 +354,14 @@ export default function ImageModal({
         )}
 
         {/* Keyboard Shortcuts Help */}
-        <div className={cn(
-          "absolute bottom-4 left-1/2 -translate-x-1/2 z-40",
-          "text-xs text-muted-foreground bg-background/80 backdrop-blur-sm",
-          "px-3 py-1.5 rounded-full border border-border/30",
-          "opacity-60 hover:opacity-100 transition-opacity duration-200"
-        )}>
+        <div
+          className={cn(
+            'absolute bottom-4 left-1/2 z-40 -translate-x-1/2',
+            'bg-background/80 text-xs text-muted-foreground backdrop-blur-sm',
+            'border-border/30 rounded-full border px-3 py-1.5',
+            'opacity-60 transition-opacity duration-200 hover:opacity-100'
+          )}
+        >
           <div className="flex items-center gap-3">
             {hasMultipleImages && (
               <>

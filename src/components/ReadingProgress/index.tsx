@@ -13,9 +13,9 @@ interface ReadingProgressProps {
   className?: string
 }
 
-const ReadingProgress: React.FC<ReadingProgressProps> = ({ 
-  target = '.blog-post-content', 
-  className = '' 
+const ReadingProgress: React.FC<ReadingProgressProps> = ({
+  target = '.blog-post-content',
+  className = '',
 }) => {
   const [progress, setProgress] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
@@ -30,7 +30,7 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({
       const scrollTop = window.pageYOffset
       const documentHeight = document.documentElement.scrollHeight
       const windowHeight = window.innerHeight
-      
+
       // Get content position and height
       const contentTop = content.offsetTop
       const contentHeight = content.offsetHeight
@@ -43,7 +43,7 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({
       // Show progress bar only when in content area
       if (scrollTop >= startReading - 100) {
         setIsVisible(true)
-        
+
         // Calculate progress percentage
         if (scrollTop <= startReading) {
           setProgress(0)
@@ -52,7 +52,10 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({
         } else {
           const readableDistance = finishReading - startReading
           const progressDistance = scrollTop - startReading
-          const percentage = Math.min(100, Math.max(0, (progressDistance / readableDistance) * 100))
+          const percentage = Math.min(
+            100,
+            Math.max(0, (progressDistance / readableDistance) * 100)
+          )
           setProgress(percentage)
         }
       } else {
@@ -75,7 +78,7 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({
 
     // Initial calculation
     calculateProgress()
-    
+
     // Add scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('resize', calculateProgress, { passive: true })
@@ -87,48 +90,48 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({
   }, [target])
 
   return (
-    <Card className={cn(
-      "fixed left-0 right-0 z-[1000]", // High z-index, just below header (1001)
-      "top-14", // 56px = header height - positioned directly below header with no gap
-      "border-0 border-b border-border/50 bg-card/95 backdrop-blur-sm",
-      "transition-all duration-300 ease-in-out shadow-sm",
-      "rounded-none",
-      isVisible
-        ? "translate-y-0 opacity-100"
-        : "-translate-y-full opacity-0",
-      className
-    )}>
+    <Card
+      className={cn(
+        'fixed left-0 right-0 z-[1000]', // High z-index, just below header (1001)
+        'top-14', // 56px = header height - positioned directly below header with no gap
+        'border-border/50 bg-card/95 border-0 border-b backdrop-blur-sm',
+        'shadow-sm transition-all duration-300 ease-in-out',
+        'rounded-none',
+        isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0',
+        className
+      )}
+    >
       <div className="flex items-center p-2">
         {/* Progress Bar Section */}
         <div className="flex-1 px-3">
-          <Progress 
-            value={progress} 
+          <Progress
+            value={progress}
             className={cn(
-              "h-2 bg-secondary/50",
-              "[&>div]:bg-gradient-to-r [&>div]:from-primary [&>div]:to-primary/80",
-              "[&>div]:transition-all [&>div]:duration-200"
+              'bg-secondary/50 h-2',
+              '[&>div]:to-primary/80 [&>div]:bg-gradient-to-r [&>div]:from-primary',
+              '[&>div]:transition-all [&>div]:duration-200'
             )}
             aria-label={`읽기 진행률 ${Math.round(progress)}%`}
           />
         </div>
-        
+
         {/* Progress Text & Icon */}
-        <div className="flex items-center gap-2 px-3 border-l border-border/30">
-          <Fa 
-            icon={progress > 95 ? faEye : faBook} 
+        <div className="border-border/30 flex items-center gap-2 border-l px-3">
+          <Fa
+            icon={progress > 95 ? faEye : faBook}
             className={cn(
-              "text-xs transition-all duration-300",
-              progress > 95 
-                ? "text-green-600 animate-pulse" 
-                : "text-muted-foreground"
-            )} 
+              'text-xs transition-all duration-300',
+              progress > 95
+                ? 'animate-pulse text-green-600'
+                : 'text-muted-foreground'
+            )}
           />
-          <Badge 
-            variant={progress > 95 ? "default" : "secondary"}
+          <Badge
+            variant={progress > 95 ? 'default' : 'secondary'}
             className={cn(
-              "text-xs font-medium min-w-[3rem] justify-center",
-              "transition-all duration-300",
-              progress > 95 && "bg-green-600 hover:bg-green-700 text-white"
+              'min-w-[3rem] justify-center text-xs font-medium',
+              'transition-all duration-300',
+              progress > 95 && 'bg-green-600 text-white hover:bg-green-700'
             )}
           >
             <span className="sr-only">읽기 진행률:</span>
@@ -136,13 +139,15 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({
           </Badge>
         </div>
       </div>
-      
+
       {/* Completion celebration */}
       {progress >= 100 && (
-        <div className={cn(
-          "absolute -top-1 left-1/2 transform -translate-x-1/2",
-          "text-xs text-green-600 font-medium animate-bounce"
-        )}>
+        <div
+          className={cn(
+            'absolute -top-1 left-1/2 -translate-x-1/2 transform',
+            'animate-bounce text-xs font-medium text-green-600'
+          )}
+        >
           🎉 완독!
         </div>
       )}

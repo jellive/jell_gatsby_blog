@@ -6,19 +6,21 @@ tags: ['Ubuntu', 'linux', 'docker', 'docker-compose', 'Jell']
 featuredImage: 'images/zwift.png'
 ---
 
-# 왜 쓰는가?
+## 왜 쓰는가
 
-하드디스크를 교체하고 ([#](https://blog.jell.kr/dev/linux/2023/02/27/%EC%9A%B0%EB%B6%84%ED%88%AC%2022.04%EB%A1%9C%20%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%20%ED%95%98%EB%8D%98%20%EC%A4%91%20%EB%B0%9C%EC%83%9D%ED%95%9C%20%EC%9D%B4%EC%8A%88/)) 꺼져있던 컴퓨터를 오랜만에 계속 켜면서 Docker를 본격적으로 공부해봐야겠다는 생각을 했습니다.
+하드디스크를 교체하고
+([#](https://blog.jell.kr/dev/linux/2023/02/27/%EC%9A%B0%EB%B6%84%ED%88%AC%2022.04%EB%A1%9C%20%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%20%ED%95%98%EB%8D%98%20%EC%A4%91%20%EB%B0%9C%EC%83%9D%ED%95%9C%20%EC%9D%B4%EC%8A%88/))
+꺼져있던 컴퓨터를 오랜만에 계속 켜면서 Docker를 본격적으로 공부해봐야겠다는 생각을 했습니다.
 그 첫번째로, mariaDB를 docker-compose에 설치하는 시간을 가져봅시다.
 
-# 왜 mariaDB지?
+## 왜 mariaDB지
 
 요즘은 이전보다 DB에 대한 선택이 많아져서, PostgreSQL이나 mongoDB를 업무에서 사용하는 경우를 흔히 볼 수 있습니다.  
 하지만 많이 사용하는건 여전히 Oracle과 MySQL임을 알 수 있습니다. ([참고](https://db-engines.com/en/ranking))  
 Oracle도 얼마든지 무료로 사용할 수 있지만, 현실적으로 사용할 수 있는 RBDMS는 MySQL과 그 pork인 MariaDB라고 생각합니다.  
 그 중, 개인적인 욕심으로(?) MariaDB를 선택하게 되었습니다.
 
-# docker-compose.yml 설정
+## docker-compose.yml 설정
 
 docker-compose.yml을 편집해봅시다.
 
@@ -50,7 +52,7 @@ docker-compose.yml에는 이렇게 입력하면 됩니다.
 그렇기 위해 우리는 docker에 있는 mariaDB 컨테이너에 직접 접속할 필요가 있습니다.  
 우선 저 상태로 두시고, 설치를 진행하시면 됩니다.
 
-# mariaDB 컨테이너 설정
+## mariaDB 컨테이너 설정
 
 자! 이제 mariaDB의 컨테이너로 접속해봅시다.
 

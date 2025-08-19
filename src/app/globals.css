@@ -60,14 +60,21 @@
     --text-tertiary: #94a3b8; /* Muted text */
 
     /* ===== Pretendard Font Variables ===== */
-    --font-korean: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic',
-      -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-    --font-code: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Consolas, Monaco, monospace;
-    --font-english: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      Helvetica, Arial, sans-serif;
+    --font-korean:
+      'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo',
+      'Noto Sans KR', 'Malgun Gothic', -apple-system, BlinkMacSystemFont,
+      system-ui, sans-serif;
+    --font-code:
+      'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', Consolas,
+      Monaco, monospace;
+    --font-english:
+      'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont,
+      'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
     /* ===== Medium Style Typography ===== */
-    --font-serif: 'Noto Serif KR', 'Apple SD Gothic Neo', Charter, Georgia, 'Times New Roman', serif;
+    --font-serif:
+      'Noto Serif KR', 'Apple SD Gothic Neo', Charter, Georgia,
+      'Times New Roman', serif;
     --font-display: var(--font-korean);
     --text-muted: #cbd5e1; /* Very light text */
 
@@ -166,9 +173,12 @@
 
     /* Shadow System (Medium Compatible) */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-md:
+      0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg:
+      0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl:
+      0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
     /* Status Colors (Modern Tech Style) */
     --color-success: #10b981; /* Emerald 500 */
@@ -238,7 +248,8 @@
     --radius-tag: 6px; /* Tag radius */
 
     /* Font Family Variables - Modern Tech Style with Korean Support */
-    --font-sans: 'SF Pro Display', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+    --font-sans:
+      'SF Pro Display', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
     --font-mono: 'SF Mono', 'Monaco', 'Consolas', 'Noto Sans Mono', monospace;
     --font-serif: 'SF Pro Display', 'Noto Serif KR', Georgia, serif;
 
@@ -705,7 +716,9 @@ a:active {
   background-color: var(--background);
   border-bottom: 1px solid var(--border-light);
   user-select: none;
-  backdrop-filter: blur(8px); /* Add backdrop blur for better visual separation */
+  backdrop-filter: blur(
+    8px
+  ); /* Add backdrop blur for better visual separation */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Add subtle shadow for better layer separation */
 }
 
@@ -919,7 +932,9 @@ a:active {
   padding-left: 0.5rem;
   opacity: 0 !important;
   visibility: hidden;
-  transition: opacity 0.5s, visibility 0.5s;
+  transition:
+    opacity 0.5s,
+    visibility 0.5s;
   user-select: none;
   pointer-events: none;
   font-family: var(--font-korean);
@@ -951,7 +966,9 @@ a:active {
 /* Desktop Layout: 3 columns (sidebar + main + aside) */
 @media screen and (min-width: 1200px) {
   .index-wrap {
-    grid-template-columns: var(--sidebar-width) var(--main-width) var(--aside-width);
+    grid-template-columns: var(--sidebar-width) var(--main-width) var(
+        --aside-width
+      );
   }
 }
 
@@ -1386,7 +1403,9 @@ pre[class*='language-'] {
   max-width: min(590px, 100%);
 
   /* Smooth loading transition */
-  transition: opacity 0.3s ease, transform 0.2s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.2s ease;
 
   /* Prevent layout shift during loading */
   object-fit: contain;
@@ -1641,7 +1660,9 @@ button:focus-visible,
 
   /* Desktop Grid - Full 3 columns */
   .grid-cols-medium-3 {
-    grid-template-columns: var(--sidebar-width) var(--main-width) var(--aside-width) !important;
+    grid-template-columns: var(--sidebar-width) var(--main-width) var(
+        --aside-width
+      ) !important;
   }
 
   /* Show all columns on desktop */

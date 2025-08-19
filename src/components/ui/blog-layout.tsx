@@ -13,27 +13,29 @@ interface BlogLayoutProps {
  * Blog-specific layout component with consistent spacing and responsive design
  * Provides standardized container widths and spacing for blog content
  */
-export function BlogLayout({ 
-  children, 
+export function BlogLayout({
+  children,
   variant = 'default',
-  className 
+  className,
 }: BlogLayoutProps) {
   return (
-    <div className={cn(
-      // Base layout styles
-      "mx-auto px-4 sm:px-6 lg:px-8",
-      "transition-all duration-300 ease-in-out",
-      
-      // Variant-specific widths
-      variant === 'narrow' && "max-w-2xl",
-      variant === 'default' && "max-w-4xl",
-      variant === 'wide' && "max-w-6xl",
-      
-      // Responsive adjustments
-      "w-full",
-      
-      className
-    )}>
+    <div
+      className={cn(
+        // Base layout styles
+        'mx-auto px-4 sm:px-6 lg:px-8',
+        'transition-all duration-300 ease-in-out',
+
+        // Variant-specific widths
+        variant === 'narrow' && 'max-w-2xl',
+        variant === 'default' && 'max-w-4xl',
+        variant === 'wide' && 'max-w-6xl',
+
+        // Responsive adjustments
+        'w-full',
+
+        className
+      )}
+    >
       {children}
     </div>
   )
@@ -48,23 +50,25 @@ interface BlogSectionProps {
 /**
  * Blog section wrapper with consistent vertical spacing
  */
-export function BlogSection({ 
-  children, 
+export function BlogSection({
+  children,
   className,
-  spacing = 'normal'
+  spacing = 'normal',
 }: BlogSectionProps) {
   return (
-    <section className={cn(
-      // Base spacing
-      "w-full",
-      
-      // Vertical spacing variants
-      spacing === 'tight' && "space-y-4",
-      spacing === 'normal' && "space-y-6",
-      spacing === 'loose' && "space-y-8",
-      
-      className
-    )}>
+    <section
+      className={cn(
+        // Base spacing
+        'w-full',
+
+        // Vertical spacing variants
+        spacing === 'tight' && 'space-y-4',
+        spacing === 'normal' && 'space-y-6',
+        spacing === 'loose' && 'space-y-8',
+
+        className
+      )}
+    >
       {children}
     </section>
   )
@@ -79,25 +83,27 @@ interface BlogContainerProps {
 /**
  * Blog content container with optimal reading width
  */
-export function BlogContainer({ 
-  children, 
+export function BlogContainer({
+  children,
   className,
-  centered = true
+  centered = true,
 }: BlogContainerProps) {
   return (
-    <div className={cn(
-      // Optimal reading width (approx 65-75 characters per line)
-      "max-w-[65ch] leading-relaxed",
-      
-      // Centering
-      centered && "mx-auto",
-      
-      // Responsive typography
-      "text-base sm:text-lg",
-      "font-normal text-foreground",
-      
-      className
-    )}>
+    <div
+      className={cn(
+        // Optimal reading width (approx 65-75 characters per line)
+        'max-w-[65ch] leading-relaxed',
+
+        // Centering
+        centered && 'mx-auto',
+
+        // Responsive typography
+        'text-base sm:text-lg',
+        'font-normal text-foreground',
+
+        className
+      )}
+    >
       {children}
     </div>
   )

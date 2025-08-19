@@ -5,7 +5,7 @@ title: 'yarn을 npm으로 전역설치 했을 때 업데이트 하는 방법'
 tags: ['npm', 'Yarn', 'package.json']
 ---
 
-# 왜 작성하게 되었는가?
+## 왜 작성하게 되었는가
 
 ![이전버전](images/previous-version.png)
 ![최신버전](images/current-version.png)

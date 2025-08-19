@@ -7,22 +7,22 @@ import {
   LinkedinShareButton,
   RedditShareButton,
   PocketShareButton,
-  EmailShareButton
+  EmailShareButton,
 } from 'react-share'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { 
+import {
   faShare,
   faEnvelope,
   faLink,
   faCheck,
   faExpand,
-  faExternalLinkAlt
+  faExternalLinkAlt,
 } from '@fortawesome/free-solid-svg-icons'
-import { 
+import {
   faFacebook,
   faTwitter,
   faLinkedin,
-  faReddit
+  faReddit,
 } from '@fortawesome/free-brands-svg-icons'
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -37,7 +37,11 @@ interface SocialShareProps {
   excerpt?: string
 }
 
-export default function SocialShare({ url, title, excerpt = '' }: SocialShareProps) {
+export default function SocialShare({
+  url,
+  title,
+  excerpt = '',
+}: SocialShareProps) {
   const [copiedUrl, setCopiedUrl] = useState(false)
   const [isShareModalOpen, setIsShareModalOpen] = useState(false)
   const shareTitle = title
@@ -62,9 +66,9 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
       props: {
         url: shareUrl,
         subject: shareTitle,
-        body: `${shareTitle}\n\n${shareUrl}`
+        body: `${shareTitle}\n\n${shareUrl}`,
       },
-      className: "hover:bg-gray-500/10 hover:text-gray-700"
+      className: 'hover:bg-gray-500/10 hover:text-gray-700',
     },
     {
       name: 'Facebook',
@@ -72,9 +76,9 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
       component: FacebookShareButton,
       props: {
         url: shareUrl,
-        hashtag: "#blog"
+        hashtag: '#blog',
       },
-      className: "hover:bg-blue-600/10 hover:text-blue-700"
+      className: 'hover:bg-blue-600/10 hover:text-blue-700',
     },
     {
       name: 'Twitter',
@@ -82,9 +86,9 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
       component: TwitterShareButton,
       props: {
         url: shareUrl,
-        title: shareTitle
+        title: shareTitle,
       },
-      className: "hover:bg-sky-500/10 hover:text-sky-600"
+      className: 'hover:bg-sky-500/10 hover:text-sky-600',
     },
     {
       name: 'LinkedIn',
@@ -93,9 +97,9 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
       props: {
         url: shareUrl,
         title: shareTitle,
-        summary: excerpt
+        summary: excerpt,
       },
-      className: "hover:bg-blue-500/10 hover:text-blue-600"
+      className: 'hover:bg-blue-500/10 hover:text-blue-600',
     },
     {
       name: 'Reddit',
@@ -103,9 +107,9 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
       component: RedditShareButton,
       props: {
         url: shareUrl,
-        title: shareTitle
+        title: shareTitle,
       },
-      className: "hover:bg-orange-500/10 hover:text-orange-600"
+      className: 'hover:bg-orange-500/10 hover:text-orange-600',
     },
     {
       name: 'Pocket',
@@ -113,24 +117,24 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
       component: PocketShareButton,
       props: {
         url: shareUrl,
-        title: shareTitle
+        title: shareTitle,
       },
-      className: "hover:bg-red-500/10 hover:text-red-600"
-    }
+      className: 'hover:bg-red-500/10 hover:text-red-600',
+    },
   ]
 
   return (
-    <Card 
+    <Card
       className={cn(
-        "social-share-card",
-        "border-border/50 bg-card/50 backdrop-blur-sm",
-        "hover:border-border transition-all duration-300"
+        'social-share-card',
+        'border-border/50 bg-card/50 backdrop-blur-sm',
+        'transition-all duration-300 hover:border-border'
       )}
       data-testid="social-share"
     >
       <CardHeader className="pb-4">
         <div className="flex items-center gap-2">
-          <Fa icon={faShare} className="text-primary text-lg" />
+          <Fa icon={faShare} className="text-lg text-primary" />
           <h4 className="text-lg font-semibold text-foreground">
             Share this post
           </h4>
@@ -139,7 +143,7 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
               variant="outline"
               size="sm"
               onClick={() => setIsShareModalOpen(true)}
-              className="gap-2 text-xs h-8"
+              className="h-8 gap-2 text-xs"
               title="모달에서 공유하기"
             >
               <Fa icon={faExpand} className="text-xs" />
@@ -159,21 +163,23 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
             <Fa icon={faLink} className="text-xs" />
             <span className="font-medium">Copy link</span>
           </div>
-          
+
           <div className="flex items-center gap-2">
-            <div className={cn(
-              "flex-1 px-3 py-2 text-sm bg-secondary/50 rounded-md",
-              "border border-border/30 truncate text-muted-foreground"
-            )}>
+            <div
+              className={cn(
+                'bg-secondary/50 flex-1 rounded-md px-3 py-2 text-sm',
+                'border-border/30 truncate border text-muted-foreground'
+              )}
+            >
               {shareUrl}
             </div>
             <Button
-              variant={copiedUrl ? "default" : "outline"}
+              variant={copiedUrl ? 'default' : 'outline'}
               size="sm"
               onClick={copyToClipboard}
               className={cn(
-                "min-w-[80px] transition-all duration-200",
-                copiedUrl && "bg-green-500 hover:bg-green-600 text-white"
+                'min-w-[80px] transition-all duration-200',
+                copiedUrl && 'bg-green-500 text-white hover:bg-green-600'
               )}
             >
               {copiedUrl ? (
@@ -196,46 +202,48 @@ export default function SocialShare({ url, title, excerpt = '' }: SocialSharePro
             <Fa icon={faShare} className="text-xs" />
             <span className="font-medium">Share on social media</span>
           </div>
-          
+
           <div className="grid grid-cols-3 gap-2 max-md:grid-cols-2">
-            {shareButtons.map(({ name, icon, component: ShareComponent, props, className }) => (
-              <ShareComponent
-                key={name}
-                {...props}
-                aria-label={`${name}으로 공유하기`}
-                className="w-full"
-                data-testid={`share-${name.toLowerCase()}`}
-              >
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className={cn(
-                    "w-full justify-start gap-2 h-10",
-                    "border-border/50 hover:border-border",
-                    "transition-all duration-200 hover:scale-105",
-                    className
-                  )}
+            {shareButtons.map(
+              ({ name, icon, component: ShareComponent, props, className }) => (
+                <ShareComponent
+                  key={name}
+                  {...props}
+                  aria-label={`${name}으로 공유하기`}
+                  className="w-full"
+                  data-testid={`share-${name.toLowerCase()}`}
                 >
-                  <Fa icon={icon} className="text-sm" />
-                  <span className="text-sm font-medium truncate">{name}</span>
-                </Button>
-              </ShareComponent>
-            ))}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className={cn(
+                      'h-10 w-full justify-start gap-2',
+                      'border-border/50 hover:border-border',
+                      'transition-all duration-200 hover:scale-105',
+                      className
+                    )}
+                  >
+                    <Fa icon={icon} className="text-sm" />
+                    <span className="truncate text-sm font-medium">{name}</span>
+                  </Button>
+                </ShareComponent>
+              )
+            )}
           </div>
         </div>
 
         {/* Share Info */}
-        <div className={cn(
-          "p-3 rounded-md bg-secondary/30 border border-border/30",
-          "text-xs text-muted-foreground"
-        )}>
-          <div className="font-medium mb-1">{shareTitle}</div>
-          {excerpt && (
-            <div className="line-clamp-2 opacity-80">{excerpt}</div>
+        <div
+          className={cn(
+            'bg-secondary/30 border-border/30 rounded-md border p-3',
+            'text-xs text-muted-foreground'
           )}
+        >
+          <div className="mb-1 font-medium">{shareTitle}</div>
+          {excerpt && <div className="line-clamp-2 opacity-80">{excerpt}</div>}
         </div>
       </CardContent>
-      
+
       {/* Share Modal */}
       <ShareModal
         isOpen={isShareModalOpen}

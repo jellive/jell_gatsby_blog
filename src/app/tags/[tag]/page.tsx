@@ -12,16 +12,18 @@ interface TagPageProps {
 
 export async function generateStaticParams() {
   const tags = await getAllTags()
-  return tags.map((tag) => ({
+  return tags.map(tag => ({
     tag: encodeURIComponent(tag),
   }))
 }
 
-export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: TagPageProps): Promise<Metadata> {
   const resolvedParams = await params
   const decodedTag = decodeURIComponent(resolvedParams.tag)
   const posts = await getPostsByTag(decodedTag)
-  
+
   if (posts.length === 0) {
     return {
       title: 'Tag Not Found',
@@ -57,7 +59,7 @@ export default async function TagPage({ params }: TagPageProps) {
   const resolvedParams = await params
   const decodedTag = decodeURIComponent(resolvedParams.tag)
   const posts = await getPostsByTag(decodedTag)
-  
+
   if (posts.length === 0) {
     notFound()
   }
@@ -69,11 +71,9 @@ export default async function TagPage({ params }: TagPageProps) {
           <span className="tag-symbol">#</span>
           {decodedTag}
         </h1>
-        <p className="tag-description">
-          {posts.length}개의 포스트
-        </p>
+        <p className="tag-description">{posts.length}개의 포스트</p>
       </div>
-      
+
       <PostList posts={posts} />
     </div>
   )

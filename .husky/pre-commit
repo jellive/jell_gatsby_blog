@@ -1,0 +1,11 @@
+#!/bin/sh
+# Check for TypeScript errors first
+echo "🔍 Running TypeScript check..."
+npm run type-check
+
+# Run lint-staged with enhanced checks
+echo "🔧 Running lint-staged..."
+npx lint-staged
+
+# Success message
+echo "✅ All pre-commit checks passed!"

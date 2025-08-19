@@ -9,11 +9,15 @@ tags: ['Gatsby', 'Next.js', '마이그레이션', '개발', 'React']
 
 개발자라면 누구나 한 번쯤은 경험하는 순간이 있습니다. "저 기술이 더 좋아 보이는데?" 하는 생각. 저 역시 그런 순간을 맞이했습니다.
 
-2년간 안정적으로 운영되던 Gatsby 기반 블로그를 보며 문득 생각했습니다. "Next.js가 요즘 주목받고 있고, App Router도 출시되었는데, 더 모던하고 성능도 좋을 것 같다."
+2년간 안정적으로 운영되던 Gatsby 기반 블로그를 보며 문득 생각했습니다.
+"Next.js가 요즘 주목받고 있고, App Router도 출시되었는데, 더 모던하고 성능도 좋을 것 같다."
 
-그렇게 시작된 마이그레이션의 여정. 처음에는 막막했지만, 체계적인 접근과 꼼꼼한 준비를 통해 성공적으로 Next.js 14로 마이그레이션을 완료했습니다. draft 시스템과 복잡한 마크다운 처리까지 모두 구현한 완전한 성공 사례를 공유하고자 합니다.
+그렇게 시작된 마이그레이션의 여정. 처음에는 막막했지만, 체계적인 접근과 꼼꼼한 준비를 통해
+성공적으로 Next.js 14로 마이그레이션을 완료했습니다. draft 시스템과 복잡한 마크다운 처리까지 모두 구현한
+완전한 성공 사례를 공유하고자 합니다.
 
 ```toc
+
 ```
 
 ## 왜 마이그레이션을 결심했는가
@@ -35,7 +39,7 @@ plugins: [
   'gatsby-plugin-sass',
   'gatsby-plugin-sharp',
   'gatsby-transformer-sharp',
-  'gatsby-transformer-remark'
+  'gatsby-transformer-remark',
   // ... 14개 더
 ]
 ```
@@ -126,7 +130,10 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
   let transformedContent = transformImagePaths(content, filePath)
 
   // TOC 처리 로직
-  transformedContent = transformedContent.replace(/```toc\s*```/g, '## Table of Contents')
+  transformedContent = transformedContent.replace(
+    /```toc\s*```/g,
+    '## Table of Contents'
+  )
 
   // unified + remark + rehype 파이프라인
   const processedContent = await unified()
@@ -145,7 +152,9 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
 
   // TOC 추출 로직 (30줄 더...)
   let tableOfContents = ''
-  const tocHeadingMatch = htmlContent.match(/<h2[^>]*>Table of Contents<\/h2>([\s\S]*?)(?=<h[1-6]|$)/i)
+  const tocHeadingMatch = htmlContent.match(
+    /<h2[^>]*>Table of Contents<\/h2>([\s\S]*?)(?=<h[1-6]|$)/i
+  )
   // ... 복잡한 정규식과 파싱 로직
 
   return {
@@ -154,7 +163,8 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
 }
 ````
 
-특히 TOC(Table of Contents) 추출이 가장 까다로웠습니다. Gatsby에서는 플러그인이 자동으로 처리해주던 것을, Next.js에서는 HTML을 파싱해서 직접 추출해야 했습니다.
+특히 TOC(Table of Contents) 추출이 가장 까다로웠습니다. Gatsby에서는 플러그인이 자동으로 처리해주던 것을,
+Next.js에서는 HTML을 파싱해서 직접 추출해야 했습니다.
 
 ### 3단계: 이미지 처리의 복잡성
 
@@ -179,7 +189,10 @@ function transformImagePaths(content: string, filePath: string): string {
     const month = pathParts[2]
     const day = pathParts[3]
 
-    return content.replace(/!\[([^\]]*)\]\(images\/([^)]+)\)/g, `![$1](/images/${category}/${year}/${month}/${day}/$2)`)
+    return content.replace(
+      /!\[([^\]]*)\]\(images\/([^)]+)\)/g,
+      `![$1](/images/${category}/${year}/${month}/${day}/$2)`
+    )
   }
   return content
 }
@@ -208,8 +221,8 @@ const nextConfig = {
   output: 'export',
   distDir: 'out',
   images: {
-    unoptimized: true
-  }
+    unoptimized: true,
+  },
   // 정적 배포를 위한 추가 설정들...
 }
 ```

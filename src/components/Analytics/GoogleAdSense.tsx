@@ -5,7 +5,7 @@ import { siteConfig } from '@/lib/config'
 
 export default function GoogleAdSense() {
   const ADSENSE_CLIENT = siteConfig.googleAdsenseClient
-  
+
   if (!ADSENSE_CLIENT || process.env.NODE_ENV === 'development') {
     return null
   }
@@ -28,7 +28,7 @@ interface AdBannerProps {
 
 export function AdBanner({ slot, style, className }: AdBannerProps) {
   const ADSENSE_CLIENT = siteConfig.googleAdsenseClient
-  
+
   if (!ADSENSE_CLIENT || process.env.NODE_ENV === 'development') {
     return null
   }
