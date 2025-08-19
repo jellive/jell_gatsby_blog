@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 // Conditionally import bundle analyzer (only available in development)
-let withBundleAnalyzer = (config) => config
+let withBundleAnalyzer = config => config
 
 if (process.env.NODE_ENV !== 'production') {
   try {
