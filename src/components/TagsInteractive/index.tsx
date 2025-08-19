@@ -8,6 +8,8 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import PostList from '@/components/PostList'
 import { cn } from '@/lib/utils'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 interface TagGroup {
   fieldValue: string
@@ -22,6 +24,7 @@ interface TagsInteractiveProps {
 export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
   const [largeCount, setLargeCount] = useState(0)
   const [targetTag, setTargetTag] = useState('undefined')
+  const router = useRouter()
 
   useEffect(() => {
     // Calculate largest count for font sizing
@@ -39,13 +42,13 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
     if (typeof window !== 'undefined' && location.hash) {
       const hashTag = location.hash.split('#')[1]
       if (hashTag && hashTag !== 'undefined') {
-        // 해시 기반 URL을 실제 태그 페이지 URL로 리다이렉트
-        window.location.href = `/tags/${encodeURIComponent(hashTag)}`
+        // Use Next.js router for safer navigation
+        router.push(`/tags/${encodeURIComponent(hashTag)}`)
       } else {
         setTargetTag(hashTag || 'undefined')
       }
     }
-  }, [])
+  }, [router])
 
   const getBadgeVariant = (totalCount: number) => {
     if (largeCount === 0) return 'outline'
@@ -123,37 +126,37 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
 
     return (
       <div key={g.fieldValue} data-testid="tag-item">
-        <Badge
-          variant={isSelected ? 'default' : variant}
-          className={cn(
-            'cursor-pointer transition-all duration-200 hover:scale-105',
-            'border-border/50 hover:border-border',
-            'px-3 py-2 text-sm font-medium',
-            isSelected
-              ? 'border-primary bg-primary text-primary-foreground'
-              : 'hover:bg-secondary/80',
-            // Size-based styling
-            getBadgeSize(g.totalCount) === 'lg' && 'px-4 py-2.5 text-base',
-            getBadgeSize(g.totalCount) === 'sm' && 'px-2 py-1.5 text-xs'
-          )}
-          onClick={() => {
-            setTargetTag(g.fieldValue)
-            if (typeof window !== 'undefined') {
-              window.location.href = `/tags/${encodeURIComponent(g.fieldValue)}`
-            }
-          }}
-        >
-          <Fa icon={faHashtag} className="mr-1 text-xs opacity-70" />
-          {g.fieldValue}
-          <span
+        <Link href={`/tags/${encodeURIComponent(g.fieldValue)}`} passHref>
+          <Badge
+            variant={isSelected ? 'default' : variant}
             className={cn(
-              'ml-1.5 text-xs opacity-70',
-              isSelected && 'opacity-90'
+              'cursor-pointer transition-all duration-200 hover:scale-105',
+              'border-border/50 hover:border-border',
+              'px-3 py-2 text-sm font-medium',
+              isSelected
+                ? 'border-primary bg-primary text-primary-foreground'
+                : 'hover:bg-secondary/80',
+              // Size-based styling
+              getBadgeSize(g.totalCount) === 'lg' && 'px-4 py-2.5 text-base',
+              getBadgeSize(g.totalCount) === 'sm' && 'px-2 py-1.5 text-xs'
             )}
+            onClick={e => {
+              // For client-side state management
+              setTargetTag(g.fieldValue)
+            }}
           >
-            {g.totalCount}
-          </span>
-        </Badge>
+            <Fa icon={faHashtag} className="mr-1 text-xs opacity-70" />
+            {g.fieldValue}
+            <span
+              className={cn(
+                'ml-1.5 text-xs opacity-70',
+                isSelected && 'opacity-90'
+              )}
+            >
+              {g.totalCount}
+            </span>
+          </Badge>
+        </Link>
       </div>
     )
   })

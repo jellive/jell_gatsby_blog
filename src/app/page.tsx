@@ -1,14 +1,12 @@
 import { getAllPosts } from '@/lib/markdown'
 import Bio from '@/components/Bio'
 import PostList from '@/components/PostList'
-import StructuredData from '@/components/StructuredData'
 
 export default async function Home() {
   const posts = await getAllPosts()
 
   return (
     <>
-      <StructuredData type="blog" />
       <main className="min-h-screen">
         {/* Desktop Layout: Side-by-side Bio and Content */}
         <div className="hidden lg:block">

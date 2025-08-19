@@ -114,6 +114,7 @@ export default async function PostPage({ params }: PostPageProps) {
     <>
       <StructuredData
         type="article"
+        includeBaseData={false}
         data={{
           title: post.frontMatter.title,
           description: excerpt,

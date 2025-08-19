@@ -4,6 +4,7 @@ import { siteConfig } from '@/lib/config'
 
 interface StructuredDataProps {
   type: 'website' | 'article' | 'blog'
+  includeBaseData?: boolean // Control whether to include base website/person data
   data?: {
     title?: string
     description?: string
@@ -16,10 +17,18 @@ interface StructuredDataProps {
   }
 }
 
-export default function StructuredData({ type, data }: StructuredDataProps) {
-  const baseStructuredData = {
+export default function StructuredData({
+  type,
+  data,
+  includeBaseData = true,
+}: StructuredDataProps) {
+  const structuredData: any = {
     '@context': 'https://schema.org',
-    '@graph': [
+  }
+
+  // Only include base data if explicitly requested (default true for backward compatibility)
+  if (includeBaseData) {
+    structuredData['@graph'] = [
       {
         '@type': 'WebSite',
         '@id': `${siteConfig.siteUrl}/#website`,
@@ -47,11 +56,13 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         url: siteConfig.website,
         sameAs: [siteConfig.github, siteConfig.linkedin].filter(Boolean),
       },
-    ],
+    ]
+  } else {
+    structuredData['@graph'] = []
   }
 
   if (type === 'article' && data) {
-    ;(baseStructuredData['@graph'] as any[]).push({
+    structuredData['@graph'].push({
       '@type': 'BlogPosting',
       '@id': `${data.url}/#article`,
       url: data.url || '',
@@ -80,7 +91,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
       },
     })
   } else if (type === 'blog') {
-    ;(baseStructuredData['@graph'] as any[]).push({
+    structuredData['@graph'].push({
       '@type': 'Blog',
       '@id': `${siteConfig.siteUrl}/#blog`,
       url: siteConfig.siteUrl,
@@ -101,7 +112,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(baseStructuredData, null, 2),
+        __html: JSON.stringify(structuredData, null, 2),
       }}
     />
   )

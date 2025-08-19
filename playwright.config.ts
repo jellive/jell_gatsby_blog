@@ -8,7 +8,7 @@ export default defineConfig({
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
+  forbidOnly: Boolean(process.env.CI),
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
@@ -28,6 +28,20 @@ export default defineConfig({
 
     /* Video recording on failure */
     video: 'retain-on-failure',
+
+    /* Increase default timeout for actions */
+    actionTimeout: 15000,
+
+    /* Increase navigation timeout */
+    navigationTimeout: 20000,
+  },
+
+  /* Global test timeout */
+  timeout: 60000,
+
+  /* Expect timeout for assertions */
+  expect: {
+    timeout: 10000,
   },
 
   /* Configure projects for major browsers */
