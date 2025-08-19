@@ -14,51 +14,88 @@ export class SafeNavigation {
     url: string,
     options?: { timeout?: number; waitUntil?: string }
   ): Promise<void> {
-    const { timeout = 25000, waitUntil = 'domcontentloaded' } = options || {}
+    // Increase timeout for heavy pages like /tags
+    const isHeavyPage = url.includes('/tags') || url.includes('/search')
+    const defaultTimeout = isHeavyPage ? 45000 : 25000
+    const { timeout = defaultTimeout, waitUntil = 'domcontentloaded' } =
+      options || {}
 
+    // Strategy 1: Primary navigation with extended timeout for heavy pages
     try {
-      // Primary strategy: Use domcontentloaded which is more reliable than networkidle
+      console.log(
+        `🚀 Attempting primary navigation to ${url} with timeout ${timeout}ms`
+      )
       await this.page.goto(url, {
         waitUntil: waitUntil as any,
         timeout,
       })
 
       // Wait for essential elements to be ready
-      await this.page.waitForLoadState('domcontentloaded')
+      await this.page.waitForLoadState('domcontentloaded', { timeout: 10000 })
+      console.log(`✅ Primary navigation to ${url} succeeded`)
+      return
     } catch (error) {
-      console.warn(`Primary navigation failed for ${url}:`, error)
+      console.warn(`❌ Primary navigation failed for ${url}:`, error)
+    }
 
-      try {
-        // Fallback strategy: Use load event with shorter timeout
-        await this.page.goto(url, {
-          waitUntil: 'load',
-          timeout: 15000,
-        })
-      } catch (fallbackError) {
-        console.warn(`Fallback navigation failed for ${url}:`, fallbackError)
+    // Strategy 2: Fallback with 'load' event and longer timeout
+    try {
+      console.log(`🔄 Attempting fallback navigation to ${url}`)
+      await this.page.goto(url, {
+        waitUntil: 'load',
+        timeout: Math.max(30000, timeout * 0.8),
+      })
+      console.log(`✅ Fallback navigation to ${url} succeeded`)
+      return
+    } catch (fallbackError) {
+      console.warn(`❌ Fallback navigation failed for ${url}:`, fallbackError)
+    }
 
+    // Strategy 3: Minimal navigation without wait conditions
+    try {
+      console.log(`🆘 Attempting last resort navigation to ${url}`)
+      await this.page.goto(url, {
+        timeout: 20000,
+      })
+
+      // Wait for basic page structure
+      await this.page.waitForSelector('body', { timeout: 8000 })
+
+      // For heavy pages, wait a bit longer for content to load
+      if (isHeavyPage) {
+        console.log(`⏳ Heavy page detected, waiting for content...`)
+        await this.page.waitForTimeout(3000)
+
+        // Try to wait for specific content indicators
         try {
-          // Last resort: Basic navigation with minimal waiting
-          await this.page.goto(url, {
-            timeout: 10000,
-          })
-
-          // At least wait for the page to start loading
-          await this.page.waitForSelector('body', { timeout: 5000 })
-        } catch (lastResortError) {
-          console.error(
-            `All navigation strategies failed for ${url}:`,
-            lastResortError
-          )
-          throw new Error(
-            `Failed to navigate to ${url} after multiple attempts`
+          if (url.includes('/tags')) {
+            await this.page.waitForSelector(
+              '[data-testid="tag-list"], .tag-list, h1',
+              { timeout: 5000 }
+            )
+          }
+        } catch (contentWaitError) {
+          console.warn(
+            `⚠️ Content wait failed, but proceeding: ${contentWaitError}`
           )
         }
       }
-    }
 
-    // Small delay to ensure page is stable
-    await this.page.waitForTimeout(500)
+      console.log(`✅ Last resort navigation to ${url} succeeded`)
+      return
+    } catch (lastResortError) {
+      console.error(
+        `💥 All navigation strategies failed for ${url}:`,
+        lastResortError
+      )
+      const errorMessage =
+        lastResortError instanceof Error
+          ? lastResortError.message
+          : String(lastResortError)
+      throw new Error(
+        `Failed to navigate to ${url} after multiple attempts. Last error: ${errorMessage}`
+      )
+    }
   }
 
   /**

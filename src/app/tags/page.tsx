@@ -14,19 +14,37 @@ interface TagGroup {
 }
 
 export default async function TagsPage() {
-  const tags = await getAllTags()
+  // Optimize: Get all posts once and process them
+  const { getAllPosts } = await import('@/lib/markdown')
+  const allPosts = await getAllPosts()
 
-  // Create tag groups with post counts and posts
-  const groups: TagGroup[] = await Promise.all(
-    tags.map(async tag => {
-      const posts = await getPostsByTag(tag)
-      return {
-        fieldValue: tag,
-        totalCount: posts.length,
-        posts: posts,
+  // Extract all unique tags
+  const tagSet = new Set(allPosts.flatMap(post => post.frontMatter.tags))
+  const tags = Array.from(tagSet).sort()
+
+  // Create tag groups efficiently by grouping posts by tag
+  const tagGroups = new Map<string, any[]>()
+
+  // Initialize tag groups
+  tags.forEach(tag => {
+    tagGroups.set(tag, [])
+  })
+
+  // Group posts by tags in one pass
+  allPosts.forEach(post => {
+    post.frontMatter.tags.forEach(tag => {
+      if (tagGroups.has(tag)) {
+        tagGroups.get(tag)!.push(post)
       }
     })
-  )
+  })
+
+  // Create final groups array
+  const groups: TagGroup[] = tags.map(tag => ({
+    fieldValue: tag,
+    totalCount: tagGroups.get(tag)?.length || 0,
+    posts: tagGroups.get(tag) || [],
+  }))
 
   // Add undefined tag group if needed (for posts without tags)
   groups.unshift({
