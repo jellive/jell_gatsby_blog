@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test'
+import { createSafeNavigation, NavigationPatterns } from './utils/navigation'
 
 test.describe('Search and Tags', () => {
   test('search page loads correctly', async ({ page }) => {
-    await page.goto('/search')
+    await NavigationPatterns.goSearch(page)
 
     // Check search page elements
     await expect(page).toHaveTitle(/Search/)
@@ -14,7 +15,7 @@ test.describe('Search and Tags', () => {
   })
 
   test('search functionality works', async ({ page }) => {
-    await page.goto('/search')
+    await NavigationPatterns.goSearch(page)
 
     const searchInput = page.locator('[data-testid="search-input"]')
 
@@ -50,7 +51,7 @@ test.describe('Search and Tags', () => {
   })
 
   test('search filters work', async ({ page }) => {
-    await page.goto('/search')
+    await NavigationPatterns.goSearch(page)
 
     // Check for search filters (category, tag filters)
     const categoryFilter = page.locator('[data-testid="category-filter"]')
@@ -81,8 +82,7 @@ test.describe('Search and Tags', () => {
 
   test('tags page loads correctly', async ({ page }) => {
     try {
-      await page.goto('/tags', { waitUntil: 'networkidle', timeout: 15000 })
-      await page.waitForLoadState('domcontentloaded')
+      await NavigationPatterns.goTags(page)
 
       // Check tags page elements
       await expect(page).toHaveTitle(/Tags/)
@@ -92,8 +92,9 @@ test.describe('Search and Tags', () => {
       await expect(page.locator('[data-testid="tag-list"]')).toBeVisible()
     } catch (error) {
       console.warn('Tags page test failed:', error)
-      // Retry with a simpler approach
-      await page.goto('/tags', { timeout: 10000 })
+      // Retry with a simpler approach using SafeNavigation
+      const nav = createSafeNavigation(page)
+      await nav.goto('/tags')
       await page.waitForSelector('h1', { timeout: 5000 })
 
       // At least check that the page loaded
@@ -102,7 +103,7 @@ test.describe('Search and Tags', () => {
   })
 
   test('tag links work correctly', async ({ page }) => {
-    await page.goto('/tags')
+    await NavigationPatterns.goTags(page)
 
     // Get all tag links
     const tagLinks = page.locator('[data-testid="tag-item"] a')
@@ -132,14 +133,14 @@ test.describe('Search and Tags', () => {
           }
 
           // Go back to tags page for next iteration
-          await page.goto('/tags')
+          await NavigationPatterns.goTags(page)
         }
       }
     }
   })
 
   test('tag post filtering works', async ({ page }) => {
-    await page.goto('/tags')
+    await NavigationPatterns.goTags(page)
 
     const tagLinks = page.locator('[data-testid="tag-item"] a')
     const tagCount = await tagLinks.count()
@@ -169,7 +170,7 @@ test.describe('Search and Tags', () => {
   })
 
   test('search no results state', async ({ page }) => {
-    await page.goto('/search')
+    await NavigationPatterns.goSearch(page)
 
     const searchInput = page.locator('[data-testid="search-input"]')
 
@@ -188,7 +189,7 @@ test.describe('Search and Tags', () => {
   })
 
   test('search keyboard navigation', async ({ page }) => {
-    await page.goto('/search')
+    await NavigationPatterns.goSearch(page)
 
     const searchInput = page.locator('[data-testid="search-input"]')
 
@@ -211,7 +212,7 @@ test.describe('Search and Tags', () => {
   })
 
   test('tag cloud visual display', async ({ page }) => {
-    await page.goto('/tags')
+    await NavigationPatterns.goTags(page)
 
     const tagItems = page.locator('[data-testid="tag-item"]')
     const tagCount = await tagItems.count()

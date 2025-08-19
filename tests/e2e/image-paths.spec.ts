@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test'
+import { createSafeNavigation, NavigationPatterns } from './utils/navigation'
 
 test.describe('Image Paths', () => {
   test('blog post images use correct hierarchical paths', async ({ page }) => {
     // Navigate to a post with images
-    await page.goto('/posts/bicycle/2018/08/24/제주도_1일차')
+    const nav = createSafeNavigation(page)
+    await nav.goto('/posts/bicycle/2018/08/24/제주도_1일차')
 
     // Wait for content to load
     await expect(page.locator('[data-testid="post-content"]')).toBeVisible()
@@ -46,7 +48,8 @@ test.describe('Image Paths', () => {
     ]
 
     for (const testPost of testPosts) {
-      await page.goto(testPost.path)
+      const nav = createSafeNavigation(page)
+      await nav.goto(testPost.path)
 
       // Check if page loads successfully
       const postContent = page.locator('[data-testid="post-content"]')
@@ -120,7 +123,7 @@ test.describe('Image Paths', () => {
 
   test('featured images use correct paths', async ({ page }) => {
     // Navigate to homepage and check post thumbnails/featured images
-    await page.goto('/')
+    await NavigationPatterns.goHome(page)
 
     const postItems = page.locator('[data-testid="post-item"]')
     const postCount = await postItems.count()

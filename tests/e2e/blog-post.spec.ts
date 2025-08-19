@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test'
+import { createSafeNavigation, NavigationPatterns } from './utils/navigation'
 
 test.describe('Blog Post Features', () => {
   test('post content displays correctly', async ({ page }) => {
     // Navigate to a specific post
-    await page.goto('/')
+    await NavigationPatterns.goHome(page)
 
     const firstPost = page.locator('[data-testid="post-item"]').first()
     await firstPost.click()
@@ -17,7 +18,7 @@ test.describe('Blog Post Features', () => {
 
   test('table of contents functionality', async ({ page }) => {
     // Find a post that has table of contents
-    await page.goto('/')
+    await NavigationPatterns.goHome(page)
 
     // Look for posts that might have TOC (longer posts typically do)
     const postLinks = await page.locator('a[href*="/posts/"]').all()
@@ -26,7 +27,8 @@ test.describe('Blog Post Features', () => {
       // Test first 5 posts
       const href = await link.getAttribute('href')
       if (href) {
-        await page.goto(href)
+        const nav = createSafeNavigation(page)
+        await nav.goto(href)
 
         // Check if TOC exists
         const toc = page.locator('[data-testid="table-of-contents"]')
@@ -63,7 +65,7 @@ test.describe('Blog Post Features', () => {
   })
 
   test('code syntax highlighting works', async ({ page }) => {
-    await page.goto('/')
+    await NavigationPatterns.goHome(page)
 
     // Find a post that might contain code
     const devPosts = page.locator('a[href*="/posts/dev/"]')
@@ -88,7 +90,7 @@ test.describe('Blog Post Features', () => {
   })
 
   test('post metadata displays correctly', async ({ page }) => {
-    await page.goto('/')
+    await NavigationPatterns.goHome(page)
 
     const firstPost = page.locator('[data-testid="post-item"]').first()
     await firstPost.click()
@@ -105,7 +107,7 @@ test.describe('Blog Post Features', () => {
   })
 
   test('image display works correctly', async ({ page }) => {
-    await page.goto('/')
+    await NavigationPatterns.goHome(page)
 
     // Look for posts that might contain images
     const postLinks = await page.locator('a[href*="/posts/"]').all()
@@ -113,7 +115,8 @@ test.describe('Blog Post Features', () => {
     for (const link of postLinks.slice(0, 10)) {
       const href = await link.getAttribute('href')
       if (href) {
-        await page.goto(href)
+        const nav = createSafeNavigation(page)
+        await nav.goto(href)
 
         const images = page.locator('[data-testid="post-body"] img')
         const imageCount = await images.count()
@@ -141,7 +144,7 @@ test.describe('Blog Post Features', () => {
   })
 
   test('social sharing buttons work', async ({ page }) => {
-    await page.goto('/')
+    await NavigationPatterns.goHome(page)
 
     const firstPost = page.locator('[data-testid="post-item"]').first()
     await firstPost.click()
@@ -162,7 +165,7 @@ test.describe('Blog Post Features', () => {
   })
 
   test('post content is properly formatted', async ({ page }) => {
-    await page.goto('/')
+    await NavigationPatterns.goHome(page)
 
     const firstPost = page.locator('[data-testid="post-item"]').first()
     await firstPost.click()
@@ -191,7 +194,7 @@ test.describe('Blog Post Features', () => {
   })
 
   test('comments section loads if enabled', async ({ page }) => {
-    await page.goto('/')
+    await NavigationPatterns.goHome(page)
 
     const firstPost = page.locator('[data-testid="post-item"]').first()
     await firstPost.click()
