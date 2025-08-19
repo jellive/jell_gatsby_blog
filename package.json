@@ -31,7 +31,7 @@
     "analyze": "ANALYZE=true npm run build",
     "verify:ts": "node scripts/verify-typescript.js",
     "quality:check": "npm run verify:ts",
-    "prepare": "husky"
+    "prepare": "husky || exit 0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",

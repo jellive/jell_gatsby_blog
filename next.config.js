@@ -1,9 +1,18 @@
 /** @type {import('next').NextConfig} */
-import bundleAnalyzer from '@next/bundle-analyzer'
+// Conditionally import bundle analyzer (only available in development)
+let withBundleAnalyzer = (config) => config
 
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-})
+if (process.env.NODE_ENV !== 'production') {
+  try {
+    const bundleAnalyzer = require('@next/bundle-analyzer')
+    withBundleAnalyzer = bundleAnalyzer({
+      enabled: process.env.ANALYZE === 'true',
+    })
+  } catch (error) {
+    // Bundle analyzer not available, continue without it
+    console.log('Bundle analyzer not available, continuing without it')
+  }
+}
 
 const nextConfig = {
   // Conditional output for build vs dev
