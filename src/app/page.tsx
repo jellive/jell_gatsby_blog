@@ -1,6 +1,6 @@
 import { getAllPosts } from '@/lib/markdown'
 import Bio from '@/components/Bio'
-import PostList from '@/components/PostList'
+import PostListWithPagination from '@/components/PostListWithPagination'
 
 export default async function Home() {
   const posts = await getAllPosts()
@@ -22,7 +22,7 @@ export default async function Home() {
               {/* Main Content Area - Flexible */}
               <div className="min-w-0 flex-1">
                 <div className="py-content">
-                  <PostList posts={posts} />
+                  <PostListWithPagination posts={posts} postsPerPage={12} />
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@ export default async function Home() {
 
             {/* Mobile Content */}
             <div className="py-content">
-              <PostList posts={posts} />
+              <PostListWithPagination posts={posts} postsPerPage={12} />
             </div>
           </div>
         </div>

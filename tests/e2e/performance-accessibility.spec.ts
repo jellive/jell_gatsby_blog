@@ -179,19 +179,37 @@ test.describe('Performance and Accessibility', () => {
     }
 
     // Check for proper ARIA labels on navigation elements
-    const navigation = page.locator('nav')
-    if (await navigation.isVisible()) {
-      const ariaLabel = await navigation.getAttribute('aria-label')
-      const role = await navigation.getAttribute('role')
-      // Navigation should have either aria-label or role, or be implicit navigation
-      if (!ariaLabel && !role) {
-        // If no explicit ARIA attributes, check if it's a semantic nav element (which is valid)
-        const tagName = await navigation.evaluate(el =>
-          el.tagName.toLowerCase()
-        )
-        expect(tagName).toBe('nav') // Should be a semantic nav element
-      } else {
-        expect(ariaLabel || role).toBeTruthy()
+    const navigationElements = await page.locator('nav').all()
+    if (navigationElements.length > 0) {
+      for (const navigation of navigationElements) {
+        const ariaLabel = await navigation.getAttribute('aria-label')
+        const role = await navigation.getAttribute('role')
+        const id = await navigation.getAttribute('id')
+
+        // Navigation should have either aria-label or role, or be implicit navigation
+        if (!ariaLabel && !role) {
+          // If no explicit ARIA attributes, check if it's a semantic nav element (which is valid)
+          const tagName = await navigation.evaluate(el =>
+            el.tagName.toLowerCase()
+          )
+          expect(tagName).toBe('nav') // Should be a semantic nav element
+        } else {
+          expect(ariaLabel || role).toBeTruthy()
+        }
+
+        // Additional check: pagination navigation should have pagination label
+        if (ariaLabel === 'pagination') {
+          expect(role).toBe('navigation')
+        }
+
+        // Main navigation should have proper identifier
+        if (id === 'nav') {
+          // Main navigation can have implicit role (no additional check needed)
+          const tagName = await navigation.evaluate(el =>
+            el.tagName.toLowerCase()
+          )
+          expect(tagName).toBe('nav')
+        }
       }
     }
 

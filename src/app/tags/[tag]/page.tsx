@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getAllTags, getPostsByTag } from '@/lib/markdown'
-import PostList from '@/components/PostList'
+import PostListWithPagination from '@/components/PostListWithPagination'
 import { Metadata } from 'next'
 import { siteConfig } from '@/lib/config'
 
@@ -65,16 +65,22 @@ export default async function TagPage({ params }: TagPageProps) {
   }
 
   return (
-    <div className="tag-page">
-      <div className="tag-header">
-        <h1 className="tag-title">
-          <span className="tag-symbol">#</span>
-          {decodedTag}
-        </h1>
-        <p className="tag-description">{posts.length}개의 포스트</p>
-      </div>
+    <main className="min-h-screen">
+      <div className="mx-auto max-w-container px-content py-content">
+        {/* 태그 헤더 */}
+        <div className="mb-8 text-center">
+          <h1 className="mb-2 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            <span className="text-primary">#</span>
+            {decodedTag}
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            {posts.length}개의 포스트
+          </p>
+        </div>
 
-      <PostList posts={posts} />
-    </div>
+        {/* 포스트 리스트 */}
+        <PostListWithPagination posts={posts} postsPerPage={10} />
+      </div>
+    </main>
   )
 }
