@@ -53,33 +53,6 @@ playwright-test-results/
 test-results/
 coverage/
 
-# Additional test files and reports to exclude from PR
-*.test.js
-*.test.ts
-*.test.jsx
-*.test.tsx
-__tests__/
-jest-report/
-test-coverage/
-.nyc_output/
-*.lcov
-test-results.xml
-junit.xml
-
-# Performance and benchmark files
-lighthouse-report/
-bundle-analyzer/
-performance-results/
-benchmark-results/
-
-# Test artifacts
-screenshots/
-test-screenshots/
-test-videos/
-*.png.diff
-*.png.new
-*.png.ref
-
 # Development tools
 .claude/
 CLAUDE.md

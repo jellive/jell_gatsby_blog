@@ -1,11 +1,12 @@
 ---
-category: "Dev"
-date: "2020-01-09T13:00:00Z"
-title: "for-of를 사용해보자."
-tags: ["개발", "Javascript", "Typescript"]
+category: 'Dev'
+date: '2020-01-09T13:00:00Z'
+title: 'for-of를 사용해보자.'
+tags: ['개발', 'Javascript', 'Typescript']
 ---
 
 ```toc
+
 ```
 
 ## 개요
@@ -15,14 +16,13 @@ tags: ["개발", "Javascript", "Typescript"]
 Javascript에는 for문 말고도 map, forEach 등등 지원해주는 함수가 많이 있습니다.  
 오늘은 그 중 for~of문을 소개할까 합니다.
 
-
 ### 사용법
 
 ```javascript
 const years = [2001, 2010, 2015, 2016]
 
 for (let year of years) {
-	console.log(year)
+  console.log(year)
 }
 ```
 
@@ -32,7 +32,7 @@ for (let year of years) {
 const years = [2001, 2010, 2015, 2016]
 
 for (let year in years) {
-	console.log(year)
+  console.log(year)
 }
 ```
 
@@ -43,6 +43,7 @@ for~in과 for~of는 역할이 거의 같습니다.
 for~in은 불가능합니다.
 
 for~in
+
 ```javascript
 const years = [2001, 2010, 2015, 2016]
 
@@ -54,6 +55,7 @@ for (let year in years) {
 ```
 
 for~of
+
 ```javascript
 const years = [2001, 2010, 2015, 2016]
 

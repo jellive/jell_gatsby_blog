@@ -304,17 +304,20 @@ export default function ShareModal({
                     key={name}
                     {...props}
                     aria-label={`${name}으로 공유하기`}
-                    className={cn(
-                      'h-12 w-full justify-start gap-3 flex items-center',
-                      'border-border/50 hover:border-border rounded-md border',
-                      'transition-all duration-200 hover:scale-105',
-                      'bg-transparent hover:bg-accent hover:text-accent-foreground',
-                      'px-3 py-2',
-                      bgColor
-                    )}
+                    className="w-full"
                   >
-                    <Fa icon={icon} className={cn('text-base', color)} />
-                    <span className="text-sm font-medium">{name}</span>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        'h-12 w-full justify-start gap-3',
+                        'border-border/50 hover:border-border',
+                        'transition-all duration-200 hover:scale-105',
+                        bgColor
+                      )}
+                    >
+                      <Fa icon={icon} className={cn('text-base', color)} />
+                      <span className="text-sm font-medium">{name}</span>
+                    </Button>
                   </ShareComponent>
                 )
               )}

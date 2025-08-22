@@ -210,18 +210,22 @@ export default function SocialShare({
                   key={name}
                   {...props}
                   aria-label={`${name}으로 공유하기`}
-                  className={cn(
-                    'h-10 w-full justify-start gap-2 flex items-center',
-                    'border-border/50 hover:border-border rounded-md border',
-                    'transition-all duration-200 hover:scale-105',
-                    'bg-transparent hover:bg-accent hover:text-accent-foreground',
-                    'px-3 py-2',
-                    className
-                  )}
+                  className="w-full"
                   data-testid={`share-${name.toLowerCase()}`}
                 >
-                  <Fa icon={icon} className="text-sm" />
-                  <span className="truncate text-sm font-medium">{name}</span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className={cn(
+                      'h-10 w-full justify-start gap-2',
+                      'border-border/50 hover:border-border',
+                      'transition-all duration-200 hover:scale-105',
+                      className
+                    )}
+                  >
+                    <Fa icon={icon} className="text-sm" />
+                    <span className="truncate text-sm font-medium">{name}</span>
+                  </Button>
                 </ShareComponent>
               )
             )}

@@ -1960,13 +1960,3 @@ button:focus-visible,
 }
 
 /* BackNavigation component now uses Shadcn UI components - legacy CSS removed */
-
-/* ========================================
-   TOC Header Hiding
-   ======================================== */
-
-/* Hide TOC headers in blog post content since we have sidebar TOC */
-/* Using CSS approach that will be handled by JavaScript for text matching */
-.blog-post-content .toc-header-hidden {
-  display: none !important;
-}

@@ -1,5 +1,81 @@
-[build.environment]
-NODE_VERSION = "20"
+# Next.js static export optimized for Netlify with cache busting
+[build]
+  publish = "out"
+  command = "npm run build:production"
 
-[functions]
-node_bundler = "esbuild"
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_VERSION = "9"
+  NODE_ENV = "production"
+  NEXT_TELEMETRY_DISABLED = "1"
+  # Skip Netlify Next.js plugin for static export
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+# Essential security headers with cache control
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Force fresh content for HTML files on each deployment
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# HTML files - always fresh (cache busting for deployment)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate, no-cache"
+    ETag = "*"
+
+# Cache static assets with build hash (immutable)
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# CSS and JS files - cache with build hash validation
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+    ETag = "*"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+    ETag = "*"
+
+# Cache images
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# Content type for API routes
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Content-Type = "application/json"
+
+# RSS and sitemap content types
+[[headers]]
+  for = "/rss"
+  [headers.values]
+    Content-Type = "application/rss+xml"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml"
+
+# Next.js static export - direct file serving (no rewrites needed)
+# Static files are served directly by Netlify
+
+# SPA fallback for client-side routing (only if file doesn't exist)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false

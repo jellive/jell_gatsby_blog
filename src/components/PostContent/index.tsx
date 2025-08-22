@@ -88,52 +88,6 @@ export default function PostContent({ post, slug }: PostContentProps) {
     return () => document.removeEventListener('scroll', handleScroll)
   }, [yList])
 
-  // Hide TOC headers and code blocks since we have sidebar TOC
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const contentElement = document.querySelector('.blog-post-content')
-      if (!contentElement) return
-
-      // Find and hide TOC headers and their following elements
-      const headings = contentElement.querySelectorAll('h1, h2, h3, h4, h5, h6')
-      headings.forEach(heading => {
-        const text = heading.textContent?.trim() || ''
-        if (text === '목차' || text === 'Table of contents') {
-          heading.classList.add('toc-header-hidden')
-          
-          // Also hide the next sibling element if it contains TOC content
-          let nextElement = heading.nextElementSibling
-          while (nextElement) {
-            // Check if it's a TOC code block or empty paragraph
-            const isCodeBlock = nextElement.tagName === 'PRE' || 
-                               nextElement.querySelector('code')
-            const isEmpty = nextElement.textContent?.trim() === ''
-            const isTocBlock = nextElement.classList?.contains('table-of-contents') ||
-                              nextElement.innerHTML?.includes('table-of-contents')
-            
-            if (isCodeBlock || isEmpty || isTocBlock) {
-              nextElement.classList.add('toc-header-hidden')
-              nextElement = nextElement.nextElementSibling
-            } else {
-              // Stop when we hit actual content
-              break
-            }
-          }
-        }
-      })
-
-      // Also find and hide any standalone TOC elements
-      const tocElements = contentElement.querySelectorAll('.table-of-contents, .toc')
-      tocElements.forEach(el => {
-        el.classList.add('toc-header-hidden')
-      })
-    }, 100)
-
-    return () => {
-      clearTimeout(timeout)
-    }
-  }, [post.htmlContent])
-
   // Setup image click handlers for modal
   useEffect(() => {
     const timeout = setTimeout(() => {

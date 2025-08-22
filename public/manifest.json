@@ -1,0 +1,15 @@
+{
+  "name": "Jell의 세상 사는 이야기",
+  "short_name": "Jell의 세상 사는 이야기",
+  "description": "이것 저것 해보는 블로그입니다.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "lang": "ko",
+  "orientation": "portrait-primary",
+  "icons": [],
+  "categories": ["lifestyle", "news", "technology"],
+  "scope": "/",
+  "prefer_related_applications": false
+}
