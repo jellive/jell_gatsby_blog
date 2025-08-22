@@ -1,36 +1,41 @@
+# Environment variables
 .env
-.vscode
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Project dependencies
-.cache
-node_modules
+# Dependencies
+node_modules/
 yarn-error.log
-
-# Build directory
-.DS_Store
-public/
+.yarn
 
 # Next.js
 .next/
 out/
 
-# Dependencies
-node_modules/
-
-# Build
+# Build outputs
 build/
 dist/
+.cache
 
-# Debug
+# TypeScript
+*.tsbuildinfo
+
+# ESLint
+.eslintcache
+
+# Prettier
+.prettierrc.cache
+
+# Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
 
-# Environment
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Bundle analyzer
+.analyze/
 
 # IDE
 .idea/
@@ -42,4 +47,50 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-.yarn/
+# Testing
+playwright-report/
+playwright-test-results/
+test-results/
+coverage/
+
+# Additional test files and reports to exclude from PR
+*.test.js
+*.test.ts
+*.test.jsx
+*.test.tsx
+__tests__/
+jest-report/
+test-coverage/
+.nyc_output/
+*.lcov
+test-results.xml
+junit.xml
+
+# Performance and benchmark files
+lighthouse-report/
+bundle-analyzer/
+performance-results/
+benchmark-results/
+
+# Test artifacts
+screenshots/
+test-screenshots/
+test-videos/
+*.png.diff
+*.png.new
+*.png.ref
+
+# Development tools
+.claude/
+CLAUDE.md
+
+# Claude Code generated files
+docs/
+@detailed_index.md
+@general_index.md
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
