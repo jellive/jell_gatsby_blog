@@ -1960,3 +1960,69 @@ button:focus-visible,
 }
 
 /* BackNavigation component now uses Shadcn UI components - legacy CSS removed */
+
+/* ===== TOC Header Hiding ===== */
+.toc-header-hidden {
+  display: none !important;
+}
+
+/* Hide common TOC structures by default */
+.blog-post-content .table-of-contents,
+.blog-post-content .toc,
+.blog-post-content code.language-toc,
+.blog-post-content pre[class*='language-toc'],
+.blog-post-content pre:has(code.language-toc) {
+  display: none !important;
+}
+
+/* Hide TOC code blocks in different formats */
+.blog-post-content pre code[class*='language-toc'],
+.blog-post-content code[class*='toc'],
+.blog-post-content pre[data-language='toc'] {
+  display: none !important;
+}
+
+/* Hide parent pre elements containing TOC */
+.blog-post-content pre:has(code[class*='toc']) {
+  display: none !important;
+}
+
+/* Hide TOC heading titles - using data attributes set by JavaScript */
+.blog-post-content h1[data-toc-title],
+.blog-post-content h2[data-toc-title],
+.blog-post-content h3[data-toc-title],
+.blog-post-content h4[data-toc-title],
+.blog-post-content h5[data-toc-title],
+.blog-post-content h6[data-toc-title] {
+  display: none !important;
+}
+
+/* Additional patterns to catch common TOC titles immediately */
+.blog-post-content h2:nth-of-type(1) {
+  /* First h2 is often TOC in Korean blogs - check if it contains TOC keywords */
+}
+
+/* Hide any heading that's immediately followed by a TOC code block */
+.blog-post-content h1:has(+ pre[class*='language-toc']),
+.blog-post-content h2:has(+ pre[class*='language-toc']),
+.blog-post-content h3:has(+ pre[class*='language-toc']),
+.blog-post-content h4:has(+ pre[class*='language-toc']),
+.blog-post-content h5:has(+ pre[class*='language-toc']),
+.blog-post-content h6:has(+ pre[class*='language-toc']) {
+  display: none !important;
+}
+
+/* Hide headings that have empty content after TOC code block */
+.blog-post-content h1:has(+ pre code[class*='toc']),
+.blog-post-content h2:has(+ pre code[class*='toc']),
+.blog-post-content h3:has(+ pre code[class*='toc']),
+.blog-post-content h4:has(+ pre code[class*='toc']),
+.blog-post-content h5:has(+ pre code[class*='toc']),
+.blog-post-content h6:has(+ pre code[class*='toc']) {
+  display: none !important;
+}
+
+/* Hide any TOC-related content that might slip through to post lists */
+[data-testid='post-list'] article [data-toc-excerpt] {
+  display: none !important;
+}

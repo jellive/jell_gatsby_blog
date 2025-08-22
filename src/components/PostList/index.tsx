@@ -110,6 +110,18 @@ const PostList = (props: PostListProps) => {
     // Format date like original Gatsby format (MMM DD, YYYY) - safe for SSR
     const formattedDate = formatDate(date)
 
+    // Filter out TOC-related content from excerpt
+    const cleanExcerpt = excerpt
+      ?.replace(/목차\s*/g, '') // Remove Korean TOC
+      .replace(/Table of contents\s*/gi, '') // Remove English TOC
+      .replace(/Table Of Contents\s*/gi, '') // Remove capitalized TOC
+      .replace(/```toc[\s\S]*?```/g, '') // Remove TOC code blocks
+      .replace(/^\s*$\n/gm, '') // Remove empty lines
+      .trim()
+
+    // Only show excerpt if it has meaningful content after filtering
+    const shouldShowExcerpt = cleanExcerpt && cleanExcerpt.length > 10
+
     // Filter out undefined tags and create Badge components
     const validTags = tags.filter(tag => tag && tag !== 'undefined')
     const tagBadges = validTags.map((tag: string) => (
@@ -165,7 +177,7 @@ const PostList = (props: PostListProps) => {
               </h2>
 
               {/* Subtitle/Excerpt */}
-              {excerpt && (
+              {shouldShowExcerpt && (
                 <p
                   className={cn(
                     // 모바일에서 더 작은 여백
@@ -174,8 +186,9 @@ const PostList = (props: PostListProps) => {
                     'md:mb-4',
                     'line-clamp-2'
                   )}
+                  data-testid="post-excerpt"
                 >
-                  {excerpt}
+                  {cleanExcerpt}
                 </p>
               )}
 
