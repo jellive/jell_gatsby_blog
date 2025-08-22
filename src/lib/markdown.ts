@@ -386,10 +386,15 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
   })
 
   // Generate excerpt from content (first 160 characters of plain text)
+  // Remove TOC related content before generating excerpt
   const plainTextContent = content
-    .replace(/#{1,6}\s+/g, '')
-    .replace(/\*\*(.+?)\*\*/g, '$1')
-    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/```toc[\s\S]*?```/g, '') // Remove TOC code blocks
+    .replace(/^#{1,6}\s*(목차|Table of contents|Table Of Contents)\s*$/gim, '') // Remove TOC headings
+    .replace(/#{1,6}\s+/g, '') // Remove other headings
+    .replace(/\*\*(.+?)\*\*/g, '$1') // Remove bold formatting
+    .replace(/\*(.+?)\*/g, '$1') // Remove italic formatting
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    .trim()
   const excerpt = plainTextContent.substring(0, 160).replace(/\n/g, ' ').trim()
 
   // Determine if this is a draft file and generate slug

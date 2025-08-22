@@ -164,6 +164,71 @@ export default function PostContent({ post, slug }: PostContentProps) {
     }
   }, [post.htmlContent]) // Re-run when content changes
 
+  // Hide TOC headers and code blocks since we have sidebar TOC - run immediately with no delay
+  useEffect(() => {
+    const hideTocElements = () => {
+      const contentElement = document.querySelector('.blog-post-content')
+      if (!contentElement) return
+
+      // Immediately hide all TOC code blocks first
+      const tocCodeBlocks = contentElement.querySelectorAll(
+        'pre code[class*="language-toc"], pre code[class*="toc"], .table-of-contents, .toc'
+      )
+      tocCodeBlocks.forEach(element => {
+        ;(element as HTMLElement).style.display = 'none'
+        if (
+          element.tagName === 'CODE' &&
+          element.parentElement?.tagName === 'PRE'
+        ) {
+          ;(element.parentElement as HTMLElement).style.display = 'none'
+        }
+      })
+
+      // Find and hide TOC headers and their following elements
+      const headings = contentElement.querySelectorAll('h1, h2, h3, h4, h5, h6')
+      headings.forEach(heading => {
+        const text = heading.textContent?.trim() || ''
+        if (
+          text === '목차' ||
+          text === 'Table of contents' ||
+          text === 'Table Of Contents'
+        ) {
+          // Immediately hide with inline style
+          ;(heading as HTMLElement).style.display = 'none'
+          heading.setAttribute('data-toc-title', 'true')
+
+          // Also hide the next sibling element if it contains TOC content
+          let nextElement = heading.nextElementSibling
+          while (nextElement) {
+            const isCodeBlock =
+              nextElement.tagName === 'PRE' || nextElement.querySelector('code')
+            const isEmpty = nextElement.textContent?.trim() === ''
+            const isTocBlock =
+              nextElement.classList?.contains('table-of-contents') ||
+              nextElement.innerHTML?.includes('table-of-contents') ||
+              nextElement.querySelector('code[class*="language-toc"]') ||
+              nextElement.querySelector('code[class*="toc"]')
+
+            if (isCodeBlock || isEmpty || isTocBlock) {
+              ;(nextElement as HTMLElement).style.display = 'none'
+              nextElement = nextElement.nextElementSibling
+            } else {
+              break
+            }
+          }
+        }
+      })
+    }
+
+    // Run immediately when component mounts
+    hideTocElements()
+
+    // Also run after a minimal delay to catch any dynamically added content
+    const timeoutId = setTimeout(hideTocElements, 10)
+
+    return () => clearTimeout(timeoutId)
+  }, [post.htmlContent])
+
   // Format date like original Gatsby format
   const formattedDate = new Date(post.frontMatter.date).toLocaleDateString(
     'ko-KR',
