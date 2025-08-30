@@ -149,7 +149,9 @@ const Bio = () => {
                 >
                   <a href={`mailto:${email}`} className="text-left">
                     <Fa icon={faAt} className="text-sm text-primary" />
-                    <span className="truncate text-sm">{email}</span>
+                    <span className="truncate text-sm text-foreground">
+                      {email}
+                    </span>
                   </a>
                 </Button>
               )}
@@ -171,7 +173,9 @@ const Bio = () => {
                     className="text-left"
                   >
                     <Fa icon={faLink} className="text-sm text-primary" />
-                    <span className="truncate text-sm">{website}</span>
+                    <span className="truncate text-sm text-foreground">
+                      {website}
+                    </span>
                   </a>
                 </Button>
               )}
