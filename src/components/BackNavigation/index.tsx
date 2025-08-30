@@ -39,7 +39,7 @@ export default function BackNavigation({
       notice: '📢 Notice',
     }
 
-    return categoryNames[cat.toLowerCase()] || `📁 ${cat}`
+    return categoryNames[cat.toLowerCase()] ?? `📁 ${cat}`
   }
 
   return (
@@ -74,7 +74,7 @@ export default function BackNavigation({
           title="뒤로 가기"
           data-testid="back-navigation"
         >
-          <Fa icon={faAngleLeft} className="text-sm" />
+          <Fa icon={faAngleLeft} className="text-sm" aria-hidden="true" />
           <span className="font-medium">Back</span>
         </Button>
 
@@ -97,7 +97,7 @@ export default function BackNavigation({
             )}
           >
             <Link href="/">
-              <Fa icon={faHome} className="text-sm" />
+              <Fa icon={faHome} className="text-sm" aria-hidden="true" />
               <span className="font-medium">Home</span>
             </Link>
           </Button>

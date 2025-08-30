@@ -38,7 +38,7 @@ describe('Header Component', () => {
 
     // Check for profile image
     const profileImage = screen.getByRole('img', {
-      name: /jell's profile picture/i,
+      name: /jell의 프로필 이미지/i,
     })
     expect(profileImage).toBeInTheDocument()
 

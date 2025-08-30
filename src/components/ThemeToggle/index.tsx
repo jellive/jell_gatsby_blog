@@ -16,21 +16,6 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
   const [theme, setTheme] = useState<Theme>('system')
   const [mounted, setMounted] = useState(false)
 
-  // Initialize theme on mount
-  useEffect(() => {
-    setMounted(true)
-
-    // Get saved theme from localStorage or default to system
-    const savedTheme = localStorage.getItem('theme') as Theme
-    if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
-      setTheme(savedTheme)
-      applyTheme(savedTheme)
-    } else {
-      setTheme('system')
-      applyTheme('system')
-    }
-  }, [])
-
   // Apply theme to document
   const applyTheme = (newTheme: Theme) => {
     const root = document.documentElement
@@ -49,6 +34,21 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
       root.classList.add(newTheme)
     }
   }
+
+  // Initialize theme on mount
+  useEffect(() => {
+    setMounted(true)
+
+    // Get saved theme from localStorage or default to system
+    const savedTheme = localStorage.getItem('theme') as Theme
+    if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
+      setTheme(savedTheme)
+      applyTheme(savedTheme)
+    } else {
+      setTheme('system')
+      applyTheme('system')
+    }
+  }, [])
 
   // Handle theme change
   const handleThemeChange = () => {
@@ -152,6 +152,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
               'group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.3)]',
             ]
           )}
+          aria-hidden="true"
         />
       </div>
 

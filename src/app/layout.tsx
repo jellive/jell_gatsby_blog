@@ -110,10 +110,22 @@ export default function RootLayout({
           <GoogleAdSense />
           <WebVitals />
           <StructuredData type="website" />
+
+          {/* Skip to Content Link for Keyboard Navigation */}
+          <a
+            href="#main-content"
+            className="skip-to-content"
+            aria-label="메인 콘텐츠로 건너뛰기"
+          >
+            메인 콘텐츠로 건너뛰기
+          </a>
+
           <Header siteTitle={siteConfig.title} />
           <div id="content">
-            <main>{children}</main>
-            <footer>
+            <main id="main-content" role="main" tabIndex={-1}>
+              {children}
+            </main>
+            <footer role="contentinfo">
               © {new Date().getFullYear()} {siteConfig.author}, Built with{' '}
               <a href="https://nextjs.org">Next.js</a>
             </footer>

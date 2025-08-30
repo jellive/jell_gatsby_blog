@@ -7,13 +7,10 @@ import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
 import {
   faTags,
   faSearch,
-  faKeyboard,
   faBars,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons'
-import { siteConfig } from '@/lib/config'
 import ThemeToggle from '@/components/ThemeToggle'
-import OptimizedImage from '@/components/OptimizedImage'
 import { Button } from '@/components/ui/button'
 import {
   Tooltip,
@@ -29,11 +26,9 @@ export interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
-  const [yPos, setYPos] = useState(0)
   const [isHide, setIsHide] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [profileSize, setProfileSize] = useState('25px')
   const pathname = usePathname()
   const router = useRouter()
   const { openPalette } = useCommandPalette()
@@ -64,14 +59,6 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
 
     checkMobile()
 
-    // Handle profile image sizing based on route - Fixed size for consistency
-    const updateProfileSize = () => {
-      // Use consistent size matching button icons (48px)
-      setProfileSize('48px')
-    }
-
-    updateProfileSize()
-
     // Ensure header is always visible on main page
     if (pathname === '/') {
       setIsHide(false)
@@ -85,11 +72,8 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
         return
       }
 
-      setYPos(prevYPos => {
-        const currentYPos = window.pageYOffset
-        setIsHide(prevYPos < currentYPos)
-        return currentYPos
-      })
+      const currentYPos = window.pageYOffset
+      setIsHide(window.pageYOffset > 50)
     }
 
     document.addEventListener('scroll', handleScroll)
@@ -113,14 +97,20 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
     <TooltipProvider>
       <header
         id="Header"
+        role="banner"
         className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''} relative`}
+        aria-label="사이트 헤더 및 주 네비게이션"
       >
         <div className="header-title">
-          <Link href="/">
+          <Link
+            href="/"
+            aria-label={`${siteTitle} 홈페이지로 이동`}
+            className="flex items-center"
+          >
             <div className="header-profile-image-wrap">
               <img
                 src="https://avatars.githubusercontent.com/u/7909227?v=4"
-                alt="Jell's profile picture"
+                alt="Jell의 프로필 이미지"
                 width="48"
                 height="48"
                 className="rounded-full object-cover"
@@ -129,7 +119,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
             </div>
           </Link>
 
-          <Link href="/">
+          <Link href="/" aria-label={`${siteTitle} 사이트 홈으로 이동`}>
             <h1 className="header-title-text">{siteTitle}</h1>
           </Link>
         </div>
@@ -150,21 +140,34 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
               // Responsive sizing for mobile
               'max-md:h-11 max-md:w-11 max-sm:h-10 max-sm:w-10'
             )}
-            aria-label="모바일 메뉴 열기"
+            aria-label={
+              mobileMenuOpen ? '모바일 메뉴 닫기' : '모바일 메뉴 열기'
+            }
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
             data-testid="mobile-menu-toggle"
           >
             <Fa
               icon={mobileMenuOpen ? faTimes : faBars}
               className="text-lg transition-all duration-200"
+              aria-hidden="true"
             />
+            <span className="sr-only">
+              {mobileMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
+            </span>
           </Button>
         </div>
 
-        <nav id="nav" className="hidden md:block">
-          <ul className="flex items-center justify-center gap-2">
+        <nav
+          id="nav"
+          className="hidden md:block"
+          role="navigation"
+          aria-label="주요 네비게이션"
+        >
+          <ul className="flex items-center justify-center gap-2" role="list">
             <li className="flex items-center justify-center">
               <div className="tag-wrap flex items-center justify-center">
-                <span>TAG</span>
+                <span className="sr-only">TAG</span>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
@@ -186,6 +189,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                         tagSpanVisibleToggle(false)
                       }}
                       aria-label="태그 페이지로 이동"
+                      title="모든 태그 보기"
                     >
                       <Fa
                         icon={faTags}
@@ -196,6 +200,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                           'group-hover:text-green-600 dark:group-hover:text-green-300',
                           'group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]'
                         )}
+                        aria-hidden="true"
                       />
                     </Button>
                   </TooltipTrigger>
@@ -233,6 +238,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                           'group-hover:text-purple-600 dark:group-hover:text-purple-300',
                           'group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]'
                         )}
+                        aria-hidden="true"
                       />
                     </Button>
                   </TooltipTrigger>
@@ -284,7 +290,11 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                 }}
                 className="w-full justify-start gap-2"
               >
-                <Fa icon={faTags} className="text-green-500" />
+                <Fa
+                  icon={faTags}
+                  className="text-green-500"
+                  aria-hidden="true"
+                />
                 <span>Tags</span>
               </Button>
 
@@ -296,7 +306,11 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                 }}
                 className="w-full justify-start gap-2"
               >
-                <Fa icon={faSearch} className="text-purple-500" />
+                <Fa
+                  icon={faSearch}
+                  className="text-purple-500"
+                  aria-hidden="true"
+                />
                 <span>Search</span>
               </Button>
 
