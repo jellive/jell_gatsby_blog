@@ -53,7 +53,7 @@
         "testStrategy": "`npm run test:unit` 명령으로 테스트를 실행하고 모두 통과하는지 확인합니다. `jest --coverage`를 실행하여 테스트 커버리지가 70% 이상인지 확인합니다. `tsc --noEmit` 실행 시 타입 에러가 발생하지 않는지 확인합니다.",
         "priority": "medium",
         "dependencies": [4],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -97,7 +97,7 @@
             "description": "주요 컴포넌트에 대한 단위 테스트를 작성하여 테스트 환경의 동작을 검증하고, 전체 테스트 커버리지 70% 달성을 위한 기반을 마련합니다.",
             "dependencies": [],
             "details": "1. `@testing-library/react`를 사용하여 최소 3개 이상의 핵심 컴포넌트(예: Button, Input, Header)에 대한 렌더링 및 상호작용 테스트 케이스를 작성합니다.\n2. `package.json`의 `scripts`에 `\"test:unit\": \"jest\"`와 `\"test:coverage\": \"jest --coverage\"`를 추가합니다.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "`npm run test:unit` 명령으로 추가된 테스트가 모두 통과하는지 확인하고, `npm run test:coverage`를 실행하여 테스트 커버리지가 70% 이상인지 확인합니다."
           }
         ]
@@ -138,7 +138,7 @@
     ],
     "metadata": {
       "created": "2025-08-30T09:09:21.091Z",
-      "updated": "2025-08-30T09:56:00.570Z",
+      "updated": "2025-08-30T10:05:05.895Z",
       "description": "Tasks for master context"
     }
   }
