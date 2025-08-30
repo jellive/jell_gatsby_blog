@@ -1,0 +1,121 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "보안 강화: Next.js 취약점 해결 및 보안 헤더 적용",
+        "description": "Next.js 버전을 최신으로 업데이트하여 발견된 4개의 CVE 취약점을 해결하고, CSP, HSTS 등 보안 헤더를 추가하여 전반적인 보안 수준을 강화합니다.",
+        "details": "Next.js 14.2.15 버전을 최신으로 업데이트하여 고위험 CVE 4개를 해결합니다. npm audit fix를 실행하고, Content Security Policy (CSP), HSTS, X-Frame-Options 등 보안 헤더를 추가합니다. 또한, Dependabot을 설정하여 의존성을 자동으로 모니터링합니다.",
+        "testStrategy": "npm audit을 실행하여 취약점이 0개가 되었는지 확인합니다. Security Headers와 같은 온라인 도구를 사용하여 보안 헤더 점수가 'A' 등급인지 검증합니다. Dependabot이 정상적으로 의존성 업데이트 PR을 생성하는지 확인합니다.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "성능 최적화: 번들 크기 400MB 미만으로 축소",
+        "description": "@next/bundle-analyzer를 사용하여 번들 구성을 분석하고, Tree Shaking 및 코드 분할을 통해 현재 754MB인 번들 크기를 400MB 미만으로 줄입니다.",
+        "details": "@next/bundle-analyzer를 설정하여 번들 구성을 시각화합니다. next.config.js에서 experimental.optimizePackageImports와 webpack.optimization.splitChunks 설정을 최적화합니다. FontAwesome, lucide-react 등 라이브러리 import 방식을 개별 import로 수정하여 Tree Shaking을 극대화합니다.",
+        "testStrategy": "'ANALYZE=true npm run build' 실행 후 생성된 번들 분석 리포트에서 최종 번들 크기가 400MB 미만인지 확인합니다. 최적화 이후 모든 기능이 정상적으로 동작하는지 회귀 테스트를 수행합니다.",
+        "priority": "high",
+        "dependencies": [1],
+        "status": "To Do",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "성능 최적화: 이미지 최적화 파이프라인 구축",
+        "description": "Sharp 라이브러리를 사용한 스크립트를 작성하여 기존 이미지를 WebP 및 AVIF 포맷으로 자동 변환하고, picture 태그를 사용하는 반응형 이미지 컴포넌트를 구현합니다.",
+        "details": "sharp와 glob 라이브러리를 이용해 public 폴더 내 이미지를 WebP와 AVIF 포맷으로 변환하는 스크립트를 작성합니다. WebP/AVIF 소스를 제공하고 lazy loading을 적용한 <OptimizedImage> 컴포넌트를 개발하여 기존 <img> 태그를 대체합니다.",
+        "testStrategy": "이미지 변환 스크립트 실행 후 .webp 및 .avif 파일이 정상적으로 생성되는지 확인합니다. 브라우저 개발자 도구의 Network 탭에서 이미지가 차세대 포맷으로 로드되는지 확인하고, Lighthouse 리포트에서 이미지 관련 성능 점수 개선을 확인합니다.",
+        "priority": "high",
+        "dependencies": [1],
+        "status": "To Do",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "성능 최적화: 폰트 로딩 개선",
+        "description": "CDN에 의존하는 폰트 로딩 방식을 로컬 호스팅으로 변경하고, 서브셋 폰트를 사용하여 폰트 로딩 시간을 단축합니다.",
+        "details": "필요한 문자셋(한국어, 라틴 등)만 포함하는 서브셋 폰트 파일(.woff2)을 생성하여 public/fonts 디렉토리에 위치시킵니다. CSS의 @font-face 규칙을 사용하여 로컬 폰트를 로드하고, font-display: swap 및 unicode-range 속성을 적용하여 렌더링을 최적화합니다.",
+        "testStrategy": "브라우저 개발자 도구의 Network 탭에서 폰트 파일이 CDN이 아닌 로컬에서 로드되는지 확인합니다. 폰트 파일의 크기가 감소했는지 확인하고, WebPageTest 또는 Lighthouse를 통해 폰트 로딩으로 인한 렌더링 차단 시간이 감소했는지 측정합니다.",
+        "priority": "high",
+        "dependencies": [1],
+        "status": "To Do",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "개발 경험 개선: GitHub Actions 기반 CI/CD 파이프라인 구축",
+        "description": "GitHub Actions를 사용하여 코드 푸시 시 린팅, 타입 체크, 테스트, 빌드를 자동화하고, main 브랜치에 머지될 경우 Netlify에 자동 배포하는 파이프라인을 구축합니다.",
+        "details": ".github/workflows/ci.yml 파일을 작성하여 CI/CD 파이프라인을 정의합니다. 'test' job에서는 npm ci, lint, type-check, unit/e2e test, security audit을 실행합니다. 'deploy' job은 'test' job 성공 후 main 브랜치에서만 실행되며, Netlify에 프로덕션 빌드를 배포합니다.",
+        "testStrategy": "새로운 PR 생성 시 'test' job이 성공적으로 실행되는지 확인합니다. main 브랜치에 머지 시 'deploy' job이 실행되어 Netlify 배포가 자동으로 완료되는지 확인합니다. 의도적으로 테스트를 실패시켜 파이프라인이 올바르게 중단되는지 테스트합니다.",
+        "priority": "medium",
+        "dependencies": [1],
+        "status": "To Do",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "개발 경험 개선: 테스트 환경 구축 및 코드 품질 강화",
+        "description": "Jest와 React Testing Library를 사용하여 단위 테스트 환경을 구축하고, TypeScript의 strict 모드를 활성화하며, ESLint 규칙을 강화하여 코드 품질과 안정성을 높입니다.",
+        "details": "Jest, @testing-library/react 등 테스트 관련 의존성을 설치하고 설정합니다. 주요 컴포넌트 및 유틸리티 함수에 대한 단위 테스트를 작성하여 커버리지 70%를 목표로 합니다. tsconfig.json에서 'strict: true'를 활성화하고, ESLint에 타입 체킹 관련 규칙을 추가합니다.",
+        "testStrategy": "'npm run test:unit' 명령어로 모든 단위 테스트가 통과하는지 확인합니다. 'npm run type-check' 및 'npm run lint' 실행 시 에러가 없는지 확인합니다. 테스트 커버리지 리포트를 생성하여 70% 목표 달성 여부를 검증합니다.",
+        "priority": "medium",
+        "dependencies": [5],
+        "status": "To Do",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "사용자 경험 개선: Web Vitals 실시간 모니터링 시스템 구축",
+        "description": "web-vitals 라이브러리를 사용하여 LCP, FID, CLS 등 Core Web Vitals 지표를 수집하고, 이를 Google Analytics와 같은 분석 도구로 전송하여 사용자 경험을 실시간으로 모니터링합니다.",
+        "details": "web-vitals 라이브러리를 설치하고, 수집된 지표를 Google Analytics 4로 전송하는 reportWebVitals 함수를 구현합니다. _app.tsx와 같은 애플리케이션 진입점에서 모니터링을 시작하도록 설정합니다.",
+        "testStrategy": "브라우저 개발자 도구 콘솔에서 web-vitals 로그가 정상적으로 출력되는지 확인합니다. Google Analytics 실시간 리포트에서 'web_vitals' 이벤트가 수집되는지 확인합니다. Lighthouse로 측정한 값과 수집된 값이 유사한지 비교 검증합니다.",
+        "priority": "medium",
+        "dependencies": [2, 3, 4],
+        "status": "To Do",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "사용자 경험 개선: 접근성 강화 (Lighthouse 100점 목표)",
+        "description": "WCAG 기준을 준수하도록 색상 대비를 개선하고, 키보드 네비게이션을 완벽하게 지원하며, 스크린 리더 사용자를 위한 ARIA 속성 및 대체 텍스트를 최적화하여 Lighthouse 접근성 점수 100점을 달성합니다.",
+        "details": "WCAG AA 등급을 만족하는 색상 대비를 적용합니다. 모든 인터랙티브 요소에 명확한 포커스 스타일과 44x44px 이상의 터치 타겟 크기를 보장합니다. 스크린 리더 사용자를 위해 적절한 ARIA 속성과 sr-only 텍스트를 추가합니다.",
+        "testStrategy": "Lighthouse 리포트에서 접근성 점수 100점을 확인합니다. 키보드만 사용하여 사이트의 모든 기능을 사용할 수 있는지 수동으로 테스트합니다. 스크린 리더(VoiceOver, NVDA 등)를 사용하여 주요 사용자 플로우를 검증합니다.",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "To Do",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "사용자 경험 개선: 모바일 최적화",
+        "description": "모바일 디바이스에서의 사용성을 개선하기 위해 터치 타겟 크기를 조정하고, 모바일 전용 레이아웃/컴포넌트를 도입하며, 디바이스 유형에 따라 무거운 기능을 조건부로 로드합니다.",
+        "details": "CSS 미디어 쿼리를 사용하여 모바일 환경에서 터치 타겟 크기를 조정하고 가독성 높은 타이포그래피를 적용합니다. 디바이스 유형을 감지하는 커스텀 훅을 만들어 모바일에서는 TOC(Table of Contents)와 같은 무거운 컴포넌트를 렌더링하지 않도록 최적화합니다.",
+        "testStrategy": "브라우저 개발자 도구의 모바일 에뮬레이터와 실제 모바일 기기에서 레이아웃과 기능이 정상 동작하는지 확인합니다. Lighthouse 리포트에서 모바일 사용성 점수가 95점 이상인지 확인합니다.",
+        "priority": "medium",
+        "dependencies": [8],
+        "status": "To Do",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "SEO 및 콘텐츠 최적화",
+        "description": "Google 리치 결과에 노출될 확률을 높이기 위해 JSON-LD 형식의 구조화된 데이터를 추가하고, 동적 사이트맵 및 RSS 피드를 개선하여 검색 엔진 크롤링 효율성을 향상시킵니다.",
+        "details": "블로그 포스트 페이지에 'BlogPosting' 스키마를 적용한 JSON-LD 구조화된 데이터를 추가합니다. Next.js의 sitemap.ts를 사용하여 동적 사이트맵을 생성하고, Route Handler를 이용해 RSS 피드를 제공합니다.",
+        "testStrategy": "Google Rich Results Test 도구를 사용하여 구조화된 데이터의 유효성을 검증합니다. /sitemap.xml 및 /rss 경로에 접속하여 콘텐츠가 올바르게 생성되는지 확인합니다. Google Search Console에 사이트맵을 제출하고 크롤링 상태를 모니터링합니다.",
+        "priority": "low",
+        "dependencies": [1],
+        "status": "To Do",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-08-30T01:22:28.014Z",
+      "updated": "2025-08-30T01:58:14.084Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

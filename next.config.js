@@ -79,6 +79,26 @@ const nextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.googlesyndication.com *.doubleclick.net *.gstatic.com *.disqus.com *.disquscdn.com",
+              "style-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com *.disquscdn.com",
+              "img-src 'self' data: *.googletagmanager.com *.google-analytics.com *.googlesyndication.com *.doubleclick.net *.gstatic.com *.disqus.com *.disquscdn.com *.gravatar.com",
+              "font-src 'self' *.gstatic.com *.googleapis.com",
+              "connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com *.disqus.com *.disquscdn.com",
+              'frame-src *.googlesyndication.com *.doubleclick.net *.disqus.com',
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "frame-ancestors 'none'",
+            ].join('; '),
+          },
         ],
       },
       {

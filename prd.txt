@@ -1,0 +1,1100 @@
+# 블로그 플랫폼 개선 PRD (Product Requirements Document)
+
+**프로젝트명**: Jell 블로그 플랫폼 현대화
+**버전**: v2.0
+**작성일**: 2025년 8월 28일
+**목표 완료일**: 2025년 11월 30일
+
+## 📋 프로젝트 개요
+
+### 현재 상태
+- **기술 스택**: Next.js 14, TypeScript, Tailwind CSS, Shadcn UI
+- **배포 환경**: Netlify (정적 사이트 생성)
+- **주요 기능**: 블로그 포스팅, 검색, 태그, 댓글, PWA, 다크모드
+- **성능**: 번들 크기 754MB, Core Web Vitals 미측정
+
+### 핵심 문제점
+1. **보안**: Next.js 취약점 4개 (CVE 발견)
+2. **성능**: 과도한 번들 크기 (754MB)
+3. **품질**: 일부 TypeScript strict 설정 누락
+4. **개발경험**: CI/CD 파이프라인 부재
+5. **모니터링**: 성능 지표 수집 시스템 없음
+
+### 목표
+웹 성능, 보안, 개발 생산성을 현대적 수준으로 끌어올려 사용자와 개발자 모두에게 뛰어난 경험을 제공하는 블로그 플랫폼 구축
+
+## 🎯 핵심 개선 영역
+
+### 1. 보안 강화 (Critical)
+**우선순위**: 🔴 최우선
+**예상 기간**: 1주
+**담당자**: 개발자
+
+#### 현재 상황
+- Next.js 14.2.15 사용 (14.2.29+ 필요)
+- 4개의 고위험 CVE 발견
+- 서비스 거부 공격, 캐시 중독 위험성
+
+#### 개선 계획
+```bash
+# 즉시 실행 필요
+npm update next@latest
+npm audit fix --force
+npm audit --audit-level=moderate
+```
+
+#### 추가 보안 조치
+1. **Content Security Policy (CSP) 강화**
+   - script-src, style-src 제한
+   - XSS 공격 방지
+
+2. **보안 헤더 추가**
+   - HSTS (HTTP Strict Transport Security)
+   - X-Frame-Options 강화
+   - Referrer-Policy 최적화
+
+3. **의존성 자동 모니터링**
+   - Dependabot 설정
+   - 월간 보안 리포트
+
+#### 성공 지표
+- npm audit 취약점: 4개 → 0개
+- Security 헤더 점수: 미측정 → A등급
+- 의존성 자동 업데이트: 0% → 90%
+
+### 2. 성능 최적화 (High)
+**우선순위**: 🟠 높음
+**예상 기간**: 3주
+**담당자**: 개발자
+
+#### 현재 상황
+- 번들 크기: 754MB (과도함)
+- 이미지 최적화: 부분 적용
+- 폰트 로딩: CDN 의존
+- Core Web Vitals: 미측정
+
+#### 2.1 번들 크기 최적화
+**목표**: 754MB → 400MB 미만 (47% 감소)
+
+##### 구현 계획
+```javascript
+// next.config.js 개선
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+module.exports = withBundleAnalyzer({
+  // Tree shaking 최적화
+  experimental: {
+    optimizePackageImports: [
+      '@fortawesome/react-fontawesome',
+      '@fortawesome/free-solid-svg-icons',
+      'lucide-react',
+      'prismjs'
+    ],
+  },
+  // 번들 분할 개선
+  webpack: (config) => {
+    config.optimization.splitChunks.chunks = 'all'
+    return config
+  }
+})
+```
+
+##### 라이브러리 최적화
+```typescript
+// ❌ 현재: 전체 라이브러리 import
+import { FontAwesome } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
+
+// ✅ 개선: 필요한 것만 import
+import { FontAwesome } from '@fortawesome/react-fontawesome'
+import faSearch from '@fortawesome/free-solid-svg-icons/faSearch'
+import faTags from '@fortawesome/free-solid-svg-icons/faTags'
+```
+
+#### 2.2 이미지 최적화 파이프라인
+**목표**: 이미지 로딩 시간 50% 단축
+
+##### 자동 이미지 최적화
+```javascript
+// scripts/optimize-images.js
+const sharp = require('sharp')
+const glob = require('glob')
+
+async function optimizeImages() {
+  const images = glob.sync('public/images/**/*.{jpg,jpeg,png}')
+  
+  for (const imagePath of images) {
+    const image = sharp(imagePath)
+    
+    // WebP 변환
+    await image
+      .webp({ quality: 85 })
+      .toFile(imagePath.replace(/\.(jpg|jpeg|png)$/i, '.webp'))
+    
+    // AVIF 변환 (최신 브라우저용)
+    await image
+      .avif({ quality: 80 })
+      .toFile(imagePath.replace(/\.(jpg|jpeg|png)$/i, '.avif'))
+  }
+}
+```
+
+##### 반응형 이미지 컴포넌트
+```typescript
+// components/OptimizedImage.tsx
+interface OptimizedImageProps {
+  src: string
+  alt: string
+  sizes?: string
+}
+
+export const OptimizedImage: React.FC<OptimizedImageProps> = ({ 
+  src, alt, sizes 
+}) => {
+  return (
+    <picture>
+      <source srcSet={src.replace('.jpg', '.avif')} type="image/avif" />
+      <source srcSet={src.replace('.jpg', '.webp')} type="image/webp" />
+      <img 
+        src={src}
+        alt={alt}
+        loading="lazy"
+        sizes={sizes || "(max-width: 768px) 100vw, 50vw"}
+      />
+    </picture>
+  )
+}
+```
+
+#### 2.3 폰트 성능 개선
+**목표**: 폰트 로딩 시간 70% 단축
+
+##### 로컬 호스팅 + 서브셋
+```css
+/* public/fonts/optimized.css */
+@font-face {
+  font-family: 'Pretendard Variable';
+  src: url('/fonts/PretendardVariable-Subset.woff2') format('woff2-variations');
+  font-weight: 45 920;
+  font-display: swap;
+  unicode-range: U+AC00-D7AF, U+1100-11FF, U+3130-318F; /* 한국어 */
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Variable.woff2') format('woff2-variations');
+  font-weight: 100 800;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153; /* 라틴 */
+}
+```
+
+#### 성공 지표
+- 번들 크기: 754MB → 400MB (-47%)
+- 이미지 압축률: → 60% 압축
+- 폰트 로딩: CDN → 로컬 (70% 빨라짐)
+- Core Web Vitals: LCP < 2.5s, FID < 100ms, CLS < 0.1
+
+### 3. 개발 경험 개선 (Medium)
+**우선순위**: 🟡 중간
+**예상 기간**: 2주
+**담당자**: 개발자
+
+#### 3.1 테스트 환경 구축
+**목표**: 테스트 커버리지 70% 달성
+
+##### 단위 테스트 환경
+```bash
+npm install --save-dev jest @testing-library/react
+npm install --save-dev @testing-library/jest-dom
+npm install --save-dev jest-environment-jsdom
+```
+
+##### 테스트 구조
+```
+tests/
+├── unit/
+│   ├── components/
+│   │   ├── Header.test.tsx
+│   │   ├── PostCard.test.tsx
+│   │   └── SearchBox.test.tsx
+│   └── lib/
+│       ├── markdown.test.ts
+│       └── utils.test.ts
+├── integration/
+│   └── api.test.ts
+└── e2e/ (기존 Playwright 유지)
+    ├── navigation.spec.ts
+    ├── search.spec.ts
+    └── performance-accessibility.spec.ts
+```
+
+##### 예시 테스트
+```typescript
+// tests/unit/components/Header.test.tsx
+import { render, screen } from '@testing-library/react'
+import Header from '@/components/Header'
+
+describe('Header', () => {
+  it('renders site title correctly', () => {
+    render(<Header siteTitle="Test Blog" />)
+    expect(screen.getByRole('heading', { name: 'Test Blog' })).toBeInTheDocument()
+  })
+
+  it('toggles theme correctly', async () => {
+    const user = userEvent.setup()
+    render(<Header siteTitle="Test Blog" />)
+    
+    const themeButton = screen.getByRole('button', { name: /theme/i })
+    await user.click(themeButton)
+    
+    expect(document.documentElement).toHaveClass('dark')
+  })
+})
+```
+
+#### 3.2 CI/CD 파이프라인
+**목표**: 배포 자동화 100% 달성
+
+##### GitHub Actions 워크플로우
+```yaml
+# .github/workflows/ci.yml
+name: CI/CD Pipeline
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run type-check
+      - run: npm run test:unit
+      - run: npm run test:e2e
+      
+      - name: Security Audit
+        run: npm audit --audit-level=moderate
+        
+      - name: Bundle Analysis
+        run: ANALYZE=true npm run build
+        
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - run: npm run build:production
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+```
+
+#### 3.3 코드 품질 강화
+**목표**: TypeScript strict 모드 100% 적용
+
+##### TypeScript 설정 강화
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true
+  }
+}
+```
+
+##### ESLint 규칙 확장
+```javascript
+// eslint.config.js
+module.exports = {
+  extends: [
+    'next/core-web-vitals',
+    '@typescript-eslint/recommended',
+    '@typescript-eslint/recommended-requiring-type-checking'
+  ],
+  rules: {
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    'prefer-const': 'error',
+    'react-hooks/exhaustive-deps': 'error'
+  }
+}
+```
+
+#### 성공 지표
+- 테스트 커버리지: 0% → 70%
+- CI/CD 자동화: 수동 배포 → 100% 자동
+- TypeScript strict: 80% → 100%
+- 코드 품질 점수: 미측정 → A등급
+
+### 4. 사용자 경험 개선 (Medium)
+**우선순위**: 🟡 중간
+**예상 기간**: 2주
+**담당자**: 개발자
+
+#### 4.1 성능 모니터링 시스템
+**목표**: 실시간 성능 지표 수집
+
+##### Web Vitals 모니터링
+```typescript
+// lib/analytics.ts
+import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals'
+
+interface WebVitalMetric {
+  name: string
+  value: number
+  id: string
+}
+
+export function reportWebVitals(metric: WebVitalMetric) {
+  // Google Analytics 4로 전송
+  gtag('event', 'web_vitals', {
+    event_category: 'Performance',
+    event_label: metric.name,
+    value: Math.round(metric.value),
+    non_interaction: true
+  })
+  
+  // 성능 저하 알림
+  if (metric.name === 'LCP' && metric.value > 4000) {
+    console.warn('Poor LCP detected:', metric.value)
+  }
+}
+
+// 자동 측정 시작
+export function initWebVitals() {
+  getCLS(reportWebVitals)
+  getFID(reportWebVitals)  
+  getFCP(reportWebVitals)
+  getLCP(reportWebVitals)
+  getTTFB(reportWebVitals)
+}
+```
+
+##### 성능 대시보드
+```typescript
+// components/PerformanceDashboard.tsx (개발환경용)
+export const PerformanceDashboard: React.FC = () => {
+  const [metrics, setMetrics] = useState<WebVitalMetric[]>([])
+  
+  useEffect(() => {
+    // 실시간 성능 지표 수집
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.entryType === 'navigation') {
+          setMetrics(prev => [...prev, {
+            name: 'Navigation',
+            value: entry.duration,
+            timestamp: Date.now()
+          }])
+        }
+      }
+    })
+    
+    observer.observe({ entryTypes: ['navigation', 'resource'] })
+  }, [])
+  
+  return (
+    <div className="fixed bottom-4 right-4 bg-white p-4 rounded shadow">
+      <h3>Performance Metrics</h3>
+      {metrics.map((metric, i) => (
+        <div key={i}>
+          {metric.name}: {Math.round(metric.value)}ms
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+#### 4.2 접근성 강화
+**목표**: Lighthouse 접근성 점수 100점
+
+##### 색상 대비 개선
+```css
+/* globals.css */
+:root {
+  /* 기존 색상 */
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  
+  /* WCAG AA 준수 색상 (대비율 4.5:1 이상) */
+  --text-primary-accessible: #0f172a; /* 대비율 16:1 */
+  --text-secondary-accessible: #374151; /* 대비율 7:1 */
+  --link-color-accessible: #1e40af; /* 대비율 5.2:1 */
+}
+
+/* 고대비 모드 지원 */
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #000000;
+    --background: #ffffff;
+    --border: #000000;
+  }
+}
+```
+
+##### 키보드 네비게이션 개선
+```typescript
+// components/AccessibleButton.tsx
+interface AccessibleButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode
+}
+
+export const AccessibleButton: React.FC<AccessibleButtonProps> = ({
+  children,
+  ...props
+}) => {
+  return (
+    <button
+      {...props}
+      className={cn(
+        "min-h-[44px] min-w-[44px]", // 터치 타겟 크기
+        "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2", // 포커스 링
+        "transition-all duration-150", // 부드러운 전환
+        props.className
+      )}
+      // 스크린 리더 지원
+      aria-label={props['aria-label'] || (typeof children === 'string' ? children : undefined)}
+    >
+      {children}
+    </button>
+  )
+}
+```
+
+##### 스크린 리더 최적화
+```typescript
+// components/ScreenReaderOnly.tsx
+export const ScreenReaderOnly: React.FC<{ children: React.ReactNode }> = ({ 
+  children 
+}) => (
+  <span className="sr-only">
+    {children}
+  </span>
+)
+
+// 사용 예시
+<button aria-describedby="search-description">
+  <SearchIcon />
+  <ScreenReaderOnly>검색</ScreenReaderOnly>
+</button>
+```
+
+#### 4.3 모바일 최적화
+**목표**: 모바일 사용성 점수 95점 이상
+
+##### 터치 인터페이스 개선
+```css
+/* mobile.css */
+@media (max-width: 768px) {
+  /* 터치 타겟 최소 44px */
+  button, a, input {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* 모바일 타이포그래피 최적화 */
+  .blog-post-content {
+    font-size: 18px; /* 모바일에서 더 큰 글씨 */
+    line-height: 1.6;
+  }
+  
+  /* 모바일 네비게이션 */
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--background);
+    border-top: 1px solid var(--border);
+    padding: 12px;
+    display: flex;
+    justify-content: space-around;
+  }
+}
+```
+
+##### 모바일 성능 최적화
+```typescript
+// hooks/useDeviceType.ts
+export function useDeviceType() {
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    const checkDevice = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkDevice()
+    window.addEventListener('resize', checkDevice)
+    return () => window.removeEventListener('resize', checkDevice)
+  }, [])
+  
+  return { isMobile }
+}
+
+// 모바일에서 무거운 기능 비활성화
+const PostPage: React.FC = () => {
+  const { isMobile } = useDeviceType()
+  
+  return (
+    <article>
+      {/* 모바일에서는 TOC 숨김 */}
+      {!isMobile && <TableOfContents />}
+      
+      {/* 모바일에서는 간단한 공유 버튼만 */}
+      {isMobile ? <SimpleShareButton /> : <FullShareModal />}
+    </article>
+  )
+}
+```
+
+#### 성공 지표
+- Core Web Vitals: 미측정 → 90점
+- Lighthouse 접근성: 미측정 → 100점
+- 모바일 사용성: 미측정 → 95점
+- 키보드 네비게이션: 부분 지원 → 100% 지원
+
+### 5. SEO 및 콘텐츠 최적화 (Low)
+**우선순위**: 🟢 낮음  
+**예상 기간**: 1주
+**담당자**: 개발자
+
+#### 5.1 구조화된 데이터 강화
+**목표**: Google 리치 결과 표시 확률 80% 증가
+
+##### JSON-LD 구조화된 데이터
+```typescript
+// components/StructuredData.tsx
+interface BlogPostStructuredDataProps {
+  post: {
+    title: string
+    excerpt: string
+    date: string
+    author: string
+    category: string
+    slug: string
+  }
+}
+
+export const BlogPostStructuredData: React.FC<BlogPostStructuredDataProps> = ({ 
+  post 
+}) => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "author": {
+      "@type": "Person",
+      "name": post.author,
+      "url": "https://blog.jell.kr"
+    },
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://blog.jell.kr/posts/${post.slug}`
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Jell's Blog",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://blog.jell.kr/icons/icon-512x512.png"
+      }
+    },
+    "articleSection": post.category,
+    "inLanguage": "ko-KR"
+  }
+  
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  )
+}
+```
+
+#### 5.2 사이트맵 및 RSS 개선
+**목표**: 검색 엔진 크롤링 효율성 30% 향상
+
+##### 동적 사이트맵 생성
+```typescript
+// app/sitemap.ts
+import { getAllPosts } from '@/lib/markdown'
+
+export default async function sitemap() {
+  const posts = await getAllPosts()
+  
+  const staticPages = [
+    {
+      url: 'https://blog.jell.kr',
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 1,
+    },
+    {
+      url: 'https://blog.jell.kr/search',
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }
+  ]
+  
+  const postPages = posts.map((post) => ({
+    url: `https://blog.jell.kr/posts/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.9,
+  }))
+  
+  return [...staticPages, ...postPages]
+}
+```
+
+##### RSS 피드 개선
+```typescript
+// app/rss/route.ts
+import RSS from 'rss'
+import { getAllPosts } from '@/lib/markdown'
+
+export async function GET() {
+  const posts = await getAllPosts()
+  
+  const feed = new RSS({
+    title: 'Jell의 세상 사는 이야기',
+    description: '개발, 자전거, 일상에 대한 블로그',
+    feed_url: 'https://blog.jell.kr/rss',
+    site_url: 'https://blog.jell.kr',
+    language: 'ko',
+    pubDate: new Date().toUTCString(),
+    ttl: 60,
+  })
+  
+  posts.slice(0, 20).forEach((post) => {
+    feed.item({
+      title: post.title,
+      description: post.excerpt,
+      url: `https://blog.jell.kr/posts/${post.slug}`,
+      date: post.date,
+      categories: post.tags,
+      author: 'Jell',
+    })
+  })
+  
+  return new Response(feed.xml(), {
+    headers: {
+      'Content-Type': 'application/xml',
+    },
+  })
+}
+```
+
+#### 성공 지표
+- Google Search Console 노출: 현재 → +30%
+- 리치 결과 표시: 0% → 80%
+- 크롤링 에러: 현재 → 0개
+- Core Web Vitals 통과율: 현재 → 100%
+
+## 📅 실행 일정
+
+### Phase 1: 보안 및 안정성 (1주차)
+**기간**: 8/28 - 9/3
+
+#### 주요 작업
+- [x] 보안 취약점 패치 (Next.js 업데이트)
+- [ ] 프로덕션 로깅 정리
+- [ ] 기본 성능 측정 기준선 설정
+- [ ] 번들 분석 도구 설정
+
+#### 완료 기준
+- npm audit 취약점 0개
+- 번들 분석 리포트 생성
+- 성능 측정 대시보드 구축
+
+### Phase 2: 성능 최적화 (2-4주차)
+**기간**: 9/4 - 9/24
+
+#### 주요 작업
+- [ ] 번들 크기 최적화 (목표: -47%)
+- [ ] 이미지 최적화 파이프라인 구축
+- [ ] 폰트 로컬 호스팅 및 서브셋
+- [ ] 코드 분할 및 지연 로딩 개선
+
+#### 완료 기준
+- 번들 크기 400MB 미만
+- 이미지 최적화율 60% 이상
+- Core Web Vitals 90점 이상
+
+### Phase 3: 개발 경험 개선 (5-6주차)  
+**기간**: 9/25 - 10/8
+
+#### 주요 작업
+- [ ] 단위 테스트 환경 구축
+- [ ] CI/CD 파이프라인 설정
+- [ ] TypeScript strict 모드 100% 적용
+- [ ] 코드 품질 도구 통합
+
+#### 완료 기준
+- 테스트 커버리지 70% 이상
+- 배포 자동화 100%
+- TypeScript strict 모드 완전 적용
+
+### Phase 4: 사용자 경험 개선 (7-8주차)
+**기간**: 10/9 - 10/22
+
+#### 주요 작업
+- [ ] 성능 모니터링 시스템 구축
+- [ ] 접근성 강화 (Lighthouse 100점)
+- [ ] 모바일 최적화
+- [ ] SEO 고도화
+
+#### 완료 기준
+- Lighthouse 성능 90점 이상
+- 접근성 점수 100점
+- 모바일 사용성 95점 이상
+
+### Phase 5: 안정화 및 모니터링 (9-12주차)
+**기간**: 10/23 - 11/19
+
+#### 주요 작업
+- [ ] 전체 시스템 통합 테스트
+- [ ] 성능 튜닝 및 최적화
+- [ ] 문서화 완료
+- [ ] 모니터링 시스템 검증
+
+#### 완료 기준
+- E2E 테스트 통과율 95% 이상
+- 모든 성능 지표 목표 달성
+- 완전한 기술 문서 작성
+
+## 📊 성공 지표 및 KPI
+
+### 기술적 성능 지표
+
+| 지표                    | 현재 상태 | 목표 상태  | 측정 방법           |
+|-------------------------|-----------|------------|---------------------|
+| **보안**                |           |            |                     |
+| npm audit 취약점       | 4개       | 0개        | npm audit           |
+| 보안 헤더 점수          | 미측정    | A등급      | Security Headers    |
+| **성능**                |           |            |                     |
+| 번들 크기               | 754MB     | <400MB     | Bundle Analyzer     |
+| LCP (최대 콘텐츠 페인트) | 미측정    | <2.5s      | Web Vitals          |
+| FID (첫 입력 지연)      | 미측정    | <100ms     | Web Vitals          |
+| CLS (누적 레이아웃 이동) | 미측정    | <0.1       | Web Vitals          |
+| **코드 품질**           |           |            |                     |
+| TypeScript 커버리지     | 80%       | 100%       | tsc --noEmit        |
+| 테스트 커버리지         | 0%        | 70%        | Jest                |
+| ESLint 오류             | 미측정    | 0개        | ESLint              |
+| **접근성**              |           |            |                     |
+| Lighthouse 접근성       | 미측정    | 100점      | Lighthouse          |
+| 키보드 네비게이션       | 부분      | 100%       | 수동 테스트         |
+| 색상 대비 준수          | 부분      | 100%       | Axe DevTools        |
+| **SEO**                 |           |            |                     |
+| Lighthouse SEO          | 미측정    | 100점      | Lighthouse          |
+| 구조화된 데이터         | 기본      | 고도화     | Google Rich Results |
+| 사이트맵 업데이트       | 수동      | 자동       | Google Search Console |
+
+### 사용자 경험 지표
+
+| 지표                | 현재 상태 | 목표 상태 | 측정 방법           |
+|---------------------|-----------|-----------|---------------------|
+| 페이지 로딩 시간    | 미측정    | <2초      | Google Analytics    |
+| 모바일 사용성       | 미측정    | 95점      | Lighthouse          |
+| 오류율              | 미측정    | <1%       | 에러 모니터링       |
+| 검색 성능           | 미측정    | <200ms    | 성능 모니터링       |
+
+### 개발 효율성 지표
+
+| 지표                | 현재 상태 | 목표 상태 | 측정 방법    |
+|---------------------|-----------|-----------|------------|
+| 빌드 시간           | 미측정    | <3분      | CI 로그    |
+| 배포 자동화         | 수동      | 100%      | GitHub Actions |
+| 테스트 실행 시간    | 미측정    | <2분      | Jest/Playwright |
+| 코드 리뷰 시간      | 수동      | <1일      | PR 분석    |
+
+## 🚨 위험 요소 및 대응 방안
+
+### 기술적 위험
+
+#### 1. Next.js 업그레이드 호환성
+**위험 수준**: 🟡 중간  
+**발생 확률**: 40%  
+**영향도**: 높음
+
+**위험 상황**:
+- Next.js 14.2.15 → 최신 버전 업그레이드 시 Breaking Changes
+- 기존 컴포넌트 동작 변경
+- 빌드 오류 발생 가능성
+
+**대응 방안**:
+```bash
+# 1단계: 브랜치 생성 후 테스트
+git checkout -b feature/nextjs-upgrade
+npm update next@latest
+
+# 2단계: 전체 테스트 실행
+npm run test:all
+npm run build
+
+# 3단계: 문제 발생 시 단계적 해결
+# - 공식 마이그레이션 가이드 참조
+# - 컴포넌트별 개별 수정
+# - 기능별 점진적 테스트
+```
+
+**비상 계획**:
+- 이전 버전으로 즉시 롤백
+- 패치 버전만 먼저 적용 후 메이저 업그레이드 연기
+- 중요 취약점만 우선 패치
+
+#### 2. 성능 최적화 부작용
+**위험 수준**: 🟠 높음  
+**발생 확률**: 60%  
+**영향도**: 중간
+
+**위험 상황**:
+- 번들 분할 시 런타임 에러
+- 이미지 최적화로 인한 품질 저하
+- 폰트 로딩 변경으로 레이아웃 변화
+
+**대응 방안**:
+```typescript
+// A/B 테스트를 통한 점진적 적용
+const useOptimization = () => {
+  const [enableOptimization, setEnableOptimization] = useState(false)
+  
+  useEffect(() => {
+    // 환경변수 또는 피쳐 플래그로 제어
+    const shouldEnable = process.env.NEXT_PUBLIC_ENABLE_OPTIMIZATION === 'true'
+    setEnableOptimization(shouldEnable)
+  }, [])
+  
+  return enableOptimization
+}
+
+// 사용 예시
+const ImageComponent = ({ src, alt }) => {
+  const enableOptimization = useOptimization()
+  
+  return enableOptimization ? (
+    <OptimizedImage src={src} alt={alt} />
+  ) : (
+    <img src={src} alt={alt} />
+  )
+}
+```
+
+**모니터링 체계**:
+```typescript
+// 성능 회귀 감지
+const performanceMonitor = {
+  thresholds: {
+    LCP: 2500,
+    FID: 100,
+    CLS: 0.1
+  },
+  
+  alert: (metric: string, value: number) => {
+    if (value > performanceMonitor.thresholds[metric]) {
+      console.error(`Performance regression detected: ${metric} = ${value}`)
+      // 알림 발송 로직
+    }
+  }
+}
+```
+
+#### 3. 테스트 환경 구축 복잡성
+**위험 수준**: 🟡 중간  
+**발생 확률**: 50%  
+**영향도**: 낮음
+
+**위험 상황**:
+- Jest와 Next.js 호환성 문제
+- E2E 테스트와 단위 테스트 간 충돌
+- 테스트 데이터 관리 복잡성
+
+**대응 방안**:
+```javascript
+// 단계적 테스트 도입
+// 1단계: 핵심 유틸리티 함수부터 시작
+// tests/unit/lib/markdown.test.ts
+
+// 2단계: 간단한 컴포넌트 테스트
+// tests/unit/components/Button.test.tsx
+
+// 3단계: 복잡한 통합 테스트
+// tests/integration/page.test.tsx
+
+// 격리된 테스트 환경 설정
+module.exports = {
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testPathIgnorePatterns: ['<rootDir>/tests/e2e/'],
+  moduleNameMapping: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+}
+```
+
+### 운영적 위험
+
+#### 1. 배포 중 서비스 중단
+**위험 수준**: 🔴 높음  
+**발생 확률**: 30%  
+**영향도**: 높음
+
+**대응 방안**:
+- Blue-Green 배포 전략 적용
+- 배포 전 스테이징 환경 검증 필수
+- 즉시 롤백 가능한 배포 스크립트 준비
+
+```yaml
+# .github/workflows/safe-deploy.yml
+deploy:
+  steps:
+    - name: Deploy to Staging
+      run: netlify deploy --dir=out --alias=staging
+      
+    - name: E2E Test on Staging
+      run: npm run test:e2e:staging
+      
+    - name: Deploy to Production (if tests pass)
+      if: success()
+      run: netlify deploy --dir=out --prod
+      
+    - name: Health Check
+      run: curl -f https://blog.jell.kr || exit 1
+```
+
+#### 2. 의존성 업데이트 충돌
+**위험 수준**: 🟡 중간  
+**발생 확률**: 40%  
+**영향도**: 중간
+
+**대응 방안**:
+- 의존성 업데이트 전 전체 백업
+- package-lock.json 버전 관리 철저화
+- 충돌 발생 시 개별 패키지 다운그레이드
+
+```bash
+# 안전한 의존성 업데이트 프로세스
+# 1. 백업
+cp package.json package.json.backup
+cp package-lock.json package-lock.json.backup
+
+# 2. 테스트 환경에서 업데이트
+npm update --save-dev
+npm test
+
+# 3. 문제 없으면 프로덕션 적용
+# 문제 있으면 롤백
+cp package.json.backup package.json
+cp package-lock.json.backup package-lock.json
+npm ci
+```
+
+## 💰 리소스 요구사항
+
+### 개발 시간 예산
+
+| Phase | 작업 내용 | 예상 시간 | 주요 활동 |
+|-------|-----------|-----------|-----------|
+| **Phase 1** | 보안 및 안정성 | 20시간 | Next.js 업데이트, 취약점 패치 |
+| **Phase 2** | 성능 최적화 | 40시간 | 번들 최적화, 이미지 파이프라인 |
+| **Phase 3** | 개발 환경 | 30시간 | 테스트 환경, CI/CD 구축 |
+| **Phase 4** | 사용자 경험 | 25시간 | 접근성, 모바일 최적화 |
+| **Phase 5** | 안정화 | 15시간 | 통합 테스트, 문서화 |
+| **총 예상 시간** | | **130시간** | **약 16주 (주당 8시간)** |
+
+### 외부 서비스 비용
+
+| 서비스 | 현재 비용 | 추가 비용 | 총 비용 |
+|--------|-----------|-----------|---------|
+| Netlify | $0 (Free) | $0 | $0 |
+| GitHub Actions | $0 (Free) | $0 | $0 |
+| Google Analytics | $0 | $0 | $0 |
+| 도메인 (.kr) | ~$10/년 | $0 | ~$10/년 |
+| **총 운영비용** | | | **$10/년** |
+
+### 도구 및 라이브러리 비용
+
+모든 사용 예정 도구는 오픈소스 또는 무료 tier 사용
+- Jest, Playwright: 무료
+- ESLint, Prettier: 무료  
+- TypeScript: 무료
+- Bundle Analyzer: 무료
+- Sharp (이미지 최적화): 무료
+
+## 🎉 성공 시나리오
+
+### 단기 성과 (1개월 후)
+- ✅ 보안 취약점 완전 해결
+- ✅ 번들 크기 47% 감소 달성
+- ✅ 기본 테스트 환경 구축
+- ✅ CI/CD 파이프라인 운영
+
+**기대 효과**:
+- 개발자 생산성 30% 향상
+- 배포 안정성 95% 달성
+- 보안 리스크 제로화
+
+### 중기 성과 (2개월 후)  
+- ✅ Core Web Vitals 90점 이상
+- ✅ Lighthouse 종합 점수 90점 이상
+- ✅ 테스트 커버리지 70% 달성
+- ✅ 접근성 완전 준수
+
+**기대 효과**:
+- 사용자 이탈률 20% 감소
+- 검색 엔진 순위 개선
+- 모바일 사용성 대폭 향상
+
+### 장기 성과 (3개월 후)
+- ✅ 완전 자동화된 개발/배포 환경
+- ✅ 실시간 성능 모니터링 시스템
+- ✅ 업계 최고 수준의 블로그 플랫폼
+- ✅ 확장 가능한 아키텍처
+
+**기대 효과**:
+- 기술 블로그계의 레퍼런스 사이트
+- 개발 커뮤니티에서의 인지도 상승
+- 향후 프로젝트의 기술 기반 확보
+
+## 📝 결론
+
+이 PRD는 현재 운영 중인 Jell 블로그를 현대적이고 안전하며 고성능인 플랫폼으로 전환하기 위한 종합적인 계획입니다.
+
+### 핵심 가치 제안
+1. **보안성**: 제로 취약점 달성으로 안전한 서비스 제공
+2. **성능**: 업계 최고 수준의 로딩 속도와 사용자 경험
+3. **접근성**: 모든 사용자가 접근 가능한 포용적 플랫폼  
+4. **생산성**: 자동화된 개발/배포 환경으로 개발 효율성 극대화
+5. **확장성**: 미래 성장을 고려한 견고한 아키텍처
+
+### 실행 원칙
+- **점진적 개선**: 급격한 변화보다는 단계적 발전
+- **데이터 기반 의사결정**: 모든 변경사항을 측정 가능한 지표로 검증
+- **사용자 중심**: 기술적 완성도와 사용자 경험의 균형
+- **지속 가능성**: 장기적으로 유지보수 가능한 구조
+
+이 계획을 통해 3개월 후에는 기술적으로나 사용자 경험 측면에서 모두 업계 최고 수준의 개인 블로그 플랫폼을 보유하게 될 것입니다.
+
+---
+**문서 버전**: v1.0  
+**최종 수정일**: 2025년 8월 28일  
+**다음 리뷰**: 2025년 9월 4일 (Phase 1 완료 후)
