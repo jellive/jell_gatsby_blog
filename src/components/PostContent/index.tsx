@@ -21,7 +21,7 @@ import SocialShare from '@/components/SocialShare'
 import ReadingProgress from '@/components/ReadingProgress'
 import ImageModal from '@/components/ImageModal'
 import { siteConfig } from '@/lib/config'
-import { PostData } from '@/lib/markdown'
+import type { PostData } from '@/lib/markdown'
 import { cn } from '@/lib/utils'
 
 interface ImageData {

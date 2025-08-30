@@ -4,9 +4,7 @@
       "type": "stdio",
       "command": "node",
       "args": ["path/to/ts-sdk-server.js"],
-      "env": {},
-      "name": "TypeScript SDK",
-      "description": "Official Anthropic SDK for building MCP servers and clients in JS/TS"
+      "env": {}
     },
     "github": {
       "type": "stdio",
@@ -14,17 +12,13 @@
       "args": ["path/to/server-github"],
       "env": {
         "GITHUB_TOKEN": "..."
-      },
-      "name": "GitHub MCP",
-      "description": "Integration with GitHub API for managing repos, issues, and PRs"
+      }
     },
     "puppeteer": {
       "type": "stdio",
       "command": "node",
       "args": ["path/to/server-puppeteer"],
-      "env": {},
-      "name": "Puppeteer MCP",
-      "description": "Browser automation using Google Puppeteer"
+      "env": {}
     },
     "slack": {
       "type": "stdio",
@@ -32,41 +26,31 @@
       "args": ["path/to/server-slack"],
       "env": {
         "SLACK_TOKEN": "..."
-      },
-      "name": "Slack MCP",
-      "description": "Access to real-time Slack conversations and workflows"
+      }
     },
     "filesystem": {
       "type": "stdio",
       "command": "node",
       "args": ["path/to/server-filesystem"],
-      "env": {},
-      "name": "File System MCP",
-      "description": "Local file management; compatible with any language"
+      "env": {}
     },
     "memory-bank": {
       "type": "stdio",
       "command": "server-memory",
       "args": [],
-      "env": {},
-      "name": "Memory Bank MCP",
-      "description": "Centralized memory system for AI agents"
+      "env": {}
     },
     "sequential-thinking": {
       "type": "stdio",
       "command": "code-reasoning",
       "args": [],
-      "env": {},
-      "name": "Sequential Thinking MCP",
-      "description": "Helps LLMs decompose complex tasks into logical steps"
+      "env": {}
     },
     "brave-search": {
       "type": "stdio",
       "command": "server-brave-search",
       "args": [],
-      "env": {},
-      "name": "Brave Search MCP",
-      "description": "Privacy-focused web search tool"
+      "env": {}
     },
     "google-maps": {
       "type": "stdio",
@@ -74,17 +58,13 @@
       "args": [],
       "env": {
         "GOOGLE_MAPS_API_KEY": "..."
-      },
-      "name": "Google Maps MCP",
-      "description": "Integrates Google Maps for geolocation and directions"
+      }
     },
     "deep-graph": {
       "type": "stdio",
       "command": "mcp-code-graph",
       "args": [],
-      "env": {},
-      "name": "Deep Graph MCP (Code Graph)",
-      "description": "Transforms source code into semantic graphs via DeepGraph"
+      "env": {}
     },
     "task-master-ai": {
       "type": "stdio",

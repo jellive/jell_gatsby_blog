@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getAllTags, getPostsByTag } from '@/lib/markdown'
 import PostListWithPagination from '@/components/PostListWithPagination'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/config'
 
 interface TagPageProps {

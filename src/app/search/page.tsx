@@ -1,6 +1,6 @@
 import { getAllPosts } from '@/lib/markdown'
 import SearchInteractive from '@/components/SearchInteractive'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Search | Jell의 세상 사는 이야기',

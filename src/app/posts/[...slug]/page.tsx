@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getAllPosts, getPostBySlug } from '@/lib/markdown'
 import { siteConfig } from '@/lib/config'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import PostContent from '@/components/PostContent'
 import StructuredData from '@/components/StructuredData'
 

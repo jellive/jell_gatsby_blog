@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { PostData } from '@/lib/markdown'
+import type { PostData } from '@/lib/markdown'
 import PostList from '@/components/PostList'
 import { cn } from '@/lib/utils'
 

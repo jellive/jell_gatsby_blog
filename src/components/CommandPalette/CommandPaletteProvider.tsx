@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { PostData } from '@/lib/markdown'
+import type { PostData } from '@/lib/markdown'
 import CommandPalette from './index'
 
 interface CommandPaletteContextType {

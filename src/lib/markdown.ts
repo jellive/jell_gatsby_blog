@@ -405,10 +405,7 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
 
   // Transform featuredImage path if exists
   let transformedFeaturedImage: string | undefined
-  if (
-    frontMatter?.featuredImage &&
-    frontMatter.featuredImage.startsWith('images/')
-  ) {
+  if (frontMatter?.featuredImage?.startsWith('images/')) {
     const pathParts = relativePath.split(path.sep)
     if (pathParts.length >= 4) {
       const category = pathParts[0]
