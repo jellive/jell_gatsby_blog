@@ -38,7 +38,7 @@ describe('Header Component', () => {
 
     // Check for profile image
     const profileImage = screen.getByRole('img', {
-      name: /title profile picture/i,
+      name: /jell's profile picture/i,
     })
     expect(profileImage).toBeInTheDocument()
 

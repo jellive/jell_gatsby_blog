@@ -2,14 +2,16 @@
    Modern Tech Blog Design System
    ======================================== */
 
-/* ===== Pretendard Font Configuration ===== */
+/* ===== Pretendard Font Configuration (Local) ===== */
 @font-face {
   font-family: 'Pretendard Variable';
-  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2')
-    format('woff2-variations');
+  src: url('/fonts/PretendardVariable.woff2') format('woff2-variations');
   font-weight: 45 920;
   font-style: normal;
   font-display: swap;
+  unicode-range:
+    U+0020-007F, U+00A0-00FF, U+0100-017F, U+1E00-1EFF, U+AC00-D7AF,
+    U+1100-11FF, U+3130-318F, U+A960-A97F, U+D7B0-D7FF;
 }
 
 @tailwind base;
@@ -785,15 +787,15 @@ a:active {
 
 @media screen and (max-width: 1119px) {
   .header-profile-image-wrap img {
-    width: 35px !important;
-    height: 35px !important;
+    width: 48px !important;
+    height: 48px !important;
   }
 }
 
 @media screen and (max-width: 559px) {
   .header-profile-image-wrap img {
-    width: 28px !important;
-    height: 28px !important;
+    width: 48px !important;
+    height: 48px !important;
   }
 }
 

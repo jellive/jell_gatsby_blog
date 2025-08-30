@@ -33,7 +33,21 @@ const nextConfig = {
   },
   images: {
     unoptimized: true, // Required for static export
-    domains: [],
+    domains: ['avatars.githubusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'blog.jell.kr',
+      },
+      {
+        protocol: 'https',
+        hostname: 'jell-gatsby-blog.netlify.app',
+      },
+    ],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 31536000, // 1 year
   },

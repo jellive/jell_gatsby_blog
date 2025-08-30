@@ -64,10 +64,10 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
 
     checkMobile()
 
-    // Handle profile image sizing based on route - Medium style avatars
+    // Handle profile image sizing based on route - Fixed size for consistency
     const updateProfileSize = () => {
-      // Use Medium avatar sizes: 48px (large), 32px (medium), 20px (small)
-      setProfileSize(pathname === '/' ? '48px' : '32px')
+      // Use consistent size matching button icons (48px)
+      setProfileSize('48px')
     }
 
     updateProfileSize()
@@ -118,13 +118,13 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
         <div className="header-title">
           <Link href="/">
             <div className="header-profile-image-wrap">
-              <OptimizedImage
+              <img
                 src="https://avatars.githubusercontent.com/u/7909227?v=4"
-                alt="title profile picture"
-                width={profileSize}
-                height={profileSize}
-                priority={true}
-                className="rounded-full"
+                alt="Jell's profile picture"
+                width="48"
+                height="48"
+                className="rounded-full object-cover"
+                crossOrigin="anonymous"
               />
             </div>
           </Link>
@@ -141,19 +141,21 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
             size="icon"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={cn(
-              'group relative flex h-10 w-10 items-center justify-center',
+              'group relative flex h-12 w-12 items-center justify-center',
               'border-border/30 rounded-md border',
               'hover:border-border/60 hover:scale-105',
               'active:scale-95',
               'transition-all duration-200',
-              'hover:bg-accent/10 bg-transparent'
+              'hover:bg-accent/10 bg-transparent',
+              // Responsive sizing for mobile
+              'max-md:h-11 max-md:w-11 max-sm:h-10 max-sm:w-10'
             )}
             aria-label="모바일 메뉴 열기"
             data-testid="mobile-menu-toggle"
           >
             <Fa
               icon={mobileMenuOpen ? faTimes : faBars}
-              className="text-base transition-all duration-200"
+              className="text-lg transition-all duration-200"
             />
           </Button>
         </div>
@@ -170,15 +172,12 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                       size="icon"
                       onClick={() => router.push('/tags')}
                       className={cn(
-                        'group relative flex h-10 w-10 items-center justify-center',
+                        'group relative flex h-12 w-12 items-center justify-center',
                         'border-border/30 rounded-md border',
                         'hover:border-border/60 hover:scale-105',
                         'active:scale-95',
                         'transition-all duration-200',
-                        'hover:bg-accent/10 bg-transparent',
-                        // Responsive sizing
-                        'max-md:h-9 max-md:w-9',
-                        'max-sm:h-8 max-sm:w-8'
+                        'hover:bg-accent/10 bg-transparent'
                       )}
                       onMouseEnter={() => {
                         tagSpanVisibleToggle(true)
@@ -191,9 +190,8 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                       <Fa
                         icon={faTags}
                         className={cn(
-                          'text-base transition-all duration-200',
+                          'text-lg transition-all duration-200',
                           'group-hover:scale-110',
-                          'max-md:text-sm max-sm:text-xs',
                           'text-green-500 dark:text-green-400',
                           'group-hover:text-green-600 dark:group-hover:text-green-300',
                           'group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]'
@@ -217,24 +215,20 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                       size="icon"
                       onClick={openPalette}
                       className={cn(
-                        'group relative flex h-10 w-10 items-center justify-center',
+                        'group relative flex h-12 w-12 items-center justify-center',
                         'border-border/30 rounded-md border',
                         'hover:border-border/60 hover:scale-105',
                         'active:scale-95',
                         'transition-all duration-200',
-                        'hover:bg-accent/10 bg-transparent',
-                        // Responsive sizing
-                        'max-md:h-9 max-md:w-9',
-                        'max-sm:h-8 max-sm:w-8'
+                        'hover:bg-accent/10 bg-transparent'
                       )}
                       aria-label="검색하기 (Cmd+K)"
                     >
                       <Fa
                         icon={faSearch}
                         className={cn(
-                          'text-base transition-all duration-200',
+                          'text-lg transition-all duration-200',
                           'group-hover:scale-110',
-                          'max-md:text-sm max-sm:text-xs',
                           'text-purple-500 dark:text-purple-400',
                           'group-hover:text-purple-600 dark:group-hover:text-purple-300',
                           'group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]'
