@@ -20,7 +20,7 @@
         "testStrategy": "'ANALYZE=true npm run build' 실행 후 생성된 번들 분석 리포트에서 최종 번들 크기가 400MB 미만인지 확인합니다. 최적화 이후 모든 기능이 정상적으로 동작하는지 회귀 테스트를 수행합니다.",
         "priority": "high",
         "dependencies": [1],
-        "status": "To Do",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -31,7 +31,7 @@
         "testStrategy": "이미지 변환 스크립트 실행 후 .webp 및 .avif 파일이 정상적으로 생성되는지 확인합니다. 브라우저 개발자 도구의 Network 탭에서 이미지가 차세대 포맷으로 로드되는지 확인하고, Lighthouse 리포트에서 이미지 관련 성능 점수 개선을 확인합니다.",
         "priority": "high",
         "dependencies": [1],
-        "status": "To Do",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -42,7 +42,7 @@
         "testStrategy": "브라우저 개발자 도구의 Network 탭에서 폰트 파일이 CDN이 아닌 로컬에서 로드되는지 확인합니다. 폰트 파일의 크기가 감소했는지 확인하고, WebPageTest 또는 Lighthouse를 통해 폰트 로딩으로 인한 렌더링 차단 시간이 감소했는지 측정합니다.",
         "priority": "high",
         "dependencies": [1],
-        "status": "To Do",
+        "status": "in-progress",
         "subtasks": []
       },
       {
@@ -114,7 +114,7 @@
     ],
     "metadata": {
       "created": "2025-08-30T01:22:28.014Z",
-      "updated": "2025-08-30T01:58:14.084Z",
+      "updated": "2025-08-30T07:04:59.543Z",
       "description": "Tasks for master context"
     }
   }

@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { siteConfig } from '@/lib/config'
 import ThemeToggle from '@/components/ThemeToggle'
+import OptimizedImage from '@/components/OptimizedImage'
 import { Button } from '@/components/ui/button'
 import {
   Tooltip,
@@ -117,11 +118,13 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
         <div className="header-title">
           <Link href="/">
             <div className="header-profile-image-wrap">
-              <img
+              <OptimizedImage
                 src="https://avatars.githubusercontent.com/u/7909227?v=4"
                 alt="title profile picture"
                 width={profileSize}
                 height={profileSize}
+                priority={true}
+                className="rounded-full"
               />
             </div>
           </Link>
