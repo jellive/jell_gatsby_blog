@@ -136,21 +136,27 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
         <Fa
           icon={effectiveTheme === 'dark' ? faMoon : faSun}
           className={cn(
-            'text-base transition-all duration-200',
+            'h-4 w-4 transition-all duration-200',
             'group-hover:scale-110',
-            // Light mode sun styling
+            // Light mode sun styling - ensure visibility on all backgrounds
             effectiveTheme === 'light' && [
-              'text-yellow-500 dark:text-yellow-400',
-              'group-hover:text-yellow-600 dark:group-hover:text-yellow-300',
+              'text-yellow-500',
+              'group-hover:text-yellow-600',
               'group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]',
             ],
-            // Dark mode moon styling
+            // Dark mode moon styling - ensure visibility on all backgrounds
             effectiveTheme === 'dark' && [
-              'text-blue-500 dark:text-blue-400',
-              'group-hover:text-blue-600 dark:group-hover:text-blue-300',
+              'text-blue-400',
+              'group-hover:text-blue-300',
               'group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.3)]',
             ]
           )}
+          style={{
+            fontSize: '16px',
+            color: effectiveTheme === 'light' ? '#eab308' : '#60a5fa',
+            display: 'inline-block',
+            verticalAlign: 'middle',
+          }}
           aria-hidden="true"
         />
       </div>
