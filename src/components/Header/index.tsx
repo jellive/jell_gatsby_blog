@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { useCommandPalette } from '@/components/CommandPalette/CommandPaletteProvider'
+import { useDeviceType } from '@/hooks/useDeviceType'
 
 export interface HeaderProps {
   siteTitle: string
@@ -27,11 +28,11 @@ export interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
   const [isHide, setIsHide] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
   const { openPalette } = useCommandPalette()
+  const { isMobile, isTablet, touchEnabled } = useDeviceType()
 
   // Handle bio opacity based on header visibility
   useEffect(() => {
@@ -47,18 +48,8 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
     }
   }, [isHide])
 
-  // Initialize mobile detection and scroll listener
+  // Initialize scroll listener (mobile detection now handled by useDeviceType hook)
   useEffect(() => {
-    // Mobile detection (simple version without external library)
-    const checkMobile = () => {
-      const userAgent = window.navigator.userAgent
-      const mobileRegex =
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
-      setIsMobile(mobileRegex.test(userAgent))
-    }
-
-    checkMobile()
-
     // Ensure header is always visible on main page
     if (pathname === '/') {
       setIsHide(false)
@@ -137,8 +128,8 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
               'active:scale-95',
               'transition-all duration-200',
               'hover:bg-accent/10 bg-transparent',
-              // Responsive sizing for mobile
-              'max-md:h-11 max-md:w-11 max-sm:h-10 max-sm:w-10'
+              // Ensure minimum touch target size of 44x44px on all devices
+              'min-h-[44px] min-w-[44px]'
             )}
             aria-label={
               mobileMenuOpen ? '모바일 메뉴 닫기' : '모바일 메뉴 열기'
@@ -180,7 +171,9 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                         'hover:border-border/60 hover:scale-105',
                         'active:scale-95',
                         'transition-all duration-200',
-                        'hover:bg-accent/10 bg-transparent'
+                        'hover:bg-accent/10 bg-transparent',
+                        // Ensure minimum touch target size of 44x44px on all devices
+                        'min-h-[44px] min-w-[44px]'
                       )}
                       onMouseEnter={() => {
                         tagSpanVisibleToggle(true)
@@ -225,7 +218,9 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                         'hover:border-border/60 hover:scale-105',
                         'active:scale-95',
                         'transition-all duration-200',
-                        'hover:bg-accent/10 bg-transparent'
+                        'hover:bg-accent/10 bg-transparent',
+                        // Ensure minimum touch target size of 44x44px on all devices
+                        'min-h-[44px] min-w-[44px]'
                       )}
                       aria-label="검색하기 (Cmd+K)"
                     >
@@ -288,7 +283,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                   router.push('/tags')
                   setMobileMenuOpen(false)
                 }}
-                className="w-full justify-start gap-2"
+                className="min-h-[44px] w-full justify-start gap-2 py-3"
               >
                 <Fa
                   icon={faTags}
@@ -304,7 +299,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                   openPalette()
                   setMobileMenuOpen(false)
                 }}
-                className="w-full justify-start gap-2"
+                className="min-h-[44px] w-full justify-start gap-2 py-3"
               >
                 <Fa
                   icon={faSearch}

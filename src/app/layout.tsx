@@ -6,6 +6,7 @@ import GoogleAnalytics from '@/components/Analytics/GoogleAnalytics'
 import GoogleAdSense from '@/components/Analytics/GoogleAdSense'
 import WebVitals from '@/components/Analytics/WebVitals'
 import ScrollToTop from '@/components/ScrollToTop'
+import MobileBottomNav from '@/components/MobileBottomNav'
 import { CommandPaletteProvider } from '@/components/CommandPalette/CommandPaletteProvider'
 import StructuredData from '@/components/StructuredData'
 import FontAwesomeInit from '@/components/FontAwesome/FontAwesomeInit'
@@ -132,6 +133,7 @@ export default function RootLayout({
           </div>
 
           <ScrollToTop />
+          <MobileBottomNav />
         </CommandPaletteProvider>
       </body>
     </html>

@@ -110,7 +110,7 @@
         "testStrategy": "Lighthouse 리포트에서 접근성 점수가 100점, 성능 점수가 90점 이상인지 확인합니다. 키보드의 Tab 키만으로 모든 링크와 버튼에 순차적으로 접근하고 활성화할 수 있는지 수동으로 테스트합니다.",
         "priority": "medium",
         "dependencies": [2, 3],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -121,8 +121,54 @@
         "testStrategy": "브라우저 개발자 도구의 모바일 시뮬레이터와 실제 모바일 기기에서 레이아웃이 깨지지 않고 모든 기능이 정상 동작하는지 확인합니다. Lighthouse의 모바일 사용성 점수가 95점 이상인지 확인합니다.",
         "priority": "medium",
         "dependencies": [6],
-        "status": "To Do",
-        "subtasks": []
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "터치 타겟 크기 전역 조정",
+            "description": "프로젝트 전반에 걸쳐 버튼, 링크 등 모든 인터랙티브 요소의 터치 영역을 최소 44x44px로 확대하여 모바일 터치 오류를 줄입니다.",
+            "dependencies": [],
+            "details": "CSS 전역 스타일 및 개별 컴포넌트 스타일을 수정하여 `min-width`, `min-height`, `padding` 속성을 조정합니다. 특히 헤더, 푸터, 카드 내 작은 아이콘/링크의 터치 영역을 중점적으로 확인합니다.",
+            "status": "in-progress",
+            "testStrategy": "브라우저 개발자 도구의 요소 검사 기능을 사용하여 주요 터치 타겟의 크기가 44x44px 이상인지 확인하고, 실제 모바일 기기에서 터치 편의성을 검증합니다."
+          },
+          {
+            "id": 2,
+            "title": "모바일 가독성 개선을 위한 타이포그래피 조정",
+            "description": "모바일 화면에서의 가독성을 높이기 위해 미디어 쿼리를 사용하여 뷰포트 너비에 따라 폰트 크기와 줄 간격을 동적으로 조정합니다.",
+            "dependencies": [],
+            "details": "CSS 미디어 쿼리(`@media (max-width: 768px)`)를 사용하여 본문 텍스트는 최소 16px, 줄 간격은 1.5 이상으로 설정합니다. 제목(h1-h6) 태그의 크기도 모바일 환경에 맞게 축소 조정합니다.",
+            "status": "pending",
+            "testStrategy": "다양한 모바일 기기 해상도(시뮬레이터 및 실제 기기)에서 텍스트가 잘리거나 너무 작게 보이지 않는지 확인합니다."
+          },
+          {
+            "id": 3,
+            "title": "모바일 전용 하단 네비게이션 바 구현",
+            "description": "모바일 사용자의 핵심 기능 접근성을 높이기 위해 화면 하단에 고정되는 네비게이션 바 컴포넌트를 새롭게 구현합니다.",
+            "dependencies": ["7.2"],
+            "details": "주요 메뉴(예: 홈, 검색, 포스트 목록)로 구성된 `BottomNavBar` 리액트 컴포넌트를 생성합니다. `position: fixed; bottom: 0;` CSS 속성을 사용하여 화면 하단에 고정시키고, 모바일 뷰포트에서만 보이도록 미디어 쿼리를 적용합니다.",
+            "status": "pending",
+            "testStrategy": "모바일 뷰에서 하단 네비게이션 바가 올바르게 표시되고 동작하는지 확인합니다. 데스크탑 뷰에서는 해당 바가 보이지 않는지 확인합니다."
+          },
+          {
+            "id": 4,
+            "title": "useDeviceType 훅 구현 및 조건부 렌더링 적용",
+            "description": "디바이스 유형(모바일/데스크탑)을 감지하는 커스텀 훅을 만들고, 이를 사용하여 모바일에서 불필요한 무거운 컴포넌트(예: Table of Contents)의 렌더링을 막아 성능을 개선합니다.",
+            "dependencies": [],
+            "details": "`window.innerWidth`를 기반으로 디바이스 유형을 판별하는 `useDeviceType` 커스텀 훅을 구현합니다. 포스트 상세 페이지 등에서 이 훅을 사용하여 모바일일 경우 Table of Contents 컴포넌트가 렌더링되지 않도록 조건부 로직을 추가합니다.",
+            "status": "pending",
+            "testStrategy": "모바일 뷰에서 Table of Contents가 보이지 않는지, 데스크탑 뷰에서는 정상적으로 보이는지 확인합니다. React DevTools를 사용하여 모바일 뷰에서 해당 컴포넌트가 렌더링 트리에서 제외되었는지 검증합니다."
+          },
+          {
+            "id": 5,
+            "title": "최종 모바일 사용성 감사 및 Lighthouse 점수 검증",
+            "description": "구현된 최적화 사항들을 종합적으로 검증하고, Lighthouse 리포트를 기반으로 추가적인 모바일 사용성 문제를 식별 및 수정하여 목표 점수인 95점 이상을 달성합니다.",
+            "dependencies": ["7.1", "7.2", "7.3", "7.4"],
+            "details": "Chrome 개발자 도구의 Lighthouse 탭에서 모바일 환경으로 리포트를 생성합니다. 'Tap targets are not sized appropriately', 'Content is not sized correctly for the viewport' 등 사용성 관련 항목에서 발견된 문제점들을 해결합니다.",
+            "status": "pending",
+            "testStrategy": "Lighthouse 리포트의 모바일 'Accessibility' 및 'Best Practices' 항목에서 사용성 관련 점수가 95점 이상인지 최종 확인합니다."
+          }
+        ]
       },
       {
         "id": 8,
@@ -138,7 +184,7 @@
     ],
     "metadata": {
       "created": "2025-08-30T09:09:21.091Z",
-      "updated": "2025-08-30T10:22:33.524Z",
+      "updated": "2025-08-30T10:40:34.667Z",
       "description": "Tasks for master context"
     }
   }
