@@ -4,12 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import {
-  faTags,
-  faSearch,
-  faBars,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons'
+import { faTags, faSearch } from '@fortawesome/free-solid-svg-icons'
 import ThemeToggle from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import {
@@ -28,7 +23,6 @@ export interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
   const [isHide, setIsHide] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
   const { openPalette } = useCommandPalette()
@@ -113,40 +107,6 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
           <Link href="/" aria-label={`${siteTitle} 사이트 홈으로 이동`}>
             <h1 className="header-title-text">{siteTitle}</h1>
           </Link>
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <div className="md:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={cn(
-              'group relative flex h-12 w-12 items-center justify-center',
-              'border-border/30 rounded-md border',
-              'hover:border-border/60 hover:scale-105',
-              'active:scale-95',
-              'transition-all duration-200',
-              'hover:bg-accent/10 bg-transparent',
-              // Ensure minimum touch target size of 44x44px on all devices
-              'min-h-[44px] min-w-[44px]'
-            )}
-            aria-label={
-              mobileMenuOpen ? '모바일 메뉴 닫기' : '모바일 메뉴 열기'
-            }
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-menu"
-            data-testid="mobile-menu-toggle"
-          >
-            <Fa
-              icon={mobileMenuOpen ? faTimes : faBars}
-              className="text-lg transition-all duration-200"
-              aria-hidden="true"
-            />
-            <span className="sr-only">
-              {mobileMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
-            </span>
-          </Button>
         </div>
 
         <nav
@@ -265,57 +225,6 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
             </li>
           </ul>
         </nav>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div
-            className={cn(
-              'absolute left-0 right-0 top-full z-50 md:hidden',
-              'bg-background/95 border-b border-border backdrop-blur-sm',
-              'shadow-lg'
-            )}
-            data-testid="mobile-menu"
-          >
-            <div className="space-y-4 p-4">
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  router.push('/tags')
-                  setMobileMenuOpen(false)
-                }}
-                className="min-h-[44px] w-full justify-start gap-2 py-3"
-              >
-                <Fa
-                  icon={faTags}
-                  className="text-green-500"
-                  aria-hidden="true"
-                />
-                <span>Tags</span>
-              </Button>
-
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  openPalette()
-                  setMobileMenuOpen(false)
-                }}
-                className="min-h-[44px] w-full justify-start gap-2 py-3"
-              >
-                <Fa
-                  icon={faSearch}
-                  className="text-purple-500"
-                  aria-hidden="true"
-                />
-                <span>Search</span>
-              </Button>
-
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Theme</span>
-                <ThemeToggle />
-              </div>
-            </div>
-          </div>
-        )}
       </header>
     </TooltipProvider>
   )

@@ -97,8 +97,8 @@
     --pretendard-h4-weight: 500;
 
     /* Mobile Responsive (Pretendard) */
-    --pretendard-mobile-size: 15px;
-    --pretendard-mobile-line-height: 1.6;
+    --pretendard-mobile-size: 16px;
+    --pretendard-mobile-line-height: 1.65;
 
     /* Dark Mode Adjustments (Pretendard) */
     --pretendard-dark-weight: 450;
@@ -608,7 +608,7 @@
 /* Standard Mobile Devices (640px - 480px) - Most smartphones */
 @media screen and (max-width: 640px) {
   :root {
-    --mobile-body-size: 15px; /* Optimized for smaller screens */
+    --mobile-body-size: 16px; /* Meets WCAG minimum 16px for better accessibility */
     --mobile-body-line-height: 1.75; /* Enhanced readability */
     --mobile-paragraph-spacing: 18px;
   }
@@ -648,7 +648,7 @@
 /* Small Mobile Devices (480px and below) - Compact smartphones */
 @media screen and (max-width: 480px) {
   :root {
-    --mobile-body-size: 14px; /* Compact but readable */
+    --mobile-body-size: 16px; /* Meets WCAG minimum 16px for better accessibility */
     --mobile-body-line-height: 1.8; /* Maximum readability */
     --mobile-paragraph-spacing: 16px;
   }
