@@ -146,8 +146,8 @@
             "title": "모바일 전용 하단 네비게이션 바 구현",
             "description": "모바일 사용자의 핵심 기능 접근성을 높이기 위해 화면 하단에 고정되는 네비게이션 바 컴포넌트를 새롭게 구현합니다.",
             "dependencies": ["7.2"],
-            "details": "주요 메뉴(예: 홈, 검색, 포스트 목록)로 구성된 `BottomNavBar` 리액트 컴포넌트를 생성합니다. `position: fixed; bottom: 0;` CSS 속성을 사용하여 화면 하단에 고정시키고, 모바일 뷰포트에서만 보이도록 미디어 쿼리를 적용합니다.",
-            "status": "pending",
+            "details": "주요 메뉴(예: 홈, 검색, 포스트 목록)로 구성된 `BottomNavBar` 리액트 컴포넌트를 생성합니다. `position: fixed; bottom: 0;` CSS 속성을 사용하여 화면 하단에 고정시키고, 모바일 뷰포트에서만 보이도록 미디어 쿼리를 적용합니다.\n<info added on 2025-08-31T02:04:47.559Z>\n사용자 확인 결과, 해당 기능은 `MobileBottomNav` 컴포넌트(`/src/components/MobileBottomNav/index.tsx`)로 이미 구현이 완료된 상태입니다. 주요 기능(홈, 태그, 검색, 맨 위로 가기 버튼), 하단 고정, 모바일 전용 표시(`md:hidden`), 스크롤에 따른 자동 숨김/표시, iOS Safe Area 대응 및 활성 페이지 표시 기능이 모두 포함되어 있습니다. 따라서 구현 작업은 필요 없으며, 기능이 정상적으로 동작하는지 테스트만 진행하면 됩니다.\n</info added on 2025-08-31T02:04:47.559Z>",
+            "status": "done",
             "testStrategy": "모바일 뷰에서 하단 네비게이션 바가 올바르게 표시되고 동작하는지 확인합니다. 데스크탑 뷰에서는 해당 바가 보이지 않는지 확인합니다."
           },
           {
@@ -155,8 +155,8 @@
             "title": "useDeviceType 훅 구현 및 조건부 렌더링 적용",
             "description": "디바이스 유형(모바일/데스크탑)을 감지하는 커스텀 훅을 만들고, 이를 사용하여 모바일에서 불필요한 무거운 컴포넌트(예: Table of Contents)의 렌더링을 막아 성능을 개선합니다.",
             "dependencies": [],
-            "details": "`window.innerWidth`를 기반으로 디바이스 유형을 판별하는 `useDeviceType` 커스텀 훅을 구현합니다. 포스트 상세 페이지 등에서 이 훅을 사용하여 모바일일 경우 Table of Contents 컴포넌트가 렌더링되지 않도록 조건부 로직을 추가합니다.",
-            "status": "pending",
+            "details": "`window.innerWidth`를 기반으로 디바이스 유형을 판별하는 `useDeviceType` 커스텀 훅을 구현합니다. 포스트 상세 페이지 등에서 이 훅을 사용하여 모바일일 경우 Table of Contents 컴포넌트가 렌더링되지 않도록 조건부 로직을 추가합니다.\n<info added on 2025-08-31T02:11:21.306Z>\n작업 완료. 기존에 구현되어 있던 SSR-safe `useDeviceType` 훅을 활용하여 `PostContent` 컴포넌트에 조건부 렌더링 로직을 적용했습니다. 이로써 모바일 환경에서는 무거운 Table of Contents(TOC) 컴포넌트가 렌더링되지 않도록 처리하여 성능을 개선했습니다. 이 최적화를 통해 번들 크기가 약 2.5kB(33.8kB → 31.3kB) 감소하는 효과를 확인했으며, 모든 빌드 및 타입 체크를 성공적으로 통과했습니다.\n</info added on 2025-08-31T02:11:21.306Z>",
+            "status": "done",
             "testStrategy": "모바일 뷰에서 Table of Contents가 보이지 않는지, 데스크탑 뷰에서는 정상적으로 보이는지 확인합니다. React DevTools를 사용하여 모바일 뷰에서 해당 컴포넌트가 렌더링 트리에서 제외되었는지 검증합니다."
           },
           {
@@ -184,7 +184,7 @@
     ],
     "metadata": {
       "created": "2025-08-30T09:09:21.091Z",
-      "updated": "2025-08-31T01:58:21.634Z",
+      "updated": "2025-08-31T02:11:25.571Z",
       "description": "Tasks for master context"
     }
   }
