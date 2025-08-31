@@ -82,6 +82,6 @@ dev-debug.log
 *.sw?
 # OS specific
 
-# Task files
-# tasks.json
-# tasks/ 
+# Task Master AI - Task management files
+.taskmaster/
+~/.taskmaster/ 
