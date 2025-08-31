@@ -194,7 +194,7 @@ const Bio = () => {
               size="icon"
               asChild
               className={cn(
-                'h-8 w-8 hover:bg-orange-500/10 hover:text-orange-600',
+                'h-8 min-h-[44px] w-8 min-w-[44px] hover:bg-orange-500/10 hover:text-orange-600',
                 'transition-all duration-200 hover:scale-110'
               )}
             >
@@ -216,7 +216,7 @@ const Bio = () => {
                 size="icon"
                 asChild
                 className={cn(
-                  'h-8 w-8',
+                  'h-8 min-h-[44px] w-8 min-w-[44px]',
                   link.color,
                   'transition-all duration-200 hover:scale-110'
                 )}

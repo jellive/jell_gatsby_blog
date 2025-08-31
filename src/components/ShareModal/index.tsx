@@ -236,7 +236,7 @@ export default function ShareModal({
                     size="sm"
                     onClick={() => copyToClipboard(shareUrl, 'url')}
                     className={cn(
-                      'h-7 min-w-[60px] text-xs',
+                      'h-7 min-h-[44px] min-w-[60px] text-xs',
                       copiedUrl && 'bg-green-500 text-white hover:bg-green-600'
                     )}
                   >

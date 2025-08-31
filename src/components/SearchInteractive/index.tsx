@@ -148,7 +148,7 @@ export default function SearchInteractive({
                 variant="ghost"
                 size="sm"
                 onClick={() => setValue('')}
-                className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 transform p-0"
+                className="absolute right-2 top-1/2 h-8 min-h-[44px] w-8 min-w-[44px] -translate-y-1/2 transform p-0"
               >
                 ×
               </Button>
