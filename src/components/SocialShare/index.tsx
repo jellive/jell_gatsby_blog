@@ -139,7 +139,7 @@ export default function SocialShare({
             Share this post
           </h4>
           <div className="ml-auto flex items-center gap-2">
-            <Button
+            {/* <Button
               variant="outline"
               size="sm"
               onClick={() => setIsShareModalOpen(true)}
@@ -148,7 +148,7 @@ export default function SocialShare({
             >
               <Fa icon={faExpand} className="text-xs" />
               모달로 공유
-            </Button>
+            </Button> */}
             <Badge variant="secondary" className="text-xs">
               Social
             </Badge>
