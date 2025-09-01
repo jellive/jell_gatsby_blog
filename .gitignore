@@ -61,6 +61,11 @@ CLAUDE.md
 docs/
 @detailed_index.md
 @general_index.md
+MOBILE_UX_SUMMARY.md
+.mcp.json
+
+# IDE and Editor specific files
+.cursor/
 
 # Temporary files
 *.tmp
