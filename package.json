@@ -8,8 +8,9 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "node scripts/copy-images.js",
-    "build": "next build && node scripts/cache-bust.js",
+    "build": "next build && node scripts/optimize-images.cjs && node scripts/cache-bust.js",
     "build:production": "NODE_ENV=production npm run build",
+    "optimize:images": "node scripts/optimize-images.cjs",
     "dev": "next dev -p 9000",
     "dev:tunnel": "concurrently \"npm run dev\" \"ngrok http 9000\"",
     "dev:tunnel:start": "npm run dev & sleep 3 && ngrok http 9000",
@@ -104,7 +105,8 @@
     "lint-staged": "^15.0.0",
     "markdownlint-cli2": "^0.15.0",
     "prettier": "^3.3.0",
-    "prettier-plugin-tailwindcss": "^0.6.0"
+    "prettier-plugin-tailwindcss": "^0.6.0",
+    "sharp": "^0.34.3"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

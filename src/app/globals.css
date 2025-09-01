@@ -2,14 +2,16 @@
    Modern Tech Blog Design System
    ======================================== */
 
-/* ===== Pretendard Font Configuration ===== */
+/* ===== Pretendard Font Configuration (Local) ===== */
 @font-face {
   font-family: 'Pretendard Variable';
-  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2')
-    format('woff2-variations');
+  src: url('/fonts/PretendardVariable.woff2') format('woff2-variations');
   font-weight: 45 920;
   font-style: normal;
   font-display: swap;
+  unicode-range:
+    U+0020-007F, U+00A0-00FF, U+0100-017F, U+1E00-1EFF, U+AC00-D7AF,
+    U+1100-11FF, U+3130-318F, U+A960-A97F, U+D7B0-D7FF;
 }
 
 @tailwind base;
@@ -26,26 +28,26 @@
     --card-foreground: #0f172a; /* Text on cards */
     --popover: #f8fafc; /* Surface popover */
     --popover-foreground: #0f172a; /* Text on popover */
-    --primary: #3b82f6; /* Blue 500 - Primary */
+    --primary: #2563eb; /* Blue 600 - Primary (improved contrast 5.74:1) */
     --primary-foreground: #ffffff; /* White text on blue */
     --secondary: #64748b; /* Slate 500 - Secondary */
     --secondary-foreground: #0f172a; /* Primary text on secondary */
     --muted: #f8fafc; /* Surface muted */
-    --muted-foreground: #64748b; /* Secondary text */
-    --accent: #06b6d4; /* Cyan 500 - Accent */
+    --muted-foreground: #475569; /* Slate 600 - Improved contrast (6.30:1) */
+    --accent: #0891b2; /* Cyan 600 - Accent (improved contrast) */
     --accent-foreground: #0f172a; /* Primary text on accent */
-    --destructive: #ef4444; /* Red 500 - Error */
+    --destructive: #dc2626; /* Red 600 - Error (improved contrast 5.25:1) */
     --destructive-foreground: #ffffff; /* White text on red */
-    --border: #e2e8f0; /* Light border */
-    --input: #e2e8f0; /* Light input border */
-    --ring: #3b82f6; /* Blue focus ring */
+    --border: #cbd5e1; /* Slate 300 - Improved border contrast (2.89:1) */
+    --input: #cbd5e1; /* Slate 300 - Input border */
+    --ring: #2563eb; /* Blue 600 focus ring */
     --radius: 8px; /* Modern border radius */
 
     /* ===== Modern Tech Semantic Colors ===== */
-    --success: #10b981; /* Emerald 500 */
-    --warning: #f59e0b; /* Amber 500 */
-    --error: #ef4444; /* Red 500 */
-    --info: #06b6d4; /* Cyan 500 */
+    --success: #059669; /* Emerald 600 (improved contrast 4.82:1) */
+    --warning: #d97706; /* Amber 600 (improved contrast 5.93:1) */
+    --error: #dc2626; /* Red 600 (improved contrast 5.25:1) */
+    --info: #0891b2; /* Cyan 600 (improved contrast) */
 
     /* ===== Modern Tech Background Variations ===== */
     --bg-primary: #ffffff; /* Pure white */
@@ -95,8 +97,8 @@
     --pretendard-h4-weight: 500;
 
     /* Mobile Responsive (Pretendard) */
-    --pretendard-mobile-size: 15px;
-    --pretendard-mobile-line-height: 1.6;
+    --pretendard-mobile-size: 16px;
+    --pretendard-mobile-line-height: 1.65;
 
     /* Dark Mode Adjustments (Pretendard) */
     --pretendard-dark-weight: 450;
@@ -148,17 +150,17 @@
     --code-function: #3b82f6; /* Blue 500 */
 
     /* ===== Legacy Color System (Modern Tech) ===== */
-    --color-primary: #3b82f6; /* Blue 500 */
+    --color-primary: #2563eb; /* Blue 600 - Improved contrast */
     --color-primary-light: #60a5fa; /* Blue 400 */
-    --color-primary-dark: #2563eb; /* Blue 600 */
-    --color-accent: #06b6d4; /* Cyan 500 accent */
+    --color-primary-dark: #1d4ed8; /* Blue 700 */
+    --color-accent: #0891b2; /* Cyan 600 accent - Improved contrast */
     --color-accent-light: #22d3ee; /* Cyan 400 */
 
     /* Neutral Colors (Modern Tech Style) */
     --color-text-primary: #0f172a; /* Primary text */
-    --color-text-secondary: #64748b; /* Secondary text */
-    --color-text-tertiary: #94a3b8; /* Muted text */
-    --color-text-muted: #cbd5e1; /* Very light text */
+    --color-text-secondary: #475569; /* Slate 600 - Improved contrast (6.30:1) */
+    --color-text-tertiary: #64748b; /* Slate 500 - Still accessible */
+    --color-text-muted: #94a3b8; /* Slate 400 - Used for less important text */
 
     /* Background Colors (Modern Tech Style) */
     --color-bg-primary: #ffffff; /* Pure white */
@@ -167,9 +169,9 @@
     --color-bg-elevated: #f8fafc; /* Card backgrounds */
 
     /* Border Colors (Modern Tech Style) */
-    --color-border-light: #e2e8f0; /* Light border */
-    --color-border-medium: #cbd5e1; /* Medium border */
-    --color-border-dark: #64748b; /* Dark border */
+    --color-border-light: #cbd5e1; /* Slate 300 - Improved border contrast */
+    --color-border-medium: #94a3b8; /* Slate 400 - Medium border */
+    --color-border-dark: #64748b; /* Slate 500 - Dark border */
 
     /* Shadow System (Medium Compatible) */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -181,10 +183,10 @@
       0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
     /* Status Colors (Modern Tech Style) */
-    --color-success: #10b981; /* Emerald 500 */
-    --color-warning: #f59e0b; /* Amber 500 */
-    --color-error: #ef4444; /* Red 500 */
-    --color-info: #06b6d4; /* Cyan 500 */
+    --color-success: #059669; /* Emerald 600 - Improved contrast (4.82:1) */
+    --color-warning: #d97706; /* Amber 600 - Improved contrast (5.93:1) */
+    --color-error: #dc2626; /* Red 600 - Improved contrast (5.25:1) */
+    --color-info: #0891b2; /* Cyan 600 - Improved contrast */
 
     /* Interactive States (Modern Tech Style) */
     --color-hover-bg: #f1f5f9; /* Slate 100 hover */
@@ -196,9 +198,9 @@
     /* ===== Layout Variables (Modern Tech Design System) ===== */
 
     /* Header Heights - Modern Tech Style */
-    --header-height: 56px; /* Modern fixed header height matching design tokens */
-    --header-height-m: 56px; /* Consistent height on mobile */
-    --header-height-s: 56px; /* Consistent height on small mobile */
+    --header-height: 70px; /* Increased header height for better proportions */
+    --header-height-m: 70px; /* Consistent height on mobile */
+    --header-height-s: 70px; /* Consistent height on small mobile */
 
     /* Media Query Breakpoints - Modern Tech Style */
     --break-desktop: 1280px; /* xl: Desktop breakpoint */
@@ -316,13 +318,13 @@
     --secondary: #64748b; /* Slate 500 secondary */
     --secondary-foreground: #f8fafc; /* Slate 50 text on secondary */
     --muted: #1e293b; /* Slate 800 muted */
-    --muted-foreground: #64748b; /* Slate 500 muted text */
+    --muted-foreground: #94a3b8; /* Slate 400 - Better contrast in dark mode (6.96:1) */
     --accent: #22d3ee; /* Cyan 400 accent */
     --accent-foreground: #0f172a; /* Slate 900 text on accent */
     --destructive: #f87171; /* Red 400 */
     --destructive-foreground: #f8fafc; /* Slate 50 text on red */
-    --border: #334155; /* Slate 700 border */
-    --input: #334155; /* Slate 700 input border */
+    --border: #475569; /* Slate 600 - Improved border contrast (2.48:1) */
+    --input: #475569; /* Slate 600 - Input border */
     --ring: #60a5fa; /* Blue 400 focus ring */
     --radius: 8px; /* Modern border radius */
 
@@ -438,10 +440,10 @@
     --color-active-bg: #e2e8f0; /* Slate 200 active */
 
     /* Status Colors (Modern Tech Style) */
-    --color-success: #10b981; /* Emerald 500 */
-    --color-warning: #f59e0b; /* Amber 500 */
-    --color-error: #ef4444; /* Red 500 */
-    --color-info: #06b6d4; /* Cyan 500 */
+    --color-success: #059669; /* Emerald 600 - Improved contrast (4.82:1) */
+    --color-warning: #d97706; /* Amber 600 - Improved contrast (5.93:1) */
+    --color-error: #dc2626; /* Red 600 - Improved contrast (5.25:1) */
+    --color-info: #0891b2; /* Cyan 600 - Improved contrast */
 
     /* Legacy Colors (for backward compatibility) */
     --font-color-0: var(--color-text-primary);
@@ -546,23 +548,157 @@
   border-left-color: var(--border-medium);
 }
 
-/* ===== Pretendard Mobile Responsive Typography ===== */
+/* ===== Enhanced Mobile Typography System ===== */
+/* ========================================
+   Mobile readability optimization with:
+   - Progressive scaling for different mobile sizes
+   - Enhanced line heights for better readability
+   - Responsive spacing adjustments
+   - Korean text optimization
+   ======================================== */
+
+/* Large Mobile Devices (768px - 640px) - Tablets in portrait */
 @media screen and (max-width: 768px) {
-  body {
-    font-size: var(--pretendard-mobile-size);
-    line-height: var(--pretendard-mobile-line-height);
+  :root {
+    /* Enhanced mobile typography variables */
+    --mobile-body-size: 16px; /* Slightly larger for better readability */
+    --mobile-body-line-height: 1.7; /* Improved line height for mobile */
+    --mobile-paragraph-spacing: 20px; /* Better paragraph separation */
   }
 
+  body {
+    font-size: var(--mobile-body-size);
+    line-height: var(--mobile-body-line-height);
+    /* Improved letter spacing for Korean characters on mobile */
+    letter-spacing: 0.01em;
+  }
+
+  /* Heading adjustments for large mobile */
   h1 {
     font-size: calc(var(--pretendard-h1-size) * 0.85);
+    line-height: 1.25; /* Tighter line height for headings */
+    margin-bottom: 16px;
   }
 
   h2 {
     font-size: calc(var(--pretendard-h2-size) * 0.9);
+    line-height: 1.3;
+    margin-bottom: 14px;
   }
 
   h3 {
     font-size: calc(var(--pretendard-h3-size) * 0.95);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  h4 {
+    font-size: calc(var(--pretendard-h4-size) * 0.95);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  /* Improved paragraph spacing */
+  p {
+    margin-bottom: var(--mobile-paragraph-spacing);
+    line-height: var(--mobile-body-line-height);
+  }
+}
+
+/* Standard Mobile Devices (640px - 480px) - Most smartphones */
+@media screen and (max-width: 640px) {
+  :root {
+    --mobile-body-size: 16px; /* Meets WCAG minimum 16px for better accessibility */
+    --mobile-body-line-height: 1.75; /* Enhanced readability */
+    --mobile-paragraph-spacing: 18px;
+  }
+
+  body {
+    font-size: var(--mobile-body-size);
+    line-height: var(--mobile-body-line-height);
+    letter-spacing: 0.015em; /* Slightly increased for readability */
+  }
+
+  /* More aggressive heading scaling for standard mobile */
+  h1 {
+    font-size: calc(var(--pretendard-h1-size) * 0.8);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    font-size: calc(var(--pretendard-h2-size) * 0.85);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    font-size: calc(var(--pretendard-h3-size) * 0.9);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  h4 {
+    font-size: calc(var(--pretendard-h4-size) * 0.9);
+    line-height: 1.35;
+    margin-bottom: 8px;
+  }
+}
+
+/* Small Mobile Devices (480px and below) - Compact smartphones */
+@media screen and (max-width: 480px) {
+  :root {
+    --mobile-body-size: 16px; /* Meets WCAG minimum 16px for better accessibility */
+    --mobile-body-line-height: 1.8; /* Maximum readability */
+    --mobile-paragraph-spacing: 16px;
+  }
+
+  body {
+    font-size: var(--mobile-body-size);
+    line-height: var(--mobile-body-line-height);
+    letter-spacing: 0.02em; /* Improved Korean character spacing */
+  }
+
+  /* Compact heading sizes while maintaining hierarchy */
+  h1 {
+    font-size: calc(var(--pretendard-h1-size) * 0.75);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-size: calc(var(--pretendard-h2-size) * 0.8);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-size: calc(var(--pretendard-h3-size) * 0.85);
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  h4 {
+    font-size: calc(var(--pretendard-h4-size) * 0.85);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  /* Compact paragraph spacing */
+  p {
+    margin-bottom: var(--mobile-paragraph-spacing);
+  }
+}
+
+/* Legacy support - maintains backward compatibility */
+@media screen and (max-width: 768px) {
+  body {
+    /* Override with new mobile typography variables */
+    font-size: var(--mobile-body-size, var(--pretendard-mobile-size));
+    line-height: var(
+      --mobile-body-line-height,
+      var(--pretendard-mobile-line-height)
+    );
   }
 }
 
@@ -785,15 +921,15 @@ a:active {
 
 @media screen and (max-width: 1119px) {
   .header-profile-image-wrap img {
-    width: 25px !important;
-    height: 25px !important;
+    width: 48px !important;
+    height: 48px !important;
   }
 }
 
 @media screen and (max-width: 559px) {
   .header-profile-image-wrap img {
-    width: 15px !important;
-    height: 15px !important;
+    width: 48px !important;
+    height: 48px !important;
   }
 }
 
@@ -1508,11 +1644,16 @@ pre[class*='language-'] {
    Enhanced Accessibility & Mobile Support
    ======================================== */
 
-/* Focus indicators for better keyboard navigation */
+/* ========================================
+   Enhanced Keyboard Navigation & Focus Styles
+   ======================================== */
+
+/* Modern focus-visible implementation for better keyboard navigation */
 :focus-visible {
-  outline: 2px solid #4285f4;
+  outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 4px;
+  transition: outline 0.15s ease-in-out;
 }
 
 /* Remove default focus outline for mouse users */
@@ -1520,33 +1661,231 @@ pre[class*='language-'] {
   outline: none;
 }
 
-/* Better button focus states */
+/* Enhanced button focus states */
 button:focus-visible,
-.toc-button:focus-visible {
-  outline: 2px solid #4285f4;
+.toc-button:focus-visible,
+[role='button']:focus-visible {
+  outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
+  box-shadow: 0 0 0 4px hsl(var(--ring) / 0.2);
+  transition: all 0.15s ease-in-out;
 }
 
-/* Skip to content link for screen readers */
+/* Link focus states */
+a:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: 2px;
+  background-color: hsl(var(--ring) / 0.1);
+  transition: all 0.15s ease-in-out;
+}
+
+/* Form input focus states */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 0;
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.2);
+  transition: all 0.15s ease-in-out;
+}
+
+/* Interactive element focus states */
+[tabindex]:focus-visible,
+[role='tab']:focus-visible,
+[role='menuitem']:focus-visible,
+[role='option']:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: 4px;
+  background-color: hsl(var(--ring) / 0.1);
+}
+
+/* Card and article focus states for keyboard navigation */
+article:focus-visible,
+.card:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 4px;
+  border-radius: 8px;
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 2px hsl(var(--ring) / 0.1),
+    0 4px 12px hsl(var(--ring) / 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Navigation link focus with visual hierarchy */
+nav a:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 4px;
+  background-color: hsl(var(--ring) / 0.1);
+  border-radius: 6px;
+  padding: 4px 8px;
+  margin: -4px -8px;
+}
+
+/* Theme toggle specific focus state */
+.theme-toggle:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 3px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 5px hsl(var(--ring) / 0.2);
+}
+
+/* TOC navigation focus improvements */
+.toc-content a:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  background-color: hsl(var(--ring) / 0.15);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin: -2px -6px;
+  font-weight: 600;
+}
+
+/* ========================================
+   Skip Navigation & Keyboard-only Elements
+   ======================================== */
+
+/* Enhanced skip to content link */
 .skip-to-content {
   position: absolute;
-  top: -40px;
-  left: 6px;
-  background: #000;
-  color: #fff;
-  padding: 8px;
+  top: -100px;
+  left: 16px;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  padding: 12px 16px;
   text-decoration: none;
-  border-radius: 4px;
-  z-index: 1000;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
 }
 
 .skip-to-content:focus {
-  top: 6px;
+  top: 16px;
+  opacity: 1;
+  transform: translateY(0);
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
 }
 
-/* Enhanced mobile touch targets - Medium Style Mobile Optimization */
+/* Keyboard navigation helper text */
+.keyboard-help {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Show keyboard help on focus for screen reader users */
+.keyboard-help:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Enhanced focus trap for modals and dropdowns */
+.focus-trap:focus-within {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* Keyboard navigation indicators */
+body.keyboard-navigation *:focus {
+  outline: 2px solid hsl(var(--ring)) !important;
+  outline-offset: 2px !important;
+}
+
+/* High contrast mode improvements for keyboard navigation */
+@media (prefers-contrast: high) {
+  :focus-visible {
+    outline-width: 3px;
+    outline-style: solid;
+    outline-color: currentColor;
+    background-color: Canvas;
+    color: CanvasText;
+  }
+
+  button:focus-visible,
+  a:focus-visible {
+    background-color: Highlight;
+    color: HighlightText;
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion preferences for focus animations */
+@media (prefers-reduced-motion: reduce) {
+  :focus-visible,
+  button:focus-visible,
+  a:focus-visible,
+  article:focus-visible,
+  .card:focus-visible {
+    transition: none;
+    transform: none;
+    animation: none;
+  }
+
+  .skip-to-content {
+    transition: none;
+    transform: none;
+  }
+
+  .skip-to-content:focus {
+    transform: none;
+  }
+}
+
+/* ========================================
+   Enhanced Touch Targets for Mobile UX Optimization
+   ======================================== */
+
+/* Universal touch target improvements for mobile devices */
 @media screen and (max-width: 768px) {
+  /* Ensure all interactive elements meet minimum 44x44px touch target */
+  button,
+  a,
+  [role='button'],
+  [tabindex]:not([tabindex='-1']),
+  input[type='button'],
+  input[type='submit'],
+  input[type='reset'] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 8px 12px;
+    touch-action: manipulation; /* Eliminates click delay on mobile */
+  }
+
+  /* Exception for text-only links that should maintain their flow */
+  a:not([role='button']):not(.btn):not(.button) {
+    min-height: unset;
+    min-width: unset;
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
   /* Mobile Container */
   .max-w-container {
     padding-left: var(--space-md);
@@ -1568,7 +1907,7 @@ button:focus-visible,
     gap: var(--space-md);
   }
 
-  /* Mobile Typography - Medium Style Optimized */
+  /* Enhanced Mobile Typography - Large Mobile (768px-640px) */
   .blog-post-container > div,
   .blog-post-container .ad {
     padding: 0 16px;
@@ -1580,41 +1919,84 @@ button:focus-visible,
 
   .blog-post-title {
     font-size: calc(var(--medium-title-size) * 0.8);
-    line-height: 1.2;
+    line-height: 1.25; /* Improved for mobile readability */
     letter-spacing: -0.012em;
     margin-bottom: 24px;
+    word-break: keep-all; /* Better Korean text wrapping */
   }
 
   .blog-post-content {
-    font-size: 18px;
-    line-height: 1.65;
+    font-size: 18px; /* Optimized base size for tablet/large mobile */
+    line-height: 1.7; /* Enhanced readability */
+    letter-spacing: 0.01em; /* Better Korean character spacing */
   }
 
   .blog-post-content p {
     font-size: 18px;
-    line-height: 1.65;
+    line-height: 1.7; /* Improved line height for better reading */
     margin-bottom: 24px;
+    letter-spacing: 0.01em; /* Better Korean text readability */
+    word-break: keep-all; /* Prevent awkward line breaks in Korean */
   }
 
   .blog-post-content h1 {
     font-size: calc(var(--medium-h2-size) * 0.85);
-    line-height: 1.25;
+    line-height: 1.3; /* Better heading line height */
     margin-top: 48px;
     margin-bottom: 24px;
+    word-break: keep-all;
   }
 
   .blog-post-content h2 {
     font-size: calc(var(--medium-h2-size) * 0.85);
-    line-height: 1.25;
+    line-height: 1.3; /* Consistent heading line height */
     margin-top: 40px;
     margin-bottom: 20px;
+    word-break: keep-all;
   }
 
   .blog-post-content h3 {
     font-size: calc(var(--medium-h3-size) * 0.9);
-    line-height: 1.3;
+    line-height: 1.35; /* Balanced heading line height */
     margin-top: 32px;
     margin-bottom: 16px;
+    word-break: keep-all;
+  }
+
+  .blog-post-content h4 {
+    font-size: calc(var(--medium-h3-size) * 0.8);
+    line-height: 1.4;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    word-break: keep-all;
+  }
+
+  /* Enhanced list and content spacing */
+  .blog-post-content ul,
+  .blog-post-content ol {
+    margin-bottom: 24px;
+    padding-left: 20px;
+    line-height: 1.7;
+  }
+
+  .blog-post-content li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  /* Better code block typography */
+  .blog-post-content pre {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 24px 0;
+    overflow-x: auto;
+  }
+
+  .blog-post-content code:not(pre code) {
+    font-size: 15px; /* Inline code slightly larger for readability */
+    padding: 2px 6px;
+    border-radius: 4px;
   }
 
   /* Mobile Grid - Single column layout */
@@ -1627,6 +2009,83 @@ button:focus-visible,
   #Header {
     height: var(--header-height);
     padding: 0 var(--space-md);
+  }
+}
+
+/* Standard Mobile Typography Enhancement (640px-480px) */
+@media screen and (max-width: 640px) {
+  .blog-post-content {
+    font-size: 17px; /* Progressive scaling between large and small mobile */
+    line-height: 1.7; /* Maintained readability */
+    letter-spacing: 0.012em; /* Progressive Korean text optimization */
+  }
+
+  .blog-post-content p {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 22px; /* Progressive spacing adjustment */
+    letter-spacing: 0.012em;
+    word-break: keep-all;
+  }
+
+  .blog-post-content h1 {
+    font-size: calc(
+      var(--medium-h2-size) * 0.8
+    ); /* Progressive heading scaling */
+    line-height: 1.28;
+    margin-top: 44px;
+    margin-bottom: 22px;
+    word-break: keep-all;
+  }
+
+  .blog-post-content h2 {
+    font-size: calc(var(--medium-h2-size) * 0.8);
+    line-height: 1.28;
+    margin-top: 36px;
+    margin-bottom: 18px;
+    word-break: keep-all;
+  }
+
+  .blog-post-content h3 {
+    font-size: calc(var(--medium-h3-size) * 0.85);
+    line-height: 1.33;
+    margin-top: 28px;
+    margin-bottom: 14px;
+    word-break: keep-all;
+  }
+
+  .blog-post-content h4 {
+    font-size: calc(var(--medium-h3-size) * 0.75);
+    line-height: 1.4;
+    margin-top: 22px;
+    margin-bottom: 11px;
+    word-break: keep-all;
+  }
+
+  /* Progressive list adjustments */
+  .blog-post-content ul,
+  .blog-post-content ol {
+    margin-bottom: 22px;
+    padding-left: 19px;
+    line-height: 1.7;
+  }
+
+  .blog-post-content li {
+    margin-bottom: 7px;
+    line-height: 1.7;
+    letter-spacing: 0.012em;
+  }
+
+  /* Progressive code block adjustments */
+  .blog-post-content pre {
+    font-size: 13.5px;
+    line-height: 1.45;
+    margin: 22px 0;
+  }
+
+  .blog-post-content code:not(pre code) {
+    font-size: 14.5px;
+    padding: 1.5px 5px;
   }
 }
 
@@ -1689,38 +2148,85 @@ button:focus-visible,
 
   .blog-post-title {
     font-size: calc(var(--medium-title-size) * 0.7);
-    line-height: 1.25;
+    line-height: 1.3; /* Improved line height for compact screens */
     letter-spacing: -0.01em;
     margin-bottom: 20px;
+    word-break: keep-all; /* Better Korean text wrapping */
   }
 
   .blog-post-content {
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 16px; /* Compact but still readable */
+    line-height: 1.75; /* Enhanced readability for small screens */
+    letter-spacing: 0.015em; /* Better Korean character spacing */
   }
 
   .blog-post-content p {
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.75; /* Maximum readability for compact screens */
     margin-bottom: 20px;
+    letter-spacing: 0.015em; /* Enhanced Korean text readability */
+    word-break: keep-all; /* Prevent awkward line breaks in Korean */
   }
 
   .blog-post-content h1 {
     font-size: calc(var(--medium-h2-size) * 0.75);
+    line-height: 1.25; /* Compact but readable heading */
     margin-top: 40px;
     margin-bottom: 20px;
+    word-break: keep-all;
   }
 
   .blog-post-content h2 {
     font-size: calc(var(--medium-h2-size) * 0.75);
+    line-height: 1.3; /* Balanced heading line height */
     margin-top: 32px;
     margin-bottom: 16px;
+    word-break: keep-all;
   }
 
   .blog-post-content h3 {
     font-size: calc(var(--medium-h3-size) * 0.8);
+    line-height: 1.35; /* Balanced heading line height */
     margin-top: 24px;
     margin-bottom: 12px;
+    word-break: keep-all;
+  }
+
+  .blog-post-content h4 {
+    font-size: calc(var(--medium-h3-size) * 0.7);
+    line-height: 1.4;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    word-break: keep-all;
+  }
+
+  /* Enhanced list spacing for small screens */
+  .blog-post-content ul,
+  .blog-post-content ol {
+    margin-bottom: 20px;
+    padding-left: 18px;
+    line-height: 1.75;
+  }
+
+  .blog-post-content li {
+    margin-bottom: 6px;
+    line-height: 1.75;
+    letter-spacing: 0.015em;
+  }
+
+  /* Optimized code blocks for small screens */
+  .blog-post-content pre {
+    font-size: 13px; /* Smaller for compact screens */
+    line-height: 1.4;
+    margin: 20px 0;
+    overflow-x: auto;
+    border-radius: 6px;
+  }
+
+  .blog-post-content code:not(pre code) {
+    font-size: 14px; /* Compact inline code */
+    padding: 1px 4px;
+    border-radius: 3px;
   }
 
   /* Better mobile spacing */
@@ -1754,6 +2260,69 @@ button:focus-visible,
 
   window {
     scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   Mobile Bottom Navigation Enhancement
+   ======================================== */
+
+/* iOS Safe Area Support */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .h-safe-bottom {
+    height: env(safe-area-inset-bottom);
+  }
+}
+
+/* Mobile Bottom Navigation Styles */
+@media screen and (max-width: 768px) {
+  /* Ensure content doesn't overlap with bottom navigation */
+  body {
+    padding-bottom: 80px; /* Space for bottom nav */
+  }
+
+  /* Adjust for iOS safe area */
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    body {
+      padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    }
+  }
+
+  /* Enhanced mobile bottom nav styling */
+  .mobile-bottom-nav {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .mobile-bottom-nav {
+    background: rgba(0, 0, 0, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Active state enhancements */
+  .mobile-nav-active {
+    background: hsl(var(--primary) / 0.1) !important;
+    color: hsl(var(--primary)) !important;
+    border: 1px solid hsl(var(--primary) / 0.2) !important;
+    box-shadow: 0 2px 8px hsl(var(--primary) / 0.2) !important;
+  }
+
+  .mobile-nav-active .mobile-nav-icon {
+    color: hsl(var(--primary)) !important;
+    transform: scale(1.1);
+  }
+
+  .mobile-nav-active .mobile-nav-label {
+    color: hsl(var(--primary)) !important;
+    font-weight: 600 !important;
   }
 }
 

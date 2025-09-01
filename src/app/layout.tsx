@@ -6,6 +6,7 @@ import GoogleAnalytics from '@/components/Analytics/GoogleAnalytics'
 import GoogleAdSense from '@/components/Analytics/GoogleAdSense'
 import WebVitals from '@/components/Analytics/WebVitals'
 import ScrollToTop from '@/components/ScrollToTop'
+import MobileBottomNav from '@/components/MobileBottomNav'
 import { CommandPaletteProvider } from '@/components/CommandPalette/CommandPaletteProvider'
 import StructuredData from '@/components/StructuredData'
 import FontAwesomeInit from '@/components/FontAwesome/FontAwesomeInit'
@@ -110,16 +111,29 @@ export default function RootLayout({
           <GoogleAdSense />
           <WebVitals />
           <StructuredData type="website" />
+
+          {/* Skip to Content Link for Keyboard Navigation */}
+          <a
+            href="#main-content"
+            className="skip-to-content"
+            aria-label="메인 콘텐츠로 건너뛰기"
+          >
+            메인 콘텐츠로 건너뛰기
+          </a>
+
           <Header siteTitle={siteConfig.title} />
           <div id="content">
-            <main>{children}</main>
-            <footer>
+            <main id="main-content" role="main" tabIndex={-1}>
+              {children}
+            </main>
+            <footer role="contentinfo">
               © {new Date().getFullYear()} {siteConfig.author}, Built with{' '}
               <a href="https://nextjs.org">Next.js</a>
             </footer>
           </div>
 
           <ScrollToTop />
+          <MobileBottomNav />
         </CommandPaletteProvider>
       </body>
     </html>

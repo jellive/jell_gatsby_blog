@@ -11,7 +11,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
-import PostList, { Post } from '@/components/PostList'
+import type { Post } from '@/components/PostList'
+import PostList from '@/components/PostList'
 import { cn } from '@/lib/utils'
 
 export interface PostListWithPaginationProps {

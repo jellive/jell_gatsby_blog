@@ -39,7 +39,7 @@ export default function BackNavigation({
       notice: '📢 Notice',
     }
 
-    return categoryNames[cat.toLowerCase()] || `📁 ${cat}`
+    return categoryNames[cat.toLowerCase()] ?? `📁 ${cat}`
   }
 
   return (
@@ -68,13 +68,15 @@ export default function BackNavigation({
           className={cn(
             'back-button gap-2 text-muted-foreground hover:text-foreground',
             'hover:bg-accent/50 transition-all duration-200',
-            'max-md:self-start'
+            'max-md:self-start',
+            // Ensure minimum touch target size of 44x44px
+            'min-h-[44px] min-w-[44px] px-3 py-2'
           )}
           aria-label="뒤로 가기"
           title="뒤로 가기"
           data-testid="back-navigation"
         >
-          <Fa icon={faAngleLeft} className="text-sm" />
+          <Fa icon={faAngleLeft} className="text-sm" aria-hidden="true" />
           <span className="font-medium">Back</span>
         </Button>
 
@@ -92,12 +94,14 @@ export default function BackNavigation({
             size="sm"
             asChild
             className={cn(
-              'breadcrumb-item home h-auto gap-1.5 px-0',
-              'text-muted-foreground hover:text-primary'
+              'breadcrumb-item home h-auto gap-1.5 px-2 py-1',
+              'text-muted-foreground hover:text-primary',
+              // Ensure minimum touch target height
+              'min-h-[44px]'
             )}
           >
             <Link href="/">
-              <Fa icon={faHome} className="text-sm" />
+              <Fa icon={faHome} className="text-sm" aria-hidden="true" />
               <span className="font-medium">Home</span>
             </Link>
           </Button>
@@ -112,9 +116,11 @@ export default function BackNavigation({
                 size="sm"
                 asChild
                 className={cn(
-                  'breadcrumb-item category h-auto px-0',
+                  'breadcrumb-item category h-auto px-2 py-1',
                   'text-muted-foreground hover:text-primary',
-                  'max-md:max-w-[120px] max-md:truncate'
+                  'max-md:max-w-[120px] max-md:truncate',
+                  // Ensure minimum touch target height
+                  'min-h-[44px]'
                 )}
               >
                 <Link href={`/tags/${encodeURIComponent(category)}`}>

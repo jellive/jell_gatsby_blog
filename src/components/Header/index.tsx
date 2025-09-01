@@ -4,14 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import {
-  faTags,
-  faSearch,
-  faKeyboard,
-  faBars,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons'
-import { siteConfig } from '@/lib/config'
+import { faTags, faSearch } from '@fortawesome/free-solid-svg-icons'
 import ThemeToggle from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import {
@@ -22,20 +15,18 @@ import {
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { useCommandPalette } from '@/components/CommandPalette/CommandPaletteProvider'
+import { useDeviceType } from '@/hooks/useDeviceType'
 
 export interface HeaderProps {
   siteTitle: string
 }
 
 const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
-  const [yPos, setYPos] = useState(0)
   const [isHide, setIsHide] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [profileSize, setProfileSize] = useState('25px')
   const pathname = usePathname()
   const router = useRouter()
   const { openPalette } = useCommandPalette()
+  const { isMobile, isTablet, touchEnabled } = useDeviceType()
 
   // Handle bio opacity based on header visibility
   useEffect(() => {
@@ -51,26 +42,8 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
     }
   }, [isHide])
 
-  // Initialize mobile detection and scroll listener
+  // Initialize scroll listener (mobile detection now handled by useDeviceType hook)
   useEffect(() => {
-    // Mobile detection (simple version without external library)
-    const checkMobile = () => {
-      const userAgent = window.navigator.userAgent
-      const mobileRegex =
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
-      setIsMobile(mobileRegex.test(userAgent))
-    }
-
-    checkMobile()
-
-    // Handle profile image sizing based on route - Medium style avatars
-    const updateProfileSize = () => {
-      // Use Medium avatar sizes: 48px (large), 32px (medium), 20px (small)
-      setProfileSize(pathname === '/' ? '48px' : '32px')
-    }
-
-    updateProfileSize()
-
     // Ensure header is always visible on main page
     if (pathname === '/') {
       setIsHide(false)
@@ -84,11 +57,8 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
         return
       }
 
-      setYPos(prevYPos => {
-        const currentYPos = window.pageYOffset
-        setIsHide(prevYPos < currentYPos)
-        return currentYPos
-      })
+      const currentYPos = window.pageYOffset
+      setIsHide(window.pageYOffset > 50)
     }
 
     document.addEventListener('scroll', handleScroll)
@@ -112,54 +82,43 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
     <TooltipProvider>
       <header
         id="Header"
+        role="banner"
         className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''} relative`}
+        aria-label="사이트 헤더 및 주 네비게이션"
       >
         <div className="header-title">
-          <Link href="/">
+          <Link
+            href="/"
+            aria-label={`${siteTitle} 홈페이지로 이동`}
+            className="flex items-center"
+          >
             <div className="header-profile-image-wrap">
               <img
                 src="https://avatars.githubusercontent.com/u/7909227?v=4"
-                alt="title profile picture"
-                width={profileSize}
-                height={profileSize}
+                alt="Jell의 프로필 이미지"
+                width="48"
+                height="48"
+                className="rounded-full object-cover"
+                crossOrigin="anonymous"
               />
             </div>
           </Link>
 
-          <Link href="/">
+          <Link href="/" aria-label={`${siteTitle} 사이트 홈으로 이동`}>
             <h1 className="header-title-text">{siteTitle}</h1>
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <div className="md:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={cn(
-              'group relative flex h-10 w-10 items-center justify-center',
-              'border-border/30 rounded-md border',
-              'hover:border-border/60 hover:scale-105',
-              'active:scale-95',
-              'transition-all duration-200',
-              'hover:bg-accent/10 bg-transparent'
-            )}
-            aria-label="모바일 메뉴 열기"
-            data-testid="mobile-menu-toggle"
-          >
-            <Fa
-              icon={mobileMenuOpen ? faTimes : faBars}
-              className="text-base transition-all duration-200"
-            />
-          </Button>
-        </div>
-
-        <nav id="nav" className="hidden md:block">
-          <ul className="flex items-center justify-center gap-2">
+        <nav
+          id="nav"
+          className="hidden md:block"
+          role="navigation"
+          aria-label="주요 네비게이션"
+        >
+          <ul className="flex items-center justify-center gap-2" role="list">
             <li className="flex items-center justify-center">
               <div className="tag-wrap flex items-center justify-center">
-                <span>TAG</span>
+                <span className="sr-only">TAG</span>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
@@ -167,15 +126,14 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                       size="icon"
                       onClick={() => router.push('/tags')}
                       className={cn(
-                        'group relative flex h-10 w-10 items-center justify-center',
+                        'group relative flex h-12 w-12 items-center justify-center',
                         'border-border/30 rounded-md border',
                         'hover:border-border/60 hover:scale-105',
                         'active:scale-95',
                         'transition-all duration-200',
                         'hover:bg-accent/10 bg-transparent',
-                        // Responsive sizing
-                        'max-md:h-9 max-md:w-9',
-                        'max-sm:h-8 max-sm:w-8'
+                        // Ensure minimum touch target size of 44x44px on all devices
+                        'min-h-[44px] min-w-[44px]'
                       )}
                       onMouseEnter={() => {
                         tagSpanVisibleToggle(true)
@@ -184,17 +142,18 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                         tagSpanVisibleToggle(false)
                       }}
                       aria-label="태그 페이지로 이동"
+                      title="모든 태그 보기"
                     >
                       <Fa
                         icon={faTags}
                         className={cn(
-                          'text-base transition-all duration-200',
+                          'text-lg transition-all duration-200',
                           'group-hover:scale-110',
-                          'max-md:text-sm max-sm:text-xs',
                           'text-green-500 dark:text-green-400',
                           'group-hover:text-green-600 dark:group-hover:text-green-300',
                           'group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]'
                         )}
+                        aria-hidden="true"
                       />
                     </Button>
                   </TooltipTrigger>
@@ -214,28 +173,27 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
                       size="icon"
                       onClick={openPalette}
                       className={cn(
-                        'group relative flex h-10 w-10 items-center justify-center',
+                        'group relative flex h-12 w-12 items-center justify-center',
                         'border-border/30 rounded-md border',
                         'hover:border-border/60 hover:scale-105',
                         'active:scale-95',
                         'transition-all duration-200',
                         'hover:bg-accent/10 bg-transparent',
-                        // Responsive sizing
-                        'max-md:h-9 max-md:w-9',
-                        'max-sm:h-8 max-sm:w-8'
+                        // Ensure minimum touch target size of 44x44px on all devices
+                        'min-h-[44px] min-w-[44px]'
                       )}
                       aria-label="검색하기 (Cmd+K)"
                     >
                       <Fa
                         icon={faSearch}
                         className={cn(
-                          'text-base transition-all duration-200',
+                          'text-lg transition-all duration-200',
                           'group-hover:scale-110',
-                          'max-md:text-sm max-sm:text-xs',
                           'text-purple-500 dark:text-purple-400',
                           'group-hover:text-purple-600 dark:group-hover:text-purple-300',
                           'group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]'
                         )}
+                        aria-hidden="true"
                       />
                     </Button>
                   </TooltipTrigger>
@@ -267,49 +225,6 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
             </li>
           </ul>
         </nav>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div
-            className={cn(
-              'absolute left-0 right-0 top-full z-50 md:hidden',
-              'bg-background/95 border-b border-border backdrop-blur-sm',
-              'shadow-lg'
-            )}
-            data-testid="mobile-menu"
-          >
-            <div className="space-y-4 p-4">
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  router.push('/tags')
-                  setMobileMenuOpen(false)
-                }}
-                className="w-full justify-start gap-2"
-              >
-                <Fa icon={faTags} className="text-green-500" />
-                <span>Tags</span>
-              </Button>
-
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  openPalette()
-                  setMobileMenuOpen(false)
-                }}
-                className="w-full justify-start gap-2"
-              >
-                <Fa icon={faSearch} className="text-purple-500" />
-                <span>Search</span>
-              </Button>
-
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Theme</span>
-                <ThemeToggle />
-              </div>
-            </div>
-          </div>
-        )}
       </header>
     </TooltipProvider>
   )

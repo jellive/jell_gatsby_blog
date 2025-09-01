@@ -15,6 +15,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ArticleMeta } from './article-header'
 import { cn } from '@/lib/utils'
+import OptimizedImage from '@/components/OptimizedImage'
 
 interface BlogCardProps {
   title: string
@@ -114,11 +115,12 @@ export function BlogCard({
               <div className="flex items-start gap-3">
                 {featuredImage && (
                   <div className="bg-secondary/30 h-16 w-16 shrink-0 overflow-hidden rounded-md">
-                    <img
+                    <OptimizedImage
                       src={featuredImage}
                       alt={title}
+                      width={64}
+                      height={64}
                       className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-110"
-                      loading="lazy"
                     />
                   </div>
                 )}
@@ -173,11 +175,11 @@ export function BlogCard({
         >
           {featuredImage && (
             <div className="bg-secondary/30 aspect-video w-full overflow-hidden">
-              <img
+              <OptimizedImage
                 src={featuredImage}
                 alt={title}
                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           )}

@@ -16,21 +16,6 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
   const [theme, setTheme] = useState<Theme>('system')
   const [mounted, setMounted] = useState(false)
 
-  // Initialize theme on mount
-  useEffect(() => {
-    setMounted(true)
-
-    // Get saved theme from localStorage or default to system
-    const savedTheme = localStorage.getItem('theme') as Theme
-    if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
-      setTheme(savedTheme)
-      applyTheme(savedTheme)
-    } else {
-      setTheme('system')
-      applyTheme('system')
-    }
-  }, [])
-
   // Apply theme to document
   const applyTheme = (newTheme: Theme) => {
     const root = document.documentElement
@@ -49,6 +34,21 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
       root.classList.add(newTheme)
     }
   }
+
+  // Initialize theme on mount
+  useEffect(() => {
+    setMounted(true)
+
+    // Get saved theme from localStorage or default to system
+    const savedTheme = localStorage.getItem('theme') as Theme
+    if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
+      setTheme(savedTheme)
+      applyTheme(savedTheme)
+    } else {
+      setTheme('system')
+      applyTheme('system')
+    }
+  }, [])
 
   // Handle theme change
   const handleThemeChange = () => {
@@ -90,8 +90,9 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
         size="icon"
         disabled
         className={cn(
-          'relative h-10 w-10 cursor-not-allowed opacity-50',
+          'relative h-11 w-11 cursor-not-allowed opacity-50',
           'border-border/50 rounded-md border',
+          'min-h-[44px] min-w-[44px]',
           className
         )}
       />
@@ -116,15 +117,14 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
       size="icon"
       onClick={handleThemeChange}
       className={cn(
-        'group relative h-10 w-10',
+        'group relative h-11 w-11',
         'border-border/30 rounded-md border',
         'hover:border-border/60 hover:scale-105',
         'active:scale-95',
         'transition-all duration-200',
         'hover:bg-accent/10 bg-transparent',
-        // Responsive sizing
-        'max-md:h-9 max-md:w-9',
-        'max-sm:h-8 max-sm:w-8',
+        // Ensure minimum touch target size of 44x44px on all devices
+        'min-h-[44px] min-w-[44px]',
         className
       )}
       aria-label={`현재 테마: ${theme === 'system' ? '시스템' : theme === 'light' ? '라이트' : '다크'}, 클릭하여 변경`}
@@ -136,32 +136,37 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
         <Fa
           icon={effectiveTheme === 'dark' ? faMoon : faSun}
           className={cn(
-            'text-base transition-all duration-200',
+            'h-4 w-4 transition-all duration-200',
             'group-hover:scale-110',
-            'max-md:text-sm max-sm:text-xs',
-            // Light mode sun styling
+            // Light mode sun styling - ensure visibility on all backgrounds
             effectiveTheme === 'light' && [
-              'text-yellow-500 dark:text-yellow-400',
-              'group-hover:text-yellow-600 dark:group-hover:text-yellow-300',
+              'text-yellow-500',
+              'group-hover:text-yellow-600',
               'group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]',
             ],
-            // Dark mode moon styling
+            // Dark mode moon styling - ensure visibility on all backgrounds
             effectiveTheme === 'dark' && [
-              'text-blue-500 dark:text-blue-400',
-              'group-hover:text-blue-600 dark:group-hover:text-blue-300',
+              'text-blue-400',
+              'group-hover:text-blue-300',
               'group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.3)]',
             ]
           )}
+          style={{
+            fontSize: '16px',
+            color: effectiveTheme === 'light' ? '#eab308' : '#60a5fa',
+            display: 'inline-block',
+            verticalAlign: 'middle',
+          }}
+          aria-hidden="true"
         />
       </div>
 
       {/* System indicator */}
       {theme === 'system' && (
-        <div className="absolute right-0.5 top-0.5 max-md:right-0 max-md:top-0 max-sm:right-0 max-sm:top-0">
+        <div className="absolute right-0.5 top-0.5">
           <div
             className={cn(
               'h-1.5 w-1.5 rounded-full bg-green-500',
-              'max-sm:h-1 max-sm:w-1',
               'opacity-80'
             )}
           />

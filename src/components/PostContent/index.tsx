@@ -21,8 +21,9 @@ import SocialShare from '@/components/SocialShare'
 import ReadingProgress from '@/components/ReadingProgress'
 import ImageModal from '@/components/ImageModal'
 import { siteConfig } from '@/lib/config'
-import { PostData } from '@/lib/markdown'
+import type { PostData } from '@/lib/markdown'
 import { cn } from '@/lib/utils'
+import { useMobileOptimization } from '@/hooks/useDeviceType'
 
 interface ImageData {
   src: string
@@ -40,6 +41,9 @@ interface PostContentProps {
 export default function PostContent({ post, slug }: PostContentProps) {
   const [isInsideToc, setIsInsideToc] = useState(false)
   const [yList, setYList] = useState<number[]>([])
+
+  // Mobile optimization hook
+  const { isMobile, desktopOnly } = useMobileOptimization()
 
   // Image modal state
   const [isImageModalOpen, setIsImageModalOpen] = useState(false)
@@ -326,7 +330,7 @@ export default function PostContent({ post, slug }: PostContentProps) {
                     </>
                   )}
 
-                  {isTableOfContents && (
+                  {isTableOfContents && !isMobile && (
                     <>
                       <Separator orientation="vertical" className="h-4" />
                       <Button
@@ -339,7 +343,7 @@ export default function PostContent({ post, slug }: PostContentProps) {
                         )}
                       >
                         <Fa icon={faListUl} className="text-xs" />
-                        TOC {isInsideToc ? '학기' : '보기'}
+                        TOC {isInsideToc ? '숨기' : '보기'}
                       </Button>
                     </>
                   )}
@@ -347,8 +351,8 @@ export default function PostContent({ post, slug }: PostContentProps) {
               </CardHeader>
             </Card>
 
-            {/* Inside TOC - collapsible */}
-            {isTableOfContents && isInsideToc && (
+            {/* Inside TOC - collapsible (desktop only) */}
+            {isTableOfContents && isInsideToc && !isMobile && (
               <div className="mt-6">
                 <Toc isOutside={false} toc={post.tableOfContents} />
               </div>
@@ -391,8 +395,10 @@ export default function PostContent({ post, slug }: PostContentProps) {
         <AdBanner slot={siteConfig.googleAdsenseSlot} className="ad" />
       </div>
 
-      {/* Outside TOC - fixed position */}
-      {isTableOfContents && <Toc isOutside={true} toc={post.tableOfContents} />}
+      {/* Outside TOC - fixed position (desktop only) */}
+      {desktopOnly(
+        isTableOfContents && <Toc isOutside={true} toc={post.tableOfContents} />
+      )}
 
       {/* Comments moved to bottom */}
       <div className="comments-bottom" data-testid="comments">

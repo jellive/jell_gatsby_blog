@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/command'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { PostData } from '@/lib/markdown'
+import type { PostData } from '@/lib/markdown'
 import { cn } from '@/lib/utils'
 
 interface CommandPaletteProps {

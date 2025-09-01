@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import SearchInteractive from '@/components/SearchInteractive'
 import { useCommandPalette } from '@/components/CommandPalette/CommandPaletteProvider'
-import { PostData } from '@/lib/markdown'
+import type { PostData } from '@/lib/markdown'
 import { cn } from '@/lib/utils'
 
 interface SearchPageProps {

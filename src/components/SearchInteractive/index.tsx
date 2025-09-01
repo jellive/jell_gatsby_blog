@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { PostData } from '@/lib/markdown'
+import type { PostData } from '@/lib/markdown'
 import PostList from '@/components/PostList'
 import { cn } from '@/lib/utils'
 
@@ -148,7 +148,7 @@ export default function SearchInteractive({
                 variant="ghost"
                 size="sm"
                 onClick={() => setValue('')}
-                className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 transform p-0"
+                className="absolute right-2 top-1/2 h-8 min-h-[44px] w-8 min-w-[44px] -translate-y-1/2 transform p-0"
               >
                 ×
               </Button>

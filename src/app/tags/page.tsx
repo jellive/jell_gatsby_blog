@@ -1,6 +1,6 @@
 import { getAllTags, getPostsByTag } from '@/lib/markdown'
 import TagsInteractive from '@/components/TagsInteractive'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Tags | Jell의 세상 사는 이야기',
