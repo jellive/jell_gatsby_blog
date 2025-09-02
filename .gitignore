@@ -90,3 +90,5 @@ dev-debug.log
 # Task Master AI - Task management files
 .taskmaster/
 ~/.taskmaster/ 
+
+jell_claude
