@@ -12,6 +12,7 @@ export interface OptimizedImageProps {
   priority?: boolean
   sizes?: string
   loading?: 'lazy' | 'eager'
+  quality?: number
   onLoad?: () => void
   onError?: () => void
   style?: React.CSSProperties
@@ -30,6 +31,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   priority = false,
   sizes = '100vw',
   loading = 'lazy',
+  quality = 85,
   onLoad,
   onError,
   style,

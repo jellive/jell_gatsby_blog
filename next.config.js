@@ -58,7 +58,12 @@ const nextConfig = {
   reactStrictMode: true,
   // Performance optimizations
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole:
+      process.env.NODE_ENV === 'production'
+        ? {
+            exclude: ['error', 'warn'],
+          }
+        : false,
   },
   // ESLint configuration for build
   eslint: {

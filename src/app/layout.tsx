@@ -1,17 +1,49 @@
 import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
+import dynamic from 'next/dynamic'
 import { siteConfig } from '@/lib/config'
 import Header from '@/components/Header'
-import GoogleAnalytics from '@/components/Analytics/GoogleAnalytics'
-import GoogleAdSense from '@/components/Analytics/GoogleAdSense'
-import WebVitals from '@/components/Analytics/WebVitals'
-import ScrollToTop from '@/components/ScrollToTop'
-import MobileBottomNav from '@/components/MobileBottomNav'
 import { CommandPaletteProvider } from '@/components/CommandPalette/CommandPaletteProvider'
-import StructuredData from '@/components/StructuredData'
-import FontAwesomeInit from '@/components/FontAwesome/FontAwesomeInit'
-import CacheChecker from '@/components/CacheChecker'
+
+// Lazy load non-critical components for better initial page load
+const GoogleAnalytics = dynamic(
+  () => import('@/components/Analytics/GoogleAnalytics'),
+  { ssr: false }
+)
+const GoogleAdSense = dynamic(
+  () => import('@/components/Analytics/GoogleAdSense'),
+  { ssr: false }
+)
+const WebVitals = dynamic(() => import('@/components/Analytics/WebVitals'), {
+  ssr: false,
+})
+const ScrollToTop = dynamic(() => import('@/components/ScrollToTop'), {
+  ssr: false,
+})
+const MobileBottomNav = dynamic(() => import('@/components/MobileBottomNav'), {
+  ssr: false,
+})
+const StructuredData = dynamic(() => import('@/components/StructuredData'))
+const FontAwesomeInit = dynamic(
+  () => import('@/components/FontAwesome/FontAwesomeInit'),
+  { ssr: false }
+)
+const CacheChecker = dynamic(() => import('@/components/CacheChecker'), {
+  ssr: false,
+})
 // Google Fonts will be loaded via CDN in the head section
+
+// Viewport configuration for mobile optimization
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
+  ],
+}
 
 export const metadata: Metadata = {
   title: {
@@ -23,6 +55,13 @@ export const metadata: Metadata = {
   creator: siteConfig.author,
   publisher: siteConfig.author,
   metadataBase: new URL(siteConfig.siteUrl),
+  alternates: {
+    canonical: siteConfig.siteUrl,
+    languages: {
+      'ko-KR': siteConfig.siteUrl,
+      'x-default': siteConfig.siteUrl,
+    },
+  },
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
@@ -83,13 +122,13 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
-        {/* JetBrains Mono for code blocks */}
+        {/* JetBrains Mono for code blocks - with display=swap for LCP optimization */}
         <link
           href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
 
-        {/* Fallback fonts for compatibility */}
+        {/* Fallback fonts for compatibility - with display=swap for LCP optimization */}
         <link
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
@@ -122,11 +161,19 @@ export default function RootLayout({
           </a>
 
           <Header siteTitle={siteConfig.title} />
-          <div id="content">
-            <main id="main-content" role="main" tabIndex={-1}>
+          <div id="content" className="w-full max-w-full">
+            <main
+              id="main-content"
+              role="main"
+              tabIndex={-1}
+              className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+            >
               {children}
             </main>
-            <footer role="contentinfo">
+            <footer
+              role="contentinfo"
+              className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+            >
               © {new Date().getFullYear()} {siteConfig.author}, Built with{' '}
               <a href="https://nextjs.org">Next.js</a>
             </footer>
