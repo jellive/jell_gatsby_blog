@@ -1,5 +1,5 @@
 import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import dynamic from 'next/dynamic'
 import { siteConfig } from '@/lib/config'
 import Header from '@/components/Header'
@@ -32,6 +32,18 @@ const CacheChecker = dynamic(() => import('@/components/CacheChecker'), {
   ssr: false,
 })
 // Google Fonts will be loaded via CDN in the head section
+
+// Viewport configuration for mobile optimization
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
+  ],
+}
 
 export const metadata: Metadata = {
   title: {
@@ -142,11 +154,19 @@ export default function RootLayout({
           </a>
 
           <Header siteTitle={siteConfig.title} />
-          <div id="content">
-            <main id="main-content" role="main" tabIndex={-1}>
+          <div id="content" className="w-full max-w-full">
+            <main
+              id="main-content"
+              role="main"
+              tabIndex={-1}
+              className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+            >
               {children}
             </main>
-            <footer role="contentinfo">
+            <footer
+              role="contentinfo"
+              className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+            >
               © {new Date().getFullYear()} {siteConfig.author}, Built with{' '}
               <a href="https://nextjs.org">Next.js</a>
             </footer>

@@ -487,6 +487,59 @@
       --font-color-0: var(--color-text-primary);
     }
   }
+
+  /* Mobile Friendliness: Overflow Control */
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Mobile Friendliness: Responsive Container Widths */
+  .container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
+  }
+
+  /* Mobile Friendliness: Responsive Typography */
+  @media (max-width: 640px) {
+    :root {
+      --pretendard-body-size: 15px;
+      --pretendard-h1-size: 1.9em;
+      --pretendard-h2-size: 1.6em;
+      --pretendard-h3-size: 1.3em;
+    }
+  }
 } /* End @layer base */
 
 /* ===== Pretendard Dark Mode Typography Adjustments ===== */
