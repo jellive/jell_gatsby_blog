@@ -83,13 +83,13 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
-        {/* JetBrains Mono for code blocks */}
+        {/* JetBrains Mono for code blocks - with display=swap for LCP optimization */}
         <link
           href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
 
-        {/* Fallback fonts for compatibility */}
+        {/* Fallback fonts for compatibility - with display=swap for LCP optimization */}
         <link
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"

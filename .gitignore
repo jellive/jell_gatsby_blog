@@ -89,6 +89,31 @@ dev-debug.log
 
 # Task Master AI - Task management files
 .taskmaster/
-~/.taskmaster/ 
+~/.taskmaster/
+
+# PRD (Product Requirements Document) files
+prd/
+
+# Internal documentation (private notes and instructions)
+internal-docs/
 
 jell_claude
+
+# Task files
+# tasks.json
+# tasks/
+
+# AI Agent configuration files (various IDEs and tools)
+.clinerules/
+.gemini/
+.github/instructions/
+.kilo/
+.kiro/
+.roo/
+.trae/
+.windsurf/
+.zed/
+AGENT.md
+AGENTS.md
+GEMINI.md
+opencode.json 
