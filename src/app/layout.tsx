@@ -55,6 +55,13 @@ export const metadata: Metadata = {
   creator: siteConfig.author,
   publisher: siteConfig.author,
   metadataBase: new URL(siteConfig.siteUrl),
+  alternates: {
+    canonical: siteConfig.siteUrl,
+    languages: {
+      'ko-KR': siteConfig.siteUrl,
+      'x-default': siteConfig.siteUrl,
+    },
+  },
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
