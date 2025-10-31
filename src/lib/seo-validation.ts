@@ -23,6 +23,19 @@ export interface SitemapValidationResult {
   warnings: string[]
 }
 
+export interface PageMetadataValidationResult {
+  isValid: boolean
+  hasRobotsTag: boolean
+  allowsIndexing: boolean
+  hasCanonicalTag: boolean
+  canonicalUrl: string | null
+  canonicalMatchesUrl: boolean
+  canonicalUsesHttps: boolean
+  canonicalIsAbsolute: boolean
+  errors: string[]
+  warnings: string[]
+}
+
 /**
  * Validates robots.txt content for SEO best practices
  * @param content - The content of robots.txt file
@@ -220,6 +233,95 @@ export function validateSitemap(content: string): SitemapValidationResult {
     hasValidXml,
     hasValidNamespace,
     urlCount,
+    errors,
+    warnings,
+  }
+}
+
+/**
+ * Validates page metadata (robots meta tag and canonical tag)
+ * @param htmlContent - The HTML content of the page
+ * @param currentUrl - The current page URL for comparison
+ * @returns Validation result with errors and warnings
+ */
+export function validatePageMetadata(
+  htmlContent: string,
+  currentUrl: string
+): PageMetadataValidationResult {
+  const errors: string[] = []
+  const warnings: string[] = []
+  let hasRobotsTag = false
+  let allowsIndexing = true
+  let hasCanonicalTag = false
+  let canonicalUrl: string | null = null
+  let canonicalMatchesUrl = false
+  let canonicalUsesHttps = false
+  let canonicalIsAbsolute = false
+
+  // Check for robots meta tag
+  const robotsMatch = htmlContent.match(
+    /<meta\s+name=["']robots["']\s+content=["']([^"']+)["']/i
+  )
+  if (robotsMatch?.[1]) {
+    hasRobotsTag = true
+    const content = robotsMatch[1].toLowerCase()
+    if (content.includes('noindex')) {
+      allowsIndexing = false
+      errors.push('Page has noindex directive')
+    }
+  }
+
+  // Check for canonical tag
+  const canonicalMatch = htmlContent.match(
+    /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i
+  )
+  if (canonicalMatch?.[1]) {
+    hasCanonicalTag = true
+    canonicalUrl = canonicalMatch[1].trim()
+
+    // Check if canonical URL is absolute
+    if (
+      canonicalUrl.startsWith('http://') ||
+      canonicalUrl.startsWith('https://')
+    ) {
+      canonicalIsAbsolute = true
+    } else {
+      canonicalIsAbsolute = false
+      errors.push('Canonical URL must be absolute')
+    }
+
+    // Check if canonical URL uses HTTPS
+    if (canonicalUrl.startsWith('https://')) {
+      canonicalUsesHttps = true
+    } else if (canonicalUrl.startsWith('http://')) {
+      canonicalUsesHttps = false
+      errors.push('Canonical URL should use HTTPS')
+    }
+
+    // Check if canonical URL matches current URL
+    const normalizedCanonical = canonicalUrl.replace(/\/$/, '')
+    const normalizedCurrent = currentUrl.replace(/\/$/, '')
+    if (normalizedCanonical === normalizedCurrent) {
+      canonicalMatchesUrl = true
+    } else {
+      canonicalMatchesUrl = false
+      warnings.push(
+        'Canonical URL does not match current URL (possible duplicate content)'
+      )
+    }
+  } else {
+    errors.push('Missing canonical tag')
+  }
+
+  return {
+    isValid: errors.length === 0,
+    hasRobotsTag,
+    allowsIndexing,
+    hasCanonicalTag,
+    canonicalUrl,
+    canonicalMatchesUrl,
+    canonicalUsesHttps,
+    canonicalIsAbsolute,
     errors,
     warnings,
   }

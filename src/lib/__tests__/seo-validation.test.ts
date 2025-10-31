@@ -1,4 +1,8 @@
-import { validateRobotsTxt, validateSitemap } from '../seo-validation'
+import {
+  validateRobotsTxt,
+  validateSitemap,
+  validatePageMetadata,
+} from '../seo-validation'
 
 describe('SEO Validation - sitemap.xml', () => {
   describe('validateSitemap', () => {
@@ -219,6 +223,181 @@ Sitemap: https://blog.jell.kr/sitemap.xml`
 
       expect(result.isValid).toBe(false)
       expect(result.errors).toContain('User-agent directive is missing')
+    })
+  })
+})
+
+describe('SEO Validation - Page Metadata', () => {
+  describe('validatePageMetadata', () => {
+    it('should validate that robots meta tag allows indexing', () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta name="robots" content="index, follow" />
+            <link rel="canonical" href="https://blog.jell.kr/post" />
+          </head>
+        </html>
+      `
+      const result = validatePageMetadata(
+        htmlContent,
+        'https://blog.jell.kr/post'
+      )
+      expect(result.isValid).toBe(true)
+      expect(result.hasRobotsTag).toBe(true)
+      expect(result.allowsIndexing).toBe(true)
+    })
+
+    it('should detect noindex in robots meta tag', () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta name="robots" content="noindex, nofollow" />
+          </head>
+        </html>
+      `
+      const result = validatePageMetadata(
+        htmlContent,
+        'https://blog.jell.kr/post'
+      )
+      expect(result.isValid).toBe(false)
+      expect(result.allowsIndexing).toBe(false)
+      expect(result.errors).toContain('Page has noindex directive')
+    })
+
+    it('should validate canonical tag presence', () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta name="robots" content="index, follow" />
+            <link rel="canonical" href="https://blog.jell.kr/post" />
+          </head>
+        </html>
+      `
+      const result = validatePageMetadata(
+        htmlContent,
+        'https://blog.jell.kr/post'
+      )
+      expect(result.isValid).toBe(true)
+      expect(result.hasCanonicalTag).toBe(true)
+    })
+
+    it('should detect missing canonical tag', () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta name="robots" content="index, follow" />
+          </head>
+        </html>
+      `
+      const result = validatePageMetadata(
+        htmlContent,
+        'https://blog.jell.kr/post'
+      )
+      expect(result.isValid).toBe(false)
+      expect(result.errors).toContain('Missing canonical tag')
+    })
+
+    it('should validate self-referencing canonical URL', () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <link rel="canonical" href="https://blog.jell.kr/post" />
+          </head>
+        </html>
+      `
+      const result = validatePageMetadata(
+        htmlContent,
+        'https://blog.jell.kr/post'
+      )
+      expect(result.isValid).toBe(true)
+      expect(result.canonicalMatchesUrl).toBe(true)
+    })
+
+    it('should detect non-self-referencing canonical URL', () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <link rel="canonical" href="https://blog.jell.kr/other" />
+          </head>
+        </html>
+      `
+      const result = validatePageMetadata(
+        htmlContent,
+        'https://blog.jell.kr/post'
+      )
+      expect(result.warnings).toContain(
+        'Canonical URL does not match current URL (possible duplicate content)'
+      )
+    })
+
+    it('should validate canonical URL uses HTTPS', () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <link rel="canonical" href="https://blog.jell.kr/post" />
+          </head>
+        </html>
+      `
+      const result = validatePageMetadata(
+        htmlContent,
+        'https://blog.jell.kr/post'
+      )
+      expect(result.canonicalUsesHttps).toBe(true)
+    })
+
+    it('should detect canonical URL using HTTP', () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <link rel="canonical" href="http://blog.jell.kr/post" />
+          </head>
+        </html>
+      `
+      const result = validatePageMetadata(
+        htmlContent,
+        'https://blog.jell.kr/post'
+      )
+      expect(result.errors).toContain('Canonical URL should use HTTPS')
+    })
+
+    it('should validate canonical URL is absolute', () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <link rel="canonical" href="https://blog.jell.kr/post" />
+          </head>
+        </html>
+      `
+      const result = validatePageMetadata(
+        htmlContent,
+        'https://blog.jell.kr/post'
+      )
+      expect(result.canonicalIsAbsolute).toBe(true)
+    })
+
+    it('should detect relative canonical URL', () => {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <link rel="canonical" href="/post" />
+          </head>
+        </html>
+      `
+      const result = validatePageMetadata(
+        htmlContent,
+        'https://blog.jell.kr/post'
+      )
+      expect(result.errors).toContain('Canonical URL must be absolute')
     })
   })
 })
