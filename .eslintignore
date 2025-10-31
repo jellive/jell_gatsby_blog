@@ -1,0 +1,18 @@
+# Build output
+/out
+/.next
+/build
+
+# Node modules
+/node_modules
+
+# Scripts (non-TypeScript)
+/scripts/*.js
+/scripts/*.cjs
+
+# Cache and logs
+.cache
+*.log
+
+# Test coverage
+/coverage
