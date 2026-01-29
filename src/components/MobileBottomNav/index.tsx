@@ -12,7 +12,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { useCommandPalette } from '@/components/CommandPalette/CommandPaletteProvider'
 import {
   useMobileOptimization,
   useMobilePerformance,
@@ -29,7 +28,6 @@ const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   const [lastScrollY, setLastScrollY] = useState(0)
   const [showScrollTop, setShowScrollTop] = useState(false)
   const pathname = usePathname()
-  const { openPalette } = useCommandPalette()
   const { mobileOnly } = useMobileOptimization()
   const { getOptimizedProps } = useMobilePerformance()
 
@@ -81,6 +79,7 @@ const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
 
   // Check if path is active
   const isActive = (path: string) => {
+    if (!pathname) return false
     if (path === '/' && pathname === '/') return true
     if (path !== '/' && pathname.startsWith(path)) return true
     return false
@@ -181,7 +180,7 @@ const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           <Button
             variant="ghost"
             size="sm"
-            onClick={openPalette}
+            asChild
             className={cn(
               'group flex flex-col items-center justify-center gap-1',
               'h-16 w-16 rounded-xl transition-all duration-200',
@@ -192,20 +191,26 @@ const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
                 'border-primary/20 border shadow-sm',
               ]
             )}
-            aria-label="검색 열기"
           >
-            <Fa
-              icon={faSearch}
-              className={cn(
-                'text-base transition-all duration-200',
-                'group-hover:scale-110',
-                'text-muted-foreground'
-              )}
-              aria-hidden="true"
-            />
-            <span className="text-xs font-medium text-muted-foreground">
-              검색
-            </span>
+            <Link href="/search" aria-label="검색 페이지로 이동">
+              <Fa
+                icon={faSearch}
+                className={cn(
+                  'text-base transition-all duration-200',
+                  'group-hover:scale-110',
+                  isActive('/search') ? 'text-primary' : 'text-muted-foreground'
+                )}
+                aria-hidden="true"
+              />
+              <span
+                className={cn(
+                  'text-xs font-medium transition-colors duration-200',
+                  isActive('/search') ? 'text-primary' : 'text-muted-foreground'
+                )}
+              >
+                검색
+              </span>
+            </Link>
           </Button>
 
           {/* Scroll to Top Button - Only visible when scrolled */}
