@@ -17,12 +17,21 @@ const CommandPaletteContext = createContext<
   CommandPaletteContextType | undefined
 >(undefined)
 
-export const useCommandPalette = () => {
+// Default values for SSR/static rendering
+const defaultContextValue: CommandPaletteContextType = {
+  isOpen: false,
+  openPalette: () => {},
+  closePalette: () => {},
+  togglePalette: () => {},
+  allPosts: [],
+  setAllPosts: () => {},
+}
+
+export const useCommandPalette = (): CommandPaletteContextType => {
   const context = useContext(CommandPaletteContext)
+  // Return default values during SSR or when provider is not available
   if (context === undefined) {
-    throw new Error(
-      'useCommandPalette must be used within a CommandPaletteProvider'
-    )
+    return defaultContextValue
   }
   return context
 }

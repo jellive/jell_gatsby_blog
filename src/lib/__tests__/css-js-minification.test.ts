@@ -159,8 +159,9 @@ describe('CSS/JS Minification and Compression', () => {
       const nextConfigPath = require.resolve('../../../next.config.js')
       const nextConfigContent = fs.readFileSync(nextConfigPath, 'utf-8')
 
-      // Should have conditional output configuration for production
-      expect(nextConfigContent).toMatch(/output\s*:\s*['"]export['"]/)
+      // Should have SSR mode configuration (Netlify plugin handles deployment)
+      // Static export was removed to fix SSR issues with React hooks
+      expect(nextConfigContent).toMatch(/trailingSlash\s*:\s*true/)
     })
 
     it('should not generate unnecessary files', () => {

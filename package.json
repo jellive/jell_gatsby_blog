@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "node scripts/copy-images.js",
-    "build": "next build && node scripts/optimize-images.cjs && node scripts/cache-bust.js",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' next build",
     "build:production": "NODE_ENV=production npm run build",
     "optimize:images": "node scripts/optimize-images.cjs",
     "dev": "next dev -p 9000",
@@ -32,6 +32,10 @@
     "analyze": "ANALYZE=true npm run build",
     "verify:ts": "node scripts/verify-typescript.js",
     "quality:check": "npm run verify:ts",
+    "blog:new": "node scripts/blog/scaffold.js",
+    "blog:validate": "node scripts/blog/quality/validate.js",
+    "blog:analyze-style": "node scripts/blog/style/analyze.js",
+    "blog:generate": "node scripts/blog/generate/generator.js",
     "prepare": "husky || exit 0"
   },
   "dependencies": {
@@ -107,20 +111,6 @@
     "markdownlint-cli2": "^0.15.0",
     "prettier": "^3.3.0",
     "prettier-plugin-tailwindcss": "^0.6.0"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write",
-      "tsc --noEmit --project tsconfig.json"
-    ],
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{md,json}": [
-      "prettier --write"
-    ]
   },
   "engines": {
     "node": ">=20.0.0",

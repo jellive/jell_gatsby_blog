@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import dynamic from 'next/dynamic'
 import { siteConfig } from '@/lib/config'
 import Header from '@/components/Header'
-import { CommandPaletteProvider } from '@/components/CommandPalette/CommandPaletteProvider'
+import Footer from '@/components/Footer'
 
 // Lazy load non-critical components for better initial page load
 const GoogleAnalytics = dynamic(
@@ -122,6 +122,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
+        {/* Google Fonts: Inter (Body) & Outfit (Headings) */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+
         {/* JetBrains Mono for code blocks - with display=swap for LCP optimization */}
         <link
           href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
@@ -143,45 +149,37 @@ export default function RootLayout({
             'var(--font-korean, "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, BlinkMacSystemFont, system-ui, sans-serif)',
         }}
       >
-        <CommandPaletteProvider>
-          <FontAwesomeInit />
-          <CacheChecker />
-          <GoogleAnalytics />
-          <GoogleAdSense />
-          <WebVitals />
-          <StructuredData type="website" />
+        <FontAwesomeInit />
+        <CacheChecker />
+        <GoogleAnalytics />
+        <GoogleAdSense />
+        <WebVitals />
+        <StructuredData type="website" />
 
-          {/* Skip to Content Link for Keyboard Navigation */}
-          <a
-            href="#main-content"
-            className="skip-to-content"
-            aria-label="메인 콘텐츠로 건너뛰기"
+        {/* Skip to Content Link for Keyboard Navigation */}
+        <a
+          href="#main-content"
+          className="skip-to-content"
+          aria-label="메인 콘텐츠로 건너뛰기"
+        >
+          메인 콘텐츠로 건너뛰기
+        </a>
+
+        <Header siteTitle={siteConfig.title} />
+        <div id="content" className="w-full max-w-full">
+          <main
+            id="main-content"
+            role="main"
+            tabIndex={-1}
+            className="mx-auto w-full max-w-7xl px-6 md:px-8 lg:px-12"
           >
-            메인 콘텐츠로 건너뛰기
-          </a>
+            {children}
+          </main>
+          <Footer />
+        </div>
 
-          <Header siteTitle={siteConfig.title} />
-          <div id="content" className="w-full max-w-full">
-            <main
-              id="main-content"
-              role="main"
-              tabIndex={-1}
-              className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
-            >
-              {children}
-            </main>
-            <footer
-              role="contentinfo"
-              className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
-            >
-              © {new Date().getFullYear()} {siteConfig.author}, Built with{' '}
-              <a href="https://nextjs.org">Next.js</a>
-            </footer>
-          </div>
-
-          <ScrollToTop />
-          <MobileBottomNav />
-        </CommandPaletteProvider>
+        <ScrollToTop />
+        <MobileBottomNav />
       </body>
     </html>
   )

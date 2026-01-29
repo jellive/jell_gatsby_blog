@@ -15,11 +15,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const nextConfig = {
-  // Conditional output for build vs dev
-  ...(process.env.NODE_ENV === 'production' && {
-    output: 'export', // Enable static export for Netlify deployment only in production
-    distDir: 'out',
-  }),
+  // Note: Static export removed to fix SSR issues with React hooks
+  // Netlify will use SSR mode with @netlify/plugin-nextjs
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   // Generate unique build ID for cache busting
