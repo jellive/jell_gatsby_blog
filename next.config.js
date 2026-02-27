@@ -103,9 +103,9 @@ const nextConfig = {
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.googlesyndication.com *.doubleclick.net *.gstatic.com *.disqus.com *.disquscdn.com",
-              "style-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com *.disquscdn.com",
+              "style-src 'self' 'unsafe-inline' cdn.jsdelivr.net *.googleapis.com *.gstatic.com *.disquscdn.com",
               "img-src 'self' data: *.googletagmanager.com *.google-analytics.com *.googlesyndication.com *.doubleclick.net *.gstatic.com *.disqus.com *.disquscdn.com *.gravatar.com github.com *.githubusercontent.com",
-              "font-src 'self' *.gstatic.com *.googleapis.com",
+              "font-src 'self' cdn.jsdelivr.net *.gstatic.com *.googleapis.com",
               "connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com *.disqus.com *.disquscdn.com",
               'frame-src *.googlesyndication.com *.doubleclick.net *.disqus.com',
               "object-src 'none'",

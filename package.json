@@ -7,7 +7,7 @@
   "author": "Jell",
   "license": "MIT",
   "scripts": {
-    "prebuild": "node scripts/copy-images.js",
+    "prebuild": "node scripts/copy-images.js && node scripts/generate-deployment-info.js",
     "build": "NODE_ENV=production NODE_OPTIONS='--max-old-space-size=8192' next build",
     "build:production": "NODE_ENV=production npm run build",
     "optimize:images": "node scripts/optimize-images.cjs",
