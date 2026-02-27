@@ -489,7 +489,6 @@
   }
 
   /* Mobile Friendliness: Overflow Control */
-  html,
   body {
     overflow-x: hidden;
     max-width: 100vw;
@@ -1420,7 +1419,7 @@ a:active {
 
 /* TOC component styling - ensure proper positioning */
 .toc-container.fixed {
-  top: 104px !important; /* 56px header + 48px reading progress */
+  top: 118px !important; /* 70px header + 48px reading progress */
 }
 
 /* TOC component now uses Shadcn UI Card structure - legacy CSS removed */

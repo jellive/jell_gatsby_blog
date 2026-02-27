@@ -19,6 +19,7 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({
 }) => {
   const [progress, setProgress] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
 
   useEffect(() => {
     const calculateProgress = () => {
@@ -28,6 +29,7 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({
 
       // Get scroll position and content dimensions
       const scrollTop = window.pageYOffset
+      setIsHeaderVisible(scrollTop <= 50)
       const documentHeight = document.documentElement.scrollHeight
       const windowHeight = window.innerHeight
 
@@ -93,7 +95,7 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({
     <Card
       className={cn(
         'fixed left-0 right-0 z-[1000]', // High z-index, just below header (1001)
-        'top-14', // 56px = header height - positioned directly below header with no gap
+        isHeaderVisible ? 'top-[70px]' : 'top-0', // Dynamic top position based on header visibility
         'border-border/50 bg-card/95 border-0 border-b backdrop-blur-sm',
         'shadow-sm transition-all duration-300 ease-in-out',
         'rounded-none',

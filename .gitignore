@@ -50,8 +50,12 @@ Thumbs.db
 # Testing
 playwright-report/
 playwright-test-results/
+playwright-screenshots/
 test-results/
 coverage/
+
+# Playwright MCP
+.playwright-mcp/
 
 # Development tools
 .claude/
