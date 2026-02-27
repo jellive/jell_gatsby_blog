@@ -12,7 +12,7 @@
 
 describe('Next.js SSG Configuration Verification', () => {
   describe('Next.js Configuration', () => {
-    it('should have static export configured in production', () => {
+    it('should have SSR deployment configured for production', () => {
       const fs = require('fs')
       const path = require('path')
       const configPath = path.resolve(process.cwd(), 'next.config.js')
@@ -21,11 +21,11 @@ describe('Next.js SSG Configuration Verification', () => {
 
       const configContent = fs.readFileSync(configPath, 'utf-8')
 
-      // Should have output: 'export' for static builds
-      expect(configContent).toMatch(/output:\s*['"]export['"]/)
+      // Should have trailingSlash for Netlify SSR compatibility
+      expect(configContent).toMatch(/trailingSlash:\s*true/)
 
-      // Should specify output directory
-      expect(configContent).toMatch(/distDir:\s*['"]out['"]/)
+      // Should have generateBuildId for cache busting
+      expect(configContent).toMatch(/generateBuildId/)
     })
 
     it('should have image optimization configured for static export', () => {

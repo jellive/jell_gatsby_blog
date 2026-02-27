@@ -23,9 +23,7 @@ import {
   CommandSeparator,
 } from '@/components/ui/command'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import type { PostData } from '@/lib/markdown'
-import { cn } from '@/lib/utils'
 
 interface CommandPaletteProps {
   allPosts: PostData[]

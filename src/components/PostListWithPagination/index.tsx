@@ -43,7 +43,7 @@ const PostListWithPaginationInner = ({
   const searchParams = useSearchParams()
 
   // URL에서 현재 페이지 가져오기 (기본값: 1)
-  const currentPage = parseInt(searchParams?.get('page') || '1', 10)
+  const currentPage = parseInt(searchParams?.get('page') ?? '1', 10)
 
   // 전체 페이지 수 계산
   const totalPages = Math.ceil(posts.length / postsPerPage)
@@ -59,7 +59,7 @@ const PostListWithPaginationInner = ({
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return
 
-    const params = new URLSearchParams(searchParams?.toString() || '')
+    const params = new URLSearchParams(searchParams?.toString() ?? '')
     if (page === 1) {
       params.delete('page')
     } else {
@@ -67,7 +67,7 @@ const PostListWithPaginationInner = ({
     }
 
     const query = params.toString()
-    const basePath = pathname || '/'
+    const basePath = pathname ?? '/'
     const url = query ? `${basePath}?${query}` : basePath
 
     router.push(url, { scroll: false })

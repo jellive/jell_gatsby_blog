@@ -65,7 +65,7 @@ export default function ImageModal({
 
   // Handle keyboard navigation
   useEffect(() => {
-    if (!isOpen) return
+    if (!isOpen) return undefined
 
     const handleKeyDown = (event: KeyboardEvent) => {
       switch (event.key) {
@@ -132,11 +132,11 @@ export default function ImageModal({
     if (currentImage && navigator.share) {
       try {
         await navigator.share({
-          title: currentImage.alt || 'Image',
-          text: currentImage.caption || currentImage.alt || 'Shared image',
+          title: currentImage.alt ?? 'Image',
+          text: currentImage.caption ?? currentImage.alt ?? 'Shared image',
           url: currentImage.src,
         })
-      } catch (error) {
+      } catch (_error) {
         // Fallback to copy to clipboard
         navigator.clipboard.writeText(currentImage.src)
       }

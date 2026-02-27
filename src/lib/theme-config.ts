@@ -3,8 +3,6 @@
  * Provides comprehensive theme management following Medium's design principles
  */
 
-import { colors } from './design-tokens'
-
 // Medium-inspired theme color definitions
 export const themeColors = {
   light: {
@@ -327,9 +325,9 @@ export const themeUtils = {
     const themeData = themeColors[theme]
     const path = colorPath.split('.')
 
-    let value: any = themeData
+    let value: Record<string, unknown> = themeData as Record<string, unknown>
     for (const key of path) {
-      value = value?.[key]
+      value = value?.[key] as Record<string, unknown>
     }
 
     return typeof value === 'string' ? value : ''

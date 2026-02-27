@@ -17,7 +17,10 @@ const path = require('path')
 // Configuration
 const MAX_URL_DEPTH = 4 // Maximum recommended URL depth
 const OUT_DIR = path.join(__dirname, '../out')
-const OUTPUT_FILE = path.join(__dirname, '../.taskmaster/reports/url-structure-report.json')
+const OUTPUT_FILE = path.join(
+  __dirname,
+  '../.taskmaster/reports/url-structure-report.json'
+)
 
 /**
  * Find all HTML files recursively
@@ -88,9 +91,7 @@ function hasKoreanChars(url) {
  */
 function filePathToUrl(filePath) {
   const relativePath = path.relative(OUT_DIR, filePath)
-  const urlPath = relativePath
-    .replace(/\\/g, '/')
-    .replace(/\/index\.html$/, '')
+  const urlPath = relativePath.replace(/\\/g, '/').replace(/\/index\.html$/, '')
   return '/' + urlPath
 }
 
@@ -110,7 +111,9 @@ function analyzeUrlStructure() {
   console.log('🔍 Starting URL structure analysis...\n')
 
   if (!fs.existsSync(OUT_DIR)) {
-    console.error('❌ Error: out/ directory not found. Run npm run build first.')
+    console.error(
+      '❌ Error: out/ directory not found. Run npm run build first.'
+    )
     process.exit(1)
   }
 

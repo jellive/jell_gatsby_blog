@@ -1,5 +1,27 @@
 require('@testing-library/jest-dom')
 
+// Mock next/image to avoid domain validation errors in tests
+jest.mock('next/image', () => ({
+  __esModule: true,
+  default: ({
+    src,
+    alt,
+    width,
+    height,
+    className,
+    priority: _priority,
+    ...props
+  }) =>
+    require('react').createElement('img', {
+      src,
+      alt,
+      width,
+      height,
+      className,
+      ...props,
+    }),
+}))
+
 // Mock Next.js router
 jest.mock('next/router', () => ({
   useRouter() {

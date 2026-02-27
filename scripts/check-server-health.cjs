@@ -19,7 +19,10 @@ const path = require('path')
 // Configuration
 const SITE_URL = 'https://blog.jell.kr'
 const TTFB_TARGET = 200 // milliseconds
-const OUTPUT_FILE = path.join(__dirname, '../.taskmaster/reports/server-health-report.json')
+const OUTPUT_FILE = path.join(
+  __dirname,
+  '../.taskmaster/reports/server-health-report.json'
+)
 
 // Test URLs
 const TEST_URLS = [
@@ -212,7 +215,8 @@ async function checkServerHealth() {
           'content-type': response.headers['content-type'],
           'cache-control': response.headers['cache-control'],
           server: response.headers.server,
-          'strict-transport-security': response.headers['strict-transport-security'],
+          'strict-transport-security':
+            response.headers['strict-transport-security'],
         },
       }
 
@@ -223,7 +227,9 @@ async function checkServerHealth() {
       const ttfbIcon = pageResult.ttfbWithinTarget ? '🟢' : '🟡'
       console.log(`${statusIcon} ${testPath}`)
       console.log(`   Status: ${response.statusCode}`)
-      console.log(`   ${ttfbIcon} TTFB: ${response.ttfb}ms (target: ${TTFB_TARGET}ms)`)
+      console.log(
+        `   ${ttfbIcon} TTFB: ${response.ttfb}ms (target: ${TTFB_TARGET}ms)`
+      )
       console.log(`   Total: ${response.totalTime}ms`)
 
       if (mixedContent.length > 0) {
@@ -277,15 +283,21 @@ async function checkServerHealth() {
   console.log('='.repeat(60))
   console.log('🏥 SERVER HEALTH CHECK SUMMARY')
   console.log('='.repeat(60))
-  console.log(`✅ Successful Pages:     ${results.summary.successfulPages}/${results.summary.totalPages}`)
+  console.log(
+    `✅ Successful Pages:     ${results.summary.successfulPages}/${results.summary.totalPages}`
+  )
   console.log(`❌ Failed Pages:         ${results.summary.failedPages}`)
-  console.log(`📊 Average TTFB:         ${results.summary.averageTTFB}ms (target: ${TTFB_TARGET}ms)`)
+  console.log(
+    `📊 Average TTFB:         ${results.summary.averageTTFB}ms (target: ${TTFB_TARGET}ms)`
+  )
   console.log(`📈 Max TTFB:             ${results.summary.maxTTFB}ms`)
   console.log(`🟡 Pages above target:   ${results.summary.pagesAboveTarget}`)
   console.log(`⚠️  Mixed content issues: ${results.summary.mixedContentIssues}`)
 
   if (results.ssl && results.ssl.isValid) {
-    console.log(`🔒 SSL Certificate:      Valid (${results.ssl.daysUntilExpiry} days remaining)`)
+    console.log(
+      `🔒 SSL Certificate:      Valid (${results.ssl.daysUntilExpiry} days remaining)`
+    )
   } else {
     console.log(`🔒 SSL Certificate:      ❌ Invalid or expired`)
   }

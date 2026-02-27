@@ -17,7 +17,10 @@ const crypto = require('crypto')
 const MIN_WORD_COUNT = 300 // Minimum words for quality content
 const SIMILARITY_THRESHOLD = 0.85 // 85% similarity = duplicate
 const POSTS_DIR = path.join(__dirname, '../_posts')
-const OUTPUT_FILE = path.join(__dirname, '../.taskmaster/reports/content-quality-report.json')
+const OUTPUT_FILE = path.join(
+  __dirname,
+  '../.taskmaster/reports/content-quality-report.json'
+)
 
 /**
  * Extract content from markdown file (excluding frontmatter)
@@ -100,7 +103,7 @@ function findMarkdownFiles(dir) {
  */
 function extractTitle(filePath) {
   const content = fs.readFileSync(filePath, 'utf-8')
-  const match = content.match(/title:\s*['"]([^'"]+)['"]/);
+  const match = content.match(/title:\s*['"]([^'"]+)['"]/)
   return match ? match[1] : path.basename(filePath, '.md')
 }
 
@@ -192,7 +195,8 @@ function analyzeContentQuality() {
     duplicateCount: duplicates.length,
     thinContentCount: thinContent.length,
     similarContentCount: similar.length,
-    healthyContentCount: analysis.length - duplicates.length - thinContent.length,
+    healthyContentCount:
+      analysis.length - duplicates.length - thinContent.length,
     minWordCount: MIN_WORD_COUNT,
     similarityThreshold: SIMILARITY_THRESHOLD,
     analyzedAt: new Date().toISOString(),

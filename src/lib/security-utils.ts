@@ -59,7 +59,7 @@ export function safeExtractText(
     return text.length > maxLength
       ? text.substring(0, maxLength).trim() + '...'
       : text
-  } catch (error) {
+  } catch (_error) {
     return 'NO_TEXT'
   }
 }
@@ -95,7 +95,7 @@ export function safeExtractHeadingText(headingHtml: string): string {
 
     // Step 3: Fallback to full sanitization
     return safeExtractText(headingHtml)
-  } catch (error) {
+  } catch (_error) {
     return 'NO_TEXT'
   }
 }
@@ -130,7 +130,7 @@ export function sanitizeId(id: string | undefined | null): string {
       .replace(/[^a-zA-Z0-9\-_.]/g, '') // Keep only valid ID characters
 
     return validId || 'NO_ID'
-  } catch (error) {
+  } catch (_error) {
     return 'NO_ID'
   }
 }

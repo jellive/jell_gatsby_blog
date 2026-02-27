@@ -31,7 +31,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   priority = false,
   sizes = '100vw',
   loading = 'lazy',
-  quality = 85,
+  quality: _quality = 85,
   onLoad,
   onError,
   style,
@@ -44,7 +44,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   // Intersection Observer for lazy loading
   useEffect(() => {
-    if (priority || isInView) return
+    if (priority || isInView) return undefined
 
     const observer = new IntersectionObserver(
       ([entry]) => {

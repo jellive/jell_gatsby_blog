@@ -107,6 +107,15 @@ jell_claude
 # tasks.json
 # tasks/
 
+# Oh My Claude Code internal state
+.omc/
+
+# Makefile (development utility)
+Makefile
+
+# Next.js pages dir (App Router project - pages/ should not exist)
+src/pages/
+
 # AI Agent configuration files (various IDEs and tools)
 .clinerules/
 .gemini/

@@ -162,8 +162,8 @@ describe('CLS Improvement', () => {
       const layoutPath = require.resolve('../../app/layout.tsx')
       const content = fs.readFileSync(layoutPath, 'utf-8')
 
-      // Footer should exist and be stable
-      expect(content).toMatch(/footer/)
+      // Footer should exist and be stable (case-insensitive)
+      expect(content).toMatch(/[Ff]ooter/)
     })
   })
 

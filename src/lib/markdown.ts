@@ -238,143 +238,84 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
     return null // Unbalanced tags
   }
 
-  // Extract TOC from the main HTML content
-  // remarkToc inserts TOC where <!-- toc --> was placed
-  // Look for TOC by finding ul with anchor links to headings
-  let tableOfContents = ''
+  // Remove remarkToc-generated content from HTML (Table of Contents heading + UL)
+  // We regenerate TOC programmatically below, so this just cleans up the content
+  const tocHeadingIdx = htmlContent.search(
+    /<h2[^>]*>(?:<a[^>]*>)?Table of Contents(?:<\/a>)?<\/h2>/i
+  )
+  if (tocHeadingIdx !== -1) {
+    const afterHeading = htmlContent.indexOf('</h2>', tocHeadingIdx) + 5
+    const remarkTocUL = extractCompleteUL(htmlContent, afterHeading)
+    if (remarkTocUL) {
+      const ulEnd =
+        htmlContent.indexOf(remarkTocUL, afterHeading) + remarkTocUL.length
+      htmlContent =
+        htmlContent.substring(0, tocHeadingIdx) + htmlContent.substring(ulEnd)
+    }
+  }
 
-  console.log('🔍 TOC Extraction Debug - HTML length:', htmlContent.length)
-
-  // Extract TOC from the generated HTML content
-  // remarkToc generates a "Table of Contents" heading followed by a UL
-  const tocHeadingMatch = htmlContent.match(
-    /<h2[^>]*>Table of Contents<\/h2>([\s\S]*?)(?=<h[1-6]|$)/i
+  // Remove all TOC marker headings (목차, Table of Contents) from rendered content
+  htmlContent = htmlContent.replace(
+    /<h[1-6][^>]*>(?:<a[^>]*>)?(?:Table of Contents|목차)(?:<\/a>)?<\/h[1-6]>/gi,
+    ''
   )
 
-  console.log('🎯 TOC Heading Match Found:', Boolean(tocHeadingMatch))
+  // Generate TOC programmatically from all h2/h3 headings in the HTML
+  // This works for ALL posts regardless of [toc] marker presence
+  const EXCLUDED_HEADING_TEXTS = new Set([
+    '목차',
+    'table of contents',
+    'toc',
+    'contents',
+  ])
 
-  if (tocHeadingMatch) {
-    // Use balanced parsing to extract complete nested UL
-    const completeUL = extractCompleteUL(tocHeadingMatch[1] || '', 0)
-
-    console.log(
-      '📋 Complete UL Extracted:',
-      Boolean(completeUL),
-      'Length:',
-      completeUL?.length || 0
+  const headingMatches = Array.from(
+    htmlContent.matchAll(
+      /<(h[23])[^>]*\sid="([^"]*)"[^>]*>(?:<a[^>]*>)?([\s\S]*?)(?:<\/a>)?<\/\1>/gi
     )
+  )
 
-    if (completeUL) {
-      // Fix URL-encoded TOC links to match plain Korean heading IDs
-      // Replace URL-encoded href attributes with decoded Korean text
-      tableOfContents = completeUL.replace(
-        /href="#([^"]+)"/g,
-        (match, encodedHref) => {
-          try {
-            const decodedHref = decodeURIComponent(encodedHref)
-            console.log('🔧 TOC Link Fix:', {
-              original: encodedHref,
-              decoded: decodedHref,
-            })
-            return `href="#${decodedHref}"`
-          } catch (error) {
-            console.warn('⚠️ Failed to decode TOC href:', encodedHref, error)
-            return match // Keep original if decoding fails
-          }
+  const headings = headingMatches
+    .map(m => ({
+      level: m[1] === 'h2' ? 2 : 3,
+      id: m[2] ?? '',
+      text: (m[3] ?? '').replace(/<[^>]*>/g, '').trim(),
+    }))
+    .filter(h => h.id && !EXCLUDED_HEADING_TEXTS.has(h.text.toLowerCase()))
+
+  let tableOfContents = ''
+
+  if (headings.length >= 2) {
+    // Build nested UL structure: h2 = top level, h3 = nested
+    let toc = '<ul>\n'
+    let inSubList = false
+
+    for (const heading of headings) {
+      if (heading.level === 2) {
+        if (inSubList) {
+          toc += '    </ul>\n  </li>\n'
+          inSubList = false
+        } else if (toc !== '<ul>\n') {
+          toc += '  </li>\n'
         }
-      )
-
-      // Debug: Extract and log TOC links for comparison (after fix)
-      const tocLinkMatches =
-        tableOfContents.match(/<a[^>]*href="#([^"]*)"[^>]*>([^<]*)<\/a>/gi) ||
-        []
-      console.log(
-        '🔗 Fixed TOC Links:',
-        tocLinkMatches.map(match => {
-          const hrefMatch = match.match(/href="#([^"]*)"/)
-          const textMatch = match.match(/>([^<]*)</)
-          return {
-            href: hrefMatch?.[1] || 'no-href',
-            text: textMatch?.[1]?.trim().substring(0, 30) || 'no-text',
-          }
-        })
-      )
-
-      // Remove both the TOC heading and the complete UL from main content
-      const tocHeadingStart = htmlContent.indexOf('<h2')
-      const tocHeadingEnd = htmlContent.indexOf('</h2>', tocHeadingStart) + 5
-      const tocULStart = htmlContent.indexOf('<ul', tocHeadingEnd)
-      const tocULEnd = tocULStart + completeUL.length
-
-      if (tocHeadingStart !== -1 && tocULStart !== -1) {
-        const fullTocContent = htmlContent.substring(tocHeadingStart, tocULEnd)
-        htmlContent = htmlContent.replace(fullTocContent, '')
-        console.log('✅ TOC Removed from main content')
+        toc += `  <li><a href="#${heading.id}">${heading.text}</a>`
+      } else {
+        // h3 — nest under current h2
+        if (!inSubList) {
+          toc += '\n    <ul>\n'
+          inSubList = true
+        }
+        toc += `      <li><a href="#${heading.id}">${heading.text}</a></li>\n`
       }
-
-      // Additional cleanup: Remove any remaining "Table of Contents" heading
-      htmlContent = htmlContent.replace(
-        /<h[1-6][^>]*>Table of Contents<\/h[1-6]>/gi,
-        ''
-      )
-      htmlContent = htmlContent.replace(/<h[1-6][^>]*>목차<\/h[1-6]>/gi, '')
-    } else {
-      // Remove just the TOC heading if no list follows (no headings to generate TOC from)
-      htmlContent = htmlContent.replace(
-        /<h2[^>]*>Table of Contents<\/h2>\s*/i,
-        ''
-      )
-      // Additional cleanup for any level of TOC heading
-      htmlContent = htmlContent.replace(
-        /<h[1-6][^>]*>Table of Contents<\/h[1-6]>/gi,
-        ''
-      )
-      htmlContent = htmlContent.replace(/<h[1-6][^>]*>목차<\/h[1-6]>/gi, '')
-      console.log('⚠️ No UL found, removed TOC heading only')
     }
-  } else {
-    // Fallback: try to find any UL with heading links (direct TOC without heading)
-    const completeUL = extractCompleteUL(htmlContent, 0)
 
-    if (completeUL && completeUL.includes('href="#')) {
-      // Fix URL-encoded TOC links in fallback case too
-      tableOfContents = completeUL.replace(
-        /href="#([^"]+)"/g,
-        (match, encodedHref) => {
-          try {
-            const decodedHref = decodeURIComponent(encodedHref)
-            console.log('🔧 Fallback TOC Link Fix:', {
-              original: encodedHref,
-              decoded: decodedHref,
-            })
-            return `href="#${decodedHref}"`
-          } catch (error) {
-            console.warn(
-              '⚠️ Failed to decode fallback TOC href:',
-              encodedHref,
-              error
-            )
-            return match
-          }
-        }
-      )
-      htmlContent = htmlContent.replace(completeUL, '')
-      // Remove any remaining TOC headings in fallback case too
-      htmlContent = htmlContent.replace(
-        /<h[1-6][^>]*>Table of Contents<\/h[1-6]>/gi,
-        ''
-      )
-      htmlContent = htmlContent.replace(/<h[1-6][^>]*>목차<\/h[1-6]>/gi, '')
-      console.log('🔄 Fallback TOC extraction successful with link fixing')
-    } else {
-      console.log('❌ No TOC found in fallback')
-      // Even if no TOC found, remove any TOC headings
-      htmlContent = htmlContent.replace(
-        /<h[1-6][^>]*>Table of Contents<\/h[1-6]>/gi,
-        ''
-      )
-      htmlContent = htmlContent.replace(/<h[1-6][^>]*>목차<\/h[1-6]>/gi, '')
+    if (inSubList) {
+      toc += '    </ul>\n  </li>\n'
+    } else if (toc !== '<ul>\n') {
+      toc += '  </li>\n'
     }
+    toc += '</ul>'
+    tableOfContents = toc
   }
 
   // Count TOC items for debugging

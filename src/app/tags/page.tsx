@@ -1,6 +1,6 @@
-import { getAllTags, getPostsByTag } from '@/lib/markdown'
 import TagsInteractive from '@/components/TagsInteractive'
 import type { Metadata } from 'next'
+import type { PostData } from '@/lib/markdown'
 
 export const metadata: Metadata = {
   title: 'Tags | Jell의 세상 사는 이야기',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 interface TagGroup {
   fieldValue: string
   totalCount: number
-  posts: any[]
+  posts: PostData[]
 }
 
 export default async function TagsPage() {
@@ -23,7 +23,7 @@ export default async function TagsPage() {
   const tags = Array.from(tagSet).sort()
 
   // Create tag groups efficiently by grouping posts by tag
-  const tagGroups = new Map<string, any[]>()
+  const tagGroups = new Map<string, PostData[]>()
 
   // Initialize tag groups
   tags.forEach(tag => {
@@ -34,7 +34,7 @@ export default async function TagsPage() {
   allPosts.forEach(post => {
     post.frontMatter.tags.forEach(tag => {
       if (tagGroups.has(tag)) {
-        tagGroups.get(tag)!.push(post)
+        tagGroups.get(tag)?.push(post)
       }
     })
   })
@@ -42,8 +42,8 @@ export default async function TagsPage() {
   // Create final groups array
   const groups: TagGroup[] = tags.map(tag => ({
     fieldValue: tag,
-    totalCount: tagGroups.get(tag)?.length || 0,
-    posts: tagGroups.get(tag) || [],
+    totalCount: tagGroups.get(tag)?.length ?? 0,
+    posts: tagGroups.get(tag) ?? [],
   }))
 
   // Add undefined tag group if needed (for posts without tags)
