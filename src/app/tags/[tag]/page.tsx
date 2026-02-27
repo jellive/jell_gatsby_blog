@@ -12,9 +12,7 @@ interface TagPageProps {
 
 export async function generateStaticParams() {
   const tags = await getAllTags()
-  return tags.map(tag => ({
-    tag: encodeURIComponent(tag),
-  }))
+  return tags.map(tag => ({ tag }))
 }
 
 export async function generateMetadata({
