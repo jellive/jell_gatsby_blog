@@ -21,45 +21,45 @@
 /* ===== Modern Tech Blog CSS Variables ===== */
 @layer base {
   :root {
-    /* ===== Shadcn UI Variables (Modern Tech Light Theme) ===== */
-    --background: #ffffff; /* Pure white */
-    --foreground: #0f172a; /* Primary text color */
-    --card: #f8fafc; /* Surface color */
-    --card-foreground: #0f172a; /* Text on cards */
-    --popover: #f8fafc; /* Surface popover */
-    --popover-foreground: #0f172a; /* Text on popover */
-    --primary: #2563eb; /* Blue 600 - Primary (improved contrast 5.74:1) */
-    --primary-foreground: #ffffff; /* White text on blue */
-    --secondary: #64748b; /* Slate 500 - Secondary */
-    --secondary-foreground: #0f172a; /* Primary text on secondary */
-    --muted: #f8fafc; /* Surface muted */
-    --muted-foreground: #475569; /* Slate 600 - Improved contrast (6.30:1) */
-    --accent: #0891b2; /* Cyan 600 - Accent (improved contrast) */
-    --accent-foreground: #0f172a; /* Primary text on accent */
-    --destructive: #dc2626; /* Red 600 - Error (improved contrast 5.25:1) */
+    /* ===== Dark Ink Editorial Light Theme ===== */
+    --background: #f7f5f0; /* Warm cream */
+    --foreground: #1a1815; /* Deep warm black */
+    --card: #ffffff; /* White surface */
+    --card-foreground: #1a1815; /* Text on cards */
+    --popover: #ffffff; /* White popover */
+    --popover-foreground: #1a1815; /* Text on popover */
+    --primary: #0a6b4a; /* Dark mint green */
+    --primary-foreground: #f7f5f0; /* Cream text on primary */
+    --secondary: #f0ede6; /* Warm muted bg */
+    --secondary-foreground: #1a1815; /* Text on secondary */
+    --muted: #f0ede6; /* Warm muted */
+    --muted-foreground: #6b6460; /* Warm gray */
+    --accent: #a07808; /* Dark gold */
+    --accent-foreground: #1a1815; /* Text on accent */
+    --destructive: #c53030; /* Deep red */
     --destructive-foreground: #ffffff; /* White text on red */
-    --border: #cbd5e1; /* Slate 300 - Improved border contrast (2.89:1) */
-    --input: #cbd5e1; /* Slate 300 - Input border */
-    --ring: #2563eb; /* Blue 600 focus ring */
-    --radius: 8px; /* Modern border radius */
+    --border: #e0dbd0; /* Warm border */
+    --input: #e0dbd0; /* Warm input border */
+    --ring: #0a6b4a; /* Dark mint focus ring */
+    --radius: 6px; /* Refined border radius */
 
-    /* ===== Modern Tech Semantic Colors ===== */
-    --success: #059669; /* Emerald 600 (improved contrast 4.82:1) */
-    --warning: #d97706; /* Amber 600 (improved contrast 5.93:1) */
-    --error: #dc2626; /* Red 600 (improved contrast 5.25:1) */
-    --info: #0891b2; /* Cyan 600 (improved contrast) */
+    /* ===== Editorial Semantic Colors ===== */
+    --success: #059669; /* Emerald 600 */
+    --warning: #a07808; /* Gold */
+    --error: #c53030; /* Deep red */
+    --info: #0a6b4a; /* Dark mint */
 
-    /* ===== Modern Tech Background Variations ===== */
-    --bg-primary: #ffffff; /* Pure white */
-    --bg-secondary: #f8fafc; /* Surface color */
-    --bg-tertiary: #f1f5f9; /* Hover background */
-    --bg-elevated: #f8fafc; /* Cards, modals */
-    --bg-glass: rgba(248, 250, 252, 0.95); /* Backdrop blur */
+    /* ===== Editorial Background Variations ===== */
+    --bg-primary: #f7f5f0; /* Warm cream */
+    --bg-secondary: #f0ede6; /* Muted warm */
+    --bg-tertiary: #e8e4db; /* Hover background */
+    --bg-elevated: #ffffff; /* Cards, modals */
+    --bg-glass: rgba(247, 245, 240, 0.95); /* Backdrop blur */
 
-    /* ===== Modern Tech Text Variations ===== */
-    --text-primary: #0f172a; /* Primary text */
-    --text-secondary: #64748b; /* Secondary text */
-    --text-tertiary: #94a3b8; /* Muted text */
+    /* ===== Editorial Text Variations ===== */
+    --text-primary: #1a1815; /* Deep warm black */
+    --text-secondary: #6b6460; /* Warm gray */
+    --text-tertiary: #8a857a; /* Warm muted */
 
     /* ===== Pretendard Font Variables ===== */
     --font-korean:
@@ -72,13 +72,15 @@
     --font-english:
       'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont,
       'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-mono-display:
+      'IBM Plex Mono', 'JetBrains Mono', 'SF Mono', Consolas, monospace;
 
     /* ===== Medium Style Typography ===== */
     --font-serif:
       'Noto Serif KR', 'Apple SD Gothic Neo', Charter, Georgia,
       'Times New Roman', serif;
     --font-display: var(--font-korean);
-    --text-muted: #cbd5e1; /* Very light text */
+    --text-muted: #8a857a; /* Warm muted text */
 
     /* ===== Korean Typography Optimization (Pretendard) ===== */
     --pretendard-body-size: 16px;
@@ -126,81 +128,82 @@
     --medium-content-padding: 24px;
     --medium-vertical-rhythm: 32px;
 
-    /* ===== Modern Tech Border Variations ===== */
-    --border-light: #e2e8f0; /* Light border */
-    --border-medium: #cbd5e1; /* Medium border */
-    --border-strong: #64748b; /* Dark border */
-    --border-focus: #3b82f6; /* Blue for focus */
+    /* ===== Editorial Border Variations ===== */
+    --border-light: #e0dbd0; /* Warm light border */
+    --border-medium: #d0c9bc; /* Warm medium border */
+    --border-strong: #8a857a; /* Warm dark border */
+    --border-focus: #0a6b4a; /* Mint for focus */
 
-    /* ===== Modern Tech Interactive States ===== */
-    --hover-bg: #f1f5f9; /* Slate 100 hover */
-    --active-bg: #e2e8f0; /* Slate 200 active */
-    --disabled-bg: #f8fafc; /* Surface disabled */
-    --follow-button: #3b82f6; /* Blue primary button */
-    --follow-button-text: #ffffff; /* White button text */
+    /* ===== Editorial Interactive States ===== */
+    --hover-bg: #f0ede6; /* Warm hover */
+    --active-bg: #e8e4db; /* Warm active */
+    --disabled-bg: #f0ede6; /* Warm disabled */
+    --follow-button: #0a6b4a; /* Mint primary button */
+    --follow-button-text: #f7f5f0; /* Cream button text */
 
-    /* ===== Modern Tech Code Highlighting ===== */
-    --code-bg: #f8fafc; /* Surface background */
-    --code-border: #e2e8f0; /* Light border */
-    --code-text: #334155; /* Slate 700 text */
-    --code-comment: #64748b; /* Secondary text */
-    --code-keyword: #0f172a; /* Primary text bold */
-    --code-string: #059669; /* Emerald 600 */
-    --code-number: #dc2626; /* Red 600 */
-    --code-function: #3b82f6; /* Blue 500 */
+    /* ===== Editorial Code Highlighting ===== */
+    --code-bg: #f0ede6; /* Warm muted background */
+    --code-border: #e0dbd0; /* Warm border */
+    --code-text: #1a1815; /* Deep warm text */
+    --code-comment: #8a857a; /* Warm muted */
+    --code-keyword: #1a1815; /* Deep warm bold */
+    --code-string: #0a6b4a; /* Mint green */
+    --code-number: #c53030; /* Deep red */
+    --code-function: #0a6b4a; /* Mint green */
 
-    /* ===== Legacy Color System (Modern Tech) ===== */
-    --color-primary: #2563eb; /* Blue 600 - Improved contrast */
-    --color-primary-light: #60a5fa; /* Blue 400 */
-    --color-primary-dark: #1d4ed8; /* Blue 700 */
-    --color-accent: #0891b2; /* Cyan 600 accent - Improved contrast */
-    --color-accent-light: #22d3ee; /* Cyan 400 */
+    /* ===== Legacy Color System (Editorial) ===== */
+    --color-primary: #0a6b4a; /* Dark mint */
+    --color-primary-light: #2d9d6f; /* Light mint */
+    --color-primary-dark: #064d35; /* Deep mint */
+    --color-accent: #a07808; /* Dark gold */
+    --color-accent-light: #c49a1c; /* Light gold */
 
-    /* Neutral Colors (Modern Tech Style) */
-    --color-text-primary: #0f172a; /* Primary text */
-    --color-text-secondary: #475569; /* Slate 600 - Improved contrast (6.30:1) */
-    --color-text-tertiary: #64748b; /* Slate 500 - Still accessible */
-    --color-text-muted: #94a3b8; /* Slate 400 - Used for less important text */
+    /* Neutral Colors (Editorial Style) */
+    --color-text-primary: #1a1815; /* Deep warm black */
+    --color-text-secondary: #6b6460; /* Warm gray */
+    --color-text-tertiary: #8a857a; /* Warm muted */
+    --color-text-muted: #b0a99e; /* Light warm muted */
 
-    /* Background Colors (Modern Tech Style) */
-    --color-bg-primary: #ffffff; /* Pure white */
-    --color-bg-secondary: #f8fafc; /* Surface color */
-    --color-bg-tertiary: #f1f5f9; /* Hover background */
-    --color-bg-elevated: #f8fafc; /* Card backgrounds */
+    /* Background Colors (Editorial Style) */
+    --color-bg-primary: #f7f5f0; /* Warm cream */
+    --color-bg-secondary: #f0ede6; /* Warm muted */
+    --color-bg-tertiary: #e8e4db; /* Warm hover */
+    --color-bg-elevated: #ffffff; /* White card backgrounds */
 
-    /* Border Colors (Modern Tech Style) */
-    --color-border-light: #cbd5e1; /* Slate 300 - Improved border contrast */
-    --color-border-medium: #94a3b8; /* Slate 400 - Medium border */
-    --color-border-dark: #64748b; /* Slate 500 - Dark border */
+    /* Border Colors (Editorial Style) */
+    --color-border-light: #e0dbd0; /* Warm light border */
+    --color-border-medium: #d0c9bc; /* Warm medium border */
+    --color-border-dark: #8a857a; /* Warm dark border */
 
-    /* Shadow System (Medium Compatible) */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    /* Shadow System (Editorial - Subtle) */
+    --shadow-sm: 0 1px 2px 0 rgb(26 24 21 / 0.04);
     --shadow-md:
-      0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      0 4px 6px -1px rgb(26 24 21 / 0.06), 0 2px 4px -2px rgb(26 24 21 / 0.04);
     --shadow-lg:
-      0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      0 10px 15px -3px rgb(26 24 21 / 0.06), 0 4px 6px -4px rgb(26 24 21 / 0.04);
     --shadow-xl:
-      0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      0 20px 25px -5px rgb(26 24 21 / 0.06),
+      0 8px 10px -6px rgb(26 24 21 / 0.04);
 
-    /* Status Colors (Modern Tech Style) */
-    --color-success: #059669; /* Emerald 600 - Improved contrast (4.82:1) */
-    --color-warning: #d97706; /* Amber 600 - Improved contrast (5.93:1) */
-    --color-error: #dc2626; /* Red 600 - Improved contrast (5.25:1) */
-    --color-info: #0891b2; /* Cyan 600 - Improved contrast */
+    /* Status Colors (Editorial Style) */
+    --color-success: #059669; /* Emerald 600 */
+    --color-warning: #a07808; /* Gold */
+    --color-error: #c53030; /* Deep red */
+    --color-info: #0a6b4a; /* Dark mint */
 
-    /* Interactive States (Modern Tech Style) */
-    --color-hover-bg: #f1f5f9; /* Slate 100 hover */
-    --color-active-bg: #e2e8f0; /* Slate 200 active */
+    /* Interactive States (Editorial Style) */
+    --color-hover-bg: #f0ede6; /* Warm hover */
+    --color-active-bg: #e8e4db; /* Warm active */
 
     /* Legacy Colors (for backward compatibility) */
     --font-color-0: var(--color-text-primary);
 
     /* ===== Layout Variables (Modern Tech Design System) ===== */
 
-    /* Header Heights - Modern Tech Style */
-    --header-height: 70px; /* Increased header height for better proportions */
-    --header-height-m: 70px; /* Consistent height on mobile */
-    --header-height-s: 70px; /* Consistent height on small mobile */
+    /* Header Heights - Slim Editorial Style */
+    --header-height: 56px; /* Slim editorial header */
+    --header-height-m: 56px; /* Consistent height on mobile */
+    --header-height-s: 56px; /* Consistent height on small mobile */
 
     /* Media Query Breakpoints - Modern Tech Style */
     --break-desktop: 1280px; /* xl: Desktop breakpoint */
@@ -306,107 +309,107 @@
 
   /* Dark Mode - Class-based (highest priority) */
   .dark {
-    /* ===== Shadcn UI Variables (Modern Tech Dark Theme) ===== */
-    --background: #0f172a; /* Slate 900 dark background */
-    --foreground: #f8fafc; /* Slate 50 white text */
-    --card: #1e293b; /* Slate 800 dark cards */
-    --card-foreground: #f8fafc; /* Slate 50 text on cards */
-    --popover: #1e293b; /* Slate 800 popover */
-    --popover-foreground: #f8fafc; /* Slate 50 text on popover */
-    --primary: #60a5fa; /* Blue 400 for dark mode */
-    --primary-foreground: #0f172a; /* Slate 900 text on blue */
-    --secondary: #64748b; /* Slate 500 secondary */
-    --secondary-foreground: #f8fafc; /* Slate 50 text on secondary */
-    --muted: #1e293b; /* Slate 800 muted */
-    --muted-foreground: #94a3b8; /* Slate 400 - Better contrast in dark mode (6.96:1) */
-    --accent: #22d3ee; /* Cyan 400 accent */
-    --accent-foreground: #0f172a; /* Slate 900 text on accent */
-    --destructive: #f87171; /* Red 400 */
-    --destructive-foreground: #f8fafc; /* Slate 50 text on red */
-    --border: #475569; /* Slate 600 - Improved border contrast (2.48:1) */
-    --input: #475569; /* Slate 600 - Input border */
-    --ring: #60a5fa; /* Blue 400 focus ring */
-    --radius: 8px; /* Modern border radius */
+    /* ===== Dark Ink Editorial Dark Theme ===== */
+    --background: #0b0c0e; /* Deep dark, blue-tinted */
+    --foreground: #e8e2d8; /* Warm ivory */
+    --card: #101215; /* Dark surface */
+    --card-foreground: #e8e2d8; /* Warm ivory on cards */
+    --popover: #101215; /* Dark popover */
+    --popover-foreground: #e8e2d8; /* Warm ivory on popover */
+    --primary: #5ef0b0; /* Mint green accent */
+    --primary-foreground: #0b0c0e; /* Deep dark text on mint */
+    --secondary: #1c1f24; /* Elevated dark */
+    --secondary-foreground: #e8e2d8; /* Warm ivory on secondary */
+    --muted: #161820; /* Dark muted */
+    --muted-foreground: #6b6660; /* Warm muted gray */
+    --accent: #f0c040; /* Gold accent */
+    --accent-foreground: #0b0c0e; /* Deep dark text on gold */
+    --destructive: #ff5252; /* Bright red */
+    --destructive-foreground: #0b0c0e; /* Dark text on red */
+    --border: #1e2228; /* Subtle dark border */
+    --input: #1c1f24; /* Dark input border */
+    --ring: #5ef0b0; /* Mint focus ring */
+    --radius: 6px; /* Refined border radius */
 
-    /* ===== Modern Tech Semantic Colors (Dark) ===== */
-    --success: #34d399; /* Emerald 400 */
-    --warning: #fbbf24; /* Amber 400 */
-    --error: #f87171; /* Red 400 */
-    --info: #22d3ee; /* Cyan 400 */
+    /* ===== Editorial Semantic Colors (Dark) ===== */
+    --success: #5ef0b0; /* Mint green */
+    --warning: #f0c040; /* Gold */
+    --error: #ff5252; /* Bright red */
+    --info: #5ef0b0; /* Mint green */
 
-    /* ===== Modern Tech Background Variations (Dark) ===== */
-    --bg-primary: #0f172a; /* Slate 900 background */
-    --bg-secondary: #1e293b; /* Slate 800 surface */
-    --bg-tertiary: #334155; /* Slate 700 hover */
-    --bg-elevated: #1e293b; /* Slate 800 cards, modals */
-    --bg-glass: rgba(30, 41, 59, 0.95); /* Backdrop blur */
+    /* ===== Editorial Background Variations (Dark) ===== */
+    --bg-primary: #0b0c0e; /* Deep dark */
+    --bg-secondary: #101215; /* Dark surface */
+    --bg-tertiary: #161a1f; /* Elevated surface */
+    --bg-elevated: #161a1f; /* Cards, modals */
+    --bg-glass: rgba(11, 12, 14, 0.95); /* Backdrop blur */
 
-    /* ===== Modern Tech Text Variations (Dark) ===== */
-    --text-primary: #f8fafc; /* Slate 50 text */
-    --text-secondary: #64748b; /* Slate 500 secondary */
-    --text-tertiary: #94a3b8; /* Slate 400 muted */
-    --text-muted: #cbd5e1; /* Slate 300 very light */
+    /* ===== Editorial Text Variations (Dark) ===== */
+    --text-primary: #e8e2d8; /* Warm ivory */
+    --text-secondary: #8a857a; /* Warm gray */
+    --text-tertiary: #6b6660; /* Warm muted */
+    --text-muted: #4a4540; /* Very muted */
 
     /* ===== Dark Mode Pretendard Adjustments ===== */
     --pretendard-body-weight: var(--pretendard-dark-weight);
     --pretendard-body-letter-spacing: var(--pretendard-dark-letter-spacing);
 
-    /* ===== Modern Tech Border Variations (Dark) ===== */
-    --border-light: #334155; /* Slate 700 border */
-    --border-medium: #475569; /* Slate 600 medium border */
-    --border-strong: #64748b; /* Slate 500 strong border */
-    --border-focus: #60a5fa; /* Blue 400 for focus */
+    /* ===== Editorial Border Variations (Dark) ===== */
+    --border-light: #1e2228; /* Subtle dark border */
+    --border-medium: #282d35; /* Medium dark border */
+    --border-strong: #3a4050; /* Strong dark border */
+    --border-focus: #5ef0b0; /* Mint for focus */
 
-    /* ===== Modern Tech Interactive States (Dark) ===== */
-    --hover-bg: #334155; /* Slate 700 hover */
-    --active-bg: #475569; /* Slate 600 active */
-    --disabled-bg: #1e293b; /* Slate 800 disabled */
-    --follow-button: #60a5fa; /* Blue 400 button */
-    --follow-button-text: #0f172a; /* Slate 900 button text */
+    /* ===== Editorial Interactive States (Dark) ===== */
+    --hover-bg: #161a1f; /* Dark hover */
+    --active-bg: #1c2028; /* Dark active */
+    --disabled-bg: #101215; /* Dark disabled */
+    --follow-button: #5ef0b0; /* Mint button */
+    --follow-button-text: #0b0c0e; /* Deep dark button text */
 
-    /* ===== Modern Tech Code Highlighting (Dark) ===== */
-    --code-bg: #1e293b; /* Slate 800 background */
-    --code-border: #334155; /* Slate 700 border */
-    --code-text: #e2e8f0; /* Slate 200 text */
-    --code-comment: #64748b; /* Slate 500 comments */
-    --code-keyword: #f8fafc; /* Slate 50 keywords bold */
-    --code-string: #34d399; /* Emerald 400 strings */
-    --code-number: #f87171; /* Red 400 numbers */
-    --code-function: #60a5fa; /* Blue 400 functions */
+    /* ===== Editorial Code Highlighting (Dark) ===== */
+    --code-bg: #0d1117; /* Code dark background */
+    --code-border: #1e2228; /* Subtle border */
+    --code-text: #e8e2d8; /* Warm ivory text */
+    --code-comment: #4a4540; /* Very muted comments */
+    --code-keyword: #e8e2d8; /* Warm ivory bold */
+    --code-string: #5ef0b0; /* Mint strings */
+    --code-number: #f0c040; /* Gold numbers */
+    --code-function: #5ef0b0; /* Mint functions */
 
-    /* ===== Legacy Dark Mode Variables (Modern Tech Style) ===== */
-    --color-primary: #60a5fa; /* Blue 400 for dark mode */
-    --color-primary-light: #93c5fd; /* Blue 300 */
-    --color-primary-dark: #3b82f6; /* Blue 500 */
-    --color-accent: #22d3ee; /* Cyan 400 accent */
-    --color-accent-light: #67e8f9; /* Cyan 300 */
+    /* ===== Legacy Dark Mode Variables (Editorial) ===== */
+    --color-primary: #5ef0b0; /* Mint green */
+    --color-primary-light: #8ef5ca; /* Light mint */
+    --color-primary-dark: #3ad090; /* Deep mint */
+    --color-accent: #f0c040; /* Gold accent */
+    --color-accent-light: #f5d470; /* Light gold */
 
-    /* Neutral Colors (Dark Modern Tech Style) */
-    --color-text-primary: #f8fafc; /* Slate 50 text */
-    --color-text-secondary: #64748b; /* Slate 500 secondary */
-    --color-text-tertiary: #94a3b8; /* Slate 400 muted */
-    --color-text-muted: #cbd5e1; /* Slate 300 very light */
+    /* Neutral Colors (Dark Editorial Style) */
+    --color-text-primary: #e8e2d8; /* Warm ivory */
+    --color-text-secondary: #8a857a; /* Warm gray */
+    --color-text-tertiary: #6b6660; /* Warm muted */
+    --color-text-muted: #4a4540; /* Very muted */
 
-    /* Background Colors (Dark Modern Tech Style) */
-    --color-bg-primary: #0f172a; /* Slate 900 background */
-    --color-bg-secondary: #1e293b; /* Slate 800 surface */
-    --color-bg-tertiary: #334155; /* Slate 700 hover */
-    --color-bg-elevated: #1e293b; /* Slate 800 card backgrounds */
+    /* Background Colors (Dark Editorial Style) */
+    --color-bg-primary: #0b0c0e; /* Deep dark */
+    --color-bg-secondary: #101215; /* Dark surface */
+    --color-bg-tertiary: #161a1f; /* Elevated surface */
+    --color-bg-elevated: #161a1f; /* Card backgrounds */
 
-    /* Border Colors (Dark Modern Tech Style) */
-    --color-border-light: #334155; /* Slate 700 border */
-    --color-border-medium: #475569; /* Slate 600 medium border */
-    --color-border-dark: #64748b; /* Slate 500 strong border */
+    /* Border Colors (Dark Editorial Style) */
+    --color-border-light: #1e2228; /* Subtle border */
+    --color-border-medium: #282d35; /* Medium border */
+    --color-border-dark: #3a4050; /* Strong border */
 
-    /* Status Colors (Dark Modern Tech Style) */
-    --color-success: #34d399; /* Emerald 400 */
-    --color-warning: #fbbf24; /* Amber 400 */
-    --color-error: #f87171; /* Red 400 */
-    --color-info: #22d3ee; /* Cyan 400 */
+    /* Status Colors (Dark Editorial Style) */
+    --color-success: #5ef0b0; /* Mint */
+    --color-warning: #f0c040; /* Gold */
+    --color-error: #ff5252; /* Bright red */
+    --color-info: #5ef0b0; /* Mint */
 
-    /* Interactive States (Dark Modern Tech Style) */
-    --color-hover-bg: #334155; /* Slate 700 hover */
-    --color-active-bg: #475569; /* Slate 600 active */
+    /* Interactive States (Dark Editorial Style) */
+    --color-hover-bg: #161a1f; /* Dark hover */
+    --color-active-bg: #1c2028; /* Dark active */
 
     /* Legacy Colors (for backward compatibility) */
     --font-color-0: var(--color-text-primary);
@@ -414,36 +417,36 @@
 
   /* Light Mode - Class-based (explicit) */
   :root.light {
-    /* Light mode uses the Modern Tech variables already defined above */
-    --color-primary: #3b82f6; /* Blue 500 */
-    --color-accent: #06b6d4; /* Cyan 500 accent */
+    /* Light mode uses the Editorial Light variables already defined in :root */
+    --color-primary: #0a6b4a; /* Dark mint */
+    --color-accent: #a07808; /* Dark gold */
 
-    /* Neutral Colors (Modern Tech Style) */
-    --color-text-primary: #0f172a; /* Slate 900 text */
-    --color-text-secondary: #64748b; /* Slate 500 secondary */
-    --color-text-tertiary: #94a3b8; /* Slate 400 muted */
-    --color-text-muted: #cbd5e1; /* Slate 300 very light */
+    /* Neutral Colors (Editorial Light Style) */
+    --color-text-primary: #1a1815; /* Deep warm black */
+    --color-text-secondary: #6b6460; /* Warm gray */
+    --color-text-tertiary: #8a857a; /* Warm muted */
+    --color-text-muted: #b0a99e; /* Light warm muted */
 
-    /* Background Colors (Modern Tech Style) */
-    --color-bg-primary: #ffffff; /* Pure white */
-    --color-bg-secondary: #f8fafc; /* Slate 50 surface */
-    --color-bg-tertiary: #f1f5f9; /* Slate 100 hover */
-    --color-bg-elevated: #f8fafc; /* Slate 50 card backgrounds */
+    /* Background Colors (Editorial Light Style) */
+    --color-bg-primary: #f7f5f0; /* Warm cream */
+    --color-bg-secondary: #f0ede6; /* Warm muted */
+    --color-bg-tertiary: #e8e4db; /* Warm hover */
+    --color-bg-elevated: #ffffff; /* White card backgrounds */
 
-    /* Border Colors (Modern Tech Style) */
-    --color-border-light: #e2e8f0; /* Slate 200 light border */
-    --color-border-medium: #cbd5e1; /* Slate 300 medium border */
-    --color-border-dark: #64748b; /* Slate 500 dark border */
+    /* Border Colors (Editorial Light Style) */
+    --color-border-light: #e0dbd0; /* Warm light border */
+    --color-border-medium: #d0c9bc; /* Warm medium border */
+    --color-border-dark: #8a857a; /* Warm dark border */
 
-    /* Interactive States (Modern Tech Style) */
-    --color-hover-bg: #f1f5f9; /* Slate 100 hover */
-    --color-active-bg: #e2e8f0; /* Slate 200 active */
+    /* Interactive States (Editorial Light Style) */
+    --color-hover-bg: #f0ede6; /* Warm hover */
+    --color-active-bg: #e8e4db; /* Warm active */
 
-    /* Status Colors (Modern Tech Style) */
-    --color-success: #059669; /* Emerald 600 - Improved contrast (4.82:1) */
-    --color-warning: #d97706; /* Amber 600 - Improved contrast (5.93:1) */
-    --color-error: #dc2626; /* Red 600 - Improved contrast (5.25:1) */
-    --color-info: #0891b2; /* Cyan 600 - Improved contrast */
+    /* Status Colors (Editorial Light Style) */
+    --color-success: #059669; /* Emerald 600 */
+    --color-warning: #a07808; /* Gold */
+    --color-error: #c53030; /* Deep red */
+    --color-info: #0a6b4a; /* Dark mint */
 
     /* Legacy Colors (for backward compatibility) */
     --font-color-0: var(--color-text-primary);
@@ -452,36 +455,36 @@
   /* System Preference Fallback (when no class is set) */
   @media (prefers-color-scheme: dark) {
     :root:not(.light):not(.dark) {
-      /* Modern Tech Dark Theme Colors for System Preference */
-      --color-primary: #60a5fa; /* Blue 400 for dark mode */
-      --color-accent: #22d3ee; /* Cyan 400 accent */
+      /* Dark Ink Editorial for System Preference */
+      --color-primary: #5ef0b0; /* Mint green */
+      --color-accent: #f0c040; /* Gold accent */
 
-      /* Neutral Colors (Dark Modern Tech Style) */
-      --color-text-primary: #f8fafc; /* Slate 50 text */
-      --color-text-secondary: #64748b; /* Slate 500 secondary */
-      --color-text-tertiary: #94a3b8; /* Slate 400 muted */
-      --color-text-muted: #cbd5e1; /* Slate 300 very light */
+      /* Neutral Colors (Dark Editorial Style) */
+      --color-text-primary: #e8e2d8; /* Warm ivory */
+      --color-text-secondary: #8a857a; /* Warm gray */
+      --color-text-tertiary: #6b6660; /* Warm muted */
+      --color-text-muted: #4a4540; /* Very muted */
 
-      /* Background Colors (Dark Modern Tech Style) */
-      --color-bg-primary: #0f172a; /* Slate 900 background */
-      --color-bg-secondary: #1e293b; /* Slate 800 surface */
-      --color-bg-tertiary: #334155; /* Slate 700 hover */
-      --color-bg-elevated: #1e293b; /* Slate 800 card backgrounds */
+      /* Background Colors (Dark Editorial Style) */
+      --color-bg-primary: #0b0c0e; /* Deep dark */
+      --color-bg-secondary: #101215; /* Dark surface */
+      --color-bg-tertiary: #161a1f; /* Elevated surface */
+      --color-bg-elevated: #161a1f; /* Card backgrounds */
 
-      /* Border Colors (Dark Modern Tech Style) */
-      --color-border-light: #334155; /* Slate 700 border */
-      --color-border-medium: #475569; /* Slate 600 medium border */
-      --color-border-dark: #64748b; /* Slate 500 strong border */
+      /* Border Colors (Dark Editorial Style) */
+      --color-border-light: #1e2228; /* Subtle border */
+      --color-border-medium: #282d35; /* Medium border */
+      --color-border-dark: #3a4050; /* Strong border */
 
-      /* Interactive States (Dark Modern Tech Style) */
-      --color-hover-bg: #334155; /* Slate 700 hover */
-      --color-active-bg: #475569; /* Slate 600 active */
+      /* Interactive States (Dark Editorial Style) */
+      --color-hover-bg: #161a1f; /* Dark hover */
+      --color-active-bg: #1c2028; /* Dark active */
 
-      /* Status Colors (Dark Modern Tech Style) */
-      --color-success: #34d399; /* Emerald 400 */
-      --color-warning: #fbbf24; /* Amber 400 */
-      --color-error: #f87171; /* Red 400 */
-      --color-info: #22d3ee; /* Cyan 400 */
+      /* Status Colors (Dark Editorial Style) */
+      --color-success: #5ef0b0; /* Mint */
+      --color-warning: #f0c040; /* Gold */
+      --color-error: #ff5252; /* Bright red */
+      --color-info: #5ef0b0; /* Mint */
 
       /* Legacy Colors (for backward compatibility) */
       --font-color-0: var(--color-text-primary);
@@ -756,17 +759,10 @@
 
 /* Dark mode post-list styling now handled by Shadcn UI */
 
-/* Dark mode header styling */
+/* Dark mode header styling - consistent across all sizes */
 :root.dark #Header {
   background-color: var(--background);
   border-bottom: 1px solid var(--border);
-}
-
-@media screen and (min-width: 1120px) {
-  :root.dark #Header {
-    background-color: transparent;
-    border-bottom: none;
-  }
 }
 
 /* Typography.js base styles - Modern Tech Design System */
@@ -886,28 +882,18 @@ a:active {
 
 /* ScrollToTop component now uses Shadcn UI Button - legacy CSS removed */
 
-/* Header Styles - Medium Design System */
+/* Header Styles - Dark Ink Editorial */
 #Header {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
   position: fixed;
   top: 0;
-  z-index: 1001; /* Highest z-index - appears above all other elements */
-  width: 100%;
-  align-items: center;
-  gap: var(--space-md);
-  padding: 0 var(--space-lg);
+  left: 0;
+  right: 0;
+  z-index: 1001;
   height: var(--header-height);
-  max-height: var(--header-height);
-  transition: top 0.3s;
-  transition-delay: 0.2s;
   background-color: var(--background);
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border);
   user-select: none;
-  backdrop-filter: blur(
-    8px
-  ); /* Add backdrop blur for better visual separation */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Add subtle shadow for better layer separation */
+  transition: top 0.3s ease;
 }
 
 /* Consistent header height across all screen sizes */
@@ -936,57 +922,84 @@ a:active {
   top: calc(-1 * var(--header-height));
 }
 
-.header-title {
-  display: flex;
-  align-items: flex-end;
-  grid-column: 1;
-}
-
-@media screen and (max-width: 559px) {
-  .header-title {
-    align-items: center;
-  }
-}
-
-.header-profile-image-wrap {
+/* Editorial Header Inner Layout */
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
   display: flex;
   align-items: center;
-  border: 1px solid #aaa;
-  padding: 2px;
-  border-radius: 100%;
-  margin-right: 0.25rem;
+  justify-content: space-between;
 }
 
-@media screen and (max-width: 559px) {
-  .header-profile-image-wrap {
-    padding: 1px;
-  }
+/* Editorial Logo: [jell.] */
+.header-logo {
+  font-family: var(--font-mono-display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--foreground);
+  transition: opacity 0.15s;
 }
-
-.header-profile-image-wrap img {
-  border-radius: 100%;
-  margin: 0;
+.header-logo:hover {
   opacity: 0.8;
-  transition: all 0.5s;
-  transition-timing-function: ease-in-out;
+}
+.logo-dot {
+  color: var(--primary);
+}
+.logo-bracket {
+  color: var(--muted-foreground);
 }
 
-@media screen and (max-width: 1119px) {
-  .header-profile-image-wrap img {
-    width: 48px !important;
-    height: 48px !important;
-  }
+/* Editorial Navigation */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-@media screen and (max-width: 559px) {
-  .header-profile-image-wrap img {
-    width: 48px !important;
-    height: 48px !important;
-  }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-family: var(--font-mono-display);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    background 0.15s;
+  border-radius: 4px;
+  min-height: 44px;
+  min-width: 44px;
+  justify-content: center;
+}
+.nav-item:hover {
+  color: var(--foreground);
+  background: var(--secondary);
 }
 
-.header-profile-image-wrap img:hover {
-  opacity: 1;
+.nav-kbd {
+  font-family: var(--font-mono-display);
+  font-size: 9px;
+  color: var(--muted-foreground);
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* Legacy header styles kept for compatibility */
+.header-title {
+  display: flex;
+  align-items: center;
 }
 
 .header-title-text {
@@ -2348,14 +2361,14 @@ body.keyboard-navigation *:focus {
   .mobile-bottom-nav {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(247, 245, 240, 0.95);
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.1);
   }
 
   .dark .mobile-bottom-nav {
-    background: rgba(0, 0, 0, 0.95);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(11, 12, 14, 0.95);
+    border-top: 1px solid rgba(30, 34, 40, 0.8);
     box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.3);
   }
 
@@ -2646,4 +2659,221 @@ body.keyboard-navigation *:focus {
 /* Hide any TOC-related content that might slip through to post lists */
 [data-testid='post-list'] article [data-toc-excerpt] {
   display: none !important;
+}
+
+/* ========================================
+   Dark Ink Editorial - Post List Styles
+   ======================================== */
+
+.post-item {
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
+  transition: border-color 0.15s;
+}
+.post-item:last-child {
+  border-bottom: 1px solid var(--border);
+}
+.post-item:hover {
+  border-top-color: var(--primary);
+}
+
+.post-link {
+  display: flex;
+  gap: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-number {
+  font-family: var(--font-mono-display);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  min-width: 28px;
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+
+.post-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.post-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--foreground);
+  line-height: 1.4;
+  flex: 1;
+  transition: color 0.15s;
+  margin: 0;
+}
+.post-item:hover .post-title {
+  color: var(--primary);
+}
+
+.post-date {
+  font-family: var(--font-mono-display);
+  font-size: 11px;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.post-excerpt {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  line-height: 1.55;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.post-tag {
+  font-family: var(--font-mono-display);
+  font-size: 11px;
+  color: var(--muted-foreground);
+  transition: color 0.15s;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.post-tag:hover {
+  color: var(--primary);
+}
+
+/* PostList Mobile Responsive */
+@media screen and (max-width: 600px) {
+  .post-header-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .post-date {
+    align-self: flex-start;
+  }
+  .post-number {
+    min-width: 24px;
+    font-size: 11px;
+  }
+  .post-link {
+    gap: 14px;
+  }
+}
+
+/* ========================================
+   Dark Ink Editorial - Bio Styles
+   ======================================== */
+
+.bio {
+  padding: 0;
+}
+
+.bio-name {
+  font-family: var(--font-mono-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.bio-comment {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  border-left: 2px solid var(--primary);
+  padding-left: 12px;
+}
+
+.bio-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.bio-info-item {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono-display);
+}
+
+.bio-info-link {
+  font-size: 12px;
+  color: var(--primary);
+  text-decoration: none;
+  font-family: var(--font-mono-display);
+}
+.bio-info-link:hover {
+  text-decoration: underline;
+}
+
+.bio-links {
+  display: flex;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.bio-link {
+  font-family: var(--font-mono-display);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.15s;
+}
+.bio-link:hover {
+  color: var(--primary);
+}
+
+/* ========================================
+   Dark Ink Editorial - Footer Styles
+   ======================================== */
+
+.site-footer {
+  margin-top: 80px;
+  border-top: 1px solid var(--border);
+  padding: 24px 0 40px;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: var(--font-mono-display);
+  font-size: 11px;
+  color: var(--muted-foreground);
+  letter-spacing: 0.04em;
+}
+
+.footer-accent {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.footer-sep {
+  color: var(--border);
 }

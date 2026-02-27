@@ -40,8 +40,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
+    { media: '(prefers-color-scheme: light)', color: '#f7f5f0' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b0c0e' },
   ],
 }
 
@@ -85,9 +85,9 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
     'apple-mobile-web-app-title': siteConfig.title,
     'mobile-web-app-capable': 'yes',
-    'msapplication-TileColor': '#3b82f6',
+    'msapplication-TileColor': '#0b0c0e',
     'msapplication-config': '/browserconfig.xml',
-    'theme-color': '#3b82f6',
+    'theme-color': '#0b0c0e',
     'google-adsense-account': 'ca-pub-5518615618879832',
   },
 }
@@ -122,15 +122,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
-        {/* Google Fonts: Inter (Body) & Outfit (Headings) */}
+        {/* Google Fonts: IBM Plex Mono (Editorial Display) & JetBrains Mono (Code) */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-
-        {/* JetBrains Mono for code blocks - with display=swap for LCP optimization */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
 
@@ -143,8 +137,8 @@ export default function RootLayout({
       <body
         className="min-h-screen bg-background font-sans text-foreground antialiased transition-colors duration-300"
         style={{
-          backgroundColor: 'var(--background, #ffffff)',
-          color: 'var(--foreground, #0f172a)',
+          backgroundColor: 'var(--background, #f7f5f0)',
+          color: 'var(--foreground, #1a1815)',
           fontFamily:
             'var(--font-korean, "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, BlinkMacSystemFont, system-ui, sans-serif)',
         }}

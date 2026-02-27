@@ -3,17 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { faTags, faSearch } from '@fortawesome/free-solid-svg-icons'
 import ThemeToggle from '@/components/ThemeToggle'
-import { Button } from '@/components/ui/button'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
 import { useCommandPalette } from '@/components/CommandPalette/CommandPaletteProvider'
 import { useDeviceType } from '@/hooks/useDeviceType'
 
@@ -26,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
   const pathname = usePathname()
   const router = useRouter()
   const { openPalette } = useCommandPalette()
-  const { isMobile, isTablet, touchEnabled } = useDeviceType()
+  const { isMobile } = useDeviceType()
 
   // Handle bio opacity based on header visibility
   useEffect(() => {
@@ -57,7 +47,6 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
         return
       }
 
-      const currentYPos = window.pageYOffset
       setIsHide(window.pageYOffset > 50)
     }
 
@@ -65,168 +54,53 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
     return () => document.removeEventListener('scroll', handleScroll)
   }, [pathname])
 
-  // Tag hover effect handlers
-  const tagSpanVisibleToggle = (isVisible: boolean) => {
-    const tag: HTMLSpanElement | null = document.querySelector('.tag-wrap>span')
-    if (tag && isVisible) {
-      tag.style.opacity = '1'
-      tag.style.visibility = 'visible'
-    }
-    if (tag && !isVisible) {
-      tag.style.opacity = '0'
-      tag.style.visibility = 'hidden'
-    }
-  }
-
   return (
-    <TooltipProvider>
-      <header
-        id="Header"
-        role="banner"
-        className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''} relative`}
-        aria-label="사이트 헤더 및 주 네비게이션"
-      >
-        <div className="header-title">
-          <Link
-            href="/"
-            aria-label={`${siteTitle} 홈페이지로 이동`}
-            className="flex items-center"
-          >
-            <div className="header-profile-image-wrap">
-              <img
-                src="https://avatars.githubusercontent.com/u/7909227?v=4"
-                alt="Jell의 프로필 이미지"
-                width="48"
-                height="48"
-                className="rounded-full object-cover"
-                crossOrigin="anonymous"
-              />
-            </div>
-          </Link>
+    <header
+      id="Header"
+      role="banner"
+      className={`${isHide ? 'hide' : 'show'} ${isMobile ? 'mobile' : ''}`}
+      aria-label="사이트 헤더 및 주 네비게이션"
+    >
+      <div className="header-inner">
+        {/* Logo: [jell.] */}
+        <Link
+          href="/"
+          className="header-logo"
+          aria-label={`${siteTitle} 홈페이지로 이동`}
+        >
+          <span className="logo-bracket">[</span>
+          <span className="logo-name">jell</span>
+          <span className="logo-dot">.</span>
+          <span className="logo-bracket">]</span>
+        </Link>
 
-          <Link href="/" aria-label={`${siteTitle} 사이트 홈으로 이동`}>
-            <h1 className="header-title-text">{siteTitle}</h1>
-          </Link>
-        </div>
-
+        {/* Navigation */}
         <nav
-          id="nav"
-          className="hidden md:block"
+          className="header-nav"
           role="navigation"
           aria-label="주요 네비게이션"
         >
-          <ul className="flex items-center justify-center gap-2" role="list">
-            <li className="flex items-center justify-center">
-              <div className="tag-wrap flex items-center justify-center">
-                <span className="sr-only">TAG</span>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => router.push('/tags')}
-                      className={cn(
-                        'group relative flex h-12 w-12 items-center justify-center',
-                        'border-border/30 rounded-md border',
-                        'hover:border-border/60 hover:scale-105',
-                        'active:scale-95',
-                        'transition-all duration-200',
-                        'hover:bg-accent/10 bg-transparent',
-                        // Ensure minimum touch target size of 44x44px on all devices
-                        'min-h-[44px] min-w-[44px]'
-                      )}
-                      onMouseEnter={() => {
-                        tagSpanVisibleToggle(true)
-                      }}
-                      onMouseLeave={() => {
-                        tagSpanVisibleToggle(false)
-                      }}
-                      aria-label="태그 페이지로 이동"
-                      title="모든 태그 보기"
-                    >
-                      <Fa
-                        icon={faTags}
-                        className={cn(
-                          'text-lg transition-all duration-200',
-                          'group-hover:scale-110',
-                          'text-green-500 dark:text-green-400',
-                          'group-hover:text-green-600 dark:group-hover:text-green-300',
-                          'group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]'
-                        )}
-                        aria-hidden="true"
-                      />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>모든 태그 보기</p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-            </li>
+          <button
+            onClick={() => router.push('/tags')}
+            className="nav-item"
+            aria-label="태그 페이지로 이동"
+          >
+            <span className="nav-label">TAGS</span>
+          </button>
 
-            <li className="flex items-center justify-center">
-              <div className="search-wrap flex items-center justify-center">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={openPalette}
-                      className={cn(
-                        'group relative flex h-12 w-12 items-center justify-center',
-                        'border-border/30 rounded-md border',
-                        'hover:border-border/60 hover:scale-105',
-                        'active:scale-95',
-                        'transition-all duration-200',
-                        'hover:bg-accent/10 bg-transparent',
-                        // Ensure minimum touch target size of 44x44px on all devices
-                        'min-h-[44px] min-w-[44px]'
-                      )}
-                      aria-label="검색하기 (Cmd+K)"
-                    >
-                      <Fa
-                        icon={faSearch}
-                        className={cn(
-                          'text-lg transition-all duration-200',
-                          'group-hover:scale-110',
-                          'text-purple-500 dark:text-purple-400',
-                          'group-hover:text-purple-600 dark:group-hover:text-purple-300',
-                          'group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.3)]'
-                        )}
-                        aria-hidden="true"
-                      />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <div className="flex items-center gap-2">
-                      <span>빠른 검색</span>
-                      <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                        ⌘K
-                      </kbd>
-                    </div>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-            </li>
+          <button
+            onClick={openPalette}
+            className="nav-item"
+            aria-label="검색하기 (Cmd+K)"
+          >
+            <span className="nav-label">SEARCH</span>
+            <kbd className="nav-kbd">⌘K</kbd>
+          </button>
 
-            <li className="flex items-center justify-center">
-              <div className="theme-wrap flex items-center justify-center">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div className="flex items-center justify-center">
-                      <ThemeToggle />
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>테마 변경 (라이트 → 다크 → 시스템)</p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-            </li>
-          </ul>
+          <ThemeToggle />
         </nav>
-      </header>
-    </TooltipProvider>
+      </div>
+    </header>
   )
 }
 

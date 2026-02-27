@@ -36,11 +36,9 @@ describe('Header Component', () => {
   it('renders navigation elements', () => {
     render(<HeaderWrapper />)
 
-    // Check for profile image
-    const profileImage = screen.getByRole('img', {
-      name: /jell의 프로필 이미지/i,
-    })
-    expect(profileImage).toBeInTheDocument()
+    // Check for logo link
+    const logoLink = screen.getByRole('link', { name: /홈페이지로 이동/i })
+    expect(logoLink).toBeInTheDocument()
 
     // Check for theme toggle
     const themeToggle = screen.getByRole('button', { name: /현재 테마/i })

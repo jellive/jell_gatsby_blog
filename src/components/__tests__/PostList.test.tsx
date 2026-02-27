@@ -70,9 +70,8 @@ describe('PostList Component', () => {
   it('formats dates correctly', () => {
     render(<PostList posts={mockPosts} />)
 
-    expect(screen.getByText('Aug 14, 2024')).toBeInTheDocument()
-    expect(screen.getByText('Aug 13, 2024')).toBeInTheDocument()
-    expect(screen.getByText('Aug 12, 2024')).toBeInTheDocument()
+    const allDates = screen.getAllByText('Aug 2024')
+    expect(allDates).toHaveLength(3)
   })
 
   it('displays excerpts when available', () => {
@@ -198,10 +197,10 @@ describe('PostList Component', () => {
     const gameTags = screen.getByText('#game')
     expect(gameTags).toBeInTheDocument()
 
-    // Verify tags are clickable (have onClick handler)
-    expect(devTags).toHaveClass('cursor-pointer')
-    expect(bicycleTags).toHaveClass('cursor-pointer')
-    expect(gameTags).toHaveClass('cursor-pointer')
+    // Verify tags are styled as interactive elements
+    expect(devTags).toHaveClass('post-tag')
+    expect(bicycleTags).toHaveClass('post-tag')
+    expect(gameTags).toHaveClass('post-tag')
   })
 
   it('handles invalid date gracefully', () => {
