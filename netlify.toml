@@ -1,6 +1,6 @@
-# Next.js SSR mode for Netlify
+# Next.js static export for Netlify
 [build]
-  publish = ".next"
+  publish = "out"
   command = "npm run build:production"
 
 [build.environment]
@@ -8,10 +8,6 @@
   NPM_VERSION = "9"
   NODE_ENV = "production"
   NEXT_TELEMETRY_DISABLED = "1"
-
-# Enable Netlify Next.js plugin for SSR
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
 
 # Essential security headers with cache control
 [[headers]]

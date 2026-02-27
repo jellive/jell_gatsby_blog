@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next'
 import { getAllPosts, getAllTags } from '@/lib/markdown'
 import { siteConfig } from '@/lib/config'
 
+export const dynamic = 'force-static'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts()
   const tags = await getAllTags()

@@ -15,8 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const nextConfig = {
-  // Note: Static export removed to fix SSR issues with React hooks
-  // Netlify will use SSR mode with @netlify/plugin-nextjs
+  output: 'export',
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   // Generate unique build ID for cache busting
