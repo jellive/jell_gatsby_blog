@@ -113,8 +113,11 @@ jell_claude
 # Makefile (development utility)
 Makefile
 
-# Next.js pages dir (App Router project - pages/ should not exist)
-src/pages/
+# Next.js pages dir (only _document.tsx is allowed for Pages Router document override)
+src/pages/404.tsx
+src/pages/500.tsx
+src/pages/_error.tsx
+src/pages/_app.tsx
 
 # AI Agent configuration files (various IDEs and tools)
 .clinerules/

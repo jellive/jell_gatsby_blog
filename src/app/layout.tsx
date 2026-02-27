@@ -6,32 +6,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { ClientProviders } from '@/components/ClientProviders'
 
-// Lazy load non-critical components for better initial page load
-const GoogleAnalytics = dynamic(
-  () => import('@/components/Analytics/GoogleAnalytics'),
-  { ssr: false }
-)
-const GoogleAdSense = dynamic(
-  () => import('@/components/Analytics/GoogleAdSense'),
-  { ssr: false }
-)
-const WebVitals = dynamic(() => import('@/components/Analytics/WebVitals'), {
-  ssr: false,
-})
-const ScrollToTop = dynamic(() => import('@/components/ScrollToTop'), {
-  ssr: false,
-})
-const MobileBottomNav = dynamic(() => import('@/components/MobileBottomNav'), {
-  ssr: false,
-})
 const StructuredData = dynamic(() => import('@/components/StructuredData'))
-const FontAwesomeInit = dynamic(
-  () => import('@/components/FontAwesome/FontAwesomeInit'),
-  { ssr: false }
-)
-const CacheChecker = dynamic(() => import('@/components/CacheChecker'), {
-  ssr: false,
-})
 // Google Fonts will be loaded via CDN in the head section
 
 // Viewport configuration for mobile optimization
@@ -144,11 +119,6 @@ export default function RootLayout({
             'var(--font-korean, "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, BlinkMacSystemFont, system-ui, sans-serif)',
         }}
       >
-        <FontAwesomeInit />
-        <CacheChecker />
-        <GoogleAnalytics />
-        <GoogleAdSense />
-        <WebVitals />
         <StructuredData type="website" />
 
         {/* Skip to Content Link for Keyboard Navigation */}
@@ -174,9 +144,6 @@ export default function RootLayout({
             <Footer />
           </div>
         </ClientProviders>
-
-        <ScrollToTop />
-        <MobileBottomNav />
       </body>
     </html>
   )
