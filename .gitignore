@@ -133,3 +133,6 @@ AGENT.md
 AGENTS.md
 GEMINI.md
 opencode.json 
+
+# Local Netlify folder
+.netlify

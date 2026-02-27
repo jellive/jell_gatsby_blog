@@ -3,6 +3,7 @@ import path from 'path'
 import matter from 'gray-matter'
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
+import remarkGfm from 'remark-gfm'
 import remarkToc from 'remark-toc'
 import remarkEmoji from 'remark-emoji'
 import remarkRehype from 'remark-rehype'
@@ -124,6 +125,7 @@ export async function parseMarkdownFile(filePath: string): Promise<PostData> {
   // Process markdown to HTML with proper remark → rehype pipeline
   const processedContent = await unified()
     .use(remarkParse)
+    .use(remarkGfm)
     .use(remarkEmoji)
     .use(remarkToc, {
       tight: true,
