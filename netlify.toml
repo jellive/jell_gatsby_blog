@@ -48,14 +48,6 @@
   [headers.values]
     Cache-Control = "public, max-age=2592000"
 
-# Suppress Next.js RSC prefetch 404s (static export limitation)
-# Client requests /tags.txt but file lives at /tags/index.txt
-[[redirects]]
-  from = "/*.txt"
-  to = "/:splat/index.txt"
-  status = 200
-  force = false
-
 # RSS and sitemap content types
 [[headers]]
   for = "/rss"
