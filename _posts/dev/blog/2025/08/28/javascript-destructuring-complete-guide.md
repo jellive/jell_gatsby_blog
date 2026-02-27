@@ -208,13 +208,3 @@ interface User {
 
 const { name, age, email = 'no-email' }: User = await fetchUser()
 ```
-
-## 핵심 정리
-
-1. **객체 구조분해**: `const { prop } = obj`
-2. **배열 구조분해**: `const [first, second] = arr`
-3. **기본값 설정**: `const { prop = 'default' } = obj`
-4. **변수명 변경**: `const { prop: newName } = obj`
-5. **Rest 패턴**: `const { id, ...rest } = obj`
-
-구조분해 할당은 코드를 간결하고 읽기 쉽게 만들어주는 강력한 도구입니다. React 개발에서 특히 유용하며, 함수 파라미터와 리턴값 처리를 훨씬 깔끔하게 만들어줍니다.
