@@ -18,9 +18,7 @@ const WebVitals = dynamic(() => import('@/components/Analytics/WebVitals'), {
 const ScrollToTop = dynamic(() => import('@/components/ScrollToTop'), {
   ssr: false,
 })
-const MobileBottomNav = dynamic(() => import('@/components/MobileBottomNav'), {
-  ssr: false,
-})
+
 const FontAwesomeInit = dynamic(
   () => import('@/components/FontAwesome/FontAwesomeInit'),
   { ssr: false }
@@ -39,7 +37,6 @@ export function ClientProviders({ children }: { children: React.ReactNode }) {
       <WebVitals />
       {children}
       <ScrollToTop />
-      <MobileBottomNav />
     </CommandPaletteProvider>
   )
 }
