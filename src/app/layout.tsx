@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { siteConfig } from '@/lib/config'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { ClientProviders } from '@/components/ClientProviders'
 
 // Lazy load non-critical components for better initial page load
 const GoogleAnalytics = dynamic(
@@ -159,18 +160,20 @@ export default function RootLayout({
           메인 콘텐츠로 건너뛰기
         </a>
 
-        <Header siteTitle={siteConfig.title} />
-        <div id="content" className="w-full max-w-full">
-          <main
-            id="main-content"
-            role="main"
-            tabIndex={-1}
-            className="mx-auto w-full max-w-7xl px-6 md:px-8 lg:px-12"
-          >
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <ClientProviders>
+          <Header siteTitle={siteConfig.title} />
+          <div id="content" className="w-full max-w-full">
+            <main
+              id="main-content"
+              role="main"
+              tabIndex={-1}
+              className="mx-auto w-full max-w-7xl px-6 md:px-8 lg:px-12"
+            >
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </ClientProviders>
 
         <ScrollToTop />
         <MobileBottomNav />
