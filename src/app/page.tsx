@@ -9,6 +9,7 @@ export default async function Home() {
   return (
     <>
       <StructuredData type="blog" />
+      <h1 className="sr-only">jell.kr — 개발, 자전거, 게임 블로그</h1>
       <main className="min-h-screen">
         {/* Desktop Layout: Side-by-side Bio and Content */}
         <div className="hidden lg:block">

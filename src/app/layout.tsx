@@ -5,6 +5,7 @@ import { siteConfig } from '@/lib/config'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { ClientProviders } from '@/components/ClientProviders'
+import MobileBottomNav from '@/components/MobileBottomNav'
 
 const StructuredData = dynamic(() => import('@/components/StructuredData'))
 // Google Fonts will be loaded via CDN in the head section
@@ -143,6 +144,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
+          <MobileBottomNav />
         </ClientProviders>
       </body>
     </html>
