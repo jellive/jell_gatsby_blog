@@ -107,7 +107,7 @@ const nextConfig = {
               "img-src 'self' data: *.googletagmanager.com *.google-analytics.com *.googlesyndication.com *.doubleclick.net *.gstatic.com *.disqus.com *.disquscdn.com *.gravatar.com github.com *.githubusercontent.com",
               "font-src 'self' cdn.jsdelivr.net *.gstatic.com *.googleapis.com",
               "connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com *.disqus.com *.disquscdn.com",
-              'frame-src *.googlesyndication.com *.doubleclick.net *.disqus.com',
+              'frame-src disqus.com *.googlesyndication.com *.doubleclick.net *.disqus.com',
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",
