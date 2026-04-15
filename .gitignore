@@ -10,10 +10,6 @@ node_modules/
 yarn-error.log
 .yarn
 
-# Storybook (local only)
-.storybook/
-src/stories/
-
 # Next.js
 .next/
 out/
@@ -54,12 +50,8 @@ Thumbs.db
 # Testing
 playwright-report/
 playwright-test-results/
-playwright-screenshots/
 test-results/
 coverage/
-
-# Playwright MCP
-.playwright-mcp/
 
 # Development tools
 .claude/
@@ -111,18 +103,6 @@ jell_claude
 # tasks.json
 # tasks/
 
-# Oh My Claude Code internal state
-.omc/
-
-# Makefile (development utility)
-Makefile
-
-# Next.js pages dir (only _document.tsx is allowed for Pages Router document override)
-src/pages/404.tsx
-src/pages/500.tsx
-src/pages/_error.tsx
-src/pages/_app.tsx
-
 # AI Agent configuration files (various IDEs and tools)
 .clinerules/
 .gemini/
@@ -136,7 +116,10 @@ src/pages/_app.tsx
 AGENT.md
 AGENTS.md
 GEMINI.md
-opencode.json 
+opencode.json
 
-# Local Netlify folder
-.netlify
+# Blog automation generated files
+scripts
+
+# Local Makefile (개인 자동화용, Git 추적 제외)
+Makefile

@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-02-27T17:38:39.255Z",
-  "buildId": "build-1772213919258",
-  "version": 1772213919258,
-  "nodeEnv": "development",
+  "timestamp": "2026-04-15T07:11:07.319Z",
+  "buildId": "build-1776237067320",
+  "version": 1776237067320,
+  "nodeEnv": "production",
   "netlifyDeployId": "",
   "commitRef": "",
   "branch": "master",

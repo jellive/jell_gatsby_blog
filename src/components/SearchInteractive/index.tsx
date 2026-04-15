@@ -101,8 +101,8 @@ export default function SearchInteractive({
       {/* Search Controls */}
       <Card
         className={cn(
-          'border-border/50 bg-card/50 backdrop-blur-sm',
-          'transition-all duration-300 hover:border-border'
+          'border-border/40 rounded-xl bg-card shadow-sm',
+          'transition-shadow duration-200 hover:shadow-md'
         )}
       >
         <CardHeader className="pb-4">
@@ -133,9 +133,8 @@ export default function SearchInteractive({
               autoComplete="off"
               autoFocus={true}
               className={cn(
-                'h-12 pl-10 pr-4',
-                'border-border/50 focus:border-primary',
-                'bg-background/50 focus:bg-background',
+                'h-12 rounded-xl border-0 bg-muted pl-10 pr-4',
+                'focus:ring-primary/20 focus:ring-2',
                 'transition-all duration-200'
               )}
               data-testid="search-input"
@@ -317,15 +316,16 @@ export default function SearchInteractive({
                         >
                           <Card
                             className={cn(
-                              'p-4 transition-all duration-200 hover:border-primary',
-                              'cursor-pointer hover:shadow-md'
+                              'border-border/40 bg-card p-4 shadow-none',
+                              'cursor-pointer transition-all duration-200',
+                              'hover:border-primary/50 hover:shadow-sm'
                             )}
                           >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <Fa
                                   icon={faHashtag}
-                                  className="text-sm text-green-500"
+                                  className="text-primary/70 text-sm"
                                 />
                                 <span className="font-medium text-foreground">
                                   #{tag.name}
@@ -359,15 +359,16 @@ export default function SearchInteractive({
                         >
                           <Card
                             className={cn(
-                              'p-4 transition-all duration-200 hover:border-primary',
-                              'cursor-pointer hover:shadow-md'
+                              'border-border/40 bg-card p-4 shadow-none',
+                              'cursor-pointer transition-all duration-200',
+                              'hover:border-primary/50 hover:shadow-sm'
                             )}
                           >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2">
                                 <Fa
                                   icon={faFolder}
-                                  className="text-sm text-blue-500"
+                                  className="text-primary/70 text-sm"
                                 />
                                 <span className="font-medium text-foreground">
                                   {category.name}
@@ -436,15 +437,16 @@ export default function SearchInteractive({
                     >
                       <Card
                         className={cn(
-                          'p-6 transition-all duration-200 hover:border-primary',
-                          'cursor-pointer hover:shadow-md'
+                          'border-border/40 bg-card p-6 shadow-none',
+                          'cursor-pointer transition-all duration-200',
+                          'hover:border-primary/50 hover:shadow-sm'
                         )}
                       >
                         <div className="mb-3 flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <Fa
                               icon={faHashtag}
-                              className="text-lg text-green-500"
+                              className="text-primary/70 text-lg"
                             />
                             <span className="font-semibold text-foreground">
                               #{tag.name}
@@ -486,15 +488,16 @@ export default function SearchInteractive({
                     >
                       <Card
                         className={cn(
-                          'p-6 transition-all duration-200 hover:border-primary',
-                          'cursor-pointer hover:shadow-md'
+                          'border-border/40 bg-card p-6 shadow-none',
+                          'cursor-pointer transition-all duration-200',
+                          'hover:border-primary/50 hover:shadow-sm'
                         )}
                       >
                         <div className="mb-3 flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <Fa
                               icon={faFolder}
-                              className="text-lg text-blue-500"
+                              className="text-primary/70 text-lg"
                             />
                             <span className="font-semibold text-foreground">
                               {category.name}

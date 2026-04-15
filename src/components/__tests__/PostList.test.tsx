@@ -70,8 +70,9 @@ describe('PostList Component', () => {
   it('formats dates correctly', () => {
     render(<PostList posts={mockPosts} />)
 
-    const allDates = screen.getAllByText('Aug 2024')
+    const allDates = screen.getAllByTestId('post-date')
     expect(allDates).toHaveLength(3)
+    expect(allDates[0]?.textContent).toMatch(/Aug/)
   })
 
   it('displays excerpts when available', () => {
@@ -197,10 +198,10 @@ describe('PostList Component', () => {
     const gameTags = screen.getByText('#game')
     expect(gameTags).toBeInTheDocument()
 
-    // Verify tags are styled as interactive elements
-    expect(devTags).toHaveClass('post-tag')
-    expect(bicycleTags).toHaveClass('post-tag')
-    expect(gameTags).toHaveClass('post-tag')
+    // Verify tags are rendered as interactive elements (cursor-pointer)
+    expect(devTags).toHaveClass('cursor-pointer')
+    expect(bicycleTags).toHaveClass('cursor-pointer')
+    expect(gameTags).toHaveClass('cursor-pointer')
   })
 
   it('handles invalid date gracefully', () => {

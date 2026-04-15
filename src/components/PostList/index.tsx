@@ -3,6 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 export interface Post {
   slug: string
@@ -50,76 +51,107 @@ const PostList = (props: PostListProps) => {
       ]
 
       const month = months[date.getMonth()]
+      const day = date.getDate().toString().padStart(2, '0')
       const year = date.getFullYear()
 
-      return `${month} ${year}`
-    } catch (_error) {
+      return `${month} ${day}, ${year}`
+    } catch (error) {
       // Fallback for invalid dates
       return dateString
     }
   }
 
-  const mapPost = posts.map((post: Post, index: number) => {
+  const mapPost = posts.map((post: Post) => {
     const { slug, frontMatter, excerpt } = post
     const { date, title, tags } = frontMatter
 
-    // Format date - editorial style (Mon YYYY)
     const formattedDate = formatDate(date)
-
-    // Editorial numbering (01, 02, ...)
-    const num = String(index + 1).padStart(2, '0')
 
     // Filter out TOC-related content from excerpt
     const cleanExcerpt = excerpt
-      ?.replace(/목차\s*/g, '') // Remove Korean TOC
-      .replace(/Table of contents\s*/gi, '') // Remove English TOC
-      .replace(/Table Of Contents\s*/gi, '') // Remove capitalized TOC
-      .replace(/```toc[\s\S]*?```/g, '') // Remove TOC code blocks
-      .replace(/^\s*$\n/gm, '') // Remove empty lines
+      ?.replace(/목차\s*/g, '')
+      .replace(/Table of contents\s*/gi, '')
+      .replace(/Table Of Contents\s*/gi, '')
+      .replace(/```toc[\s\S]*?```/g, '')
+      .replace(/^\s*$\n/gm, '')
       .trim()
 
-    // Only show excerpt if it has meaningful content after filtering
     const shouldShowExcerpt = cleanExcerpt && cleanExcerpt.length > 10
 
     // Filter out undefined tags
     const validTags = tags.filter(tag => tag && tag !== 'undefined')
 
     return (
-      <article key={slug} className="post-item" data-testid="post-item">
-        <Link href={`/posts/${slug}`} className="post-link">
-          <div className="post-number">{num}</div>
-          <div className="post-body">
-            <div className="post-header-row">
-              <h2 className="post-title">{title}</h2>
-              <time className="post-date" data-testid="post-date">
-                {formattedDate}
-              </time>
-            </div>
-            {shouldShowExcerpt && (
-              <p className="post-excerpt" data-testid="post-excerpt">
-                {cleanExcerpt}
-              </p>
-            )}
-            {validTags.length > 0 && (
-              <div className="post-tags" data-testid="post-tags">
-                {validTags.map((tag: string) => (
-                  <span
-                    key={`${slug}-${tag}`}
-                    className="post-tag"
-                    role="button"
-                    tabIndex={0}
-                    onClick={e => handleTagClick(e, tag)}
-                    onKeyDown={e => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        handleTagClick(e as unknown as React.MouseEvent, tag)
-                      }
-                    }}
+      <article
+        key={slug}
+        className={cn(
+          'group cursor-pointer',
+          'border-border/40 rounded-xl border bg-card',
+          'p-5 sm:p-6',
+          'transition-shadow duration-200',
+          'shadow-none hover:shadow-sm'
+        )}
+        data-testid="post-item"
+      >
+        <Link
+          href={`/posts/${slug}`}
+          className="block text-inherit no-underline hover:text-inherit"
+        >
+          <div className="flex items-start justify-between gap-4">
+            {/* Content Section */}
+            <div className="min-w-0 flex-1">
+              {/* Title - larger, tighter tracking */}
+              <h2
+                className={cn(
+                  'mb-3 font-heading text-xl font-bold leading-tight tracking-tight',
+                  'md:text-2xl',
+                  'text-foreground transition-colors duration-200',
+                  'group-hover:text-primary',
+                  'line-clamp-2'
+                )}
+              >
+                {title}
+              </h2>
+
+              {/* Subtitle/Excerpt */}
+              {shouldShowExcerpt && (
+                <p
+                  className={cn(
+                    'mb-4 text-sm leading-relaxed text-muted-foreground',
+                    'line-clamp-2'
+                  )}
+                  data-testid="post-excerpt"
+                >
+                  {cleanExcerpt}
+                </p>
+              )}
+
+              {/* Metadata */}
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                <time data-testid="post-date">{formattedDate}</time>
+                {validTags.length > 0 && (
+                  <div
+                    className="flex flex-wrap gap-x-2"
+                    data-testid="post-tags"
                   >
-                    #{tag}
-                  </span>
-                ))}
+                    {validTags.map((tag: string) => (
+                      <span
+                        key={`${slug}-${tag}`}
+                        className="text-muted-foreground/70 cursor-pointer transition-colors duration-200 hover:text-primary"
+                        onClick={e => handleTagClick(e, tag)}
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
+            </div>
+
+            {/* Hover arrow indicator */}
+            <span className="text-muted-foreground/0 mt-1 hidden flex-shrink-0 transition-all duration-200 group-hover:text-muted-foreground sm:block">
+              &rarr;
+            </span>
           </div>
         </Link>
       </article>
@@ -128,7 +160,11 @@ const PostList = (props: PostListProps) => {
 
   return (
     <div className="w-full" data-testid="post-list">
-      <div className="mx-auto max-w-3xl">{mapPost}</div>
+      <div className="mx-auto max-w-4xl">
+        <div className="grid animate-slide-up gap-4 sm:gap-5 md:gap-6">
+          {mapPost}
+        </div>
+      </div>
     </div>
   )
 }

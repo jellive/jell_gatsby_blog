@@ -79,72 +79,18 @@ export default {
         tag: '6px', // Modern Tech tags
       },
 
-      // Modern Tech font system with Pretendard
+      // Modern Tech font system with Pretendard, Inter, and Outfit
       fontFamily: {
         sans: [
+          'Inter',
           'Pretendard Variable',
           'Pretendard',
-          'Apple SD Gothic Neo',
-          'Noto Sans KR',
-          'Malgun Gothic',
-          '-apple-system',
-          'BlinkMacSystemFont',
           'system-ui',
           'sans-serif',
         ],
-        mono: [
-          'JetBrains Mono',
-          'Fira Code',
-          'Cascadia Code',
-          'SF Mono',
-          'Monaco',
-          'Consolas',
-          'Noto Sans Mono',
-          'monospace',
-        ],
-        serif: [
-          'Noto Serif KR',
-          'Apple SD Gothic Neo',
-          'Charter',
-          'Georgia',
-          'Times New Roman',
-          'serif',
-        ],
-        // Legacy aliases for backward compatibility
-        system: [
-          'Pretendard Variable',
-          'Pretendard',
-          'Apple SD Gothic Neo',
-          'Noto Sans KR',
-          'system-ui',
-          '-apple-system',
-          'sans-serif',
-        ],
-        'nanum-gothic': [
-          'Pretendard Variable',
-          'Pretendard',
-          'Apple SD Gothic Neo',
-          'Noto Sans KR',
-          'system-ui',
-          '-apple-system',
-          'sans-serif',
-        ],
-        'noto-serif-kr': [
-          'Noto Serif KR',
-          'Apple SD Gothic Neo',
-          'Charter',
-          'Georgia',
-          'serif',
-        ],
-        raleway: [
-          'Pretendard Variable',
-          'Pretendard',
-          'Apple SD Gothic Neo',
-          'Noto Sans KR',
-          'system-ui',
-          '-apple-system',
-          'sans-serif',
-        ],
+        heading: ['Outfit', 'Pretendard Variable', 'Pretendard', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        serif: ['Noto Serif KR', 'serif'],
       },
 
       // Modern Tech font sizes
@@ -273,9 +219,21 @@ export default {
           from: { opacity: '0', transform: 'translateY(10px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
+        'fade-up': {
+          from: { opacity: '0', transform: 'translateY(20px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
         'scale-in': {
           from: { opacity: '0', transform: 'scale(0.95)' },
           to: { opacity: '1', transform: 'scale(1)' },
+        },
+        'slide-up': {
+          from: { opacity: '0', transform: 'translateY(16px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        'blur-in': {
+          from: { opacity: '0', filter: 'blur(4px)' },
+          to: { opacity: '1', filter: 'blur(0)' },
         },
       },
 
@@ -285,7 +243,10 @@ export default {
         'spin-slow': 'spin-slow 10s linear infinite',
         'bounce-subtle': 'bounce-subtle 3s ease-in-out infinite',
         'fade-in': 'fade-in 0.2s ease-out',
+        'fade-up': 'fade-up 0.5s ease-out forwards',
         'scale-in': 'scale-in 0.2s ease-out',
+        'slide-up': 'slide-up 0.4s ease-out forwards',
+        'blur-in': 'blur-in 0.3s ease-out forwards',
       },
 
       // Modern Tech grid system

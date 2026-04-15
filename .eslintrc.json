@@ -6,7 +6,12 @@
     "project": "./tsconfig.json",
     "ecmaVersion": "latest"
   },
-  "ignorePatterns": ["next.config.js", "scripts/**"],
+  "ignorePatterns": [
+    "next.config.js",
+    "tailwind.config.js",
+    "postcss.config.js",
+    "scripts/**"
+  ],
   "rules": {
     // JavaScript/General rules
     "prefer-const": "error",
