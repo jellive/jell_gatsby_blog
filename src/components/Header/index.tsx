@@ -4,7 +4,11 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
-import { faTags, faSearch } from '@fortawesome/free-solid-svg-icons'
+import {
+  faTags,
+  faSearch,
+  faFolderOpen,
+} from '@fortawesome/free-solid-svg-icons'
 import ThemeToggle from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import {
@@ -109,6 +113,29 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
             aria-label="주요 네비게이션"
           >
             <ul className="flex items-center gap-1" role="list">
+              <li>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => router.push('/projects')}
+                      className={cn(
+                        'h-10 w-10 rounded-full',
+                        'hover:bg-muted',
+                        'transition-colors duration-200'
+                      )}
+                      aria-label="프로젝트 페이지로 이동"
+                    >
+                      <Fa icon={faFolderOpen} className="text-lg" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Projects</p>
+                  </TooltipContent>
+                </Tooltip>
+              </li>
+
               <li>
                 <Tooltip>
                   <TooltipTrigger asChild>
