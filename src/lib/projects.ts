@@ -43,8 +43,8 @@ export const projects: Project[] = [
   {
     name: 'Dev Utils Hub',
     description:
-      '개발자를 위한 유틸리티 도구 모음. 13가지 도구를 Electron + React 기반 데스크탑 앱으로 제공.',
-    tech: ['Electron', 'React', 'TypeScript', 'Vite'],
+      '개발자를 위한 유틸리티 도구 모음. 13가지 도구를 Tauri v2 + React 기반 데스크탑 앱으로 제공.',
+    tech: ['Tauri v2', 'React', 'TypeScript', 'Vite'],
     github: 'https://github.com/jellive',
     status: 'active',
     category: 'desktop',
@@ -61,8 +61,17 @@ export const projects: Project[] = [
   {
     name: 'Jellmodoro',
     description:
-      '뽀모도로 타이머 앱. 집중력 향상과 작업 관리를 위한 타이머 및 통계 기능 제공.',
-    tech: ['Flutter', 'Dart'],
+      'Flutter 뽀모도로 타이머 앱. AI 집중 분석 리포트 + Apple Watch 연동으로 작업 패턴을 시각화.',
+    tech: ['Flutter', 'Dart', 'Apple Watch', 'AI'],
+    github: 'https://github.com/jellive',
+    status: 'active',
+    category: 'mobile',
+  },
+  {
+    name: 'Couple Planner',
+    description:
+      'Next.js + Expo 기반 커플 앱. AI 데이트 플래너, 공유 캘린더, 기념일 관리 기능 제공.',
+    tech: ['Next.js', 'Expo', 'React Native', 'TypeScript', 'AI'],
     github: 'https://github.com/jellive',
     status: 'active',
     category: 'mobile',
