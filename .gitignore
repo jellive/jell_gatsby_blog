@@ -123,3 +123,18 @@ scripts
 
 # Local Makefile (개인 자동화용, Git 추적 제외)
 Makefile
+
+# Debug screenshots
+disqus-check.png
+homepage.png
+mobile-bottom-nav*.png
+mobile-check.png
+table-verification.png
+playwright-screenshots/
+
+# Local tools
+.netlify/
+.omc/
+.playwright-mcp/
+.storybook/
+src/stories/
