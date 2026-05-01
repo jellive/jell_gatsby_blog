@@ -38,9 +38,8 @@ describe('Image Optimization', () => {
     it('should implement lazy loading for below-fold images', () => {
       // OptimizedImage should support lazy loading
       const fs = require('fs')
-      const optimizedImagePath = require.resolve(
-        '../../components/OptimizedImage/index.tsx'
-      )
+      const optimizedImagePath =
+        require.resolve('../../components/OptimizedImage/index.tsx')
       const content = fs.readFileSync(optimizedImagePath, 'utf-8')
 
       // Check for loading prop handling
@@ -49,9 +48,8 @@ describe('Image Optimization', () => {
 
     it('should use priority loading for above-fold images', () => {
       const fs = require('fs')
-      const optimizedImagePath = require.resolve(
-        '../../components/OptimizedImage/index.tsx'
-      )
+      const optimizedImagePath =
+        require.resolve('../../components/OptimizedImage/index.tsx')
       const content = fs.readFileSync(optimizedImagePath, 'utf-8')
 
       // Check for priority prop support
@@ -62,9 +60,8 @@ describe('Image Optimization', () => {
   describe('Responsive Images', () => {
     it('should define image sizes for responsive breakpoints', () => {
       const fs = require('fs')
-      const optimizedImagePath = require.resolve(
-        '../../components/OptimizedImage/index.tsx'
-      )
+      const optimizedImagePath =
+        require.resolve('../../components/OptimizedImage/index.tsx')
       const content = fs.readFileSync(optimizedImagePath, 'utf-8')
 
       // Check for sizes prop configuration
@@ -83,9 +80,8 @@ describe('Image Optimization', () => {
   describe('Image Quality and Compression', () => {
     it('should configure appropriate image quality settings', () => {
       const fs = require('fs')
-      const optimizedImagePath = require.resolve(
-        '../../components/OptimizedImage/index.tsx'
-      )
+      const optimizedImagePath =
+        require.resolve('../../components/OptimizedImage/index.tsx')
       const content = fs.readFileSync(optimizedImagePath, 'utf-8')
 
       // Check for quality prop in default configuration
@@ -103,9 +99,8 @@ describe('Image Optimization', () => {
   describe('Blog Post Images', () => {
     it('should render images in blog post content', () => {
       const fs = require('fs')
-      const postContentPath = require.resolve(
-        '../../components/PostContent/index.tsx'
-      )
+      const postContentPath =
+        require.resolve('../../components/PostContent/index.tsx')
       const content = fs.readFileSync(postContentPath, 'utf-8')
 
       // PostContent renders markdown HTML which includes img tags

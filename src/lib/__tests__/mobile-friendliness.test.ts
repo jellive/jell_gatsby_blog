@@ -90,9 +90,8 @@ describe('Mobile Friendliness Implementation', () => {
       let hasProperSizing = false
 
       try {
-        const mobileNavPath = require.resolve(
-          '../../components/MobileBottomNav'
-        )
+        const mobileNavPath =
+          require.resolve('../../components/MobileBottomNav')
         const mobileNavContent = fs.readFileSync(mobileNavPath, 'utf-8')
         componentFound = true
 
@@ -118,9 +117,8 @@ describe('Mobile Friendliness Implementation', () => {
       let hasProperSpacing = false
 
       try {
-        const mobileNavPath = require.resolve(
-          '../../components/MobileBottomNav'
-        )
+        const mobileNavPath =
+          require.resolve('../../components/MobileBottomNav')
         const mobileNavContent = fs.readFileSync(mobileNavPath, 'utf-8')
         componentFound = true
 
@@ -231,9 +229,8 @@ describe('Mobile Friendliness Implementation', () => {
       let hasResponsiveDisplay = false
 
       try {
-        const mobileNavPath = require.resolve(
-          '../../components/MobileBottomNav'
-        )
+        const mobileNavPath =
+          require.resolve('../../components/MobileBottomNav')
         const mobileNavContent = fs.readFileSync(mobileNavPath, 'utf-8')
 
         // Should hide on desktop: lg:hidden means hidden on large screens
@@ -308,9 +305,8 @@ describe('Mobile Friendliness Implementation', () => {
       let hasAriaLabels = false
 
       try {
-        const mobileNavPath = require.resolve(
-          '../../components/MobileBottomNav'
-        )
+        const mobileNavPath =
+          require.resolve('../../components/MobileBottomNav')
         const mobileNavContent = fs.readFileSync(mobileNavPath, 'utf-8')
 
         // Should have aria-label attributes

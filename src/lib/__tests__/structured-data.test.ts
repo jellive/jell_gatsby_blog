@@ -14,9 +14,8 @@ describe('Structured Data Implementation', () => {
   describe('StructuredData Component', () => {
     it('should have StructuredData component file', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       expect(componentContent).toBeDefined()
@@ -24,9 +23,8 @@ describe('Structured Data Implementation', () => {
 
     it('should use JSON-LD format', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should use application/ld+json script type
@@ -35,9 +33,8 @@ describe('Structured Data Implementation', () => {
 
     it('should have @context for schema.org', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should reference schema.org context
@@ -49,9 +46,8 @@ describe('Structured Data Implementation', () => {
   describe('Article Schema (BlogPosting)', () => {
     it('should implement BlogPosting schema for articles', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should have BlogPosting type
@@ -60,9 +56,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include headline field', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Article schema requires headline
@@ -71,9 +66,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include image field', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Article schema requires image
@@ -83,9 +77,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include datePublished field', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Article schema requires datePublished
@@ -94,9 +87,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include dateModified field', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Article schema requires dateModified
@@ -105,9 +97,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include author information', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Article schema requires author
@@ -117,9 +108,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include publisher information', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Article schema requires publisher
@@ -128,9 +118,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include mainEntityOfPage', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should link to main entity (WebPage)
@@ -142,9 +131,8 @@ describe('Structured Data Implementation', () => {
   describe('BreadcrumbList Schema', () => {
     it('should implement BreadcrumbList schema', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should have BreadcrumbList type
@@ -153,9 +141,8 @@ describe('Structured Data Implementation', () => {
 
     it('should have itemListElement for breadcrumbs', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // BreadcrumbList requires itemListElement
@@ -164,9 +151,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include position and name for list items', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // ListItem requires position and name
@@ -176,9 +162,8 @@ describe('Structured Data Implementation', () => {
 
     it('should link breadcrumb items with URLs', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Each breadcrumb item should have an item (URL)
@@ -189,9 +174,8 @@ describe('Structured Data Implementation', () => {
   describe('WebSite Schema', () => {
     it('should implement WebSite schema', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should have WebSite type
@@ -200,9 +184,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include site name and description', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // WebSite schema requires name and description
@@ -212,9 +195,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include site URL', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // WebSite schema requires url
@@ -223,9 +205,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include SearchAction for site search', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should have potentialAction with SearchAction
@@ -235,9 +216,8 @@ describe('Structured Data Implementation', () => {
 
     it('should have query-input for search functionality', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // SearchAction requires query-input
@@ -257,9 +237,8 @@ describe('Structured Data Implementation', () => {
 
     it('should use @graph for multiple schemas', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should use @graph array for multiple schema items
@@ -268,9 +247,8 @@ describe('Structured Data Implementation', () => {
 
     it('should reference entities with @id', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Entities should have @id for referencing
@@ -281,9 +259,8 @@ describe('Structured Data Implementation', () => {
   describe('Required Schema Fields', () => {
     it('should include inLanguage field', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should specify language (ko-KR for Korean)
@@ -293,9 +270,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include sameAs for social profiles', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Person schema should have sameAs for social profiles
@@ -304,9 +280,8 @@ describe('Structured Data Implementation', () => {
 
     it('should use siteConfig for consistent data', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should import and use siteConfig
@@ -318,9 +293,8 @@ describe('Structured Data Implementation', () => {
   describe('Article-Specific Fields', () => {
     it('should include keywords field for articles', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Articles should have keywords
@@ -329,9 +303,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include articleSection for categorization', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Articles should have articleSection (category)
@@ -340,9 +313,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include about field for topic', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Articles should have about field
@@ -351,9 +323,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include wordCount for reading metrics', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Articles should have wordCount
@@ -362,9 +333,8 @@ describe('Structured Data Implementation', () => {
 
     it('should include timeRequired for estimated reading time', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Articles should have timeRequired in ISO 8601 duration format
@@ -375,9 +345,8 @@ describe('Structured Data Implementation', () => {
   describe('TypeScript Type Safety', () => {
     it('should have TypeScript interface for props', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Should have StructuredDataProps interface
@@ -386,9 +355,8 @@ describe('Structured Data Implementation', () => {
 
     it('should type the data prop', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const componentContent = fs.readFileSync(componentPath, 'utf-8')
 
       // Data prop should be typed

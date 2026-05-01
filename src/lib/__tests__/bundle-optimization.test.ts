@@ -16,9 +16,8 @@ describe('Bundle Optimization', () => {
       const fs = require('fs')
 
       // Check if CommandPalette uses dynamic import
-      const commandPalettePath = require.resolve(
-        '../../components/CommandPalette/index.tsx'
-      )
+      const commandPalettePath =
+        require.resolve('../../components/CommandPalette/index.tsx')
       const commandPaletteContent = fs.readFileSync(commandPalettePath, 'utf-8')
 
       // Should not be statically imported everywhere
@@ -87,9 +86,8 @@ describe('Bundle Optimization', () => {
       const fs = require('fs')
 
       // Check a sample component for selective imports
-      const postListPath = require.resolve(
-        '../../components/PostList/index.tsx'
-      )
+      const postListPath =
+        require.resolve('../../components/PostList/index.tsx')
       const postListContent = fs.readFileSync(postListPath, 'utf-8')
 
       // Should use destructured imports for tree shaking

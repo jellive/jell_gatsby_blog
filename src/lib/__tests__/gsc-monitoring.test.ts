@@ -25,9 +25,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should include coverage report monitoring process', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/커버리지 보고서 정기 점검/)
@@ -37,9 +36,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should include URL inspection process', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/URL 검사 프로세스/)
@@ -49,9 +47,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should include performance report analysis', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/실적 보고서 분석/)
@@ -64,9 +61,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should define monitoring schedule', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/정기 점검 일정/)
@@ -78,9 +74,8 @@ describe('Google Search Console Monitoring System', () => {
   describe('Process Templates', () => {
     it('should have weekly checklist template', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/주간 체크리스트/)
@@ -91,9 +86,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should have issue logging template', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/이슈 로그/)
@@ -104,9 +98,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should have index request template', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/색인 생성 요청 로그/)
@@ -116,9 +109,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should have weekly dashboard template', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/주간 실적 보고서/)
@@ -129,9 +121,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should have monthly dashboard template', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/월간 실적 보고서/)
@@ -143,9 +134,8 @@ describe('Google Search Console Monitoring System', () => {
   describe('Issue Response Procedures', () => {
     it('should define coverage issue responses', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/이슈 발견 시 대응/)
@@ -157,9 +147,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should define abnormal pattern detection', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/이상 징후 감지/)
@@ -169,9 +158,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should have emergency response procedures', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/긴급 상황 대응/)
@@ -182,9 +170,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should have action plan template', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/액션 플랜/)
@@ -197,9 +184,8 @@ describe('Google Search Console Monitoring System', () => {
   describe('Monitoring Metrics', () => {
     it('should define click metrics', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/총 클릭수/)
@@ -208,9 +194,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should define impression metrics', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/총 노출수/)
@@ -219,9 +204,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should define CTR metrics and targets', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/평균 CTR/)
@@ -231,9 +215,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should define ranking metrics', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/평균 게재순위/)
@@ -244,9 +227,8 @@ describe('Google Search Console Monitoring System', () => {
   describe('Automation Setup', () => {
     it('should include notification setup instructions', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/알림 설정/)
@@ -256,9 +238,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should have regular monitoring schedule', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/정기 점검 일정/)
@@ -270,9 +251,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should provide dashboard links', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/대시보드 링크/)
@@ -283,9 +263,8 @@ describe('Google Search Console Monitoring System', () => {
   describe('Report Storage', () => {
     it('should define report storage structure', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/보고서 저장 위치/)
@@ -321,9 +300,8 @@ describe('Google Search Console Monitoring System', () => {
   describe('Documentation Quality', () => {
     it('should have table of contents', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/## 목차/)
@@ -332,9 +310,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should have reference links', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/참고 자료/)
@@ -344,9 +321,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should have version information', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/문서 버전/)
@@ -357,9 +333,8 @@ describe('Google Search Console Monitoring System', () => {
   describe('Process Coverage', () => {
     it('should cover new content indexing process', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/새 글 발행/)
@@ -368,9 +343,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should cover content update process', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/콘텐츠 수정/)
@@ -379,9 +353,8 @@ describe('Google Search Console Monitoring System', () => {
 
     it('should cover performance improvement process', () => {
       const fs = require('fs')
-      const docPath = require.resolve(
-        '../../../docs/google-search-console-monitoring.md'
-      )
+      const docPath =
+        require.resolve('../../../docs/google-search-console-monitoring.md')
       const content = fs.readFileSync(docPath, 'utf-8')
 
       expect(content).toMatch(/개선 방법/)

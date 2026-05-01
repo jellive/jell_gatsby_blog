@@ -14,9 +14,8 @@ describe('CLS Improvement', () => {
   describe('Image Dimensions', () => {
     it('should specify width and height for OptimizedImage', () => {
       const fs = require('fs')
-      const optimizedImagePath = require.resolve(
-        '../../components/OptimizedImage/index.tsx'
-      )
+      const optimizedImagePath =
+        require.resolve('../../components/OptimizedImage/index.tsx')
       const content = fs.readFileSync(optimizedImagePath, 'utf-8')
 
       // OptimizedImage should accept and use width/height props
@@ -26,9 +25,8 @@ describe('CLS Improvement', () => {
 
     it('should use aspect-ratio for images', () => {
       const fs = require('fs')
-      const optimizedImagePath = require.resolve(
-        '../../components/OptimizedImage/index.tsx'
-      )
+      const optimizedImagePath =
+        require.resolve('../../components/OptimizedImage/index.tsx')
       const content = fs.readFileSync(optimizedImagePath, 'utf-8')
 
       // Should use aspect-ratio CSS property
@@ -37,9 +35,8 @@ describe('CLS Improvement', () => {
 
     it('should prevent layout shift with placeholder', () => {
       const fs = require('fs')
-      const optimizedImagePath = require.resolve(
-        '../../components/OptimizedImage/index.tsx'
-      )
+      const optimizedImagePath =
+        require.resolve('../../components/OptimizedImage/index.tsx')
       const content = fs.readFileSync(optimizedImagePath, 'utf-8')
 
       // Should have placeholder while loading
@@ -79,9 +76,8 @@ describe('CLS Improvement', () => {
   describe('Dynamic Content Space Reservation', () => {
     it('should reserve space for lazy-loaded components', () => {
       const fs = require('fs')
-      const optimizedImagePath = require.resolve(
-        '../../components/OptimizedImage/index.tsx'
-      )
+      const optimizedImagePath =
+        require.resolve('../../components/OptimizedImage/index.tsx')
       const content = fs.readFileSync(optimizedImagePath, 'utf-8')
 
       // Should have min-height or skeleton loader
@@ -116,9 +112,8 @@ describe('CLS Improvement', () => {
 
     it('should use opacity for fade animations', () => {
       const fs = require('fs')
-      const optimizedImagePath = require.resolve(
-        '../../components/OptimizedImage/index.tsx'
-      )
+      const optimizedImagePath =
+        require.resolve('../../components/OptimizedImage/index.tsx')
       const content = fs.readFileSync(optimizedImagePath, 'utf-8')
 
       // Should use opacity for fade effects
@@ -177,9 +172,8 @@ describe('CLS Improvement', () => {
 
     it('should track CLS in WebVitals component', () => {
       const fs = require('fs')
-      const webVitalsPath = require.resolve(
-        '../../components/Analytics/WebVitals.tsx'
-      )
+      const webVitalsPath =
+        require.resolve('../../components/Analytics/WebVitals.tsx')
       const content = fs.readFileSync(webVitalsPath, 'utf-8')
 
       // Should track CLS metric

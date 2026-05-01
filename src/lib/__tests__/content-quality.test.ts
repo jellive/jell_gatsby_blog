@@ -57,9 +57,8 @@ describe('Content Quality Implementation', () => {
 
     it('should detect exact duplicates using content hashing', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-content-quality.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-content-quality.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       // Should use crypto for hashing
@@ -70,9 +69,8 @@ describe('Content Quality Implementation', () => {
 
     it('should detect similar content using similarity algorithm', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-content-quality.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-content-quality.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       // Should calculate similarity
@@ -104,9 +102,8 @@ describe('Content Quality Implementation', () => {
   describe('Thin Content Identification', () => {
     it('should identify thin content with word count < 300', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-content-quality.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-content-quality.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       // Should have minimum word count threshold
@@ -116,9 +113,8 @@ describe('Content Quality Implementation', () => {
 
     it('should count words correctly for Korean and English', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-content-quality.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-content-quality.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       // Should count Korean words
@@ -128,9 +124,8 @@ describe('Content Quality Implementation', () => {
 
     it('should extract content excluding frontmatter', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-content-quality.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-content-quality.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       // Should remove frontmatter
@@ -257,9 +252,8 @@ describe('Content Quality Implementation', () => {
 
     it('should export analyzeContentQuality function', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-content-quality.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-content-quality.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/module\.exports.*analyzeContentQuality/)
@@ -267,9 +261,8 @@ describe('Content Quality Implementation', () => {
 
     it('should handle errors gracefully', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-content-quality.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-content-quality.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/try|catch|error/i)

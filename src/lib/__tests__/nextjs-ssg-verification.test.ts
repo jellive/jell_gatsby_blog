@@ -68,9 +68,8 @@ describe('Next.js SSG Configuration Verification', () => {
   describe('Static Route Generation', () => {
     it('should have generateStaticParams for post pages', () => {
       const fs = require('fs')
-      const pagePath = require.resolve(
-        '../../../src/app/posts/[...slug]/page.tsx'
-      )
+      const pagePath =
+        require.resolve('../../../src/app/posts/[...slug]/page.tsx')
       const pageContent = fs.readFileSync(pagePath, 'utf-8')
 
       // Should export generateStaticParams function
@@ -88,9 +87,8 @@ describe('Next.js SSG Configuration Verification', () => {
 
     it('should have generateMetadata for SEO', () => {
       const fs = require('fs')
-      const pagePath = require.resolve(
-        '../../../src/app/posts/[...slug]/page.tsx'
-      )
+      const pagePath =
+        require.resolve('../../../src/app/posts/[...slug]/page.tsx')
       const pageContent = fs.readFileSync(pagePath, 'utf-8')
 
       // Should export generateMetadata function

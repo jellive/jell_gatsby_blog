@@ -25,9 +25,8 @@ describe('Server and Hosting Stability', () => {
 
     it('should check HTTP status codes', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/check-server-health.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/check-server-health.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/statusCode/)
@@ -37,9 +36,8 @@ describe('Server and Hosting Stability', () => {
 
     it('should measure TTFB', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/check-server-health.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/check-server-health.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/TTFB/)
@@ -49,9 +47,8 @@ describe('Server and Hosting Stability', () => {
 
     it('should validate SSL certificate', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/check-server-health.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/check-server-health.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/checkSSL/)
@@ -61,9 +58,8 @@ describe('Server and Hosting Stability', () => {
 
     it('should check for mixed content', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/check-server-health.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/check-server-health.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/checkMixedContent/)
@@ -264,9 +260,8 @@ describe('Server and Hosting Stability', () => {
 
     it('should export checkServerHealth function', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/check-server-health.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/check-server-health.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/module\.exports.*checkServerHealth/)
@@ -274,9 +269,8 @@ describe('Server and Hosting Stability', () => {
 
     it('should handle errors gracefully', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/check-server-health.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/check-server-health.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/catch|error/i)

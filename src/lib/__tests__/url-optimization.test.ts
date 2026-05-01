@@ -27,9 +27,8 @@ describe('URL Optimization Implementation', () => {
 
     it('should detect deep URLs (>4 levels)', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-url-structure.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-url-structure.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/MAX_URL_DEPTH/)
@@ -39,9 +38,8 @@ describe('URL Optimization Implementation', () => {
 
     it('should detect Korean URLs', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-url-structure.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-url-structure.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/hasKoreanChars/)
@@ -73,9 +71,8 @@ describe('URL Optimization Implementation', () => {
   describe('Internal Links', () => {
     it('should extract internal links from HTML', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-url-structure.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-url-structure.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/extractInternalLinks/)
@@ -84,9 +81,8 @@ describe('URL Optimization Implementation', () => {
 
     it('should detect broken internal links', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-url-structure.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-url-structure.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/brokenLinks/)
@@ -95,9 +91,8 @@ describe('URL Optimization Implementation', () => {
 
     it('should identify orphan pages', () => {
       const fs = require('fs')
-      const scriptPath = require.resolve(
-        '../../../scripts/analyze-url-structure.cjs'
-      )
+      const scriptPath =
+        require.resolve('../../../scripts/analyze-url-structure.cjs')
       const content = fs.readFileSync(scriptPath, 'utf-8')
 
       expect(content).toMatch(/orphans/)
@@ -108,18 +103,16 @@ describe('URL Optimization Implementation', () => {
   describe('Breadcrumb Navigation', () => {
     it('should have breadcrumb navigation component', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/BackNavigation/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/BackNavigation/index.tsx')
 
       expect(fs.existsSync(componentPath)).toBe(true)
     })
 
     it('should implement semantic breadcrumb structure', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/BackNavigation/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/BackNavigation/index.tsx')
       const content = fs.readFileSync(componentPath, 'utf-8')
 
       // Should have breadcrumb elements
@@ -129,9 +122,8 @@ describe('URL Optimization Implementation', () => {
 
     it('should include home link in breadcrumb', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/BackNavigation/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/BackNavigation/index.tsx')
       const content = fs.readFileSync(componentPath, 'utf-8')
 
       expect(content).toMatch(/faHome/)
@@ -140,9 +132,8 @@ describe('URL Optimization Implementation', () => {
 
     it('should show category in breadcrumb', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/BackNavigation/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/BackNavigation/index.tsx')
       const content = fs.readFileSync(componentPath, 'utf-8')
 
       expect(content).toMatch(/category/)
@@ -151,9 +142,8 @@ describe('URL Optimization Implementation', () => {
 
     it('should mark current page in breadcrumb', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/BackNavigation/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/BackNavigation/index.tsx')
       const content = fs.readFileSync(componentPath, 'utf-8')
 
       expect(content).toMatch(/aria-current/)
@@ -306,18 +296,16 @@ describe('URL Optimization Implementation', () => {
   describe('Structured Data Breadcrumb', () => {
     it('should have structured data component', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
 
       expect(fs.existsSync(componentPath)).toBe(true)
     })
 
     it('should include breadcrumb list in structured data', () => {
       const fs = require('fs')
-      const componentPath = require.resolve(
-        '../../components/StructuredData/index.tsx'
-      )
+      const componentPath =
+        require.resolve('../../components/StructuredData/index.tsx')
       const content = fs.readFileSync(componentPath, 'utf-8')
 
       // Should have breadcrumb list type
