@@ -1,6 +1,7 @@
 .cache
 package.json
 package-lock.json
+pnpm-lock.yaml
 public
 config.js
 tsconfig.json
