@@ -488,11 +488,17 @@
     }
   }
 
-  /* Mobile Friendliness: Overflow Control */
-  html,
+  /* Mobile Friendliness: Overflow Control
+   *
+   * Use `overflow-x: clip` on <body> only. `clip` clips the overflow
+   * without creating a new scroll container, so iOS Safari can keep
+   * driving scroll on <html> and momentum-scrolling stays smooth.
+   *
+   * The previous `overflow-x: hidden` on <html> + `max-width: 100vw`
+   * combo broke iOS momentum scroll and re-laid-out on every address-
+   * bar show/hide. */
   body {
-    overflow-x: hidden;
-    max-width: 100vw;
+    overflow-x: clip;
   }
 
   /* Mobile Friendliness: Responsive Container Widths */
