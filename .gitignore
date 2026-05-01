@@ -58,7 +58,12 @@ coverage/
 CLAUDE.md
 
 # Claude Code generated files
-docs/
+# Use docs/* (not docs/) so a negated entry below can re-include a single file.
+# Git's negation rules ignore patterns whose parent directory is itself ignored.
+docs/*
+# Test fixtures referenced from src/__tests__/ — gitignoring these makes CI
+# checkout miss the file and Jest fails with "Cannot find module".
+!docs/google-search-console-monitoring.md
 @detailed_index.md
 @general_index.md
 MOBILE_UX_SUMMARY.md

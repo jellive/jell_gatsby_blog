@@ -20,5 +20,8 @@
     "out/**",
     "gatsby_backup/**",
     "_drafts/**",
+    // docs/ holds Claude-generated reference notes that aren't authored
+    // for human readers; skip markdown lint on them.
+    "docs/**",
   ],
 }
