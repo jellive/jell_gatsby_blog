@@ -56,7 +56,7 @@ export default function CommandPalette({
           const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000
           const filtered = parsed.filter(item => item.timestamp > thirtyDaysAgo)
 
-          setRecentSearches(filtered.slice(0, 5)) // Keep only last 5
+          setRecentSearches(filtered.slice(0, 5))
         } catch (error) {
           console.error('Error parsing recent searches:', error)
         }
