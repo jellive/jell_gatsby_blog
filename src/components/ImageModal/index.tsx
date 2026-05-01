@@ -54,11 +54,16 @@ export default function ImageModal({
   const currentImage = images[currentIndex]
   const hasMultipleImages = images.length > 1
 
-  // Reset state when modal opens/closes or image changes
+  // Reset state when modal opens/closes or image changes.
+  // These are not derived from props — they're imperative resets triggered
+  // by an open/index transition, so an effect is the correct primitive.
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- imperative reset on isOpen/currentIndex transition, not state derivation
       setIsZoomed(false)
+
       setImageLoaded(false)
+
       setShowInfo(false)
     }
   }, [isOpen, currentIndex])

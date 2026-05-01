@@ -50,6 +50,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle }) => {
   useEffect(() => {
     // Ensure header is always visible on main page
     if (pathname === '/') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time path-based reset at mount; the listener below is the steady-state driver
       setIsHide(false)
     }
 

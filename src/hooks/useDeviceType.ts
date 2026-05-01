@@ -120,9 +120,11 @@ export const useDeviceType = (
 
   // Handle window resize with debouncing
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount flag for hydration-safe rendering
     setMounted(true)
 
     // Update device info immediately on mount for client-side hydration
+
     setDeviceInfo(getInitialState())
 
     let timeoutId: NodeJS.Timeout

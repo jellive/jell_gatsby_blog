@@ -35,8 +35,13 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
     }
   }
 
-  // Initialize theme on mount
+  // Initialize theme on mount.
+  // localStorage is unavailable during SSR, so the initial render uses the
+  // default state and we hydrate from storage in this effect. This is the
+  // canonical "client-only mount sync" pattern; React's set-state-in-effect
+  // rule flags it because it can't tell external sync from cascading updates.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount flag for hydration-safe rendering, not derivable from props
     setMounted(true)
 
     // Get saved theme from localStorage or default to system

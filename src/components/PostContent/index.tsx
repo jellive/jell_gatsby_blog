@@ -58,6 +58,7 @@ export default function PostContent({ post, slug }: PostContentProps) {
       document.querySelectorAll('h2, h3')
     ) as Array<HTMLHeadingElement>
     const positions = hs.map(h => h.offsetTop)
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- positions are measured from the live DOM (offsetTop); cannot be derived from props
     setYList(positions)
   }, [post])
 

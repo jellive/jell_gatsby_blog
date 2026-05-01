@@ -15,7 +15,7 @@
     "dev:tunnel": "concurrently \"npm run dev\" \"ngrok http 9000\"",
     "dev:tunnel:start": "npm run dev & sleep 3 && ngrok http 9000",
     "tunnel": "ngrok http 9000",
-    "lint": "next lint",
+    "lint": "eslint .",
     "start": "next start",
     "type-check": "tsc --noEmit",
     "test:e2e": "playwright test",

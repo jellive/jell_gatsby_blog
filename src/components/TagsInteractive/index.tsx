@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
 import { faTags, faHashtag, faInfo } from '@fortawesome/free-solid-svg-icons'
 import { Card, CardHeader, CardContent } from '@/components/ui/card'
@@ -22,20 +22,21 @@ interface TagsInteractiveProps {
 }
 
 export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
-  const [largeCount, setLargeCount] = useState(0)
-  const [targetTag, setTargetTag] = useState('undefined')
-  const router = useRouter()
-
-  useEffect(() => {
-    // Calculate largest count for font sizing
+  // Derived from props — was previously a useState + useEffect, but that
+  // tripped react-hooks/set-state-in-effect on React 19. useMemo is the
+  // correct primitive for "computed from props" without a render cascade.
+  const largeCount = useMemo(() => {
     let large = 0
     for (const g of tagGroups) {
       if (g.fieldValue !== 'undefined' && g.totalCount > large) {
         large = g.totalCount
       }
     }
-    setLargeCount(large)
+    return large
   }, [tagGroups])
+
+  const [targetTag, setTargetTag] = useState('undefined')
+  const router = useRouter()
 
   // Handle hash navigation and redirect to proper URL
   useEffect(() => {
@@ -45,6 +46,7 @@ export default function TagsInteractive({ tagGroups }: TagsInteractiveProps) {
         // Use Next.js router for safer navigation
         router.push(`/tags/${encodeURIComponent(hashTag)}`)
       } else {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing UI to a one-time URL hash signal at mount; not a render-driven state derivation
         setTargetTag(hashTag || 'undefined')
       }
     }

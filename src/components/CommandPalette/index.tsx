@@ -69,6 +69,7 @@ export default function CommandPalette({
 
     const newSearch: RecentSearch = {
       query: query.trim(),
+      // eslint-disable-next-line react-hooks/purity -- saveSearch is invoked from a click/select handler, not during render
       timestamp: Date.now(),
     }
 

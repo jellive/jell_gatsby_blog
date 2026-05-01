@@ -16,6 +16,10 @@ export default [
       "build/**",
       "node_modules/**",
       "coverage/**",
+      // Storybook config files live outside the project's TS build graph,
+      // so @typescript-eslint can't resolve them with the shared tsconfig.
+      // Not shipped to production — skip them.
+      ".storybook/**",
     ],
   },
 
