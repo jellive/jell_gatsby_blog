@@ -122,5 +122,13 @@
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=9.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@tootallnate/once": ">=3.0.1"
+    }
+  },
+  "overrides": {
+    "@tootallnate/once": ">=3.0.1"
   }
 }
