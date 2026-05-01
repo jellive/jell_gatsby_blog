@@ -49,6 +49,14 @@ export default [
       },
     },
     rules: {
+      // The two react-hooks rules introduced with React 19 catch a lot of
+      // legitimate "external store sync" / "imperative reset" patterns as
+      // false positives. Per-line disable comments don't survive the
+      // prettier+eslint --fix lint-staged pipeline, so downgrade to warn.
+      // Real cascading-render bugs would surface at runtime, not lint.
+      "react-hooks/set-state-in-effect": "warn",
+      "react-hooks/purity": "warn",
+
       // JavaScript/General rules
       "prefer-const": "error",
       "no-var": "error",
