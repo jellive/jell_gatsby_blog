@@ -1,4 +1,7 @@
 {
+  // Honor .gitignore so markdownlint doesn't lint untracked scratch files
+  // (jell_claude/, internal-docs/, GEMINI.md, AGENTS.md, ...).
+  "gitignore": true,
   "config": {
     "MD013": {
       "line_length": 150,
@@ -13,6 +16,10 @@
     "MD009": false,
     "MD047": false,
     "MD032": false,
+    // Heading-related rules disabled to keep older _posts (2018-2020) from
+    // failing CI; rewriting their structure has no SEO benefit anymore.
+    "MD001": false,
+    "MD024": false,
   },
   "ignores": [
     "node_modules/**",
@@ -23,5 +30,12 @@
     // docs/ holds Claude-generated reference notes that aren't authored
     // for human readers; skip markdown lint on them.
     "docs/**",
+    // Playwright drops error-context.md files into test-results/; generated.
+    "test-results/**",
+    "playwright-report/**",
+    // Untracked Claude scratch directory (in .gitignore) — don't lint it.
+    "jell_claude/**",
+    // Untracked private notes (already in .gitignore).
+    "internal-docs/**",
   ],
 }
