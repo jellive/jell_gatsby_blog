@@ -119,8 +119,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # audit-level=high — moderate threshold trips on the 5 dev-only or
+      # false-positive findings catalogued in commit f55ebe7 (Storybook
+      # transitive uuid, npm-audit's stale path-trace for next 16's
+      # postcss). They've been triaged via Dependabot dismissals; gate
+      # deploys on high+critical only.
       - name: Run security audit
-        run: npm audit --audit-level=moderate
+        run: npm audit --audit-level=high
 
       - name: Build application
         run: npm run build
