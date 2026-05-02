@@ -50,7 +50,8 @@ export async function generateMetadata({
       : description
 
   return {
-    title: `${post.frontMatter.title} | ${siteConfig.title}`,
+    // Raw title — layout.tsx's metadata.title.template appends sitename.
+    title: post.frontMatter.title,
     description: excerpt,
     keywords: post.frontMatter.tags.join(', '),
     authors: [{ name: siteConfig.author }],

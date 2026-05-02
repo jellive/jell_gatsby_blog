@@ -29,7 +29,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${decodedTag} 태그 | ${siteConfig.title}`,
+    // Raw title — layout.tsx's metadata.title.template appends sitename.
+    title: `${decodedTag} 태그`,
     description: `${decodedTag} 태그가 포함된 블로그 포스트 ${posts.length}개를 확인해보세요.`,
     keywords: [decodedTag, 'blog', 'tag', 'posts'].join(', '),
     openGraph: {

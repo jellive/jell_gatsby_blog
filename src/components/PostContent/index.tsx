@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { FontAwesomeIcon as Fa } from '@fortawesome/react-fontawesome'
 import {
   faListUl,
@@ -13,8 +14,16 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import Disqus from '@/components/Comments/Disqus'
-import { AdBanner } from '@/components/Analytics/GoogleAdSense'
+// Disqus + AdSense embed external scripts that mutate the DOM during/after
+// hydration. Loading them with ssr:false defers them until after hydration
+// completes, which avoids React error #418 from the embed-driven mismatch.
+const Disqus = dynamic(() => import('@/components/Comments/Disqus'), {
+  ssr: false,
+})
+const AdBanner = dynamic(
+  () => import('@/components/Analytics/GoogleAdSense').then(m => m.AdBanner),
+  { ssr: false }
+)
 import Toc from '@/components/Toc'
 import BackNavigation from '@/components/BackNavigation'
 import SocialShare from '@/components/SocialShare'

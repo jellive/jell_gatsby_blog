@@ -3,7 +3,8 @@ import SearchInteractive from '@/components/SearchInteractive'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Search | Jell의 세상 사는 이야기',
+  // Raw title — layout.tsx's metadata.title.template appends sitename.
+  title: 'Search',
   description: '블로그 포스트를 검색해보세요.',
 }
 

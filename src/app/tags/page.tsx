@@ -3,7 +3,8 @@ import type { Metadata } from 'next'
 import type { PostData } from '@/lib/markdown'
 
 export const metadata: Metadata = {
-  title: 'Tags | Jell의 세상 사는 이야기',
+  // Raw title — layout.tsx's metadata.title.template appends sitename.
+  title: 'Tags',
   description: '블로그의 모든 태그를 확인해보세요.',
 }
 
