@@ -72,7 +72,7 @@ jobs:
         run: npm run test:unit:coverage
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v6
         with:
           directory: ./coverage
           fail_ci_if_error: false
@@ -187,9 +187,9 @@ jobs:
         run: npm audit --audit-level=critical
 
       - name: Run CodeQL Analysis
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: javascript
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
