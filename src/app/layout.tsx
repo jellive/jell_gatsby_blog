@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
 import dynamic from 'next/dynamic'
+import Script from 'next/script'
 import { siteConfig } from '@/lib/config'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -146,6 +147,12 @@ export default function RootLayout({
           </div>
         </ClientProviders>
         <MobileBottomNav />
+        <Script
+          src="https://umami.jell.kr/script.js"
+          data-website-id="f6cb9a61-ff71-4309-a4dd-7b592018d440"
+          strategy="afterInteractive"
+          defer
+        />
       </body>
     </html>
   )
