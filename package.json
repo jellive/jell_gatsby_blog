@@ -129,12 +129,14 @@
     "overrides": {
       "@tootallnate/once": ">=3.0.1",
       "minimatch": "^9.0.5",
-      "brace-expansion": "^2.0.1"
+      "brace-expansion": "^2.0.1",
+      "shell-quote": "^1.8.4"
     }
   },
   "overrides": {
     "@tootallnate/once": ">=3.0.1",
     "minimatch": "^9.0.5",
-    "brace-expansion": "^2.0.1"
+    "brace-expansion": "^2.0.1",
+    "shell-quote": "^1.8.4"
   }
 }
