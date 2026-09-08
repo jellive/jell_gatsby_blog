@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-05-01T16:56:05.413Z",
-  "buildId": "build-1777654565413",
-  "version": 1777654565413,
+  "timestamp": "2026-09-08T04:01:06.423Z",
+  "buildId": "build-1788840066423",
+  "version": 1788840066423,
   "nodeEnv": "production",
-  "netlifyDeployId": "0",
-  "commitRef": "f55ebe760b62b5cb986ae1bf9500a964c0e0faac",
+  "netlifyDeployId": "",
+  "commitRef": "",
   "branch": "master",
-  "deployUrl": "https://0--jell.netlify.app",
+  "deployUrl": "https://blog.jell.kr",
   "cacheStatus": "fresh"
 }
