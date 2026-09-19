@@ -64,6 +64,7 @@ docs/*
 # Test fixtures referenced from src/__tests__/ — gitignoring these makes CI
 # checkout miss the file and Jest fails with "Cannot find module".
 !docs/google-search-console-monitoring.md
+!docs/analytics-roles.md
 @detailed_index.md
 @general_index.md
 MOBILE_UX_SUMMARY.md
