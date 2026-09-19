@@ -39,6 +39,14 @@ export const metadata: Metadata = {
       'ko-KR': siteConfig.siteUrl,
       'x-default': siteConfig.siteUrl,
     },
+    // ★피드는 `/rss` 에 4년 전부터 있었는데 **아무도 못 찾았다** — 이 링크 태그가 없으면
+    //   RSS 리더·아그리게이터가 원리적으로 자동 발견을 못 한다(2026-09-19 실측:
+    //   /rss.xml·/feed·/atom.xml 전부 404, head 에 alternate 태그 0건).
+    types: {
+      'application/rss+xml': [
+        { url: `${siteConfig.siteUrl}/rss.xml`, title: siteConfig.title },
+      ],
+    },
   },
   openGraph: {
     title: siteConfig.title,
