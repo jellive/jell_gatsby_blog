@@ -99,6 +99,12 @@ const nextConfig = {
             value: 'max-age=63072000; includeSubDomains; preload',
           },
           {
+            // ⚠️ 이 headers() 는 **`next dev` 에서만** 적용된다.
+            //    이 레포는 `output: 'export'` 이고, Next.js 는 static export 에서 `headers` 를
+            //    Unsupported Features 로 명시한다(빌드 때 "will not automatically work" 경고).
+            //    프로덕션 CSP 정본은 `netlify.toml` 의 [[headers]] 이고, `public/_headers` 가
+            //    같은 값을 들고 있다(`src/lib/__tests__/csp-consistency.test.ts` 가 둘을 고정).
+            //    여기를 고쳐도 배포에는 아무 영향이 없으니, 로컬 확인용으로만 쓸 것.
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",

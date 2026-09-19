@@ -1,10 +1,15 @@
+# ⚠️ CSP 는 netlify.toml 의 [[headers]] 와 **바이트 동일**해야 한다.
+#    Netlify 는 헤더 단위로 병합하고 충돌 시 netlify.toml 이 이긴다 —
+#    즉 평소엔 이 줄이 안 쓰이지만, 그쪽이 빠지면 이게 유일한 CSP 가 된다.
+#    (2026-05-18 에 netlify.toml 만 umami 를 받고 여기는 안 받아서 넉 달간 갈려 있었다)
+#    src/lib/__tests__/csp-consistency.test.ts 가 어긋나면 막는다.
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.googlesyndication.com *.doubleclick.net *.gstatic.com *.disqus.com *.disquscdn.com; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net *.googleapis.com *.gstatic.com *.disquscdn.com; img-src 'self' data: *.googletagmanager.com *.google-analytics.com *.googlesyndication.com *.doubleclick.net *.gstatic.com *.disqus.com *.disquscdn.com *.gravatar.com github.com *.githubusercontent.com; font-src 'self' cdn.jsdelivr.net *.gstatic.com *.googleapis.com; connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com *.disqus.com *.disquscdn.com; frame-src disqus.com *.googlesyndication.com *.doubleclick.net *.disqus.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.googlesyndication.com *.doubleclick.net *.gstatic.com *.disqus.com *.disquscdn.com umami.jell.kr; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net *.googleapis.com *.gstatic.com *.disquscdn.com; img-src 'self' data: *.googletagmanager.com *.google-analytics.com *.googlesyndication.com *.doubleclick.net *.gstatic.com *.disqus.com *.disquscdn.com *.gravatar.com github.com *.githubusercontent.com; font-src 'self' cdn.jsdelivr.net *.gstatic.com *.googleapis.com; connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com *.disqus.com *.disquscdn.com umami.jell.kr; frame-src disqus.com *.googlesyndication.com *.doubleclick.net *.disqus.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
 
 /images/*
   Cache-Control: public, max-age=31536000, immutable
