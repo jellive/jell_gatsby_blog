@@ -33,31 +33,31 @@ importers:
   .:
     dependencies:
       '@fortawesome/fontawesome-svg-core':
-        specifier: ^6.5.1
+        specifier: ^6.7.2
         version: 6.7.2
       '@fortawesome/free-brands-svg-icons':
-        specifier: ^6.5.1
+        specifier: ^6.7.2
         version: 6.7.2
       '@fortawesome/free-regular-svg-icons':
-        specifier: ^6.5.1
+        specifier: ^6.7.2
         version: 6.7.2
       '@fortawesome/free-solid-svg-icons':
-        specifier: ^6.5.1
+        specifier: ^6.7.2
         version: 6.7.2
       '@fortawesome/react-fontawesome':
-        specifier: ^0.2.0
+        specifier: ^0.2.6
         version: 0.2.6(@fortawesome/fontawesome-svg-core@6.7.2)(react@18.3.1)
       '@radix-ui/react-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-progress':
-        specifier: ^1.1.7
+        specifier: ^1.1.8
         version: 1.1.8(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-separator':
-        specifier: ^1.1.7
+        specifier: ^1.1.8
         version: 1.1.8(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-slot':
-        specifier: ^1.2.3
+        specifier: ^1.2.4
         version: 1.2.4(@types/react@18.3.28)(react@18.3.1)
       '@radix-ui/react-tabs':
         specifier: ^1.1.13
@@ -72,16 +72,16 @@ importers:
         specifier: ^0.4.4
         version: 0.4.4(tailwindcss@3.4.19(yaml@2.8.3))
       '@types/node':
-        specifier: ^20.16.14
+        specifier: ^20.19.39
         version: 20.19.39
       '@types/react':
-        specifier: ^18.3.12
+        specifier: ^18.3.28
         version: 18.3.28
       '@types/react-dom':
-        specifier: ^18.3.1
+        specifier: ^18.3.7
         version: 18.3.7(@types/react@18.3.28)
       autoprefixer:
-        specifier: ^10.4.0
+        specifier: ^10.5.0
         version: 10.5.0(postcss@8.5.23)
       class-variance-authority:
         specifier: ^0.7.1
@@ -93,7 +93,7 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       disqus-react:
-        specifier: ^1.1.5
+        specifier: ^1.1.7
         version: 1.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       dompurify:
         specifier: ^3.4.15
@@ -102,13 +102,13 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4(jiti@1.21.7)
       glob:
-        specifier: ^11.0.3
+        specifier: ^11.1.0
         version: 11.1.0
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
       isomorphic-dompurify:
-        specifier: ^2.26.0
+        specifier: ^2.36.0
         version: 2.36.0
       lucide-react:
         specifier: ^0.539.0
@@ -129,13 +129,13 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-share:
-        specifier: ^5.2.2
+        specifier: ^5.3.0
         version: 5.3.0(react@18.3.1)
       rehype-autolink-headings:
         specifier: ^7.1.0
         version: 7.1.0
       rehype-prism-plus:
-        specifier: ^2.0.1
+        specifier: ^2.0.2
         version: 2.0.2
       rehype-slug:
         specifier: ^6.0.0
@@ -147,10 +147,10 @@ importers:
         specifier: ^15.0.1
         version: 15.0.1
       remark-emoji:
-        specifier: ^5.0.1
+        specifier: ^5.0.2
         version: 5.0.2
       remark-gfm:
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: 4.0.1
       remark-html:
         specifier: ^16.0.1
@@ -165,25 +165,25 @@ importers:
         specifier: ^9.0.0
         version: 9.0.0
       sharp:
-        specifier: ^0.35.0
+        specifier: ^0.35.4
         version: 0.35.4(@types/node@20.19.39)
       tailwind-merge:
-        specifier: ^3.3.1
+        specifier: ^3.5.0
         version: 3.5.0
       tailwindcss:
-        specifier: ^3.4.0
+        specifier: ^3.4.19
         version: 3.4.19(yaml@2.8.3)
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.19(yaml@2.8.3))
       typescript:
-        specifier: ^5.6.3
+        specifier: ^5.9.3
         version: 5.9.3
       unified:
         specifier: ^11.0.5
         version: 11.0.5
       web-vitals:
-        specifier: ^4.0.0
+        specifier: ^4.2.4
         version: 4.2.4
     devDependencies:
       '@eslint/eslintrc':
@@ -196,7 +196,7 @@ importers:
         specifier: ^16.2.4
         version: 16.2.4
       '@playwright/test':
-        specifier: ^1.54.2
+        specifier: ^1.59.1
         version: 1.59.1
       '@storybook/addon-essentials':
         specifier: ^8.6.18
@@ -214,37 +214,37 @@ importers:
         specifier: ^8.6.18
         version: 8.6.18(storybook@8.6.18(prettier@3.8.3))
       '@testing-library/jest-dom':
-        specifier: ^6.0.0
+        specifier: ^6.9.1
         version: 6.9.1
       '@testing-library/react':
-        specifier: ^16.0.0
+        specifier: ^16.3.2
         version: 16.3.2(@testing-library/dom@10.4.0)(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/dompurify':
-        specifier: ^3.0.5
+        specifier: ^3.2.0
         version: 3.2.0
       '@types/jest':
-        specifier: ^29.5.0
+        specifier: ^29.5.14
         version: 29.5.14
       '@typescript-eslint/eslint-plugin':
-        specifier: ^8.40.0
+        specifier: ^8.58.2
         version: 8.58.2(@typescript-eslint/parser@8.58.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
       '@typescript-eslint/parser':
-        specifier: ^8.40.0
+        specifier: ^8.58.2
         version: 8.58.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
       concurrently:
-        specifier: ^9.2.0
+        specifier: ^9.2.1
         version: 9.2.1
       eslint-config-next:
         specifier: ^16.2.4
         version: 16.2.4(@typescript-eslint/parser@8.58.2(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
       eslint-config-prettier:
-        specifier: ^9.0.0
+        specifier: ^9.1.2
         version: 9.1.2(eslint@9.39.4(jiti@1.21.7))
       eslint-plugin-jsx-a11y:
-        specifier: ^6.8.0
+        specifier: ^6.10.2
         version: 6.10.2(eslint@9.39.4(jiti@1.21.7))
       husky:
-        specifier: ^9.0.0
+        specifier: ^9.1.7
         version: 9.1.7
       jest:
         specifier: ^29.7.0
@@ -253,16 +253,16 @@ importers:
         specifier: ^29.7.0
         version: 29.7.0
       lint-staged:
-        specifier: ^15.0.0
+        specifier: ^15.5.2
         version: 15.5.2
       markdownlint-cli2:
         specifier: ^0.21.0
         version: 0.21.0
       prettier:
-        specifier: ^3.3.0
+        specifier: ^3.8.3
         version: 3.8.3
       prettier-plugin-tailwindcss:
-        specifier: ^0.6.0
+        specifier: ^0.6.14
         version: 0.6.14(prettier@3.8.3)
       storybook:
         specifier: ^8.6.18
@@ -2373,13 +2373,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  baseline-browser-mapping@2.10.24:
-    resolution: {integrity: sha512-I2NkZOOrj2XuguvWCK6OVh9GavsNjZjK908Rq3mIBK25+GD8vPX5w2WdxVqnQ7xx3SrZJiCiZFu+/Oz50oSYSA==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-
-  baseline-browser-mapping@2.11.21:
-    resolution: {integrity: sha512-uh8vpY/1/YyFkunIDFH/12p7/7VdPKA1hejMVEbdkEaWnUz0Hesvx5EbiU6XxjyHZIOju+ZMbQJkRh+es3/spQ==}
+  baseline-browser-mapping@2.11.25:
+    resolution: {integrity: sha512-gMmEShwwq7FJqMwvfRwvCl00v4kN+KOfJqXn+f4nrufak5gNHJOksd/60Dvjuz7sI8Y5WiSFBa8FEYr+zoyqCw==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -2976,6 +2971,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -7620,9 +7616,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  baseline-browser-mapping@2.10.24: {}
-
-  baseline-browser-mapping@2.11.21: {}
+  baseline-browser-mapping@2.11.25: {}
 
   better-opn@3.0.2:
     dependencies:
@@ -7646,7 +7640,7 @@ snapshots:
 
   browserslist@4.28.9:
     dependencies:
-      baseline-browser-mapping: 2.11.21
+      baseline-browser-mapping: 2.11.25
       caniuse-lite: 1.0.30001810
       electron-to-chromium: 1.5.423
       node-releases: 2.0.54
@@ -10045,7 +10039,7 @@ snapshots:
     dependencies:
       '@next/env': 16.3.4
       '@swc/helpers': 0.5.23
-      baseline-browser-mapping: 2.10.24
+      baseline-browser-mapping: 2.11.25
       caniuse-lite: 1.0.30001791
       postcss: 8.5.23
       react: 18.3.1
