@@ -30,8 +30,11 @@ export const siteConfig = {
   enableSocialShare: true,
 
   /** Optional */
-  googleAnalytics:
-    process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'UA-127125899-1',
+  // ★폴백을 빈 문자열로 둔다. 전에는 `UA-127125899-1`(2023년에 종료된 Universal
+  //   Analytics 속성)이라, 환경변수가 빠지면 **아무 데도 안 가는 태그가 붙은 채
+  //   설치된 것처럼 보였다.** 빈 값이면 GoogleAnalytics 컴포넌트가 null 을 돌려
+  //   아예 안 붙는다 — 없는 게 죽은 게 붙은 것보다 낫다.
+  googleAnalytics: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '',
   googleAdsenseSlot:
     process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_SLOT || '6839238861',
   googleAdsenseClient:
