@@ -49,8 +49,22 @@
     Cache-Control = "public, max-age=2592000"
 
 # RSS and sitemap content types
+#
+# ★이 규칙이 곧 실제 Content-Type 이다. 라우트 핸들러가 Response 에 적는 헤더는
+#   `output: 'export'` 에서 프로덕션에 안 나간다(정적 파일로 굽고 끝이라) —
+#   `src/app/rss/route.ts` 도 `application/rss+xml` 을 적어 두지만 그게 나가는 게 아니라
+#   여기 이 줄이 나간다. 피드 경로를 새로 만들면 **여기에도 줄을 추가해야 한다.**
+#   `src/lib/__tests__/feed-content-type.test.ts` 가 빠진 경로를 막는다.
 [[headers]]
   for = "/rss"
+  [headers.values]
+    Content-Type = "application/rss+xml"
+
+# `/rss.xml` 은 `/rss` 의 별칭인데 **확장자가 있어서** 규칙이 없으면 Netlify 가
+# 확장자로 판정해 `application/xml` 로 내보낸다(2026-09-19 실측). 리더 대부분은
+# 그래도 받지만 정석이 아니고, 자동 발견에서 피드로 안 쳐주는 구현이 있다.
+[[headers]]
+  for = "/rss.xml"
   [headers.values]
     Content-Type = "application/rss+xml"
 
