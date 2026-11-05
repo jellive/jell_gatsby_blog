@@ -62,7 +62,7 @@
     "disqus-react": "^1.1.7",
     "dompurify": "^3.4.17",
     "eslint": "^9.39.4",
-    "glob": "^11.1.0",
+    "glob": "^14.0.2",
     "gray-matter": "^4.0.3",
     "isomorphic-dompurify": "^2.36.0",
     "lucide-react": "^0.539.0",
